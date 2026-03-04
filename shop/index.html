@@ -3,370 +3,1069 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Shop all AWAY premium rooftop cargo solutions." />
-    <title>Shop - AWAY</title>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="../assets/fav-dark.svg"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="../assets/fav-white.svg"
-      media="(prefers-color-scheme: light)"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../styles.css" />
-    <!-- Google Fonts: Barlow Condensed -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="description" content="AWAY — Shop all premium rooftop cargo systems. Roofboxes, roofbags, crossbars and roofracks." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <title>Shop All — AWAY</title>
+
+    <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         ANNOUNCEMENT BAR
+         ══════════════════════════════════════ */
+      .home-announcement {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 51;
+        background: #1a1a1a; overflow: hidden; height: 28px;
+        display: flex; align-items: center; transition: transform 0.4s ease;
+      }
+      .home-announcement.is-hidden { transform: translateY(-100%); }
+      .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+      .home-announcement__text {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.04em; text-transform: uppercase; padding: 0 3rem;
+      }
+      .home-announcement__text span { color: #EC0201; font-weight: 600; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* ══════════════════════════════════════
+         NAV
+         ══════════════════════════════════════ */
+      .home-nav {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        padding: 1rem 2rem; background: #fff; position: fixed; top: 28px;
+        left: 0; right: 0; z-index: 50; transition: transform 0.4s ease;
+      }
+      .home-nav.is-hidden { transform: translateY(calc(-100% - 28px)); }
+      .home-nav__logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+      .home-nav__logo img { width: 100px; height: auto; display: block; }
+      .home-nav__links { display: flex; gap: 4rem; margin-left: 3rem; }
+      .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-nav__col a {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase;
+      }
+      .home-nav__col a.is-red { color: #EC0201; }
+      .home-nav__col a:hover { opacity: 0.5; }
+      .home-nav__right { display: flex; align-items: flex-start; gap: 1rem; flex-shrink: 0; }
+      .home-nav__cart {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: baseline; gap: 0.2em;
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+      }
+      .home-nav__cart-count { color: #EC0201; font-weight: 600; }
+      .home-nav__cart:hover { opacity: 0.5; }
+      .home-nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+      .home-nav__hamburger svg { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .home-mobile-menu {
+        position: fixed; inset: 0; z-index: 100; background: #fff;
+        display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem;
+        transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .home-mobile-menu.is-open { transform: translateY(0); }
+      .home-mobile-menu__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+      .home-mobile-menu__logo { display: flex; align-items: center; text-decoration: none; }
+      .home-mobile-menu__logo img { width: 90px; height: auto; display: block; }
+      .home-mobile-menu__close { background: none; border: none; cursor: pointer; padding: 0; }
+      .home-mobile-menu__close svg { display: block; }
+      .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
+      .home-mobile-menu__links a {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #000;
+        text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
+        padding: 0.7rem 0; border-bottom: 1px solid #e5e5e5; transition: opacity 0.2s ease;
+      }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e5e5e5; }
+      .home-mobile-menu__links a:hover { opacity: 0.4; }
+      .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #999; text-decoration: none; letter-spacing: 0.04em; }
+
+      /* ══════════════════════════════════════
+         SHARED HELPERS
+         ══════════════════════════════════════ */
+      .home-section-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.04em; text-transform: uppercase; margin: 0.25rem 0 0;
+      }
+
+      /* ══════════════════════════════════════
+         PRODUCT CARD
+         ══════════════════════════════════════ */
+      .home-product { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+      .home-product__img-wrap { position: relative; background: #fff; overflow: hidden; aspect-ratio: 1 / 1; margin-bottom: 1rem; }
+      .home-product__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+      .home-product:hover .home-product__img { transform: scale(1.04); }
+      .home-product__badge {
+        position: absolute; top: 0.75rem; left: 0.75rem; font-family: var(--font-body);
+        font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+        background: #EC0201; color: #fff; padding: 0.3rem 0.6rem; line-height: 1; z-index: 1;
+      }
+      .home-product__badge--pick { background: #1a1a1a; }
+      .home-product__add {
+        position: absolute; top: 0.75rem; right: 0.75rem; font-family: var(--font-body);
+        font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+        color: #1a1a1a; background: rgba(255,255,255,0.88); border: none; padding: 0.35rem 0.6rem;
+        cursor: pointer; z-index: 1; line-height: 1; transition: background 0.2s ease;
+      }
+      .home-product__add:hover { background: #fff; }
+      .home-product__info {
+        position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: flex-end;
+        justify-content: space-between; padding: 3rem 0.85rem 0.85rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%); z-index: 1;
+      }
+      .home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
+      .home-product__price { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: #fff; white-space: nowrap; flex-shrink: 0; }
+
+      /* ══════════════════════════════════════
+         SHOP — HEADER
+         ══════════════════════════════════════ */
+      .shop-header { padding: 120px 2rem 0; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+      .shop-header__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: #000; letter-spacing: -0.02em; text-transform: uppercase; margin: 0; }
+      .shop-header__title em { font-style: italic; }
+      .shop-header__count { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+
+      /* ══════════════════════════════════════
+         SHOP — CONTROLS BAR
+         ══════════════════════════════════════ */
+      .shop-controls {
+        padding: 1.5rem 2rem 0.5rem;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      }
+      .shop-controls__filter-btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s ease;
+      }
+      .shop-controls__filter-btn:hover { opacity: 0.5; }
+      .shop-controls__filter-count {
+        font-size: 0.5rem; font-weight: 700; background: #EC0201; color: #fff;
+        width: 16px; height: 16px; border-radius: 50%; display: none;
+        align-items: center; justify-content: center; line-height: 1;
+      }
+      .shop-controls__filter-count.is-visible { display: inline-flex; }
+
+      .shop-controls__sort {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #999;
+        cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem;
+        background: none; border: none; padding: 0;
+      }
+      .shop-controls__sort:hover { color: #1a1a1a; }
+      .shop-controls__sort span { font-weight: 600; color: #1a1a1a; }
+
+      .shop-controls__view { display: flex; align-items: center; gap: 0.5rem; }
+      .shop-controls__view-label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #999; margin-right: 0.25rem;
+      }
+      .shop-controls__view-btn {
+        background: none; border: none; cursor: pointer; padding: 0.25rem;
+        color: #ccc; transition: color 0.2s ease; display: inline-flex; align-items: center;
+      }
+      .shop-controls__view-btn.is-active,
+      .shop-controls__view-btn:hover { color: #1a1a1a; }
+
+      /* ══════════════════════════════════════
+         FILTER PANEL — BACKDROP
+         ══════════════════════════════════════ */
+      .fp-backdrop {
+        position: fixed; inset: 0; z-index: 59;
+        background: rgba(0,0,0,0.3); opacity: 0; visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+      .fp-backdrop.is-open { opacity: 1; visibility: visible; }
+
+      /* ══════════════════════════════════════
+         FILTER PANEL — SLIDE-IN
+         ══════════════════════════════════════ */
+      .fp-panel {
+        position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 90vw;
+        z-index: 60; background: #fff; display: flex; flex-direction: column;
+        transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 30px rgba(0,0,0,0.08);
+      }
+      .fp-panel.is-open { transform: translateX(0); }
+
+      .fp-panel__header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.5rem 2rem; border-bottom: 1px solid #e5e5e5; flex-shrink: 0;
+      }
+      .fp-panel__title {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+      }
+      .fp-panel__close { background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s ease; }
+      .fp-panel__close:hover { opacity: 0.5; }
+
+      .fp-panel__body { flex: 1; overflow-y: auto; padding: 0; -webkit-overflow-scrolling: touch; }
+
+      .fp-panel__footer {
+        padding: 1.5rem 2rem; border-top: 1px solid #e5e5e5;
+        display: flex; gap: 1rem; flex-shrink: 0; align-items: center;
+      }
+      .fp-panel__apply {
+        flex: 1; font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+        background: none; border: 1.5px solid #1a1a1a; padding: 1rem; cursor: pointer;
+        transition: all 0.2s ease; text-align: center;
+      }
+      .fp-panel__apply:hover { background: #1a1a1a; color: #fff; }
+      .fp-panel__clear {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #999;
+        background: none; border: none; cursor: pointer; padding: 1rem 0;
+        transition: color 0.2s ease; white-space: nowrap;
+      }
+      .fp-panel__clear:hover { color: #EC0201; }
+
+      /* ══════════════════════════════════════
+         FILTER PANEL — SECTIONS
+         ══════════════════════════════════════ */
+      .fp-section { padding: 1.5rem 2rem; border-bottom: 1px solid #f0f0f0; }
+      .fp-section__head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1rem; }
+      .fp-section__num {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #999; letter-spacing: 0.04em;
+      }
+      .fp-section__label {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 800;
+        color: #1a1a1a; letter-spacing: 0.08em; text-transform: uppercase;
+      }
+
+      /* ── Text list items ── */
+      .fp-section__list { display: flex; flex-direction: column; gap: 0; }
+      .fp-item {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; letter-spacing: 0.04em; text-transform: uppercase;
+        padding: 0.45rem 0; cursor: pointer; transition: all 0.15s ease;
+        background: none; border: none; text-align: left;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .fp-item:hover { color: #1a1a1a; }
+      .fp-item.is-active { color: #1a1a1a; font-weight: 700; }
+      .fp-item.is-active::after {
+        content: ''; width: 6px; height: 6px;
+        background: #EC0201; border-radius: 50%; flex-shrink: 0;
+      }
+
+      /* ── VIEW MORE ── */
+      .fp-section__list--collapsed .fp-item:nth-child(n+5) { display: none; }
+      .fp-section__list--collapsed.is-expanded .fp-item:nth-child(n+5) { display: flex; }
+      .fp-section__more {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #999; letter-spacing: 0.08em; text-transform: uppercase;
+        background: none; border: none; cursor: pointer;
+        padding: 0.75rem 0 0; transition: color 0.2s ease;
+      }
+      .fp-section__more:hover { color: #1a1a1a; }
+
+      /* ── Colour swatches ── */
+      .fp-section__swatches { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+      .fp-swatch {
+        display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+        cursor: pointer; background: none; border: none; padding: 0; transition: opacity 0.15s ease;
+      }
+      .fp-swatch:hover { opacity: 0.7; }
+      .fp-swatch__color {
+        width: 24px; height: 24px; border-radius: 2px;
+        border: 1.5px solid #e5e5e5; transition: all 0.15s ease;
+      }
+      .fp-swatch.is-active .fp-swatch__color {
+        border-color: #1a1a1a; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #1a1a1a;
+      }
+      .fp-swatch__label {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #999; letter-spacing: 0.04em; text-transform: uppercase;
+      }
+      .fp-swatch.is-active .fp-swatch__label { color: #1a1a1a; font-weight: 700; }
+
+      /* ── Price range slider ── */
+      .fp-section__price-display {
+        display: flex; justify-content: space-between; margin-bottom: 1.2rem;
+      }
+      .fp-section__price-display span {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        color: #1a1a1a; letter-spacing: 0.02em;
+      }
+      .fp-range { position: relative; height: 24px; display: flex; align-items: center; }
+      .fp-range__track {
+        position: absolute; left: 0; right: 0; height: 1.5px;
+        background: #e5e5e5; pointer-events: none;
+      }
+      .fp-range__fill {
+        position: absolute; height: 100%; background: #1a1a1a; pointer-events: none;
+      }
+      .fp-range__input {
+        position: absolute; width: 100%; height: 24px;
+        -webkit-appearance: none; appearance: none;
+        background: transparent; pointer-events: none; margin: 0; padding: 0;
+      }
+      .fp-range__input::-webkit-slider-thumb {
+        -webkit-appearance: none; appearance: none;
+        width: 14px; height: 14px; border-radius: 50%;
+        background: #1a1a1a; border: 2px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        cursor: pointer; pointer-events: all; position: relative; z-index: 2;
+      }
+      .fp-range__input::-moz-range-thumb {
+        width: 14px; height: 14px; border-radius: 50%;
+        background: #1a1a1a; border: 2px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        cursor: pointer; pointer-events: all;
+      }
+      .fp-range__input#rangeMax { z-index: 3; }
+
+      /* ══════════════════════════════════════
+         SHOP — ACTIVE TAGS
+         ══════════════════════════════════════ */
+      .shop-active-tags {
+        padding: 0 2rem 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap; min-height: 0;
+      }
+      .shop-active-tag {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: #1a1a1a; background: #f5f5f5; border: none;
+        padding: 0.35rem 0.6rem; cursor: pointer; display: inline-flex;
+        align-items: center; gap: 0.3rem; transition: background 0.15s ease;
+      }
+      .shop-active-tag:hover { background: #e5e5e5; }
+      .shop-active-tag svg { width: 8px; height: 8px; stroke: #999; fill: none; stroke-width: 2.5; }
+
+      /* ══════════════════════════════════════
+         SHOP — PRODUCT GRID
+         ══════════════════════════════════════ */
+      .shop-grid {
+        display: grid; gap: 1.5rem; padding: 0 2rem 3rem; min-height: 200px;
+        transition: all 0.3s ease;
+      }
+      .shop-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .shop-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .shop-grid--cols-1 { grid-template-columns: 1fr; max-width: 600px; }
+
+      @keyframes cardIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .shop-grid .home-product { animation: cardIn 0.4s ease both; }
+
+      /* ── Empty state ── */
+      .shop-empty { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; }
+      .shop-empty__text {
+        font-family: var(--font-body); font-size: 0.875rem; font-weight: 400;
+        color: #999; letter-spacing: 0.04em; margin-bottom: 1rem;
+      }
+      .shop-empty__btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #EC0201; background: none; border: none; cursor: pointer;
+        letter-spacing: 0.04em; text-transform: uppercase; padding: 0;
+      }
+      .shop-empty__btn:hover { opacity: 0.6; }
+
+      /* ══════════════════════════════════════
+         PROMO / NEWSLETTER / TRUST / FOOTER
+         ══════════════════════════════════════ */
+      .home-promo { position: relative; z-index: 2; background: #EC0201; overflow: hidden; padding: 0.7rem 0; }
+      .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
+      .home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+      .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
+      @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.04em; text-transform: uppercase; }
+      .home-newsletter__input::placeholder { color: #000; }
+      .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+      .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.04em; opacity: 0.7; }
+
+      .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+      .home-trust__item { display: flex; align-items: center; gap: 1rem; }
+      .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e5e5e5; padding: 3rem 2rem 1.5rem; }
+      .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+      .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+      .home-footer__logo { display: inline-flex; }
+      .home-footer__logo img { width: 120px; height: auto; display: block; }
+      .home-footer__socials { display: flex; gap: 0.8rem; }
+      .home-footer__socials a { display: flex; align-items: center; justify-content: center; }
+      .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
+      .home-footer__socials a:hover svg { opacity: 0.5; }
+      .home-footer__columns { display: flex; gap: 4rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; color: #000; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
+      .home-footer__col-links a:hover { color: #000; }
+      .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e5e5e5; }
+      .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; color: #000; letter-spacing: 0.04em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stars { display: flex; gap: 0.25rem; }
+      .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
+      .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .home-footer__bottom { border-top: 1px solid #e5e5e5; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
+      .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.04em; }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 768px) {
+        .home-announcement { height: 24px; }
+        .home-announcement__text { font-size: 0.5rem; padding: 0 2rem; }
+        .home-nav { padding: 0.5rem 1.5rem; align-items: center; top: 24px; }
+        .home-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+        .home-nav__links { display: none; }
+        .home-nav__hamburger { display: block; }
+
+        .shop-header { padding: 100px 1.5rem 0; }
+        .shop-controls { padding: 1rem 1.5rem 0.5rem; }
+        .shop-controls__view-label { display: none; }
+        .shop-controls__sort { display: none; }
+        .shop-active-tags { padding: 0 1.5rem 0.5rem; }
+        .shop-grid { padding: 1rem 1.5rem 2rem; gap: 0.75rem; }
+        .shop-grid--cols-3 { grid-template-columns: repeat(2, 1fr); }
+        .shop-grid--cols-1 { max-width: none; }
+
+        .fp-panel { width: 100%; max-width: 100vw; }
+
+        .home-newsletter { padding: 2rem 1.5rem; }
+        .home-newsletter__subtitle { font-size: 0.625rem; }
+        .home-trust { padding: 1.5rem; gap: 1rem; justify-content: flex-start; }
+        .home-trust__label { font-size: 0.5rem; }
+        .home-footer { padding: 2rem 1.5rem 1.5rem; }
+        .home-footer__main { flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+        .home-footer__columns { gap: 3rem; }
+        .home-footer__stats { flex-wrap: wrap; gap: 1rem; }
+        .home-footer__stat { padding-right: 1rem; margin-right: 0; }
+        .home-footer__bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      }
+    </style>
   </head>
-  <body class="shop-page">
-    <!-- Header -->
-    <div id="navbar-placeholder"></div>
 
-    <!-- Main Content -->
-    <main class="shop-main" id="main-content">
-      <div class="shop-header">
-        <h1 class="shop-title">All Products</h1>
-        <p class="shop-subtitle">
-          Durable and versatile, these storage solutions are both capable and stylish. Perfect for
-          any journey.
-        </p>
+  <body>
+    <!-- Announcement Marquee -->
+    <div class="home-announcement" id="homeAnnouncement">
+      <div class="home-announcement__track">
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
       </div>
+    </div>
 
-      <div class="shop-categories">
-        <!-- Category: Roofboxes -->
-        <button class="shop-category-card" data-category="roofbox">
-          <div class="shop-img-wrapper">
-            <img src="../assets/product-roofbox-1.png" alt="Roofboxes" loading="lazy" />
-          </div>
-          <div class="shop-category-info">
-            <h3 class="shop-category-title">Roofboxes</h3>
-            <span class="shop-category-count">6 products</span>
-          </div>
-        </button>
-
-        <!-- Category: Roofbags -->
-        <button class="shop-category-card" data-category="roofbag">
-          <div class="shop-img-wrapper">
-            <img src="../assets/product-roofbag-1.png" alt="Roofbags" loading="lazy" />
-          </div>
-          <div class="shop-category-info">
-            <h3 class="shop-category-title">Roofbags</h3>
-            <span class="shop-category-count">5 products</span>
-          </div>
-        </button>
-
-        <!-- Category: Crossbars -->
-        <button class="shop-category-card" data-category="crossbar">
-          <div class="shop-img-wrapper">
-            <img src="../assets/product-crossbar-1.png" alt="Crossbars" loading="lazy" />
-          </div>
-          <div class="shop-category-info">
-            <h3 class="shop-category-title">Crossbars</h3>
-            <span class="shop-category-count">5 products</span>
-          </div>
-        </button>
-
-        <!-- Category: Roofracks -->
-        <button class="shop-category-card" data-category="roofrack">
-          <div class="shop-img-wrapper">
-            <img src="../assets/product-roofrack-1.png" alt="Roofracks" loading="lazy" />
-          </div>
-          <div class="shop-category-info">
-            <h3 class="shop-category-title">Roofracks</h3>
-            <span class="shop-category-count">4 products</span>
-          </div>
-        </button>
+    <!-- Navigation -->
+    <nav class="home-nav" id="homeNav">
+      <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+      <div class="home-nav__links">
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="#">About</a><a href="#">Contact</a></div>
+        <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
+        <div class="home-nav__col"><a href="#">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="#" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
       </div>
-
-      <!-- Mobile Filter Toggle Button -->
-      <button class="mobile-filter-toggle" id="mobileFilterToggle">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="4" y1="6" x2="20" y2="6" />
-          <line x1="4" y1="12" x2="14" y2="12" />
-          <line x1="4" y1="18" x2="9" y2="18" />
-        </svg>
-        <span>Show Filters</span>
+      <div class="home-nav__right">
+        <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count">0</span>)</a>
+      </div>
+      <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
       </button>
-      <div class="mobile-filter-backdrop" id="mobileFilterBackdrop"></div>
+    </nav>
 
-      <!-- Shop Content: Filters + Product Grid -->
-      <div class="shop-content">
-        <!-- LEFT: Sticky Filter Sidebar -->
-        <aside class="shop-filters" id="shop-filters">
-          <!-- Mobile Filter Header (close button) -->
-          <div class="mobile-filter-header" id="mobileFilterHeader">
-            <span class="mobile-filter-title">Filters</span>
-            <button class="mobile-filter-close" id="mobileFilterClose" aria-label="Close filters">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-          <!-- Availability Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="availability" aria-expanded="true">
-              <span>Availability</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-availability">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="availability" value="in-stock" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">In stock</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="availability" value="out-of-stock" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Out of stock</span>
-              </label>
-            </div>
-          </div>
+    <!-- Mobile Menu -->
+    <div class="home-mobile-menu" id="mobileMenu">
+      <div class="home-mobile-menu__header">
+        <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+        <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="home-mobile-menu__links">
+        <a href="../home/">Home</a><a href="#">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="#" style="color:#EC0201;">Dealers</a><a href="#">Contact</a><a href="#">FAQ</a>
+      </div>
+      <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
+    </div>
 
-          <!-- Color Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="color" aria-expanded="true">
-              <span>Color</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-color">
-              <div class="filter-color-swatches">
-                <button
-                  class="filter-swatch"
-                  data-color="Black"
-                  style="background-color: #1a1a1a"
-                  title="Black"
-                ></button>
-                <button
-                  class="filter-swatch"
-                  data-color="Matte Gray"
-                  style="background-color: #6b6b6b"
-                  title="Matte Gray"
-                ></button>
-                <button
-                  class="filter-swatch"
-                  data-color="Silver"
-                  style="background-color: #c0c0c0"
-                  title="Silver"
-                ></button>
-                <button
-                  class="filter-swatch"
-                  data-color="White"
-                  style="background-color: #f5f5f5; border: 1px solid #ddd"
-                  title="White"
-                ></button>
-                <button
-                  class="filter-swatch"
-                  data-color="Dark Blue"
-                  style="background-color: #1a3a5c"
-                  title="Dark Blue"
-                ></button>
-                <button
-                  class="filter-swatch"
-                  data-color="Charcoal"
-                  style="background-color: #36454f"
-                  title="Charcoal"
-                ></button>
-              </div>
-            </div>
-          </div>
+    <!-- Filter Panel Backdrop -->
+    <div class="fp-backdrop" id="fpBackdrop"></div>
 
-          <!-- Size / Capacity Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="size" aria-expanded="true">
-              <span>Size</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-size">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="size" value="compact" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Compact</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="size" value="medium" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Medium (380–450L)</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="size" value="large" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Large (450–540L)</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="size" value="xl" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">XL (540L+)</span>
-              </label>
-            </div>
+    <!-- Right Slide-In Filter Panel -->
+    <div class="fp-panel" id="fpPanel">
+      <div class="fp-panel__header">
+        <span class="fp-panel__title">Filters</span>
+        <button class="fp-panel__close" id="fpClose" aria-label="Close filters">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="fp-panel__body" id="fpBody">
+        <!-- |01| CATEGORY -->
+        <div class="fp-section" data-section="category">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|01|</span>
+            <span class="fp-section__label">Category</span>
           </div>
-
-          <!-- Finish Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="finish" aria-expanded="true">
-              <span>Finish</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-finish">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="finish" value="textured" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Textured</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="finish" value="glossy" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Glossy</span>
-              </label>
-            </div>
+          <div class="fp-section__list" id="fpCategory"></div>
+        </div>
+        <!-- |02| PRICE -->
+        <div class="fp-section" data-section="price">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|02|</span>
+            <span class="fp-section__label">Price</span>
           </div>
-
-          <!-- Product Type Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="type" aria-expanded="true">
-              <span>Product Type</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-type">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="roofbox" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Roofboxes</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="roofbag" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Roofbags</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="crossbar" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Crossbars</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="roofrack" />
-                <span class="checkbox-custom"></span>
-                <span class="filter-label-text">Roofracks</span>
-              </label>
-            </div>
+          <div class="fp-section__price-display">
+            <span id="priceMinDisplay">&#8377; 4,999</span>
+            <span>—</span>
+            <span id="priceMaxDisplay">&#8377; 27,999</span>
           </div>
-
-          <!-- Price Range Filter -->
-          <div class="filter-group">
-            <button class="filter-heading" data-filter="price" aria-expanded="true">
-              <span>Price</span>
-              <i data-lucide="minus" class="filter-toggle-icon"></i>
-            </button>
-            <div class="filter-options" id="filter-price">
-              <div class="filter-price-range">
-                <div class="price-inputs">
-                  <div class="price-input-group">
-                    <span class="price-currency">₹</span>
-                    <input
-                      type="number"
-                      class="price-input"
-                      id="price-min"
-                      placeholder="0"
-                      min="0"
-                    />
-                  </div>
-                  <span class="price-separator">to</span>
-                  <div class="price-input-group">
-                    <span class="price-currency">₹</span>
-                    <input
-                      type="number"
-                      class="price-input"
-                      id="price-max"
-                      placeholder="50000"
-                      min="0"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <!-- RIGHT: Sort Bar + Product Grid -->
-        <div class="shop-products-area">
-          <!-- Sort Bar -->
-          <div class="shop-sort-bar">
-            <div class="custom-dropdown" id="sort-dropdown">
-              <button
-                class="custom-dropdown-trigger"
-                id="sort-trigger"
-                type="button"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-              >
-                <span class="shop-sort-label">Sort by</span>
-                <span class="custom-dropdown-value" id="sort-value">Featured</span>
-                <i data-lucide="chevron-down" class="custom-dropdown-chevron"></i>
-              </button>
-              <ul class="custom-dropdown-menu" id="sort-menu" role="listbox">
-                <li class="custom-dropdown-item is-active" data-value="featured" role="option">
-                  Featured
-                </li>
-                <li class="custom-dropdown-item" data-value="price-asc" role="option">
-                  Price: Low to High
-                </li>
-                <li class="custom-dropdown-item" data-value="price-desc" role="option">
-                  Price: High to Low
-                </li>
-                <li class="custom-dropdown-item" data-value="name-asc" role="option">Name: A–Z</li>
-                <li class="custom-dropdown-item" data-value="name-desc" role="option">Name: Z–A</li>
-                <li class="custom-dropdown-item" data-value="newest" role="option">Newest</li>
-              </ul>
-              <input type="hidden" id="shop-sort" value="featured" />
-            </div>
-            <div class="active-filters-container" id="active-filters"></div>
-            <span class="shop-product-count" id="product-count" style="margin-left: auto"
-              >40 products</span
-            >
-          </div>
-
-          <!-- Product Grid (populated via JS) -->
-          <div class="shop-product-grid" id="shop-product-grid">
-            <!-- Products will be rendered here by JavaScript -->
+          <div class="fp-range" id="fpRange">
+            <div class="fp-range__track"><div class="fp-range__fill" id="rangeFill"></div></div>
+            <input type="range" class="fp-range__input" id="rangeMin" min="4999" max="27999" value="4999" step="500" />
+            <input type="range" class="fp-range__input" id="rangeMax" min="4999" max="27999" value="27999" step="500" />
           </div>
         </div>
+        <!-- |03| COLOUR -->
+        <div class="fp-section" data-section="colour">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|03|</span>
+            <span class="fp-section__label">Colour</span>
+          </div>
+          <div class="fp-section__swatches" id="fpColour"></div>
+        </div>
+        <!-- |04| BRAND -->
+        <div class="fp-section" data-section="brand">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|04|</span>
+            <span class="fp-section__label">Brand</span>
+          </div>
+          <div class="fp-section__list" id="fpBrand"></div>
+        </div>
+        <!-- |05| CAR -->
+        <div class="fp-section" data-section="car">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|05|</span>
+            <span class="fp-section__label">Car</span>
+          </div>
+          <div class="fp-section__list" id="fpCar"></div>
+        </div>
+        <!-- |06| SORT -->
+        <div class="fp-section" data-section="sort">
+          <div class="fp-section__head">
+            <span class="fp-section__num">|06|</span>
+            <span class="fp-section__label">Sort</span>
+          </div>
+          <div class="fp-section__list" id="fpSort"></div>
+        </div>
       </div>
+      <div class="fp-panel__footer">
+        <button class="fp-panel__clear" id="fpClear">Clear All</button>
+        <button class="fp-panel__apply" id="fpApply">View Results</button>
+      </div>
+    </div>
+
+    <main>
+      <!-- Page Header -->
+      <div class="shop-header">
+        <div>
+          <h1 class="shop-header__title">All <em>Products</em></h1>
+          <p class="home-section-sub">Shop The Collection</p>
+        </div>
+        <span class="shop-header__count" id="productCount">20 Products</span>
+      </div>
+
+      <!-- Controls Bar -->
+      <div class="shop-controls">
+        <button class="shop-controls__filter-btn" id="filterToggle">
+          Filters
+          <span class="shop-controls__filter-count" id="filterCountBadge"></span>
+        </button>
+        <button class="shop-controls__sort" id="sortToggle">
+          Sort: <span id="sortLabel">Featured</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="shop-controls__view">
+          <span class="shop-controls__view-label">View</span>
+          <button class="shop-controls__view-btn is-active" data-cols="3" aria-label="3 columns">
+            <svg width="14" height="14" viewBox="0 0 14 14"><rect x="0" y="0" width="3.5" height="14" fill="currentColor"/><rect x="5.25" y="0" width="3.5" height="14" fill="currentColor"/><rect x="10.5" y="0" width="3.5" height="14" fill="currentColor"/></svg>
+          </button>
+          <button class="shop-controls__view-btn" data-cols="2" aria-label="2 columns">
+            <svg width="14" height="14" viewBox="0 0 14 14"><rect x="0" y="0" width="6" height="14" fill="currentColor"/><rect x="8" y="0" width="6" height="14" fill="currentColor"/></svg>
+          </button>
+          <button class="shop-controls__view-btn" data-cols="1" aria-label="1 column">
+            <svg width="14" height="14" viewBox="0 0 14 14"><rect x="0" y="0" width="14" height="14" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Filter Tags -->
+      <div class="shop-active-tags" id="activeTags"></div>
+
+      <!-- Product Grid (JS rendered) -->
+      <div class="shop-grid shop-grid--cols-3" id="shopGrid"></div>
     </main>
 
-    <!-- Footer -->
-    <div id="footer-placeholder"></div>
+    <!-- Promo Marquee -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+      </div>
+    </div>
 
-    <script src="../script.js"></script>
-    <script src="shop.js"></script>
+    <!-- Newsletter -->
+    <section class="home-newsletter">
+      <h2 class="home-newsletter__title">0% Spam. 100% Away.</h2>
+      <p class="home-newsletter__subtitle">We love a clean mail inbox, so we only send our subscribers important things: promotions you can't miss or news that will blow your mind.</p>
+      <form class="home-newsletter__form" onsubmit="return false;">
+        <input class="home-newsletter__input" type="email" placeholder="Email Address" required />
+        <button class="home-newsletter__submit" aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="home-newsletter__privacy">Consult our privacy policy for more information on how we obtain and process information.</p>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="home-trust">
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-trust__label">Express Shipping from India</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M1 10h22"/></svg><span class="home-trust__label">Free Shipping</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="home-trust__label">30 Days Return Policy</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4l3 3"/><path d="M7 3v2M17 3v2"/></svg><span class="home-trust__label">100% Secure Payment</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="home-trust__label">1 Year Warranty</span></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+      <div class="home-footer__main">
+        <div class="home-footer__brand">
+          <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+          <div class="home-footer__socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+        <div class="home-footer__columns">
+          <div><h4 class="home-footer__col-title">Brand</h4><div class="home-footer__col-links"><a href="#">About Us</a><a href="#">Sustainability</a></div></div>
+          <div><h4 class="home-footer__col-title">Help</h4><div class="home-footer__col-links"><a href="#">FAQs</a><a href="#">Contact</a><a href="#">Shipping</a></div></div>
+        </div>
+      </div>
+      <div class="home-footer__stats">
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Happy Customers</span><span class="home-footer__stat-value">10,000+</span></div>
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Google Reviews</span><span class="home-footer__stat-value">4.5<span class="home-footer__stars"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span></span></div>
+      </div>
+      <div class="home-footer__bottom">
+        <div class="home-footer__payments"><img src="../assets/amex.png" alt="Amex"/><img src="../assets/gpay.png" alt="Google Pay"/><img src="../assets/mastercard.png" alt="Mastercard"/><img src="../assets/visa.png" alt="Visa"/><img src="../assets/upi.png" alt="UPI"/></div>
+        <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        /* ══════════════════════════════════════
+           PRODUCT DATA
+           ══════════════════════════════════════ */
+        const PRODUCTS = [
+          { id:'roofbox-540l-glossy', name:'Roofbox 540L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:24999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-540l-textured', name:'Roofbox 540L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:26999, car:['universal'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbox-450l-glossy', name:'Roofbox 450L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:19999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-450l-textured', name:'Roofbox 450L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:21999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbox-540l-white', name:'Roofbox 540L', variant:'White Edition', category:'roofbox', brand:'AWAY Pro', colour:'white', price:27999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-450l-silver', name:'Roofbox 450L', variant:'Silver', category:'roofbox', brand:'AWAY Pro', colour:'silver', price:22999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbag-explorer-xl', name:'Explorer XL', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:7999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-1.png' },
+          { id:'roofbag-adventure-pro', name:'Adventure Pro', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:8999, car:['universal'], badge:'Save 20%', badgeType:'sale', image:'../assets/product-roofbag-2.png' },
+          { id:'roofbag-compact', name:'Roofbag Compact', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
+          { id:'roofbag-sport', name:'Roofbag Sport', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:6999, car:['hatchback','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-2.png' },
+          { id:'roofbag-weekend', name:'Roofbag Weekend', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:4999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
+          { id:'crossbar-aero-black', name:'Aero Crossbars', variant:'Black', category:'crossbars', brand:'AWAY', colour:'black', price:6999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-aero-silver', name:'Aero Crossbars', variant:'Silver', category:'crossbars', brand:'AWAY', colour:'silver', price:7499, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-heavy-duty', name:'Heavy Duty Crossbars', variant:'', category:'crossbars', brand:'AWAY Pro', colour:'black', price:9999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-universal', name:'Universal Fit Crossbars', variant:'', category:'crossbars', brand:'AWAY', colour:'silver', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-crossbar-1.png' },
+          { id:'roofrack-platform', name:'Platform Rack', variant:'Standard', category:'roofrack', brand:'AWAY', colour:'black', price:14999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-platform-lg', name:'Platform Rack', variant:'Large', category:'roofrack', brand:'AWAY Pro', colour:'black', price:18999, car:['suv'], badge:'', badgeType:'', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-basket', name:'Basket Rack Pro', variant:'', category:'roofrack', brand:'AWAY', colour:'black', price:12999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-low-profile', name:'Low Profile Rack', variant:'', category:'roofrack', brand:'AWAY', colour:'silver', price:11999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-expedition', name:'Expedition Rack', variant:'', category:'roofrack', brand:'AWAY Pro', colour:'black', price:22999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofrack-1.png' },
+        ];
+
+        /* ══════════════════════════════════════
+           FILTER CONFIG
+           ══════════════════════════════════════ */
+        const FILTER_GROUPS = [
+          { key:'category', label:'Category', options:['Roofbox','Roofbag','Crossbars','Roofrack'] },
+          { key:'colour', label:'Colour', options:['Black','White','Silver','Grey'], type:'swatch' },
+          { key:'brand', label:'Brand', options:['AWAY','AWAY Pro'] },
+          { key:'car', label:'Car', options:['Universal','SUV','Sedan','Hatchback'] },
+        ];
+        const SORT_OPTIONS = [
+          { value:'featured', label:'Featured' },
+          { value:'price-asc', label:'Price: Low to High' },
+          { value:'price-desc', label:'Price: High to Low' },
+          { value:'newest', label:'Newest' },
+        ];
+        const COLOUR_HEX = { Black:'#1a1a1a', White:'#ffffff', Silver:'#c0c0c0', Grey:'#808080' };
+        const PRICE_BOUNDS = { min: 4999, max: 27999 };
+
+        /* ══════════════════════════════════════
+           STATE
+           ══════════════════════════════════════ */
+        const activeFilters = { category:[], colour:[], brand:[], car:[] };
+        let activeSort = 'featured';
+        let priceMin = PRICE_BOUNDS.min;
+        let priceMax = PRICE_BOUNDS.max;
+
+        const gridEl = document.getElementById('shopGrid');
+        const countEl = document.getElementById('productCount');
+        const tagsEl = document.getElementById('activeTags');
+
+        /* ══════════════════════════════════════
+           FILTER + SORT LOGIC
+           ══════════════════════════════════════ */
+        function filterAndSort() {
+          let results = PRODUCTS.filter(p => {
+            if (activeFilters.category.length && !activeFilters.category.some(v => v.toLowerCase() === p.category)) return false;
+            if (activeFilters.colour.length && !activeFilters.colour.some(v => v.toLowerCase() === p.colour)) return false;
+            if (p.price < priceMin || p.price > priceMax) return false;
+            if (activeFilters.brand.length && !activeFilters.brand.includes(p.brand)) return false;
+            if (activeFilters.car.length && !activeFilters.car.some(v => p.car.includes(v.toLowerCase()))) return false;
+            return true;
+          });
+          if (activeSort === 'price-asc') results.sort((a, b) => a.price - b.price);
+          else if (activeSort === 'price-desc') results.sort((a, b) => b.price - a.price);
+          else if (activeSort === 'newest') results.reverse();
+          return results;
+        }
+
+        /* ══════════════════════════════════════
+           RENDER GRID
+           ══════════════════════════════════════ */
+        function formatPrice(n) {
+          return '\u20B9 ' + n.toLocaleString('en-IN');
+        }
+
+        function renderGrid(results) {
+          countEl.textContent = results.length + ' Product' + (results.length !== 1 ? 's' : '');
+          if (!results.length) {
+            gridEl.innerHTML = '<div class="shop-empty"><p class="shop-empty__text">No products match your filters</p><button class="shop-empty__btn" onclick="clearAll()">Clear All Filters</button></div>';
+            return;
+          }
+          gridEl.innerHTML = results.map((p, i) => {
+            const badgeClass = p.badgeType === 'pick' ? ' home-product__badge--pick' : '';
+            const badgeHtml = p.badge ? `<span class="home-product__badge${badgeClass}">${p.badge}</span>` : '';
+            const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
+            return `<a href="#" class="home-product" style="animation-delay:${i * 0.04}s">
+              <div class="home-product__img-wrap">
+                ${badgeHtml}
+                <button class="home-product__add">Add</button>
+                <img src="${p.image}" alt="${displayName}" class="home-product__img" loading="lazy" />
+                <div class="home-product__info">
+                  <p class="home-product__name">${p.name}</p>
+                  <span class="home-product__price">${formatPrice(p.price)}</span>
+                </div>
+              </div>
+            </a>`;
+          }).join('');
+        }
+
+        /* ══════════════════════════════════════
+           RENDER ACTIVE TAGS
+           ══════════════════════════════════════ */
+        function renderTags() {
+          const tags = [];
+          for (const key in activeFilters) {
+            activeFilters[key].forEach(val => { tags.push({ key, val }); });
+          }
+          if (priceMin > PRICE_BOUNDS.min || priceMax < PRICE_BOUNDS.max) {
+            tags.push({ key: 'price-range', val: `${formatPrice(priceMin)} – ${formatPrice(priceMax)}` });
+          }
+          tagsEl.innerHTML = tags.map(t =>
+            `<button class="shop-active-tag" data-key="${t.key}" data-val="${t.val}">${t.val} <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
+          ).join('');
+          tagsEl.querySelectorAll('.shop-active-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+              const k = tag.dataset.key;
+              if (k === 'price-range') {
+                priceMin = PRICE_BOUNDS.min;
+                priceMax = PRICE_BOUNDS.max;
+                document.getElementById('rangeMin').value = PRICE_BOUNDS.min;
+                document.getElementById('rangeMax').value = PRICE_BOUNDS.max;
+                updateRangeDisplay();
+              } else {
+                const v = tag.dataset.val;
+                activeFilters[k] = activeFilters[k].filter(x => x !== v);
+              }
+              update();
+            });
+          });
+        }
+
+        /* ══════════════════════════════════════
+           BUILD FILTER PANEL
+           ══════════════════════════════════════ */
+        function buildFilterPanel() {
+          // Category
+          document.getElementById('fpCategory').innerHTML = FILTER_GROUPS.find(g => g.key === 'category').options.map(opt =>
+            `<button class="fp-item" data-group="category" data-value="${opt}">${opt}</button>`
+          ).join('');
+
+          // Colour swatches
+          document.getElementById('fpColour').innerHTML = FILTER_GROUPS.find(g => g.key === 'colour').options.map(opt =>
+            `<button class="fp-swatch" data-group="colour" data-value="${opt}">
+              <span class="fp-swatch__color" style="background:${COLOUR_HEX[opt]}"></span>
+              <span class="fp-swatch__label">${opt}</span>
+            </button>`
+          ).join('');
+
+          // Brand
+          document.getElementById('fpBrand').innerHTML = FILTER_GROUPS.find(g => g.key === 'brand').options.map(opt =>
+            `<button class="fp-item" data-group="brand" data-value="${opt}">${opt}</button>`
+          ).join('');
+
+          // Car
+          document.getElementById('fpCar').innerHTML = FILTER_GROUPS.find(g => g.key === 'car').options.map(opt =>
+            `<button class="fp-item" data-group="car" data-value="${opt}">${opt}</button>`
+          ).join('');
+
+          // Sort
+          document.getElementById('fpSort').innerHTML = SORT_OPTIONS.map(opt =>
+            `<button class="fp-item" data-group="sort" data-value="${opt.value}">${opt.label}</button>`
+          ).join('');
+
+          // Event delegation for all clicks in panel body
+          document.getElementById('fpBody').addEventListener('click', (e) => {
+            const item = e.target.closest('.fp-item');
+            const swatch = e.target.closest('.fp-swatch');
+
+            if (item) {
+              const group = item.dataset.group;
+              const value = item.dataset.value;
+              if (group === 'sort') {
+                activeSort = value;
+              } else {
+                if (activeFilters[group].includes(value)) {
+                  activeFilters[group] = activeFilters[group].filter(v => v !== value);
+                } else {
+                  activeFilters[group].push(value);
+                }
+              }
+              syncPanelUI();
+            }
+
+            if (swatch) {
+              const value = swatch.dataset.value;
+              if (activeFilters.colour.includes(value)) {
+                activeFilters.colour = activeFilters.colour.filter(v => v !== value);
+              } else {
+                activeFilters.colour.push(value);
+              }
+              syncPanelUI();
+            }
+          });
+        }
+
+        /* ══════════════════════════════════════
+           PRICE RANGE SLIDER
+           ══════════════════════════════════════ */
+        function updateRangeDisplay() {
+          const minInput = document.getElementById('rangeMin');
+          const maxInput = document.getElementById('rangeMax');
+          const fill = document.getElementById('rangeFill');
+
+          let min = parseInt(minInput.value);
+          let max = parseInt(maxInput.value);
+          if (min > max) { const t = min; min = max; max = t; }
+
+          priceMin = min;
+          priceMax = max;
+
+          document.getElementById('priceMinDisplay').textContent = formatPrice(min);
+          document.getElementById('priceMaxDisplay').textContent = formatPrice(max);
+
+          const range = PRICE_BOUNDS.max - PRICE_BOUNDS.min;
+          const leftPct = ((min - PRICE_BOUNDS.min) / range) * 100;
+          const rightPct = ((max - PRICE_BOUNDS.min) / range) * 100;
+          fill.style.left = leftPct + '%';
+          fill.style.width = (rightPct - leftPct) + '%';
+
+          // Update preview count on apply button
+          syncPanelUI();
+        }
+
+        function initRangeSlider() {
+          const minInput = document.getElementById('rangeMin');
+          const maxInput = document.getElementById('rangeMax');
+          minInput.addEventListener('input', updateRangeDisplay);
+          maxInput.addEventListener('input', updateRangeDisplay);
+          updateRangeDisplay();
+        }
+
+        /* ══════════════════════════════════════
+           SYNC PANEL UI
+           ══════════════════════════════════════ */
+        function syncPanelUI() {
+          // Text list items
+          document.querySelectorAll('.fp-item').forEach(item => {
+            const group = item.dataset.group;
+            const value = item.dataset.value;
+            if (group === 'sort') {
+              item.classList.toggle('is-active', activeSort === value);
+            } else {
+              item.classList.toggle('is-active', activeFilters[group]?.includes(value) || false);
+            }
+          });
+
+          // Colour swatches
+          document.querySelectorAll('.fp-swatch').forEach(swatch => {
+            swatch.classList.toggle('is-active', activeFilters.colour.includes(swatch.dataset.value));
+          });
+
+          // Sort label in controls bar
+          const sortLabelEl = document.getElementById('sortLabel');
+          const currentSort = SORT_OPTIONS.find(o => o.value === activeSort);
+          if (sortLabelEl && currentSort) sortLabelEl.textContent = currentSort.label;
+
+          // Filter count badge
+          const totalActive = Object.values(activeFilters).reduce((sum, arr) => sum + arr.length, 0);
+          const hasPriceFilter = (priceMin > PRICE_BOUNDS.min || priceMax < PRICE_BOUNDS.max);
+          const totalCount = totalActive + (hasPriceFilter ? 1 : 0);
+          const badge = document.getElementById('filterCountBadge');
+          if (badge) {
+            badge.textContent = totalCount;
+            badge.classList.toggle('is-visible', totalCount > 0);
+          }
+
+          // Preview count on apply button
+          const previewResults = filterAndSort();
+          const applyBtn = document.getElementById('fpApply');
+          if (applyBtn) {
+            applyBtn.textContent = `View ${previewResults.length} Result${previewResults.length !== 1 ? 's' : ''}`;
+          }
+        }
+
+        /* ══════════════════════════════════════
+           UPDATE (central)
+           ══════════════════════════════════════ */
+        function update() {
+          const results = filterAndSort();
+          renderGrid(results);
+          renderTags();
+          syncPanelUI();
+        }
+
+        window.clearAll = function() {
+          for (const k in activeFilters) activeFilters[k] = [];
+          activeSort = 'featured';
+          priceMin = PRICE_BOUNDS.min;
+          priceMax = PRICE_BOUNDS.max;
+          document.getElementById('rangeMin').value = PRICE_BOUNDS.min;
+          document.getElementById('rangeMax').value = PRICE_BOUNDS.max;
+          updateRangeDisplay();
+          update();
+        };
+
+        /* ══════════════════════════════════════
+           PANEL OPEN / CLOSE
+           ══════════════════════════════════════ */
+        const fpPanel = document.getElementById('fpPanel');
+        const fpBackdrop = document.getElementById('fpBackdrop');
+
+        function openPanel() {
+          syncPanelUI();
+          fpPanel.classList.add('is-open');
+          fpBackdrop.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        }
+        function closePanel() {
+          fpPanel.classList.remove('is-open');
+          fpBackdrop.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+
+        document.getElementById('filterToggle').addEventListener('click', openPanel);
+        document.getElementById('sortToggle').addEventListener('click', openPanel);
+        document.getElementById('fpClose').addEventListener('click', closePanel);
+        fpBackdrop.addEventListener('click', closePanel);
+
+        document.getElementById('fpApply').addEventListener('click', () => {
+          closePanel();
+          update();
+        });
+
+        document.getElementById('fpClear').addEventListener('click', () => {
+          window.clearAll();
+          syncPanelUI();
+        });
+
+        /* ══════════════════════════════════════
+           GRID VIEW TOGGLE
+           ══════════════════════════════════════ */
+        const viewBtns = document.querySelectorAll('.shop-controls__view-btn');
+        viewBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const cols = btn.dataset.cols;
+            viewBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            gridEl.classList.remove('shop-grid--cols-1', 'shop-grid--cols-2', 'shop-grid--cols-3');
+            gridEl.classList.add('shop-grid--cols-' + cols);
+          });
+        });
+
+        /* ══════════════════════════════════════
+           NAV + MOBILE MENU
+           ══════════════════════════════════════ */
+        const nav = document.getElementById('homeNav');
+        const announcement = document.getElementById('homeAnnouncement');
+        let lastY = 0, ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              if (y > lastY && y > 100) { nav.classList.add('is-hidden'); announcement.classList.add('is-hidden'); }
+              else { nav.classList.remove('is-hidden'); announcement.classList.remove('is-hidden'); }
+              lastY = y; ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        document.getElementById('hamburgerOpen').addEventListener('click', () => { mobileMenu.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
+        document.getElementById('hamburgerClose').addEventListener('click', () => { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            if (mobileMenu.classList.contains('is-open')) { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; }
+            if (fpPanel.classList.contains('is-open')) closePanel();
+          }
+        });
+
+        /* ══════════════════════════════════════
+           INIT
+           ══════════════════════════════════════ */
+        buildFilterPanel();
+        initRangeSlider();
+        update();
+
+      })();
+    </script>
   </body>
 </html>

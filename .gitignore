@@ -44,3 +44,4 @@ coverage/
 # Production
 *.min.js
 *.min.css
+.vercel
