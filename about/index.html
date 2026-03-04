@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="AWAY - Born from the belief that every journey deserves better. Discover our story of crafting premium rooftop cargo solutions."
+    />
+    <meta
+      name="keywords"
+      content="about AWAY, rooftop cargo story, premium cargo solutions, adventure brand"
+    />
+    <meta name="author" content="AWAY" />
+    <meta property="og:title" content="Our Story - AWAY" />
+    <meta
+      property="og:description"
+      content="Born from the belief that every journey deserves better."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://away.com/about" />
+    <title>Our Story - AWAY</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="about-hero-content">
+        <p class="about-hero-eyebrow">Our Story</p>
+        <h1 class="about-hero-title">Built for the Journey,<br />Designed for Life</h1>
+        <p class="about-hero-subtitle">
+          Every adventure begins with a single question:<br />
+          What if we could carry more, worry less, and explore further?
+        </p>
+      </div>
+      <div class="about-hero-image">
+        <img src="../assets/hero-image.jpg" alt="AWAY Journey" loading="eager" />
+      </div>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="manifesto-section">
+      <div class="manifesto-container">
+        <div class="manifesto-quote">
+          "We exist to remove the barriers between you and where you're going. Every roofbox,
+          every detail, every innovation—built to expand possibility."
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="product-showcase">
+      <div class="showcase-container">
+        <div class="showcase-image">
+          <img src="../assets/product-detail.jpg" alt="AWAY Product Detail" loading="lazy" />
+        </div>
+        <div class="showcase-content">
+          <h2 class="showcase-title">Engineering Meets Obsession</h2>
+          <div class="showcase-features">
+            <div class="showcase-feature">
+              <div class="feature-label">Materials</div>
+              <div class="feature-value">Premium ABS composite. Marine-grade seals. Built to outlast.</div>
+            </div>
+            <div class="showcase-feature">
+              <div class="feature-label">Testing</div>
+              <div class="feature-value">120mph wind tunnels. Arctic freeze. Desert heat. Extreme ready.</div>
+            </div>
+            <div class="showcase-feature">
+              <div class="feature-label">Warranty</div>
+              <div class="feature-value">Lifetime coverage. No questions. No limits.</div>
+            </div>
+            <div class="showcase-feature">
+              <div class="feature-label">Design</div>
+              <div class="feature-value">Aerodynamic. Timeless. Built for the next decade.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="impact-section">
+      <div class="impact-grid">
+        <div class="impact-stat">
+          <div class="impact-number">500K+</div>
+          <div class="impact-label">Adventures Enabled</div>
+        </div>
+        <div class="impact-stat">
+          <div class="impact-number">98%</div>
+          <div class="impact-label">Would Recommend</div>
+        </div>
+        <div class="impact-stat">
+          <div class="impact-number">Zero</div>
+          <div class="impact-label">Compromises Made</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing Statement -->
+    <section class="closing-section">
+      <div class="closing-container">
+        <h2 class="closing-title">Built for Life's<br />Next Chapter</h2>
+        <p class="closing-text">
+          Whether you're chasing sunsets, family memories, or the next great unknown—<br />
+          AWAY is your partner in possibility.
+        </p>
+        <a href="../shop/" class="closing-cta">Explore Collection</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <script src="../script.js"></script>
+    <script>
+      // Load navbar
+      fetch('../components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          if (typeof initNavigation === 'function') {
+            initNavigation();
+          }
+        });
+
+      // Load footer
+      fetch('../components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "fabric-ecommerce",
+  "version": "1.0.0",
+  "description": "Modern sustainable fashion e-commerce website built with best practices",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 9000 -o",
+    "start": "npx http-server -p 9000",
+    "lint:css": "npx stylelint '**/*.css'",
+    "lint:js": "npx eslint '**/*.js'",
+    "format": "npx prettier --write '*.{html,css,js,json,md}'",
+    "validate": "npx html-validate '*.html'"
+  },
+  "keywords": [
+    "ecommerce",
+    "fashion",
+    "sustainable",
+    "responsive",
+    "accessibility",
+    "seo"
+  ],
+  "author": "Fabric",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "stylelint": "^15.0.0",
+    "prettier": "^3.0.0",
+    "html-validate": "^8.0.0",
+    "http-server": "^14.0.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "iOS >= 12",
+    "Android >= 8"
+  ]
+}

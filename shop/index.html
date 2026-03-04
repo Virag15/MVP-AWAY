@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Shop all AWAY premium rooftop cargo solutions." />
+    <title>Shop - AWAY</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/fav-dark.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/fav-white.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles.css" />
+    <!-- Google Fonts: Barlow Condensed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="shop-page">
+    <!-- Header -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="shop-main" id="main-content">
+      <div class="shop-header">
+        <h1 class="shop-title">All Products</h1>
+        <p class="shop-subtitle">
+          Durable and versatile, these storage solutions are both capable and stylish. Perfect for
+          any journey.
+        </p>
+      </div>
+
+      <div class="shop-categories">
+        <!-- Category: Roofboxes -->
+        <button class="shop-category-card" data-category="roofbox">
+          <div class="shop-img-wrapper">
+            <img src="../assets/product-roofbox-1.png" alt="Roofboxes" loading="lazy" />
+          </div>
+          <div class="shop-category-info">
+            <h3 class="shop-category-title">Roofboxes</h3>
+            <span class="shop-category-count">6 products</span>
+          </div>
+        </button>
+
+        <!-- Category: Roofbags -->
+        <button class="shop-category-card" data-category="roofbag">
+          <div class="shop-img-wrapper">
+            <img src="../assets/product-roofbag-1.png" alt="Roofbags" loading="lazy" />
+          </div>
+          <div class="shop-category-info">
+            <h3 class="shop-category-title">Roofbags</h3>
+            <span class="shop-category-count">5 products</span>
+          </div>
+        </button>
+
+        <!-- Category: Crossbars -->
+        <button class="shop-category-card" data-category="crossbar">
+          <div class="shop-img-wrapper">
+            <img src="../assets/product-crossbar-1.png" alt="Crossbars" loading="lazy" />
+          </div>
+          <div class="shop-category-info">
+            <h3 class="shop-category-title">Crossbars</h3>
+            <span class="shop-category-count">5 products</span>
+          </div>
+        </button>
+
+        <!-- Category: Roofracks -->
+        <button class="shop-category-card" data-category="roofrack">
+          <div class="shop-img-wrapper">
+            <img src="../assets/product-roofrack-1.png" alt="Roofracks" loading="lazy" />
+          </div>
+          <div class="shop-category-info">
+            <h3 class="shop-category-title">Roofracks</h3>
+            <span class="shop-category-count">4 products</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Mobile Filter Toggle Button -->
+      <button class="mobile-filter-toggle" id="mobileFilterToggle">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <line x1="4" y1="12" x2="14" y2="12" />
+          <line x1="4" y1="18" x2="9" y2="18" />
+        </svg>
+        <span>Show Filters</span>
+      </button>
+      <div class="mobile-filter-backdrop" id="mobileFilterBackdrop"></div>
+
+      <!-- Shop Content: Filters + Product Grid -->
+      <div class="shop-content">
+        <!-- LEFT: Sticky Filter Sidebar -->
+        <aside class="shop-filters" id="shop-filters">
+          <!-- Mobile Filter Header (close button) -->
+          <div class="mobile-filter-header" id="mobileFilterHeader">
+            <span class="mobile-filter-title">Filters</span>
+            <button class="mobile-filter-close" id="mobileFilterClose" aria-label="Close filters">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+          <!-- Availability Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="availability" aria-expanded="true">
+              <span>Availability</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-availability">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="availability" value="in-stock" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">In stock</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="availability" value="out-of-stock" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Out of stock</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Color Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="color" aria-expanded="true">
+              <span>Color</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-color">
+              <div class="filter-color-swatches">
+                <button
+                  class="filter-swatch"
+                  data-color="Black"
+                  style="background-color: #1a1a1a"
+                  title="Black"
+                ></button>
+                <button
+                  class="filter-swatch"
+                  data-color="Matte Gray"
+                  style="background-color: #6b6b6b"
+                  title="Matte Gray"
+                ></button>
+                <button
+                  class="filter-swatch"
+                  data-color="Silver"
+                  style="background-color: #c0c0c0"
+                  title="Silver"
+                ></button>
+                <button
+                  class="filter-swatch"
+                  data-color="White"
+                  style="background-color: #f5f5f5; border: 1px solid #ddd"
+                  title="White"
+                ></button>
+                <button
+                  class="filter-swatch"
+                  data-color="Dark Blue"
+                  style="background-color: #1a3a5c"
+                  title="Dark Blue"
+                ></button>
+                <button
+                  class="filter-swatch"
+                  data-color="Charcoal"
+                  style="background-color: #36454f"
+                  title="Charcoal"
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Size / Capacity Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="size" aria-expanded="true">
+              <span>Size</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-size">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="size" value="compact" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Compact</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="size" value="medium" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Medium (380–450L)</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="size" value="large" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Large (450–540L)</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="size" value="xl" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">XL (540L+)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Finish Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="finish" aria-expanded="true">
+              <span>Finish</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-finish">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="finish" value="textured" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Textured</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="finish" value="glossy" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Glossy</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Product Type Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="type" aria-expanded="true">
+              <span>Product Type</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-type">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="roofbox" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Roofboxes</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="roofbag" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Roofbags</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="crossbar" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Crossbars</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="roofrack" />
+                <span class="checkbox-custom"></span>
+                <span class="filter-label-text">Roofracks</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <button class="filter-heading" data-filter="price" aria-expanded="true">
+              <span>Price</span>
+              <i data-lucide="minus" class="filter-toggle-icon"></i>
+            </button>
+            <div class="filter-options" id="filter-price">
+              <div class="filter-price-range">
+                <div class="price-inputs">
+                  <div class="price-input-group">
+                    <span class="price-currency">₹</span>
+                    <input
+                      type="number"
+                      class="price-input"
+                      id="price-min"
+                      placeholder="0"
+                      min="0"
+                    />
+                  </div>
+                  <span class="price-separator">to</span>
+                  <div class="price-input-group">
+                    <span class="price-currency">₹</span>
+                    <input
+                      type="number"
+                      class="price-input"
+                      id="price-max"
+                      placeholder="50000"
+                      min="0"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- RIGHT: Sort Bar + Product Grid -->
+        <div class="shop-products-area">
+          <!-- Sort Bar -->
+          <div class="shop-sort-bar">
+            <div class="custom-dropdown" id="sort-dropdown">
+              <button
+                class="custom-dropdown-trigger"
+                id="sort-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+              >
+                <span class="shop-sort-label">Sort by</span>
+                <span class="custom-dropdown-value" id="sort-value">Featured</span>
+                <i data-lucide="chevron-down" class="custom-dropdown-chevron"></i>
+              </button>
+              <ul class="custom-dropdown-menu" id="sort-menu" role="listbox">
+                <li class="custom-dropdown-item is-active" data-value="featured" role="option">
+                  Featured
+                </li>
+                <li class="custom-dropdown-item" data-value="price-asc" role="option">
+                  Price: Low to High
+                </li>
+                <li class="custom-dropdown-item" data-value="price-desc" role="option">
+                  Price: High to Low
+                </li>
+                <li class="custom-dropdown-item" data-value="name-asc" role="option">Name: A–Z</li>
+                <li class="custom-dropdown-item" data-value="name-desc" role="option">Name: Z–A</li>
+                <li class="custom-dropdown-item" data-value="newest" role="option">Newest</li>
+              </ul>
+              <input type="hidden" id="shop-sort" value="featured" />
+            </div>
+            <div class="active-filters-container" id="active-filters"></div>
+            <span class="shop-product-count" id="product-count" style="margin-left: auto"
+              >40 products</span
+            >
+          </div>
+
+          <!-- Product Grid (populated via JS) -->
+          <div class="shop-product-grid" id="shop-product-grid">
+            <!-- Products will be rendered here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../script.js"></script>
+    <script src="shop.js"></script>
+  </body>
+</html>

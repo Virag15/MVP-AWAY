@@ -1,0 +1,22 @@
+<!-- Product Card Component Template
+     Usage: This is used as a template. Products are rendered via JS on the shop page.
+     Each product card expects: image, name, subtitle, price, originalPrice (optional), badge (optional), colors (optional)
+-->
+<div class="shop-product-card" id="product-card-template">
+  <a href="#" class="shop-product-link">
+    <div class="shop-product-img-wrapper">
+      <!-- Badge: STAFF PICK, SAVE UP TO 20%, etc -->
+      <span class="shop-product-badge"></span>
+      <img src="" alt="" class="shop-product-img" loading="lazy" />
+    </div>
+    <div class="shop-product-info">
+      <h3 class="shop-product-name"></h3>
+      <p class="shop-product-subtitle"></p>
+      <div class="shop-product-pricing">
+        <span class="shop-product-price"></span>
+        <span class="shop-product-original-price"></span>
+      </div>
+      <div class="shop-product-colors"></div>
+    </div>
+  </a>
+</div>
