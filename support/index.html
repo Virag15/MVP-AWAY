@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Support & Help Center. FAQs, contact us, and track your order." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <title>Support — AWAY</title>
+
+    <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --neon: #EC0201;
+        --neon-glow: 0 0 6px rgba(236, 2, 1, 0.4), 0 0 18px rgba(236, 2, 1, 0.15);
+        --neon-glow-strong: 0 0 8px rgba(236, 2, 1, 0.6), 0 0 25px rgba(236, 2, 1, 0.25), 0 0 50px rgba(236, 2, 1, 0.1);
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         ANNOUNCEMENT BAR
+         ══════════════════════════════════════ */
+      .home-announcement {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 51;
+        background: #1a1a1a; overflow: hidden; height: 28px;
+        display: flex; align-items: center; transition: transform 0.4s ease;
+      }
+      .home-announcement.is-hidden { transform: translateY(-100%); }
+      .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+      .home-announcement__text {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 3rem;
+      }
+      .home-announcement__text span { color: #EC0201; font-weight: 600; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* ══════════════════════════════════════
+         NAV
+         ══════════════════════════════════════ */
+      .home-nav {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        padding: 1rem 2rem; background: #fff; position: fixed; top: 28px;
+        left: 0; right: 0; z-index: 50; transition: transform 0.4s ease;
+      }
+      .home-nav.is-hidden { transform: translateY(calc(-100% - 28px)); }
+      .home-nav__logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+      .home-nav__logo img { width: 100px; height: auto; display: block; }
+      .home-nav__links { display: flex; gap: 4rem; margin-left: 3rem; }
+      .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-nav__col a {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .home-nav__col a.is-red { color: #EC0201; }
+      .home-nav__col a:hover { opacity: 0.5; }
+      .home-nav__right { display: flex; align-items: flex-start; gap: 1rem; flex-shrink: 0; }
+      .home-nav__cart {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: baseline; gap: 0.2em;
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1;
+      }
+      .home-nav__cart-count { color: #EC0201; font-weight: 600; }
+      .home-nav__cart:hover { opacity: 0.5; }
+      .home-nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+      .home-nav__hamburger svg { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .home-mobile-menu {
+        position: fixed; inset: 0; z-index: 100; background: #fff;
+        display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem;
+        transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .home-mobile-menu.is-open { transform: translateY(0); }
+      .home-mobile-menu__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+      .home-mobile-menu__logo { display: flex; align-items: center; text-decoration: none; }
+      .home-mobile-menu__logo img { width: 90px; height: auto; display: block; }
+      .home-mobile-menu__close { background: none; border: none; cursor: pointer; padding: 0; }
+      .home-mobile-menu__close svg { display: block; }
+      .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
+      .home-mobile-menu__links a {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
+        text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
+        padding: 0.7rem 0; border-bottom: 1px solid #e5e5e5; transition: opacity 0.2s ease;
+      }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e5e5e5; }
+      .home-mobile-menu__links a:hover { opacity: 0.4; }
+      .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #999; text-decoration: none; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         SHARED
+         ══════════════════════════════════════ */
+      .home-section-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase; margin: 0.25rem 0 0;
+      }
+
+      /* ══════════════════════════════════════
+         SUPPORT — PAGE HEADER
+         ══════════════════════════════════════ */
+      .support-header {
+        padding: 120px 2rem 0;
+        display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+      }
+
+      .support-header__title {
+        font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+
+      .support-header__title em { font-style: italic; }
+
+      /* ══════════════════════════════════════
+         SUPPORT — QUICK HELP CARDS
+         ══════════════════════════════════════ */
+      .support-quick {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+        padding: 2rem 2rem 0; margin-top: 1.5rem;
+      }
+
+      .support-quick__card {
+        background: #fafafa; padding: 2rem 1.5rem;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+        transition: background 0.2s ease; cursor: pointer; border: none;
+        text-align: left; text-decoration: none; color: inherit;
+      }
+
+      .support-quick__card:hover { background: #f0f0f0; }
+
+      .support-quick__icon {
+        width: 32px; height: 32px; stroke: #1a1a1a; fill: none; stroke-width: 1.5;
+      }
+
+      .support-quick__label {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em;
+      }
+
+      .support-quick__desc {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #888; line-height: 1.5; letter-spacing: 0.02em;
+      }
+
+      .support-quick__arrow {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
+        color: #EC0201; text-transform: uppercase; letter-spacing: 0.02em;
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        margin-top: auto;
+      }
+
+      .support-quick__arrow svg { width: 12px; height: 12px; stroke: #EC0201; fill: none; stroke-width: 2; }
+
+      /* ══════════════════════════════════════
+         SUPPORT — TRACK ORDER BAR
+         ══════════════════════════════════════ */
+      .support-track {
+        background: #1a1a1a; padding: 2rem; margin: 2rem 2rem 0;
+        display: flex; align-items: center; gap: 1.5rem;
+      }
+
+      .support-track__icon svg {
+        width: 28px; height: 28px; stroke: var(--neon); fill: none; stroke-width: 1.5;
+        filter: drop-shadow(0 0 6px rgba(236, 2, 1, 0.4));
+      }
+
+      .support-track__info { flex: 1; }
+
+      .support-track__title {
+        font-family: var(--font-display); font-size: 0.875rem; font-weight: 600;
+        color: #fff; text-transform: uppercase; letter-spacing: 0em;
+      }
+
+      .support-track__subtitle {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.02em;
+        margin-top: 0.2rem;
+      }
+
+      .support-track__input-wrap {
+        display: flex; align-items: center; gap: 0;
+        flex: 1; max-width: 400px;
+      }
+
+      .support-track__input {
+        flex: 1; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.02em; background: rgba(255,255,255,0.08);
+        border: 1.5px solid rgba(255,255,255,0.15); border-right: none;
+        padding: 0.75rem 1rem; outline: none;
+        transition: border-color 0.2s ease;
+      }
+
+      .support-track__input:focus { border-color: var(--neon); }
+      .support-track__input::placeholder { color: rgba(255,255,255,0.3); text-transform: uppercase; font-size: 0.65rem; }
+
+      .support-track__btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        color: #1a1a1a; background: var(--neon); border: none;
+        padding: 0.82rem 1.5rem; cursor: pointer;
+        transition: background 0.2s ease; white-space: nowrap;
+      }
+
+      .support-track__btn:hover { background: #fff; }
+
+      /* ══════════════════════════════════════
+         SUPPORT — FAQ SECTION
+         ══════════════════════════════════════ */
+      .support-faq {
+        padding: 3rem 2rem;
+      }
+
+      .support-faq__header {
+        display: flex; align-items: flex-end; justify-content: space-between;
+        margin-bottom: 2rem;
+      }
+
+      .support-faq__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0;
+      }
+
+      .support-faq__title em { font-style: italic; }
+
+      /* ── FAQ Category Tabs ── */
+      .support-faq__tabs {
+        display: flex; gap: 0; border-bottom: 1.5px solid #e5e5e5; margin-bottom: 0;
+      }
+
+      .support-faq__tab {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #999;
+        background: none; border: none; border-bottom: 2px solid transparent;
+        padding: 0.75rem 1.5rem; cursor: pointer;
+        transition: all 0.2s ease; margin-bottom: -1.5px;
+      }
+
+      .support-faq__tab:hover { color: #1a1a1a; }
+
+      .support-faq__tab.is-active {
+        color: #1a1a1a; font-weight: 600;
+        border-bottom-color: #EC0201;
+      }
+
+      /* ── FAQ Accordion ── */
+      .support-faq__group { display: none; }
+      .support-faq__group.is-active { display: block; }
+
+      .support-faq__item {
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .support-faq__question {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+        color: #1a1a1a; letter-spacing: 0.01em;
+        background: none; border: none; width: 100%; text-align: left;
+        padding: 1.25rem 0; cursor: pointer;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        transition: color 0.2s ease;
+      }
+
+      .support-faq__question:hover { color: #EC0201; }
+
+      .support-faq__question svg {
+        width: 14px; height: 14px; stroke: #999; fill: none; stroke-width: 2;
+        flex-shrink: 0; transition: transform 0.3s ease;
+      }
+
+      .support-faq__item.is-open .support-faq__question svg {
+        transform: rotate(45deg); stroke: #EC0201;
+      }
+
+      .support-faq__answer {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.01em;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0 0 0 0;
+      }
+
+      .support-faq__item.is-open .support-faq__answer {
+        max-height: 300px; padding: 0 0 1.25rem 0;
+      }
+
+      /* ══════════════════════════════════════
+         SUPPORT — CONTACT FORM
+         ══════════════════════════════════════ */
+      .support-contact {
+        padding: 0 2rem 3rem;
+        display: grid; grid-template-columns: 1fr 400px; gap: 0;
+      }
+
+      .support-contact__form-wrap {
+        padding: 2.5rem; background: #fafafa;
+      }
+
+      .support-contact__form-title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.25rem;
+      }
+
+      .support-contact__form-title em { font-style: italic; }
+
+      .support-contact__form-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase;
+        margin: 0 0 2rem;
+      }
+
+      .support-form { display: flex; flex-direction: column; gap: 1rem; }
+
+      .support-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      .support-form__field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+      .support-form__label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .support-form__input {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.02em;
+        background: #fff; border: 1.5px solid #e5e5e5;
+        padding: 0.7rem 1rem; outline: none;
+        transition: border-color 0.2s ease;
+      }
+
+      .support-form__input:focus { border-color: #1a1a1a; }
+      .support-form__input::placeholder { color: #bbb; text-transform: uppercase; font-size: 0.65rem; }
+
+      .support-form__textarea {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.02em;
+        background: #fff; border: 1.5px solid #e5e5e5;
+        padding: 0.7rem 1rem; outline: none; resize: vertical;
+        min-height: 120px; transition: border-color 0.2s ease;
+      }
+
+      .support-form__textarea:focus { border-color: #1a1a1a; }
+      .support-form__textarea::placeholder { color: #bbb; text-transform: uppercase; font-size: 0.65rem; }
+
+      .support-form__submit {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        color: #fff; background: #1a1a1a; border: none;
+        padding: 1rem 2.5rem; cursor: pointer;
+        transition: background 0.2s ease; align-self: flex-start;
+      }
+
+      .support-form__submit:hover { background: #EC0201; }
+
+      /* ── Custom Searchable Dropdown ── */
+      .cdd { position: relative; }
+
+      .cdd__trigger {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+        background: #fff; border: 1.5px solid #e5e5e5;
+        padding: 0.7rem 2.5rem 0.7rem 1rem; cursor: pointer;
+        outline: none; transition: border-color 0.2s ease;
+        width: 100%; text-align: left; display: flex; align-items: center;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+
+      .cdd__trigger:hover { border-color: #ccc; }
+      .cdd.is-open .cdd__trigger { border-color: #1a1a1a; }
+
+      .cdd__arrow {
+        position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+        width: 0; height: 0;
+        border-left: 4px solid transparent; border-right: 4px solid transparent;
+        border-top: 5px solid #999;
+        pointer-events: none; transition: transform 0.2s ease;
+      }
+
+      .cdd.is-open .cdd__arrow { transform: translateY(-50%) rotate(180deg); }
+
+      .cdd__panel {
+        position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+        background: #fff; border: 1.5px solid #1a1a1a;
+        z-index: 40; display: none; flex-direction: column;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        max-height: 260px;
+      }
+
+      .cdd.is-open .cdd__panel { display: flex; }
+
+      .cdd__search-wrap {
+        padding: 0.6rem 0.8rem; border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+      }
+
+      .cdd__search {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.02em;
+        background: #f8f8f8; border: none; outline: none;
+        padding: 0.5rem 0.6rem; width: 100%;
+      }
+
+      .cdd__search::placeholder { color: #bbb; text-transform: uppercase; font-size: 0.6rem; }
+
+      .cdd__options { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; }
+
+      .cdd__options::-webkit-scrollbar { width: 3px; }
+      .cdd__options::-webkit-scrollbar-track { background: transparent; }
+      .cdd__options::-webkit-scrollbar-thumb { background: #ddd; }
+
+      .cdd__opt {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #666; letter-spacing: 0.02em; text-transform: uppercase;
+        padding: 0.55rem 0.8rem; cursor: pointer; transition: all 0.1s ease;
+        background: none; border: none; width: 100%; text-align: left;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+
+      .cdd__opt:hover { background: #f5f5f5; color: #1a1a1a; }
+
+      .cdd__opt.is-active {
+        color: #1a1a1a; font-weight: 600; background: #fafafa;
+      }
+
+      .cdd__opt.is-active::after {
+        content: ''; width: 5px; height: 5px;
+        background: #EC0201; border-radius: 50%; flex-shrink: 0;
+      }
+
+      .cdd__opt--empty {
+        color: #bbb; font-size: 0.6rem; padding: 1rem 0.8rem;
+        cursor: default; text-align: center;
+      }
+
+      .cdd__opt--empty:hover { background: none; color: #bbb; }
+
+      /* ── Contact Sidebar ── */
+      .support-contact__sidebar {
+        background: #1a1a1a; padding: 2.5rem;
+        display: flex; flex-direction: column; gap: 2rem;
+      }
+
+      .support-sidebar__title {
+        font-family: var(--font-display); font-size: 0.875rem; font-weight: 600;
+        color: #fff; text-transform: uppercase; letter-spacing: 0em;
+      }
+
+      .support-sidebar__channels { display: flex; flex-direction: column; gap: 1.5rem; }
+
+      .support-channel {
+        display: flex; align-items: flex-start; gap: 1rem;
+        padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .support-channel:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .support-channel__icon svg {
+        width: 20px; height: 20px; stroke: var(--neon); fill: none; stroke-width: 1.5;
+        flex-shrink: 0;
+      }
+
+      .support-channel__label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.02em;
+        margin-bottom: 0.2rem;
+      }
+
+      .support-channel__value {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+        color: #fff; letter-spacing: 0em;
+      }
+
+      .support-channel__value a {
+        color: #fff; text-decoration: none; transition: color 0.2s ease;
+      }
+
+      .support-channel__value a:hover { color: var(--neon); }
+
+      .support-channel__hours {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: rgba(255,255,255,0.35); letter-spacing: 0.02em;
+        text-transform: uppercase; margin-top: 0.25rem;
+      }
+
+      .support-sidebar__dealer-btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+        color: #1a1a1a; background: var(--neon); border: none;
+        padding: 1rem; cursor: pointer; text-align: center;
+        transition: all 0.2s ease; display: block;
+        box-shadow: var(--neon-glow); margin-top: auto;
+      }
+
+      .support-sidebar__dealer-btn:hover { background: #fff; box-shadow: none; }
+
+      /* ══════════════════════════════════════
+         PROMO / NEWSLETTER / TRUST / FOOTER
+         ══════════════════════════════════════ */
+      .home-promo { position: relative; z-index: 2; background: #EC0201; overflow: hidden; padding: 0.7rem 0; }
+      .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
+      .home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+      .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
+      @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-newsletter__input::placeholder { color: #000; }
+      .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+      .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.02em; opacity: 0.7; }
+
+      .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+      .home-trust__item { display: flex; align-items: center; gap: 1rem; }
+      .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
+
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e5e5e5; padding: 3rem 2rem 1.5rem; }
+      .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+      .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+      .home-footer__logo { display: inline-flex; }
+      .home-footer__logo img { width: 120px; height: auto; display: block; }
+      .home-footer__socials { display: flex; gap: 0.8rem; }
+      .home-footer__socials a { display: flex; align-items: center; justify-content: center; }
+      .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
+      .home-footer__socials a:hover svg { opacity: 0.5; }
+      .home-footer__columns { display: flex; gap: 4rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s ease; }
+      .home-footer__col-links a:hover { color: #000; }
+      .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e5e5e5; }
+      .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stars { display: flex; gap: 0.25rem; }
+      .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
+      .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .home-footer__bottom { border-top: 1px solid #e5e5e5; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
+      .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .support-contact { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 768px) {
+        .home-announcement { height: 24px; }
+        .home-announcement__text { font-size: 0.5rem; padding: 0 2rem; }
+        .home-nav { padding: 0.5rem 1.5rem; align-items: center; top: 24px; }
+        .home-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+        .home-nav__links { display: none; }
+        .home-nav__hamburger { display: block; }
+
+        .support-header { padding: 100px 1.5rem 0; }
+        .support-quick { grid-template-columns: 1fr 1fr; padding: 1.5rem 1.5rem 0; }
+        .support-track { margin: 1.5rem 1.5rem 0; flex-direction: column; align-items: flex-start; }
+        .support-track__input-wrap { max-width: 100%; width: 100%; }
+        .support-faq { padding: 2rem 1.5rem; }
+        .support-faq__tabs { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .support-faq__tabs::-webkit-scrollbar { display: none; }
+        .support-faq__tab { white-space: nowrap; padding: 0.75rem 1rem; font-size: 0.6rem; }
+        .support-contact { padding: 0 1.5rem 2rem; }
+        .support-contact__form-wrap { padding: 1.5rem; }
+        .support-contact__sidebar { padding: 1.5rem; }
+        .support-form__row { grid-template-columns: 1fr; }
+        .home-newsletter { padding: 2rem 1.5rem; }
+        .home-newsletter__subtitle { font-size: 0.625rem; }
+        .home-trust { padding: 1.5rem; gap: 1rem; justify-content: flex-start; }
+        .home-trust__label { font-size: 0.5rem; }
+        .home-footer { padding: 2rem 1.5rem 1.5rem; }
+        .home-footer__main { flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+        .home-footer__columns { gap: 3rem; }
+        .home-footer__stats { flex-wrap: wrap; gap: 1rem; }
+        .home-footer__stat { padding-right: 1rem; margin-right: 0; }
+        .home-footer__bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      }
+
+      @media (max-width: 480px) {
+        .support-quick { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Announcement Marquee -->
+    <div class="home-announcement" id="homeAnnouncement">
+      <div class="home-announcement__track">
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="home-nav" id="homeNav">
+      <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+      <div class="home-nav__links">
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>
+        <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
+        <div class="home-nav__col"><a href="#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
+      </div>
+      <div class="home-nav__right">
+        <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count">0</span>)</a>
+      </div>
+      <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="home-mobile-menu" id="mobileMenu">
+      <div class="home-mobile-menu__header">
+        <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+        <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="home-mobile-menu__links">
+        <a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
+    </div>
+
+    <main>
+      <!-- Page Header -->
+      <div class="support-header">
+        <div>
+          <h1 class="support-header__title">Help &amp; <em>Support</em></h1>
+          <p class="home-section-sub">We're Here For You</p>
+        </div>
+      </div>
+
+      <!-- Quick Help Cards -->
+      <div class="support-quick">
+        <a href="#faq" class="support-quick__card">
+          <svg class="support-quick__icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="support-quick__label">FAQs</span>
+          <span class="support-quick__desc">Find answers to commonly asked questions about products and orders.</span>
+          <span class="support-quick__arrow">Browse <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a href="#contact" class="support-quick__card">
+          <svg class="support-quick__icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="support-quick__label">Contact Us</span>
+          <span class="support-quick__desc">Get in touch with our support team for personalized assistance.</span>
+          <span class="support-quick__arrow">Write <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <div class="support-quick__card" onclick="document.getElementById('trackInput').focus(); window.scrollTo({top: document.querySelector('.support-track').offsetTop - 100, behavior: 'smooth'});">
+          <svg class="support-quick__icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z"/></svg>
+          <span class="support-quick__label">Track Order</span>
+          <span class="support-quick__desc">Check the real-time status and location of your shipment.</span>
+          <span class="support-quick__arrow">Track <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+        <a href="../dealers/" class="support-quick__card">
+          <svg class="support-quick__icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="support-quick__label">Find a Dealer</span>
+          <span class="support-quick__desc">Locate an authorized AWAY dealer nearest to you.</span>
+          <span class="support-quick__arrow">Locate <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <!-- Track Order Bar -->
+      <div class="support-track">
+        <div class="support-track__icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="support-track__info">
+          <h3 class="support-track__title">Track Your Order</h3>
+          <p class="support-track__subtitle">Enter your order ID to get real-time updates</p>
+        </div>
+        <div class="support-track__input-wrap">
+          <input type="text" class="support-track__input" id="trackInput" placeholder="Order ID (e.g. AWY-20260304-XXXX)" />
+          <button class="support-track__btn" onclick="alert('Order tracking coming soon!')">Track</button>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <section class="support-faq" id="faq">
+        <div class="support-faq__header">
+          <div>
+            <h2 class="support-faq__title">Frequently Asked <em>Questions</em></h2>
+            <p class="home-section-sub">Quick Answers</p>
+          </div>
+        </div>
+
+        <div class="support-faq__tabs" id="faqTabs">
+          <button class="support-faq__tab is-active" data-tab="general">General</button>
+          <button class="support-faq__tab" data-tab="orders">Orders &amp; Shipping</button>
+          <button class="support-faq__tab" data-tab="products">Products</button>
+          <button class="support-faq__tab" data-tab="returns">Returns &amp; Warranty</button>
+          <button class="support-faq__tab" data-tab="installation">Installation</button>
+        </div>
+
+        <!-- General -->
+        <div class="support-faq__group is-active" data-group="general">
+          <div class="support-faq__item">
+            <button class="support-faq__question">What is AWAY? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">AWAY is India's premium rooftop cargo systems brand. We design and manufacture high-quality roofboxes, roofbags, roofracks, and crossbars engineered for adventure and built to last. Our products are crafted to withstand Indian road and weather conditions while looking great on any vehicle.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Where are AWAY products manufactured? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">All AWAY products are designed in India and manufactured using premium-grade materials. Our roofboxes use automotive-grade ABS plastic with UV-resistant coating, and our roofracks are built from aircraft-grade aluminum alloy for maximum strength with minimal weight.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Do you have physical stores? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">AWAY products are available through our network of 24+ authorized dealers across India. You can find the nearest dealer on our <a href="../dealers/" style="color:#EC0201;">Dealer Locator</a> page. You can also purchase directly from our website with free shipping on orders over &#8377;10,000.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Can I rent an AWAY roofbox instead of buying? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Yes! We offer a rental program for roofboxes. This is perfect for one-off road trips or if you want to try before you buy. Contact us or visit an authorized dealer for rental availability and pricing in your area.</div>
+          </div>
+        </div>
+
+        <!-- Orders & Shipping -->
+        <div class="support-faq__group" data-group="orders">
+          <div class="support-faq__item">
+            <button class="support-faq__question">How long does shipping take? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">We offer express shipping across India. Most orders are dispatched within 24-48 hours. Delivery typically takes 3-7 business days depending on your location. Metro cities usually receive orders within 3-4 business days.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Is shipping free? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Yes, we offer free shipping on all orders over &#8377;10,000. For orders below this amount, a flat shipping fee of &#8377;499 applies. All orders include tracking so you can monitor your shipment in real-time.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">How do I track my order? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Once your order is dispatched, you'll receive a tracking ID via email and SMS. You can use the "Track Your Order" section at the top of this page, or click the tracking link in your email to see real-time delivery status.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">What payment methods do you accept? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">We accept all major payment methods including Visa, Mastercard, American Express, UPI, Google Pay, and net banking. All payments are processed through a secure 256-bit encrypted gateway. We also offer Cash on Delivery (COD) on select products.</div>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="support-faq__group" data-group="products">
+          <div class="support-faq__item">
+            <button class="support-faq__question">Will a roofbox fit my car? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">AWAY roofboxes are designed with a universal mounting system compatible with most factory-installed roof rails and aftermarket crossbars. Check the product page for specific vehicle compatibility, or contact us with your car make and model for confirmation.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">What is the weight capacity of your roofboxes? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Our roofboxes have a maximum load capacity of 50-75 kg depending on the model. The 540L Roofbox supports up to 75 kg. Always check your vehicle's roof load rating as well — the lower of the two limits applies.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Are your products waterproof? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Yes, all AWAY roofboxes feature IP67-rated sealing with dual-side weatherproof gaskets. Our roofbags use heavy-duty PVC-coated fabric with welded seams rated at 10,000mm waterproof. Your gear stays dry in any weather condition.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Do roofboxes affect fuel efficiency? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Our roofboxes are aerodynamically designed to minimize wind resistance. Expect a 2-5% increase in fuel consumption at highway speeds when loaded, which is significantly lower than open roof racks or non-aerodynamic alternatives.</div>
+          </div>
+        </div>
+
+        <!-- Returns & Warranty -->
+        <div class="support-faq__group" data-group="returns">
+          <div class="support-faq__item">
+            <button class="support-faq__question">What is your return policy? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">We offer a 30-day easy return policy. If you're not satisfied with your purchase, you can return it within 30 days of delivery for a full refund. The product must be unused, in original packaging, and with all accessories included. Return shipping is free.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">What does the warranty cover? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">All AWAY products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. This includes the locking mechanism, hinges, mounting hardware, and structural integrity. Normal wear and tear, misuse, or modifications are not covered.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">How do I initiate a return or warranty claim? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Use the contact form below or email us at support@awayindia.com with your order ID and a description of the issue. For warranty claims, please include photos of the defect. Our team will respond within 24 hours with next steps.</div>
+          </div>
+        </div>
+
+        <!-- Installation -->
+        <div class="support-faq__group" data-group="installation">
+          <div class="support-faq__item">
+            <button class="support-faq__question">Can I install a roofbox myself? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Yes! All AWAY roofboxes come with detailed installation instructions and all necessary mounting hardware. Installation typically takes 15-20 minutes with basic tools. We also have video guides on our YouTube channel for step-by-step guidance.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Do I need crossbars to install a roofbox? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Yes, roofboxes require crossbars for mounting. If your vehicle has factory roof rails, you can add AWAY crossbars for a perfect fit. If your car doesn't have roof rails, we offer door-clamp crossbar solutions. Check the crossbars section in our shop for compatible options.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">Can a dealer install the roofbox for me? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">Absolutely. All our authorized dealers offer professional installation services. Some dealers include free installation with purchase. Find a dealer near you on our <a href="../dealers/" style="color:#EC0201;">Dealer Locator</a> page and contact them directly for installation availability.</div>
+          </div>
+          <div class="support-faq__item">
+            <button class="support-faq__question">What is the maximum speed with a roofbox installed? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+            <div class="support-faq__answer">AWAY roofboxes are tested and rated for speeds up to 130 km/h when properly installed and loaded within the weight limit. We recommend keeping speeds under 120 km/h for optimal safety and fuel efficiency, especially when the roofbox is fully loaded.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Form + Sidebar -->
+      <section class="support-contact" id="contact">
+        <div class="support-contact__form-wrap">
+          <h2 class="support-contact__form-title">Get In <em>Touch</em></h2>
+          <p class="support-contact__form-sub">We'll Get Back Within 24 Hours</p>
+
+          <form class="support-form" onsubmit="return false;">
+            <div class="support-form__row">
+              <div class="support-form__field">
+                <label class="support-form__label">Full Name</label>
+                <input type="text" class="support-form__input" placeholder="Your name" />
+              </div>
+              <div class="support-form__field">
+                <label class="support-form__label">Email Address</label>
+                <input type="email" class="support-form__input" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="support-form__row">
+              <div class="support-form__field">
+                <label class="support-form__label">Phone (Optional)</label>
+                <input type="tel" class="support-form__input" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div class="support-form__field">
+                <label class="support-form__label">Order ID (Optional)</label>
+                <input type="text" class="support-form__input" placeholder="AWY-XXXXXXXX" />
+              </div>
+            </div>
+
+            <div class="support-form__field">
+              <label class="support-form__label">Subject</label>
+              <div class="cdd" id="subjectCdd">
+                <button type="button" class="cdd__trigger" id="subjectTrigger">Select Subject</button>
+                <span class="cdd__arrow"></span>
+                <div class="cdd__panel">
+                  <div class="cdd__search-wrap">
+                    <input type="text" class="cdd__search" id="subjectSearch" placeholder="Search subject..." />
+                  </div>
+                  <div class="cdd__options" id="subjectOptions"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="support-form__field">
+              <label class="support-form__label">Product (Optional)</label>
+              <div class="cdd" id="productCdd">
+                <button type="button" class="cdd__trigger" id="productTrigger">Select Product</button>
+                <span class="cdd__arrow"></span>
+                <div class="cdd__panel">
+                  <div class="cdd__search-wrap">
+                    <input type="text" class="cdd__search" id="productSearch" placeholder="Search product..." />
+                  </div>
+                  <div class="cdd__options" id="productOptions"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="support-form__field">
+              <label class="support-form__label">Message</label>
+              <textarea class="support-form__textarea" placeholder="Describe your query or issue..."></textarea>
+            </div>
+
+            <button type="submit" class="support-form__submit">Send Message</button>
+          </form>
+        </div>
+
+        <div class="support-contact__sidebar">
+          <h3 class="support-sidebar__title">Other Ways to Reach Us</h3>
+          <div class="support-sidebar__channels">
+            <div class="support-channel">
+              <div class="support-channel__icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <p class="support-channel__label">Email</p>
+                <p class="support-channel__value"><a href="mailto:support@awayindia.com">support@awayindia.com</a></p>
+                <p class="support-channel__hours">Response within 24 hours</p>
+              </div>
+            </div>
+            <div class="support-channel">
+              <div class="support-channel__icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <p class="support-channel__label">Phone</p>
+                <p class="support-channel__value"><a href="tel:+911800XXXXXX">1800-XXX-XXXX</a></p>
+                <p class="support-channel__hours">Mon — Sat, 9AM — 6PM IST</p>
+              </div>
+            </div>
+            <div class="support-channel">
+              <div class="support-channel__icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div>
+                <p class="support-channel__label">WhatsApp</p>
+                <p class="support-channel__value"><a href="#">+91 98XXX XXXXX</a></p>
+                <p class="support-channel__hours">Quick replies, Mon — Sat</p>
+              </div>
+            </div>
+            <div class="support-channel">
+              <div class="support-channel__icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </div>
+              <div>
+                <p class="support-channel__label">Instagram DM</p>
+                <p class="support-channel__value"><a href="#">@away.india</a></p>
+                <p class="support-channel__hours">Follow us for updates</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="../dealers/" class="support-sidebar__dealer-btn">Find a Dealer Near You</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Promo Marquee -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="home-newsletter">
+      <h2 class="home-newsletter__title">0% Spam. 100% Away.</h2>
+      <p class="home-newsletter__subtitle">We love a clean mail inbox, so we only send our subscribers important things: promotions you can't miss or news that will blow your mind.</p>
+      <form class="home-newsletter__form" onsubmit="return false;">
+        <input class="home-newsletter__input" type="email" placeholder="Email Address" required />
+        <button class="home-newsletter__submit" aria-label="Subscribe">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <p class="home-newsletter__privacy">Consult our privacy policy for more information on how we obtain and process information.</p>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="home-trust">
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="home-trust__label">Express Shipping from India</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M1 10h22"/></svg>
+        <span class="home-trust__label">Free Shipping</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="home-trust__label">30 Days Return Policy</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4l3 3"/><path d="M7 3v2M17 3v2"/></svg>
+        <span class="home-trust__label">100% Secure Payment</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span class="home-trust__label">1 Year Warranty</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+      <div class="home-footer__main">
+        <div class="home-footer__brand">
+          <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+          <div class="home-footer__socials">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="home-footer__columns">
+          <div>
+            <h4 class="home-footer__col-title">Brand</h4>
+            <div class="home-footer__col-links">
+              <a href="../about/">About Us</a>
+              <a href="#">Sustainability</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="home-footer__col-title">Help</h4>
+            <div class="home-footer__col-links">
+              <a href="#faq">FAQs</a>
+              <a href="#contact">Contact</a>
+              <a href="#">Shipping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-footer__stats">
+        <div class="home-footer__stat">
+          <span class="home-footer__stat-label">Happy Customers</span>
+          <span class="home-footer__stat-value">10,000+</span>
+        </div>
+        <div class="home-footer__stat">
+          <span class="home-footer__stat-label">Google Reviews</span>
+          <span class="home-footer__stat-value">
+            4.5
+            <span class="home-footer__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="home-footer__bottom">
+        <div class="home-footer__payments">
+          <img src="../assets/amex.png" alt="Amex" />
+          <img src="../assets/gpay.png" alt="Google Pay" />
+          <img src="../assets/mastercard.png" alt="Mastercard" />
+          <img src="../assets/visa.png" alt="Visa" />
+          <img src="../assets/upi.png" alt="UPI" />
+        </div>
+        <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        /* ── NAV + ANNOUNCEMENT: hide on scroll down, show on scroll up ── */
+        const nav = document.getElementById('homeNav');
+        const announcement = document.getElementById('homeAnnouncement');
+        let lastY = 0;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              if (y > lastY && y > 100) {
+                nav.classList.add('is-hidden');
+                announcement.classList.add('is-hidden');
+              } else {
+                nav.classList.remove('is-hidden');
+                announcement.classList.remove('is-hidden');
+              }
+              lastY = y;
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        /* ── MOBILE MENU ── */
+        const mobileMenu = document.getElementById('mobileMenu');
+        const openBtn = document.getElementById('hamburgerOpen');
+        const closeBtn = document.getElementById('hamburgerClose');
+
+        openBtn.addEventListener('click', () => {
+          mobileMenu.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = '';
+          }
+        });
+
+        /* ══════════════════════════════════════
+           CUSTOM SEARCHABLE DROPDOWN (CDD)
+           ══════════════════════════════════════ */
+        function createCdd(wrapId, triggerId, searchId, optionsId, placeholder, allItems, onChange) {
+          const wrap = document.getElementById(wrapId);
+          const trigger = document.getElementById(triggerId);
+          const search = document.getElementById(searchId);
+          const optionsEl = document.getElementById(optionsId);
+          let current = '';
+
+          function render(filter) {
+            const q = (filter || '').toLowerCase();
+            const filtered = allItems.filter(i => i.toLowerCase().includes(q));
+            optionsEl.innerHTML = '';
+
+            // "All" option
+            const allBtn = document.createElement('button');
+            allBtn.type = 'button';
+            allBtn.className = 'cdd__opt' + (current === '' ? ' is-active' : '');
+            allBtn.textContent = placeholder;
+            allBtn.addEventListener('click', () => { current = ''; trigger.textContent = placeholder; wrap.classList.remove('is-open'); if (onChange) onChange(''); });
+            optionsEl.appendChild(allBtn);
+
+            if (filtered.length === 0) {
+              const empty = document.createElement('div');
+              empty.className = 'cdd__opt cdd__opt--empty';
+              empty.textContent = 'No results';
+              optionsEl.appendChild(empty);
+            } else {
+              filtered.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'cdd__opt' + (current === item ? ' is-active' : '');
+                btn.textContent = item;
+                btn.addEventListener('click', () => { current = item; trigger.textContent = item; wrap.classList.remove('is-open'); if (onChange) onChange(item); });
+                optionsEl.appendChild(btn);
+              });
+            }
+          }
+
+          trigger.addEventListener('click', () => {
+            const wasOpen = wrap.classList.contains('is-open');
+            document.querySelectorAll('.cdd.is-open').forEach(d => d.classList.remove('is-open'));
+            if (!wasOpen) {
+              wrap.classList.add('is-open');
+              search.value = '';
+              render('');
+              search.focus();
+            }
+          });
+
+          search.addEventListener('input', () => render(search.value));
+
+          document.addEventListener('click', (e) => {
+            if (!wrap.contains(e.target)) wrap.classList.remove('is-open');
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') wrap.classList.remove('is-open');
+          });
+
+          render('');
+          return { getValue: () => current, setValue: (v) => { current = v; trigger.textContent = v || placeholder; render(''); } };
+        }
+
+        /* ── Initialize dropdowns ── */
+        const subjects = [
+          'Order Status / Tracking',
+          'Product Information',
+          'Returns & Refunds',
+          'Warranty Claim',
+          'Installation Help',
+          'Dealer Inquiry',
+          'Rental Inquiry',
+          'Bulk / Corporate Order',
+          'Partnership / Collaboration',
+          'Other'
+        ];
+
+        const products = [
+          'Roofbox 540L — Glossy',
+          'Roofbox 540L — Textured',
+          'Roofbag Explorer XL',
+          'Roofbag Adventure Pro',
+          'Platform Rack',
+          'Aero Crossbars',
+          'Other / Not Listed'
+        ];
+
+        createCdd('subjectCdd', 'subjectTrigger', 'subjectSearch', 'subjectOptions', 'Select Subject', subjects);
+        createCdd('productCdd', 'productTrigger', 'productSearch', 'productOptions', 'Select Product', products);
+
+        /* ══════════════════════════════════════
+           FAQ TABS + ACCORDION
+           ══════════════════════════════════════ */
+        const tabs = document.querySelectorAll('.support-faq__tab');
+        const groups = document.querySelectorAll('.support-faq__group');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('is-active'));
+            groups.forEach(g => g.classList.remove('is-active'));
+            tab.classList.add('is-active');
+            document.querySelector(`.support-faq__group[data-group="${tab.dataset.tab}"]`).classList.add('is-active');
+          });
+        });
+
+        document.querySelectorAll('.support-faq__question').forEach(q => {
+          q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const wasOpen = item.classList.contains('is-open');
+            // close all in same group
+            item.parentElement.querySelectorAll('.support-faq__item').forEach(i => i.classList.remove('is-open'));
+            if (!wasOpen) item.classList.add('is-open');
+          });
+        });
+
+      })();
+    </script>
+  </body>
+</html>

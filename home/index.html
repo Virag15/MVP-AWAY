@@ -7,9 +7,22 @@
     <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
     <title>AWAY — Rooftop Cargo Systems</title>
-    <link rel="stylesheet" href="../styles.css" />
-
     <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
       /* ══════════════════════════════════════
          HOME PAGE — Editorial Minimalism
          ══════════════════════════════════════ */
@@ -44,7 +57,7 @@
         font-size: 0.625rem;
         font-weight: 400;
         color: #fff;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         padding: 0 3rem;
       }
@@ -110,7 +123,7 @@
         color: #1a1a1a;
         text-decoration: none;
         line-height: 1.5;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
       }
 
@@ -142,7 +155,7 @@
         font-weight: 400;
         color: #EC0201;
         text-decoration: none;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         line-height: 1;
       }
@@ -226,18 +239,18 @@
       .home-mobile-menu__links a {
         font-family: var(--font-display);
         font-size: 2rem;
-        font-weight: 700;
+        font-weight: 600;
         color: #000;
         text-decoration: none;
         letter-spacing: 0em;
         text-transform: uppercase;
         padding: 0.7rem 0;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e3dede;
         transition: opacity 0.2s ease;
       }
 
       .home-mobile-menu__links a:first-child {
-        border-top: 1px solid #e5e5e5;
+        border-top: 1px solid #e3dede;
       }
 
       .home-mobile-menu__links a:hover {
@@ -254,9 +267,9 @@
         font-family: var(--font-body);
         font-size: 0.75rem;
         font-weight: 400;
-        color: #999;
+        color: #9a8f8f;
         text-decoration: none;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
       }
 
       /* ── HERO (sticky — stays behind video) ── */
@@ -283,7 +296,7 @@
         font-size: 0.625rem;
         font-weight: 400;
         color: #EC0201;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         margin: 0.25rem 0 0;
       }
@@ -294,7 +307,7 @@
         font-size: 0.625rem;
         font-weight: 400;
         color: #EC0201;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         text-decoration: none;
         transition: opacity 0.2s ease;
@@ -322,7 +335,7 @@
       .home-bestsellers__title {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #000;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -361,7 +374,7 @@
       .home-bestsellers__arrow svg {
         width: 14px;
         height: 14px;
-        stroke: #666;
+        stroke: #6b6262;
         fill: none;
         stroke-width: 2;
         stroke-linecap: round;
@@ -426,7 +439,7 @@
         font-size: 0.5rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         background: #EC0201;
         color: #fff;
         padding: 0.3rem 0.6rem;
@@ -446,7 +459,7 @@
         font-size: 0.5rem;
         font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         color: #1a1a1a;
         background: rgba(255, 255, 255, 0.88);
         border: none;
@@ -477,7 +490,7 @@
       .home-product__name {
         font-family: var(--font-display);
         font-size: 1rem;
-        font-weight: 800;
+        font-weight: 600;
         color: #fff;
         text-transform: uppercase;
         letter-spacing: 0em;
@@ -491,6 +504,21 @@
         color: #fff;
         white-space: nowrap;
         flex-shrink: 0;
+        display: flex;
+        align-items: baseline;
+        gap: 0.35rem;
+      }
+
+      .home-product__price--sale {
+        color: #39FF14;
+        font-weight: 600;
+      }
+
+      .home-product__price--original {
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: rgba(255,255,255,0.6);
+        text-decoration: line-through;
       }
 
       /* ── CATEGORIES ── */
@@ -511,7 +539,7 @@
       .home-categories__title {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #000;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -571,7 +599,7 @@
       .home-categories__name {
         font-family: var(--font-display);
         font-size: 1rem;
-        font-weight: 800;
+        font-weight: 600;
         color: #fff;
         text-transform: uppercase;
         letter-spacing: 0em;
@@ -583,7 +611,7 @@
         font-size: 0.5rem;
         font-weight: 500;
         color: rgba(255,255,255,0.7);
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
       }
 
@@ -592,7 +620,7 @@
         font-size: 0.5rem;
         font-weight: 600;
         color: #fff;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         display: flex;
         align-items: center;
@@ -634,7 +662,7 @@
       .home-icons__title {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #fff;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -644,7 +672,7 @@
       .home-icons__accent {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #EC0201;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -683,7 +711,7 @@
         font-size: 0.625rem;
         font-weight: 500;
         color: #fff;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
       }
 
@@ -751,7 +779,7 @@
       .home-style {
         position: relative;
         z-index: 2;
-        background: #f5f5f5;
+        background: #f5f2f2;
         padding: 3rem 2rem;
       }
 
@@ -766,7 +794,7 @@
       .home-style__title {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #000;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -776,7 +804,7 @@
       .home-style__accent {
         font-family: var(--font-display);
         font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #EC0201;
         letter-spacing: -0.02em;
         text-transform: uppercase;
@@ -819,7 +847,7 @@
         font-size: 0.625rem;
         font-weight: 600;
         color: #fff;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
       }
@@ -835,7 +863,7 @@
       .home-newsletter__title {
         font-family: var(--font-display);
         font-size: clamp(2rem, 3.5vw, 2.5rem);
-        font-weight: 900;
+        font-weight: 600;
         color: #000;
         text-transform: uppercase;
         letter-spacing: -0.02em;
@@ -847,7 +875,7 @@
         font-size: 0.75rem;
         font-weight: 400;
         color: #000;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         margin: 0 0 2.5rem;
         max-width: 700px;
@@ -872,7 +900,7 @@
         font-size: 0.75rem;
         font-weight: 500;
         color: #000;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
       }
 
@@ -902,7 +930,7 @@
         font-size: 0.625rem;
         font-weight: 400;
         color: #000;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         opacity: 0.7;
       }
 
@@ -939,7 +967,7 @@
         font-size: 0.625rem;
         font-weight: 600;
         color: #1a1a1a;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         white-space: nowrap;
       }
@@ -949,7 +977,7 @@
         position: relative;
         z-index: 2;
         background: #fff;
-        border-top: 1px solid #e5e5e5;
+        border-top: 1px solid #e3dede;
         padding: 3rem 2rem 1.5rem;
       }
 
@@ -1005,9 +1033,9 @@
       .home-footer__col-title {
         font-family: var(--font-display);
         font-size: 0.75rem;
-        font-weight: 800;
+        font-weight: 600;
         color: #000;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
         margin: 0 0 0.8rem;
       }
@@ -1022,9 +1050,9 @@
         font-family: var(--font-body);
         font-size: 0.75rem;
         font-weight: 400;
-        color: #555;
+        color: #5c5454;
         text-decoration: none;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         transition: color 0.2s ease;
       }
 
@@ -1045,7 +1073,7 @@
         gap: 0.5rem;
         padding-right: 2rem;
         margin-right: 2rem;
-        border-right: 1px solid #e5e5e5;
+        border-right: 1px solid #e3dede;
       }
 
       .home-footer__stat:last-child {
@@ -1057,9 +1085,9 @@
       .home-footer__stat-label {
         font-family: var(--font-display);
         font-size: 0.75rem;
-        font-weight: 800;
+        font-weight: 600;
         color: #000;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
       }
 
@@ -1067,7 +1095,7 @@
         font-family: var(--font-body);
         font-size: 0.75rem;
         font-weight: 400;
-        color: #555;
+        color: #5c5454;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -1092,7 +1120,7 @@
 
       /* ── FOOTER BOTTOM ── */
       .home-footer__bottom {
-        border-top: 1px solid #e5e5e5;
+        border-top: 1px solid #e3dede;
         padding-top: 1.2rem;
         display: flex;
         align-items: center;
@@ -1116,8 +1144,8 @@
         font-family: var(--font-body);
         font-size: 0.625rem;
         font-weight: 400;
-        color: #999;
-        letter-spacing: 0.04em;
+        color: #9a8f8f;
+        letter-spacing: 0.01em;
       }
 
       /* ══════════════════════════════════════
@@ -1268,7 +1296,7 @@
         <div class="home-nav__col">
           <a href="../home/">Home</a>
           <a href="../about/">About</a>
-          <a href="#">Contact</a>
+          <a href="../support/">Contact</a>
         </div>
         <div class="home-nav__col">
           <a href="../shop/">Roofbox</a>
@@ -1276,12 +1304,12 @@
           <a href="../shop/">Roofrack</a>
         </div>
         <div class="home-nav__col">
-          <a href="#">FAQ</a>
+          <a href="../support/#faq">FAQ</a>
           <a href="#">Instagram</a>
           <a href="#">Facebook</a>
         </div>
         <div class="home-nav__col">
-          <a href="#" class="is-red">Dealers</a>
+          <a href="../dealers/" class="is-red">Dealers</a>
           <a href="#" class="is-red">Rent</a>
         </div>
       </div>
@@ -1314,9 +1342,9 @@
         <a href="../shop/">Roofbag</a>
         <a href="../shop/">Roofrack</a>
         <a href="#" style="color: #EC0201;">Rent</a>
-        <a href="#" style="color: #EC0201;">Dealers</a>
-        <a href="#">Contact</a>
-        <a href="#">FAQ</a>
+        <a href="../dealers/" style="color: #EC0201;">Dealers</a>
+        <a href="../support/">Support</a>
+        <a href="../support/#faq">FAQ</a>
       </div>
       <div class="home-mobile-menu__footer">
         <a href="#">Instagram</a>
@@ -1408,7 +1436,7 @@
         <div class="home-bestsellers__grid" id="bsGrid">
 
           <!-- Card 1 -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=roofbox-540l-glossy" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge">New In</span>
               <button class="home-product__add">Add</button>
@@ -1421,7 +1449,7 @@
           </a>
 
           <!-- Card 2 -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=roofbox-540l-textured" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
               <button class="home-product__add">Add</button>
@@ -1434,7 +1462,7 @@
           </a>
 
           <!-- Card 3 -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=roofbag-explorer-xl" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge">New In</span>
               <button class="home-product__add">Add</button>
@@ -1447,7 +1475,7 @@
           </a>
 
           <!-- Card 4 -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=crossbar-aero-black" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge">New In</span>
               <button class="home-product__add">Add</button>
@@ -1460,7 +1488,7 @@
           </a>
 
           <!-- Card 5 (scroll to reveal) -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=roofrack-platform" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
               <button class="home-product__add">Add</button>
@@ -1473,14 +1501,14 @@
           </a>
 
           <!-- Card 6 (scroll to reveal) -->
-          <a href="../shop/" class="home-product">
+          <a href="../product/?id=roofbag-adventure-pro" class="home-product">
             <div class="home-product__img-wrap">
               <span class="home-product__badge">Save 20%</span>
               <button class="home-product__add">Add</button>
               <img src="../assets/product-roofbag-2.png" alt="Roofbag Adventure Pro" class="home-product__img" loading="lazy" />
               <div class="home-product__info">
                 <p class="home-product__name">Adventure Pro</p>
-                <span class="home-product__price">&#8377; 8,999</span>
+                <span class="home-product__price"><span class="home-product__price--sale">&#8377; 8,999</span> <span class="home-product__price--original">&#8377; 11,249</span></span>
               </div>
             </div>
           </a>
@@ -1646,8 +1674,8 @@
           <div>
             <h4 class="home-footer__col-title">Help</h4>
             <div class="home-footer__col-links">
-              <a href="#">FAQs</a>
-              <a href="#">Contact</a>
+              <a href="../support/#faq">FAQs</a>
+              <a href="../support/#contact">Contact</a>
               <a href="#">Shipping</a>
             </div>
           </div>

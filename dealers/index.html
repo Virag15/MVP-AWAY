@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Find an authorized dealer near you. Premium rooftop cargo systems across India." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <title>Find a Dealer — AWAY</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --neon: #EC0201;
+        --neon-glow: 0 0 6px rgba(236, 2, 1, 0.4), 0 0 18px rgba(236, 2, 1, 0.15);
+        --neon-glow-strong: 0 0 8px rgba(236, 2, 1, 0.6), 0 0 25px rgba(236, 2, 1, 0.25), 0 0 50px rgba(236, 2, 1, 0.1);
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         ANNOUNCEMENT BAR
+         ══════════════════════════════════════ */
+      .home-announcement {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 51;
+        background: #1a1a1a; overflow: hidden; height: 28px;
+        display: flex; align-items: center; transition: transform 0.4s ease;
+      }
+      .home-announcement.is-hidden { transform: translateY(-100%); }
+      .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+      .home-announcement__text {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 3rem;
+      }
+      .home-announcement__text span { color: #EC0201; font-weight: 600; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* ══════════════════════════════════════
+         NAV
+         ══════════════════════════════════════ */
+      .home-nav {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        padding: 1rem 2rem; background: #fff; position: fixed; top: 28px;
+        left: 0; right: 0; z-index: 50; transition: transform 0.4s ease;
+      }
+      .home-nav.is-hidden { transform: translateY(calc(-100% - 28px)); }
+      .home-nav__logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+      .home-nav__logo img { width: 100px; height: auto; display: block; }
+      .home-nav__links { display: flex; gap: 4rem; margin-left: 3rem; }
+      .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-nav__col a {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .home-nav__col a.is-red { color: #EC0201; }
+      .home-nav__col a:hover { opacity: 0.5; }
+      .home-nav__right { display: flex; align-items: flex-start; gap: 1rem; flex-shrink: 0; }
+      .home-nav__cart {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: baseline; gap: 0.2em;
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1;
+      }
+      .home-nav__cart-count { color: #EC0201; font-weight: 600; }
+      .home-nav__cart:hover { opacity: 0.5; }
+      .home-nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+      .home-nav__hamburger svg { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .home-mobile-menu {
+        position: fixed; inset: 0; z-index: 100; background: #fff;
+        display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem;
+        transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .home-mobile-menu.is-open { transform: translateY(0); }
+      .home-mobile-menu__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+      .home-mobile-menu__logo { display: flex; align-items: center; text-decoration: none; }
+      .home-mobile-menu__logo img { width: 90px; height: auto; display: block; }
+      .home-mobile-menu__close { background: none; border: none; cursor: pointer; padding: 0; }
+      .home-mobile-menu__close svg { display: block; }
+      .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
+      .home-mobile-menu__links a {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
+        text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
+        padding: 0.7rem 0; border-bottom: 1px solid #e5e5e5; transition: opacity 0.2s ease;
+      }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e5e5e5; }
+      .home-mobile-menu__links a:hover { opacity: 0.4; }
+      .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #999; text-decoration: none; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         SHARED
+         ══════════════════════════════════════ */
+      .home-section-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase; margin: 0.25rem 0 0;
+      }
+
+      /* ══════════════════════════════════════
+         DEALERS — PAGE HEADER
+         ══════════════════════════════════════ */
+      .dealer-header {
+        padding: 120px 2rem 0;
+        display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+      }
+
+      .dealer-header__title {
+        font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+
+      .dealer-header__title em { font-style: italic; }
+
+      .dealer-header__count {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #999; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
+      }
+
+      /* ══════════════════════════════════════
+         DEALERS — NEON STATS BAR
+         ══════════════════════════════════════ */
+      .dealer-stats {
+        display: flex; align-items: center; gap: 2rem;
+        padding: 1.5rem 2rem; margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .dealer-stat {
+        display: flex; align-items: baseline; gap: 0.5rem;
+      }
+
+      .dealer-stat__number {
+        font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+        color: var(--neon); text-shadow: var(--neon-glow);
+        letter-spacing: -0.02em;
+      }
+
+      .dealer-stat__label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
+        color: #999; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .dealer-stat__divider {
+        width: 1px; height: 24px; background: #e5e5e5;
+      }
+
+      /* ══════════════════════════════════════
+         DEALERS — FILTER CONTROLS
+         ══════════════════════════════════════ */
+      .dealer-controls {
+        padding: 1rem 2rem 0;
+        display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      }
+
+      /* ── Custom Searchable Dropdown ── */
+      .cdd {
+        position: relative; min-width: 200px;
+      }
+
+      .cdd__trigger {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+        background: #fff; border: 1.5px solid #e5e5e5;
+        padding: 0.65rem 2.5rem 0.65rem 1rem; cursor: pointer;
+        outline: none; transition: border-color 0.2s ease;
+        width: 100%; text-align: left; display: flex; align-items: center;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+
+      .cdd__trigger:hover { border-color: #ccc; }
+      .cdd.is-open .cdd__trigger { border-color: #1a1a1a; }
+
+      .cdd__arrow {
+        position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+        width: 0; height: 0;
+        border-left: 4px solid transparent; border-right: 4px solid transparent;
+        border-top: 5px solid #999;
+        pointer-events: none; transition: transform 0.2s ease;
+      }
+
+      .cdd.is-open .cdd__arrow { transform: translateY(-50%) rotate(180deg); }
+
+      .cdd__panel {
+        position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+        background: #fff; border: 1.5px solid #1a1a1a;
+        z-index: 40; display: none; flex-direction: column;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        max-height: 260px;
+      }
+
+      .cdd.is-open .cdd__panel { display: flex; }
+
+      .cdd__search-wrap {
+        padding: 0.6rem 0.8rem; border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
+      }
+
+      .cdd__search {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.02em;
+        background: #f8f8f8; border: none; outline: none;
+        padding: 0.5rem 0.6rem; width: 100%;
+      }
+
+      .cdd__search::placeholder { color: #bbb; text-transform: uppercase; font-size: 0.6rem; }
+
+      .cdd__options {
+        overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch;
+      }
+
+      .cdd__options::-webkit-scrollbar { width: 3px; }
+      .cdd__options::-webkit-scrollbar-track { background: transparent; }
+      .cdd__options::-webkit-scrollbar-thumb { background: #ddd; }
+
+      .cdd__opt {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #666; letter-spacing: 0.02em; text-transform: uppercase;
+        padding: 0.55rem 0.8rem; cursor: pointer; transition: all 0.1s ease;
+        background: none; border: none; width: 100%; text-align: left;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+
+      .cdd__opt:hover { background: #f5f5f5; color: #1a1a1a; }
+
+      .cdd__opt.is-active {
+        color: #1a1a1a; font-weight: 600; background: #fafafa;
+      }
+
+      .cdd__opt.is-active::after {
+        content: ''; width: 5px; height: 5px;
+        background: #EC0201; border-radius: 50%; flex-shrink: 0;
+      }
+
+      .cdd__opt--empty {
+        color: #bbb; font-size: 0.6rem; padding: 1rem 0.8rem;
+        cursor: default; text-align: center;
+      }
+
+      .cdd__opt--empty:hover { background: none; color: #bbb; }
+
+      .dealer-search {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.02em;
+        background: #fff; border: 1.5px solid #e5e5e5;
+        padding: 0.65rem 1rem; outline: none;
+        transition: border-color 0.2s ease; flex: 1; min-width: 200px;
+      }
+
+      .dealer-search:focus { border-color: #1a1a1a; }
+
+      .dealer-search::placeholder { color: #bbb; text-transform: uppercase; }
+
+      .dealer-clear-btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #999;
+        background: none; border: none; cursor: pointer; padding: 0.65rem 0;
+        transition: color 0.2s ease; white-space: nowrap;
+      }
+
+      .dealer-clear-btn:hover { color: #EC0201; }
+
+      /* ══════════════════════════════════════
+         DEALERS — ACTIVE FILTER TAGS
+         ══════════════════════════════════════ */
+      .dealer-tags {
+        padding: 0.75rem 2rem 0;
+        display: flex; gap: 0.4rem; flex-wrap: wrap; min-height: 0;
+      }
+
+      .dealer-tag {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        color: #1a1a1a; background: #f5f5f5; border: none;
+        padding: 0.35rem 0.6rem; cursor: pointer; display: inline-flex;
+        align-items: center; gap: 0.3rem; transition: background 0.15s ease;
+      }
+
+      .dealer-tag:hover { background: #e5e5e5; }
+
+      .dealer-tag svg { width: 8px; height: 8px; stroke: #999; fill: none; stroke-width: 2.5; }
+
+      /* ══════════════════════════════════════
+         DEALERS — MAP + LIST LAYOUT
+         ══════════════════════════════════════ */
+      .dealer-layout {
+        display: grid; grid-template-columns: 1fr 420px;
+        gap: 0; padding: 1.5rem 2rem 0; min-height: 600px;
+      }
+
+      /* ── Map ── */
+      .dealer-map-wrap {
+        position: relative; border: 1.5px solid #e5e5e5; overflow: hidden;
+      }
+
+      #dealerMap { width: 100%; height: 100%; min-height: 600px; z-index: 1; }
+
+      /* Leaflet popup override */
+      .leaflet-popup-content-wrapper {
+        border-radius: 0 !important; padding: 0 !important;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12) !important;
+      }
+      .leaflet-popup-content { margin: 0 !important; min-width: 260px; }
+      .leaflet-popup-tip { display: none; }
+
+      .map-popup {
+        font-family: var(--font-body); padding: 1.25rem;
+      }
+
+      .map-popup__name {
+        font-family: var(--font-display); font-size: 0.875rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em;
+        margin: 0 0 0.25rem;
+      }
+
+      .map-popup__type {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: var(--neon); margin: 0 0 0.6rem;
+        text-shadow: var(--neon-glow);
+      }
+
+      .map-popup__address {
+        font-size: 0.7rem; font-weight: 400; color: #666;
+        line-height: 1.5; margin: 0 0 0.5rem;
+      }
+
+      .map-popup__phone {
+        font-size: 0.7rem; font-weight: 500; color: #1a1a1a;
+        margin: 0 0 0.75rem; display: flex; align-items: center; gap: 0.4rem;
+      }
+
+      .map-popup__phone svg { width: 12px; height: 12px; stroke: #1a1a1a; fill: none; stroke-width: 2; flex-shrink: 0; }
+
+      .map-popup__actions { display: flex; gap: 0.5rem; }
+
+      .map-popup__nav-btn {
+        flex: 1; font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+        color: #fff; background: #1a1a1a; border: none; padding: 0.6rem;
+        cursor: pointer; text-align: center; transition: background 0.2s ease;
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      }
+
+      .map-popup__nav-btn:hover { background: #EC0201; }
+
+      .map-popup__nav-btn svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 2; }
+
+      .map-popup__call-btn {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+        color: #1a1a1a; background: none; border: 1.5px solid #e5e5e5; padding: 0.6rem 0.8rem;
+        cursor: pointer; text-align: center; transition: all 0.2s ease;
+      }
+
+      .map-popup__call-btn:hover { border-color: #1a1a1a; }
+
+      /* ── Dealer List Sidebar ── */
+      .dealer-list {
+        border: 1.5px solid #e5e5e5; border-left: none;
+        overflow-y: auto; max-height: 600px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .dealer-list::-webkit-scrollbar { width: 4px; }
+      .dealer-list::-webkit-scrollbar-track { background: transparent; }
+      .dealer-list::-webkit-scrollbar-thumb { background: #ddd; }
+
+      .dealer-list__header {
+        padding: 1.25rem 1.5rem; border-bottom: 1px solid #e5e5e5;
+        position: sticky; top: 0; background: #fff; z-index: 2;
+      }
+
+      .dealer-list__title {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.02em;
+      }
+
+      .dealer-list__count {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #999; letter-spacing: 0.02em; text-transform: uppercase;
+        margin-top: 0.15rem;
+      }
+
+      .dealer-card {
+        padding: 1.25rem 1.5rem; border-bottom: 1px solid #f0f0f0;
+        cursor: pointer; transition: background 0.15s ease;
+      }
+
+      .dealer-card:hover { background: #fafafa; }
+
+      .dealer-card.is-active { background: #f5f5f5; border-left: 3px solid var(--neon); }
+
+      .dealer-card__top {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        gap: 0.5rem; margin-bottom: 0.35rem;
+      }
+
+      .dealer-card__name {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em; margin: 0;
+      }
+
+      .dealer-card__type {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: var(--neon); white-space: nowrap;
+        text-shadow: var(--neon-glow);
+        padding: 0.2rem 0.4rem; border: 1px solid rgba(236, 2, 1, 0.25);
+        background: rgba(236, 2, 1, 0.04);
+      }
+
+      .dealer-card__address {
+        font-family: var(--font-body); font-size: 0.68rem; font-weight: 400;
+        color: #888; line-height: 1.5; margin: 0 0 0.4rem;
+      }
+
+      .dealer-card__meta {
+        display: flex; align-items: center; gap: 0.75rem;
+      }
+
+      .dealer-card__phone {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
+        color: #555; display: flex; align-items: center; gap: 0.3rem;
+      }
+
+      .dealer-card__phone svg { width: 10px; height: 10px; stroke: #999; fill: none; stroke-width: 2; }
+
+      .dealer-card__nav {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        color: #EC0201; text-decoration: none; display: inline-flex;
+        align-items: center; gap: 0.3rem; transition: opacity 0.2s ease;
+      }
+
+      .dealer-card__nav:hover { opacity: 0.6; }
+
+      .dealer-card__nav svg { width: 10px; height: 10px; stroke: #EC0201; fill: none; stroke-width: 2; }
+
+      /* ── Empty state ── */
+      .dealer-empty {
+        padding: 3rem 1.5rem; text-align: center;
+      }
+
+      .dealer-empty__text {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+        color: #999; letter-spacing: 0.02em; margin-bottom: 0.75rem;
+      }
+
+      .dealer-empty__btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #EC0201; background: none; border: none; cursor: pointer;
+        letter-spacing: 0.02em; text-transform: uppercase; padding: 0;
+      }
+
+      .dealer-empty__btn:hover { opacity: 0.6; }
+
+      /* ══════════════════════════════════════
+         DEALERS — NEON HIGHLIGHT SECTION
+         ══════════════════════════════════════ */
+      .dealer-cta {
+        background: #1a1a1a; padding: 3rem 2rem; margin-top: 3rem;
+        display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+      }
+
+      .dealer-cta__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #fff; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0;
+      }
+
+      .dealer-cta__neon {
+        color: var(--neon); text-shadow: var(--neon-glow-strong);
+      }
+
+      .dealer-cta__subtitle {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: rgba(255,255,255,0.5); letter-spacing: 0.02em; text-transform: uppercase;
+        margin: 0.5rem 0 0;
+      }
+
+      .dealer-cta__btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+        color: #1a1a1a; background: var(--neon); border: none;
+        padding: 1rem 2.5rem; cursor: pointer; transition: all 0.2s ease;
+        white-space: nowrap; box-shadow: var(--neon-glow);
+      }
+
+      .dealer-cta__btn:hover {
+        background: #fff; box-shadow: none;
+      }
+
+      /* ══════════════════════════════════════
+         PROMO / NEWSLETTER / TRUST / FOOTER
+         ══════════════════════════════════════ */
+      .home-promo { position: relative; z-index: 2; background: #EC0201; overflow: hidden; padding: 0.7rem 0; }
+      .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
+      .home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+      .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
+      @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-newsletter__input::placeholder { color: #000; }
+      .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+      .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.02em; opacity: 0.7; }
+
+      .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+      .home-trust__item { display: flex; align-items: center; gap: 1rem; }
+      .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
+
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e5e5e5; padding: 3rem 2rem 1.5rem; }
+      .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+      .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+      .home-footer__logo { display: inline-flex; }
+      .home-footer__logo img { width: 120px; height: auto; display: block; }
+      .home-footer__socials { display: flex; gap: 0.8rem; }
+      .home-footer__socials a { display: flex; align-items: center; justify-content: center; }
+      .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
+      .home-footer__socials a:hover svg { opacity: 0.5; }
+      .home-footer__columns { display: flex; gap: 4rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s ease; }
+      .home-footer__col-links a:hover { color: #000; }
+      .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e5e5e5; }
+      .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stars { display: flex; gap: 0.25rem; }
+      .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
+      .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .home-footer__bottom { border-top: 1px solid #e5e5e5; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
+      .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         CUSTOM MAP MARKER
+         ══════════════════════════════════════ */
+      .away-marker {
+        width: 32px; height: 40px; position: relative;
+      }
+
+      .away-marker__pin {
+        width: 32px; height: 32px; background: #EC0201;
+        border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 8px rgba(236, 2, 1, 0.4);
+        transition: all 0.2s ease;
+      }
+
+      .away-marker:hover .away-marker__pin {
+        background: #1a1a1a;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+        transform: rotate(-45deg) scale(1.1);
+      }
+
+      .away-marker__icon {
+        transform: rotate(45deg);
+        font-size: 14px; color: #fff; line-height: 1;
+      }
+
+      .away-marker__pulse {
+        position: absolute; top: 6px; left: 6px;
+        width: 20px; height: 20px; border-radius: 50%;
+        background: rgba(236, 2, 1, 0.3);
+        animation: markerPulse 2s ease-out infinite;
+      }
+
+      @keyframes markerPulse {
+        0% { transform: scale(1); opacity: 0.6; }
+        100% { transform: scale(3); opacity: 0; }
+      }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .dealer-layout { grid-template-columns: 1fr; }
+        .dealer-list {
+          border: 1.5px solid #e5e5e5; border-top: none;
+          max-height: 400px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-announcement { height: 24px; }
+        .home-announcement__text { font-size: 0.5rem; padding: 0 2rem; }
+        .home-nav { padding: 0.5rem 1.5rem; align-items: center; top: 24px; }
+        .home-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+        .home-nav__links { display: none; }
+        .home-nav__hamburger { display: block; }
+
+        .dealer-header { padding: 100px 1.5rem 0; flex-direction: column; align-items: flex-start; }
+        .dealer-stats { padding: 1rem 1.5rem; gap: 1rem; }
+        .dealer-stat__number { font-size: 1.25rem; }
+        .dealer-controls { padding: 0.75rem 1.5rem 0; flex-direction: column; align-items: stretch; }
+        .cdd { min-width: 100%; }
+        .dealer-search { min-width: 100%; }
+        .dealer-tags { padding: 0.5rem 1.5rem 0; }
+        .dealer-layout { padding: 1rem 1.5rem 0; }
+        #dealerMap { min-height: 400px; }
+        .dealer-list { max-height: 350px; }
+
+        .dealer-cta { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; margin-top: 2rem; }
+
+        .home-newsletter { padding: 2rem 1.5rem; }
+        .home-newsletter__subtitle { font-size: 0.625rem; }
+        .home-trust { padding: 1.5rem; gap: 1rem; justify-content: flex-start; }
+        .home-trust__label { font-size: 0.5rem; }
+        .home-footer { padding: 2rem 1.5rem 1.5rem; }
+        .home-footer__main { flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+        .home-footer__columns { gap: 3rem; }
+        .home-footer__stats { flex-wrap: wrap; gap: 1rem; }
+        .home-footer__stat { padding-right: 1rem; margin-right: 0; }
+        .home-footer__bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Announcement Marquee -->
+    <div class="home-announcement" id="homeAnnouncement">
+      <div class="home-announcement__track">
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="home-nav" id="homeNav">
+      <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+      <div class="home-nav__links">
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>
+        <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
+        <div class="home-nav__col"><a href="../support/#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
+      </div>
+      <div class="home-nav__right">
+        <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count">0</span>)</a>
+      </div>
+      <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="home-mobile-menu" id="mobileMenu">
+      <div class="home-mobile-menu__header">
+        <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+        <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="home-mobile-menu__links">
+        <a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="../support/#faq">FAQ</a>
+      </div>
+      <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
+    </div>
+
+    <main>
+      <!-- Page Header -->
+      <div class="dealer-header">
+        <div>
+          <h1 class="dealer-header__title">Find a <em>Dealer</em></h1>
+          <p class="home-section-sub">Our Authorized Network</p>
+        </div>
+        <span class="dealer-header__count" id="dealerCount">24 Dealers</span>
+      </div>
+
+      <!-- Neon Stats -->
+      <div class="dealer-stats">
+        <div class="dealer-stat">
+          <span class="dealer-stat__number">24</span>
+          <span class="dealer-stat__label">Dealers</span>
+        </div>
+        <div class="dealer-stat__divider"></div>
+        <div class="dealer-stat">
+          <span class="dealer-stat__number">12</span>
+          <span class="dealer-stat__label">States</span>
+        </div>
+        <div class="dealer-stat__divider"></div>
+        <div class="dealer-stat">
+          <span class="dealer-stat__number">18</span>
+          <span class="dealer-stat__label">Cities</span>
+        </div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="dealer-controls">
+        <div class="cdd" id="stateCdd">
+          <button class="cdd__trigger" id="stateTrigger">All States</button>
+          <span class="cdd__arrow"></span>
+          <div class="cdd__panel">
+            <div class="cdd__search-wrap">
+              <input type="text" class="cdd__search" id="stateSearch" placeholder="Search state..." />
+            </div>
+            <div class="cdd__options" id="stateOptions"></div>
+          </div>
+        </div>
+        <div class="cdd" id="cityCdd">
+          <button class="cdd__trigger" id="cityTrigger">All Cities</button>
+          <span class="cdd__arrow"></span>
+          <div class="cdd__panel">
+            <div class="cdd__search-wrap">
+              <input type="text" class="cdd__search" id="citySearch" placeholder="Search city..." />
+            </div>
+            <div class="cdd__options" id="cityOptions"></div>
+          </div>
+        </div>
+        <input type="text" class="dealer-search" id="dealerSearch" placeholder="Search dealer name..." />
+        <button class="dealer-clear-btn" id="clearFilters">Clear All</button>
+      </div>
+
+      <!-- Active Tags -->
+      <div class="dealer-tags" id="dealerTags"></div>
+
+      <!-- Map + List Layout -->
+      <div class="dealer-layout">
+        <div class="dealer-map-wrap">
+          <div id="dealerMap"></div>
+        </div>
+        <div class="dealer-list" id="dealerList"></div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="dealer-cta">
+        <div>
+          <h2 class="dealer-cta__title">Become an <span class="dealer-cta__neon">AWAY Dealer</span></h2>
+          <p class="dealer-cta__subtitle">Join India's fastest growing rooftop cargo network</p>
+        </div>
+        <a href="mailto:dealers@awayindia.com" class="dealer-cta__btn">Apply Now</a>
+      </div>
+    </main>
+
+    <!-- Promo Marquee -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="home-newsletter">
+      <h2 class="home-newsletter__title">0% Spam. 100% Away.</h2>
+      <p class="home-newsletter__subtitle">We love a clean mail inbox, so we only send our subscribers important things: promotions you can't miss or news that will blow your mind.</p>
+      <form class="home-newsletter__form" onsubmit="return false;">
+        <input class="home-newsletter__input" type="email" placeholder="Email Address" required />
+        <button class="home-newsletter__submit" aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="home-newsletter__privacy">Consult our privacy policy for more information on how we obtain and process information.</p>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="home-trust">
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-trust__label">Express Shipping from India</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M1 10h22"/></svg><span class="home-trust__label">Free Shipping</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="home-trust__label">30 Days Return Policy</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4l3 3"/><path d="M7 3v2M17 3v2"/></svg><span class="home-trust__label">100% Secure Payment</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="home-trust__label">1 Year Warranty</span></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+      <div class="home-footer__main">
+        <div class="home-footer__brand">
+          <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+          <div class="home-footer__socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+        <div class="home-footer__columns">
+          <div><h4 class="home-footer__col-title">Brand</h4><div class="home-footer__col-links"><a href="../about/">About Us</a><a href="#">Sustainability</a></div></div>
+          <div><h4 class="home-footer__col-title">Help</h4><div class="home-footer__col-links"><a href="../support/#faq">FAQs</a><a href="../support/#contact">Contact</a><a href="#">Shipping</a></div></div>
+        </div>
+      </div>
+      <div class="home-footer__stats">
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Happy Customers</span><span class="home-footer__stat-value">10,000+</span></div>
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Google Reviews</span><span class="home-footer__stat-value">4.5<span class="home-footer__stars"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span></span></div>
+      </div>
+      <div class="home-footer__bottom">
+        <div class="home-footer__payments"><img src="../assets/amex.png" alt="Amex"/><img src="../assets/gpay.png" alt="Google Pay"/><img src="../assets/mastercard.png" alt="Mastercard"/><img src="../assets/visa.png" alt="Visa"/><img src="../assets/upi.png" alt="UPI"/></div>
+        <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+      (() => {
+        /* ══════════════════════════════════════
+           DEALER DATA
+           ══════════════════════════════════════ */
+        const DEALERS = [
+          { id: 1, name: 'AWAY Delhi Flagship', type: 'Flagship Store', state: 'Delhi', city: 'New Delhi', address: 'G-12, Rajouri Garden, New Delhi 110027', phone: '+91 11 4567 8901', lat: 28.6448, lng: 77.1198 },
+          { id: 2, name: 'AWAY Gurugram', type: 'Premium Dealer', state: 'Haryana', city: 'Gurugram', address: 'Plot 45, Sector 29, Gurugram, Haryana 122001', phone: '+91 124 456 7890', lat: 28.4595, lng: 77.0266 },
+          { id: 3, name: 'AWAY Mumbai Central', type: 'Flagship Store', state: 'Maharashtra', city: 'Mumbai', address: '204, Linking Road, Bandra West, Mumbai 400050', phone: '+91 22 2654 8901', lat: 19.0596, lng: 72.8295 },
+          { id: 4, name: 'AWAY Pune', type: 'Authorized Dealer', state: 'Maharashtra', city: 'Pune', address: 'Shop 18, Koregaon Park, Pune 411001', phone: '+91 20 2615 4321', lat: 18.5362, lng: 73.8936 },
+          { id: 5, name: 'AWAY Bangalore HSR', type: 'Premium Dealer', state: 'Karnataka', city: 'Bangalore', address: '27th Main, HSR Layout, Bangalore 560102', phone: '+91 80 4567 1234', lat: 12.9121, lng: 77.6446 },
+          { id: 6, name: 'AWAY Bangalore Whitefield', type: 'Authorized Dealer', state: 'Karnataka', city: 'Bangalore', address: 'Phoenix Marketcity, Whitefield, Bangalore 560048', phone: '+91 80 4567 5678', lat: 12.9974, lng: 77.7261 },
+          { id: 7, name: 'AWAY Chennai', type: 'Premium Dealer', state: 'Tamil Nadu', city: 'Chennai', address: '84, Anna Salai, Nungambakkam, Chennai 600034', phone: '+91 44 2827 4567', lat: 13.0604, lng: 80.2496 },
+          { id: 8, name: 'AWAY Coimbatore', type: 'Authorized Dealer', state: 'Tamil Nadu', city: 'Coimbatore', address: '15, Avinashi Road, Coimbatore 641018', phone: '+91 422 243 5678', lat: 11.0168, lng: 76.9558 },
+          { id: 9, name: 'AWAY Hyderabad', type: 'Flagship Store', state: 'Telangana', city: 'Hyderabad', address: 'Road No. 36, Jubilee Hills, Hyderabad 500033', phone: '+91 40 2355 6789', lat: 17.4325, lng: 78.4071 },
+          { id: 10, name: 'AWAY Kolkata', type: 'Premium Dealer', state: 'West Bengal', city: 'Kolkata', address: '22, Park Street, Kolkata 700016', phone: '+91 33 2229 8765', lat: 22.5551, lng: 88.3513 },
+          { id: 11, name: 'AWAY Ahmedabad', type: 'Authorized Dealer', state: 'Gujarat', city: 'Ahmedabad', address: 'SG Highway, Bodakdev, Ahmedabad 380054', phone: '+91 79 2685 4321', lat: 23.0395, lng: 72.5113 },
+          { id: 12, name: 'AWAY Surat', type: 'Authorized Dealer', state: 'Gujarat', city: 'Surat', address: 'Ring Road, Vesu, Surat 395007', phone: '+91 261 267 8901', lat: 21.1555, lng: 72.7710 },
+          { id: 13, name: 'AWAY Jaipur', type: 'Premium Dealer', state: 'Rajasthan', city: 'Jaipur', address: 'C-Scheme, Ashok Marg, Jaipur 302001', phone: '+91 141 237 4567', lat: 26.9124, lng: 75.7873 },
+          { id: 14, name: 'AWAY Udaipur', type: 'Authorized Dealer', state: 'Rajasthan', city: 'Udaipur', address: 'Fatehpura, Udaipur 313004', phone: '+91 294 242 3456', lat: 24.5854, lng: 73.7125 },
+          { id: 15, name: 'AWAY Chandigarh', type: 'Premium Dealer', state: 'Chandigarh', city: 'Chandigarh', address: 'Sector 17, Chandigarh 160017', phone: '+91 172 270 5678', lat: 30.7415, lng: 76.7683 },
+          { id: 16, name: 'AWAY Lucknow', type: 'Authorized Dealer', state: 'Uttar Pradesh', city: 'Lucknow', address: 'Hazratganj, Lucknow 226001', phone: '+91 522 223 4567', lat: 26.8504, lng: 80.9496 },
+          { id: 17, name: 'AWAY Noida', type: 'Authorized Dealer', state: 'Uttar Pradesh', city: 'Noida', address: 'Sector 18, Noida 201301', phone: '+91 120 425 6789', lat: 28.5706, lng: 77.3216 },
+          { id: 18, name: 'AWAY Kochi', type: 'Authorized Dealer', state: 'Kerala', city: 'Kochi', address: 'MG Road, Ernakulam, Kochi 682035', phone: '+91 484 237 8901', lat: 9.9816, lng: 76.2999 },
+          { id: 19, name: 'AWAY Goa', type: 'Premium Dealer', state: 'Goa', city: 'Panaji', address: '18th June Road, Panaji, Goa 403001', phone: '+91 832 222 4567', lat: 15.4909, lng: 73.8278 },
+          { id: 20, name: 'AWAY Dehradun', type: 'Authorized Dealer', state: 'Uttarakhand', city: 'Dehradun', address: 'Rajpur Road, Dehradun 248001', phone: '+91 135 265 3456', lat: 30.3165, lng: 78.0322 },
+          { id: 21, name: 'AWAY Indore', type: 'Authorized Dealer', state: 'Madhya Pradesh', city: 'Indore', address: 'Vijay Nagar, Indore 452010', phone: '+91 731 255 6789', lat: 22.7533, lng: 75.8937 },
+          { id: 22, name: 'AWAY Nagpur', type: 'Authorized Dealer', state: 'Maharashtra', city: 'Nagpur', address: 'Dharampeth, Nagpur 440010', phone: '+91 712 253 4567', lat: 21.1458, lng: 79.0882 },
+          { id: 23, name: 'AWAY Bhubaneswar', type: 'Authorized Dealer', state: 'Odisha', city: 'Bhubaneswar', address: 'Janpath, Bhubaneswar 751001', phone: '+91 674 253 2345', lat: 20.2961, lng: 85.8245 },
+          { id: 24, name: 'AWAY Visakhapatnam', type: 'Authorized Dealer', state: 'Andhra Pradesh', city: 'Visakhapatnam', address: 'Beach Road, Visakhapatnam 530002', phone: '+91 891 274 5678', lat: 17.7231, lng: 83.3013 },
+        ];
+
+        /* ══════════════════════════════════════
+           MAP INIT
+           ══════════════════════════════════════ */
+        const map = L.map('dealerMap', {
+          scrollWheelZoom: true,
+          zoomControl: true,
+        }).setView([22.5, 78.5], 5);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+          subdomains: 'abcd',
+          maxZoom: 19,
+        }).addTo(map);
+
+        /* ── Custom marker icon ── */
+        function createMarkerIcon() {
+          return L.divIcon({
+            className: '',
+            html: `<div class="away-marker">
+              <div class="away-marker__pulse"></div>
+              <div class="away-marker__pin">
+                <span class="away-marker__icon">A</span>
+              </div>
+            </div>`,
+            iconSize: [32, 40],
+            iconAnchor: [16, 40],
+            popupAnchor: [0, -42],
+          });
+        }
+
+        /* ── Create markers ── */
+        const markerGroup = L.featureGroup();
+        const markers = {};
+
+        DEALERS.forEach(dealer => {
+          const marker = L.marker([dealer.lat, dealer.lng], { icon: createMarkerIcon() });
+
+          const popupContent = `
+            <div class="map-popup">
+              <p class="map-popup__name">${dealer.name}</p>
+              <p class="map-popup__type">${dealer.type}</p>
+              <p class="map-popup__address">${dealer.address}</p>
+              <p class="map-popup__phone">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                ${dealer.phone}
+              </p>
+              <div class="map-popup__actions">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=${dealer.lat},${dealer.lng}" target="_blank" rel="noopener" class="map-popup__nav-btn">
+                  <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Navigate
+                </a>
+                <a href="tel:${dealer.phone.replace(/\s/g, '')}" class="map-popup__call-btn">Call</a>
+              </div>
+            </div>`;
+
+          marker.bindPopup(popupContent, { maxWidth: 300, closeButton: true });
+          markerGroup.addLayer(marker);
+          markers[dealer.id] = marker;
+        });
+
+        markerGroup.addTo(map);
+
+        /* ══════════════════════════════════════
+           CUSTOM SEARCHABLE DROPDOWN
+           ══════════════════════════════════════ */
+        function createCdd(wrapId, triggerId, searchId, optionsId, placeholder, allItems, onChange) {
+          const wrap = document.getElementById(wrapId);
+          const trigger = document.getElementById(triggerId);
+          const searchEl = document.getElementById(searchId);
+          const optionsEl = document.getElementById(optionsId);
+          let selected = '';
+          let items = allItems;
+
+          function renderOptions(filter) {
+            const q = (filter || '').toLowerCase();
+            const filtered = q ? items.filter(i => i.toLowerCase().includes(q)) : items;
+            optionsEl.innerHTML = `<button class="cdd__opt${!selected ? ' is-active' : ''}" data-val="">${placeholder}</button>` +
+              (filtered.length
+                ? filtered.map(i => `<button class="cdd__opt${selected === i ? ' is-active' : ''}" data-val="${i}">${i}</button>`).join('')
+                : '<div class="cdd__opt cdd__opt--empty">No results</div>');
+
+            optionsEl.querySelectorAll('.cdd__opt:not(.cdd__opt--empty)').forEach(opt => {
+              opt.addEventListener('click', () => {
+                selected = opt.dataset.val;
+                trigger.textContent = selected || placeholder;
+                close();
+                onChange(selected);
+              });
+            });
+          }
+
+          function open() {
+            document.querySelectorAll('.cdd.is-open').forEach(el => el.classList.remove('is-open'));
+            wrap.classList.add('is-open');
+            searchEl.value = '';
+            renderOptions('');
+            setTimeout(() => searchEl.focus(), 50);
+          }
+
+          function close() {
+            wrap.classList.remove('is-open');
+          }
+
+          trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            wrap.classList.contains('is-open') ? close() : open();
+          });
+
+          searchEl.addEventListener('input', () => renderOptions(searchEl.value));
+          searchEl.addEventListener('click', (e) => e.stopPropagation());
+
+          return {
+            getValue: () => selected,
+            setValue: (v) => { selected = v; trigger.textContent = v || placeholder; },
+            setItems: (newItems) => { items = newItems; renderOptions(''); },
+          };
+        }
+
+        /* ══════════════════════════════════════
+           POPULATE FILTERS
+           ══════════════════════════════════════ */
+        const searchInput = document.getElementById('dealerSearch');
+        const dealerListEl = document.getElementById('dealerList');
+        const dealerCountEl = document.getElementById('dealerCount');
+        const tagsEl = document.getElementById('dealerTags');
+
+        const allStates = [...new Set(DEALERS.map(d => d.state))].sort();
+
+        let stateCdd, cityCdd;
+
+        function getCitiesForState(state) {
+          return state
+            ? [...new Set(DEALERS.filter(d => d.state === state).map(d => d.city))].sort()
+            : [...new Set(DEALERS.map(d => d.city))].sort();
+        }
+
+        stateCdd = createCdd('stateCdd', 'stateTrigger', 'stateSearch', 'stateOptions', 'All States', allStates, (val) => {
+          cityCdd.setValue('');
+          cityCdd.setItems(getCitiesForState(val));
+          update();
+        });
+
+        cityCdd = createCdd('cityCdd', 'cityTrigger', 'citySearch', 'cityOptions', 'All Cities', getCitiesForState(''), (val) => {
+          update();
+        });
+
+        /* ══════════════════════════════════════
+           FILTER + RENDER
+           ══════════════════════════════════════ */
+        function getFiltered() {
+          const state = stateCdd.getValue();
+          const city = cityCdd.getValue();
+          const query = searchInput.value.toLowerCase().trim();
+
+          return DEALERS.filter(d => {
+            if (state && d.state !== state) return false;
+            if (city && d.city !== city) return false;
+            if (query && !d.name.toLowerCase().includes(query) && !d.address.toLowerCase().includes(query)) return false;
+            return true;
+          });
+        }
+
+        let activeCardId = null;
+
+        function renderList(dealers) {
+          dealerCountEl.textContent = dealers.length + ' Dealer' + (dealers.length !== 1 ? 's' : '');
+
+          if (!dealers.length) {
+            dealerListEl.innerHTML = `
+              <div class="dealer-list__header">
+                <p class="dealer-list__title">Nearby Dealers</p>
+                <p class="dealer-list__count">0 Results</p>
+              </div>
+              <div class="dealer-empty">
+                <p class="dealer-empty__text">No dealers found</p>
+                <button class="dealer-empty__btn" onclick="document.getElementById('clearFilters').click()">Clear Filters</button>
+              </div>`;
+            return;
+          }
+
+          dealerListEl.innerHTML = `
+            <div class="dealer-list__header">
+              <p class="dealer-list__title">Nearby Dealers</p>
+              <p class="dealer-list__count">${dealers.length} Result${dealers.length !== 1 ? 's' : ''}</p>
+            </div>
+            ${dealers.map(d => `
+              <div class="dealer-card${activeCardId === d.id ? ' is-active' : ''}" data-id="${d.id}">
+                <div class="dealer-card__top">
+                  <p class="dealer-card__name">${d.name}</p>
+                  <span class="dealer-card__type">${d.type}</span>
+                </div>
+                <p class="dealer-card__address">${d.address}</p>
+                <div class="dealer-card__meta">
+                  <span class="dealer-card__phone">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    ${d.phone}
+                  </span>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}" target="_blank" rel="noopener" class="dealer-card__nav">
+                    Navigate
+                    <svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+            `).join('')}`;
+
+          // Card click -> focus marker on map
+          dealerListEl.querySelectorAll('.dealer-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+              if (e.target.closest('.dealer-card__nav')) return;
+              const id = parseInt(card.dataset.id);
+              const dealer = DEALERS.find(d => d.id === id);
+              if (dealer && markers[id]) {
+                activeCardId = id;
+                map.flyTo([dealer.lat, dealer.lng], 14, { duration: 0.8 });
+                markers[id].openPopup();
+                renderList(getFiltered());
+              }
+            });
+          });
+        }
+
+        function updateMap(dealers) {
+          markerGroup.clearLayers();
+          dealers.forEach(d => {
+            if (markers[d.id]) markerGroup.addLayer(markers[d.id]);
+          });
+          if (dealers.length) {
+            const group = L.featureGroup(dealers.map(d => markers[d.id]));
+            map.fitBounds(group.getBounds().pad(0.15), { maxZoom: 12 });
+          }
+        }
+
+        function renderTags() {
+          const tags = [];
+          if (stateCdd.getValue()) tags.push({ key: 'state', val: stateCdd.getValue() });
+          if (cityCdd.getValue()) tags.push({ key: 'city', val: cityCdd.getValue() });
+          if (searchInput.value.trim()) tags.push({ key: 'search', val: `"${searchInput.value.trim()}"` });
+
+          tagsEl.innerHTML = tags.map(t =>
+            `<button class="dealer-tag" data-key="${t.key}">${t.val} <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
+          ).join('');
+
+          tagsEl.querySelectorAll('.dealer-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+              const k = tag.dataset.key;
+              if (k === 'state') { stateCdd.setValue(''); cityCdd.setValue(''); cityCdd.setItems(getCitiesForState('')); }
+              if (k === 'city') cityCdd.setValue('');
+              if (k === 'search') searchInput.value = '';
+              update();
+            });
+          });
+        }
+
+        function update() {
+          const filtered = getFiltered();
+          renderList(filtered);
+          updateMap(filtered);
+          renderTags();
+        }
+
+        /* ══════════════════════════════════════
+           EVENTS
+           ══════════════════════════════════════ */
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(update, 250);
+        });
+
+        document.getElementById('clearFilters').addEventListener('click', () => {
+          stateCdd.setValue('');
+          cityCdd.setValue('');
+          cityCdd.setItems(getCitiesForState(''));
+          searchInput.value = '';
+          activeCardId = null;
+          update();
+        });
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', () => {
+          document.querySelectorAll('.cdd.is-open').forEach(el => el.classList.remove('is-open'));
+        });
+
+        /* ══════════════════════════════════════
+           NAV + MOBILE MENU
+           ══════════════════════════════════════ */
+        const nav = document.getElementById('homeNav');
+        const announcement = document.getElementById('homeAnnouncement');
+        let lastY = 0, ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              if (y > lastY && y > 100) { nav.classList.add('is-hidden'); announcement.classList.add('is-hidden'); }
+              else { nav.classList.remove('is-hidden'); announcement.classList.remove('is-hidden'); }
+              lastY = y; ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        document.getElementById('hamburgerOpen').addEventListener('click', () => { mobileMenu.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
+        document.getElementById('hamburgerClose').addEventListener('click', () => { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = '';
+          }
+        });
+
+        /* ══════════════════════════════════════
+           INIT
+           ══════════════════════════════════════ */
+        update();
+
+      })();
+    </script>
+  </body>
+</html>

@@ -36,7 +36,7 @@
       .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
       .home-announcement__text {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        color: #fff; letter-spacing: 0.04em; text-transform: uppercase; padding: 0 3rem;
+        color: #fff; letter-spacing: 0.01em; text-transform: uppercase; padding: 0 3rem;
       }
       .home-announcement__text span { color: #EC0201; font-weight: 600; }
       @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -56,7 +56,7 @@
       .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
       .home-nav__col a {
         font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
-        text-decoration: none; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.01em; text-transform: uppercase;
       }
       .home-nav__col a.is-red { color: #EC0201; }
       .home-nav__col a:hover { opacity: 0.5; }
@@ -65,7 +65,7 @@
         background: none; border: none; cursor: pointer; padding: 0;
         display: inline-flex; align-items: baseline; gap: 0.2em;
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        color: #EC0201; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1;
       }
       .home-nav__cart-count { color: #EC0201; font-weight: 600; }
       .home-nav__cart:hover { opacity: 0.5; }
@@ -86,21 +86,21 @@
       .home-mobile-menu__close svg { display: block; }
       .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
       .home-mobile-menu__links a {
-        font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #000;
+        font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
         text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
-        padding: 0.7rem 0; border-bottom: 1px solid #e5e5e5; transition: opacity 0.2s ease;
+        padding: 0.7rem 0; border-bottom: 1px solid #e3dede; transition: opacity 0.2s ease;
       }
-      .home-mobile-menu__links a:first-child { border-top: 1px solid #e5e5e5; }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e3dede; }
       .home-mobile-menu__links a:hover { opacity: 0.4; }
       .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
-      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #999; text-decoration: none; letter-spacing: 0.04em; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #9a8f8f; text-decoration: none; letter-spacing: 0.01em; }
 
       /* ══════════════════════════════════════
          SHARED HELPERS
          ══════════════════════════════════════ */
       .home-section-sub {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        color: #EC0201; letter-spacing: 0.04em; text-transform: uppercase; margin: 0.25rem 0 0;
+        color: #EC0201; letter-spacing: 0.01em; text-transform: uppercase; margin: 0.25rem 0 0;
       }
 
       /* ══════════════════════════════════════
@@ -112,13 +112,13 @@
       .home-product:hover .home-product__img { transform: scale(1.04); }
       .home-product__badge {
         position: absolute; top: 0.75rem; left: 0.75rem; font-family: var(--font-body);
-        font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+        font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em;
         background: #EC0201; color: #fff; padding: 0.3rem 0.6rem; line-height: 1; z-index: 1;
       }
       .home-product__badge--pick { background: #1a1a1a; }
       .home-product__add {
         position: absolute; top: 0.75rem; right: 0.75rem; font-family: var(--font-body);
-        font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+        font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.01em;
         color: #1a1a1a; background: rgba(255,255,255,0.88); border: none; padding: 0.35rem 0.6rem;
         cursor: pointer; z-index: 1; line-height: 1; transition: background 0.2s ease;
       }
@@ -128,16 +128,18 @@
         justify-content: space-between; padding: 3rem 0.85rem 0.85rem;
         background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%); z-index: 1;
       }
-      .home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
-      .home-product__price { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: #fff; white-space: nowrap; flex-shrink: 0; }
+      .home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
+      .home-product__price { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: #fff; white-space: nowrap; flex-shrink: 0; display: flex; align-items: baseline; gap: 0.35rem; }
+      .home-product__price--sale { color: #39FF14; font-weight: 600; }
+      .home-product__price--original { font-size: 0.7rem; font-weight: 400; color: rgba(255,255,255,0.6); text-decoration: line-through; }
 
       /* ══════════════════════════════════════
          SHOP — HEADER
          ══════════════════════════════════════ */
       .shop-header { padding: 120px 2rem 0; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-      .shop-header__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: #000; letter-spacing: -0.02em; text-transform: uppercase; margin: 0; }
+      .shop-header__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: #000; letter-spacing: -0.02em; text-transform: uppercase; margin: 0; }
       .shop-header__title em { font-style: italic; }
-      .shop-header__count { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+      .shop-header__count { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase; white-space: nowrap; }
 
       /* ══════════════════════════════════════
          SHOP — CONTROLS BAR
@@ -148,13 +150,13 @@
       }
       .shop-controls__filter-btn {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
-        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #1a1a1a;
         background: none; border: none; cursor: pointer; padding: 0;
         display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s ease;
       }
       .shop-controls__filter-btn:hover { opacity: 0.5; }
       .shop-controls__filter-count {
-        font-size: 0.5rem; font-weight: 700; background: #EC0201; color: #fff;
+        font-size: 0.5rem; font-weight: 600; background: #EC0201; color: #fff;
         width: 16px; height: 16px; border-radius: 50%; display: none;
         align-items: center; justify-content: center; line-height: 1;
       }
@@ -162,7 +164,7 @@
 
       .shop-controls__sort {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        text-transform: uppercase; letter-spacing: 0.04em; color: #999;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #9a8f8f;
         cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem;
         background: none; border: none; padding: 0;
       }
@@ -172,11 +174,11 @@
       .shop-controls__view { display: flex; align-items: center; gap: 0.5rem; }
       .shop-controls__view-label {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        text-transform: uppercase; letter-spacing: 0.04em; color: #999; margin-right: 0.25rem;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #9a8f8f; margin-right: 0.25rem;
       }
       .shop-controls__view-btn {
         background: none; border: none; cursor: pointer; padding: 0.25rem;
-        color: #ccc; transition: color 0.2s ease; display: inline-flex; align-items: center;
+        color: #d1c8c8; transition: color 0.2s ease; display: inline-flex; align-items: center;
       }
       .shop-controls__view-btn.is-active,
       .shop-controls__view-btn:hover { color: #1a1a1a; }
@@ -204,11 +206,11 @@
 
       .fp-panel__header {
         display: flex; align-items: center; justify-content: space-between;
-        padding: 1.5rem 2rem; border-bottom: 1px solid #e5e5e5; flex-shrink: 0;
+        padding: 1.5rem 2rem; border-bottom: 1px solid #e3dede; flex-shrink: 0;
       }
       .fp-panel__title {
-        font-family: var(--font-display); font-size: 0.75rem; font-weight: 800;
-        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #1a1a1a;
       }
       .fp-panel__close { background: none; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s ease; }
       .fp-panel__close:hover { opacity: 0.5; }
@@ -216,19 +218,19 @@
       .fp-panel__body { flex: 1; overflow-y: auto; padding: 0; -webkit-overflow-scrolling: touch; }
 
       .fp-panel__footer {
-        padding: 1.5rem 2rem; border-top: 1px solid #e5e5e5;
+        padding: 1.5rem 2rem; border-top: 1px solid #e3dede;
         display: flex; gap: 1rem; flex-shrink: 0; align-items: center;
       }
       .fp-panel__apply {
         flex: 1; font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
-        text-transform: uppercase; letter-spacing: 0.12em; color: #1a1a1a;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #1a1a1a;
         background: none; border: 1.5px solid #1a1a1a; padding: 1rem; cursor: pointer;
         transition: all 0.2s ease; text-align: center;
       }
       .fp-panel__apply:hover { background: #1a1a1a; color: #fff; }
       .fp-panel__clear {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
-        text-transform: uppercase; letter-spacing: 0.04em; color: #999;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #9a8f8f;
         background: none; border: none; cursor: pointer; padding: 1rem 0;
         transition: color 0.2s ease; white-space: nowrap;
       }
@@ -237,28 +239,28 @@
       /* ══════════════════════════════════════
          FILTER PANEL — SECTIONS
          ══════════════════════════════════════ */
-      .fp-section { padding: 1.5rem 2rem; border-bottom: 1px solid #f0f0f0; }
+      .fp-section { padding: 1.5rem 2rem; border-bottom: 1px solid #f0ecec; }
       .fp-section__head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1rem; }
       .fp-section__num {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
-        color: #999; letter-spacing: 0.04em;
+        color: #9a8f8f; letter-spacing: 0.01em;
       }
       .fp-section__label {
-        font-family: var(--font-display); font-size: 0.75rem; font-weight: 800;
-        color: #1a1a1a; letter-spacing: 0.08em; text-transform: uppercase;
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
       }
 
       /* ── Text list items ── */
       .fp-section__list { display: flex; flex-direction: column; gap: 0; }
       .fp-item {
         font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
-        color: #666; letter-spacing: 0.04em; text-transform: uppercase;
+        color: #6b6262; letter-spacing: 0.01em; text-transform: uppercase;
         padding: 0.45rem 0; cursor: pointer; transition: all 0.15s ease;
         background: none; border: none; text-align: left;
         display: flex; align-items: center; justify-content: space-between;
       }
       .fp-item:hover { color: #1a1a1a; }
-      .fp-item.is-active { color: #1a1a1a; font-weight: 700; }
+      .fp-item.is-active { color: #1a1a1a; font-weight: 600; }
       .fp-item.is-active::after {
         content: ''; width: 6px; height: 6px;
         background: #EC0201; border-radius: 50%; flex-shrink: 0;
@@ -269,7 +271,7 @@
       .fp-section__list--collapsed.is-expanded .fp-item:nth-child(n+5) { display: flex; }
       .fp-section__more {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
-        color: #999; letter-spacing: 0.08em; text-transform: uppercase;
+        color: #9a8f8f; letter-spacing: 0.02em; text-transform: uppercase;
         background: none; border: none; cursor: pointer;
         padding: 0.75rem 0 0; transition: color 0.2s ease;
       }
@@ -284,16 +286,16 @@
       .fp-swatch:hover { opacity: 0.7; }
       .fp-swatch__color {
         width: 24px; height: 24px; border-radius: 2px;
-        border: 1.5px solid #e5e5e5; transition: all 0.15s ease;
+        border: 1.5px solid #e3dede; transition: all 0.15s ease;
       }
       .fp-swatch.is-active .fp-swatch__color {
         border-color: #1a1a1a; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #1a1a1a;
       }
       .fp-swatch__label {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
-        color: #999; letter-spacing: 0.04em; text-transform: uppercase;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
       }
-      .fp-swatch.is-active .fp-swatch__label { color: #1a1a1a; font-weight: 700; }
+      .fp-swatch.is-active .fp-swatch__label { color: #1a1a1a; font-weight: 600; }
 
       /* ── Price range slider ── */
       .fp-section__price-display {
@@ -301,12 +303,12 @@
       }
       .fp-section__price-display span {
         font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
-        color: #1a1a1a; letter-spacing: 0.02em;
+        color: #1a1a1a; letter-spacing: 0.01em;
       }
       .fp-range { position: relative; height: 24px; display: flex; align-items: center; }
       .fp-range__track {
         position: absolute; left: 0; right: 0; height: 1.5px;
-        background: #e5e5e5; pointer-events: none;
+        background: #e3dede; pointer-events: none;
       }
       .fp-range__fill {
         position: absolute; height: 100%; background: #1a1a1a; pointer-events: none;
@@ -339,12 +341,12 @@
       }
       .shop-active-tag {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
-        text-transform: uppercase; letter-spacing: 0.04em;
-        color: #1a1a1a; background: #f5f5f5; border: none;
+        text-transform: uppercase; letter-spacing: 0.01em;
+        color: #1a1a1a; background: #f5f2f2; border: none;
         padding: 0.35rem 0.6rem; cursor: pointer; display: inline-flex;
         align-items: center; gap: 0.3rem; transition: background 0.15s ease;
       }
-      .shop-active-tag:hover { background: #e5e5e5; }
+      .shop-active-tag:hover { background: #e3dede; }
       .shop-active-tag svg { width: 8px; height: 8px; stroke: #999; fill: none; stroke-width: 2.5; }
 
       /* ══════════════════════════════════════
@@ -368,12 +370,12 @@
       .shop-empty { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; }
       .shop-empty__text {
         font-family: var(--font-body); font-size: 0.875rem; font-weight: 400;
-        color: #999; letter-spacing: 0.04em; margin-bottom: 1rem;
+        color: #9a8f8f; letter-spacing: 0.01em; margin-bottom: 1rem;
       }
       .shop-empty__btn {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
         color: #EC0201; background: none; border: none; cursor: pointer;
-        letter-spacing: 0.04em; text-transform: uppercase; padding: 0;
+        letter-spacing: 0.01em; text-transform: uppercase; padding: 0;
       }
       .shop-empty__btn:hover { opacity: 0.6; }
 
@@ -387,21 +389,21 @@
       @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
       .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
-      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
-      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
       .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
-      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.04em; text-transform: uppercase; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.01em; text-transform: uppercase; }
       .home-newsletter__input::placeholder { color: #000; }
       .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
       .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
-      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.04em; opacity: 0.7; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.01em; opacity: 0.7; }
 
       .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
       .home-trust__item { display: flex; align-items: center; gap: 1rem; }
       .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
-      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.01em; text-transform: uppercase; white-space: nowrap; }
 
-      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e5e5e5; padding: 3rem 2rem 1.5rem; }
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e3dede; padding: 3rem 2rem 1.5rem; }
       .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
       .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
       .home-footer__logo { display: inline-flex; }
@@ -411,22 +413,22 @@
       .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
       .home-footer__socials a:hover svg { opacity: 0.5; }
       .home-footer__columns { display: flex; gap: 4rem; }
-      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; color: #000; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 0.8rem; }
       .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
-      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #5c5454; text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s ease; }
       .home-footer__col-links a:hover { color: #000; }
       .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
-      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e5e5e5; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e3dede; }
       .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 800; color: #000; letter-spacing: 0.04em; text-transform: uppercase; }
-      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.01em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #5c5454; display: flex; align-items: center; gap: 0.5rem; }
       .home-footer__stars { display: flex; gap: 0.25rem; }
       .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
       .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
-      .home-footer__bottom { border-top: 1px solid #e5e5e5; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__bottom { border-top: 1px solid #e3dede; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
       .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
       .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
-      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.04em; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #9a8f8f; letter-spacing: 0.01em; }
 
       /* ══════════════════════════════════════
          RESPONSIVE
@@ -481,10 +483,10 @@
     <nav class="home-nav" id="homeNav">
       <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
       <div class="home-nav__links">
-        <div class="home-nav__col"><a href="../home/">Home</a><a href="#">About</a><a href="#">Contact</a></div>
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>
         <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
-        <div class="home-nav__col"><a href="#">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
-        <div class="home-nav__col"><a href="#" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
+        <div class="home-nav__col"><a href="../support/#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
       </div>
       <div class="home-nav__right">
         <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count">0</span>)</a>
@@ -503,8 +505,8 @@
         </button>
       </div>
       <div class="home-mobile-menu__links">
-        <a href="../home/">Home</a><a href="#">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
-        <a href="#" style="color:#EC0201;">Rent</a><a href="#" style="color:#EC0201;">Dealers</a><a href="#">Contact</a><a href="#">FAQ</a>
+        <a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="../support/#faq">FAQ</a>
       </div>
       <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
     </div>
@@ -666,8 +668,8 @@
           </div>
         </div>
         <div class="home-footer__columns">
-          <div><h4 class="home-footer__col-title">Brand</h4><div class="home-footer__col-links"><a href="#">About Us</a><a href="#">Sustainability</a></div></div>
-          <div><h4 class="home-footer__col-title">Help</h4><div class="home-footer__col-links"><a href="#">FAQs</a><a href="#">Contact</a><a href="#">Shipping</a></div></div>
+          <div><h4 class="home-footer__col-title">Brand</h4><div class="home-footer__col-links"><a href="../about/">About Us</a><a href="#">Sustainability</a></div></div>
+          <div><h4 class="home-footer__col-title">Help</h4><div class="home-footer__col-links"><a href="../support/#faq">FAQs</a><a href="../support/#contact">Contact</a><a href="#">Shipping</a></div></div>
         </div>
       </div>
       <div class="home-footer__stats">
@@ -693,7 +695,7 @@
           { id:'roofbox-540l-white', name:'Roofbox 540L', variant:'White Edition', category:'roofbox', brand:'AWAY Pro', colour:'white', price:27999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
           { id:'roofbox-450l-silver', name:'Roofbox 450L', variant:'Silver', category:'roofbox', brand:'AWAY Pro', colour:'silver', price:22999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-roofbox-2.png' },
           { id:'roofbag-explorer-xl', name:'Explorer XL', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:7999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-1.png' },
-          { id:'roofbag-adventure-pro', name:'Adventure Pro', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:8999, car:['universal'], badge:'Save 20%', badgeType:'sale', image:'../assets/product-roofbag-2.png' },
+          { id:'roofbag-adventure-pro', name:'Adventure Pro', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:8999, originalPrice:11249, car:['universal'], badge:'Save 20%', badgeType:'sale', image:'../assets/product-roofbag-2.png' },
           { id:'roofbag-compact', name:'Roofbag Compact', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
           { id:'roofbag-sport', name:'Roofbag Sport', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:6999, car:['hatchback','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-2.png' },
           { id:'roofbag-weekend', name:'Roofbag Weekend', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:4999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
@@ -773,14 +775,14 @@
             const badgeClass = p.badgeType === 'pick' ? ' home-product__badge--pick' : '';
             const badgeHtml = p.badge ? `<span class="home-product__badge${badgeClass}">${p.badge}</span>` : '';
             const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
-            return `<a href="#" class="home-product" style="animation-delay:${i * 0.04}s">
+            return `<a href="../product/?id=${p.id}" class="home-product" style="animation-delay:${i * 0.04}s">
               <div class="home-product__img-wrap">
                 ${badgeHtml}
                 <button class="home-product__add">Add</button>
                 <img src="${p.image}" alt="${displayName}" class="home-product__img" loading="lazy" />
                 <div class="home-product__info">
                   <p class="home-product__name">${p.name}</p>
-                  <span class="home-product__price">${formatPrice(p.price)}</span>
+                  <span class="home-product__price">${p.originalPrice ? `<span class="home-product__price--sale">${formatPrice(p.price)}</span> <span class="home-product__price--original">${formatPrice(p.originalPrice)}</span>` : formatPrice(p.price)}</span>
                 </div>
               </div>
             </a>`;

@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Our story, mission, and the team behind India's premium rooftop cargo systems." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <title>About — AWAY</title>
+
+    <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --neon: #EC0201;
+        --neon-glow: 0 0 6px rgba(236, 2, 1, 0.4), 0 0 18px rgba(236, 2, 1, 0.15);
+        --neon-glow-strong: 0 0 8px rgba(236, 2, 1, 0.6), 0 0 25px rgba(236, 2, 1, 0.25), 0 0 50px rgba(236, 2, 1, 0.1);
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         ANNOUNCEMENT BAR
+         ══════════════════════════════════════ */
+      .home-announcement {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 51;
+        background: #1a1a1a; overflow: hidden; height: 28px;
+        display: flex; align-items: center; transition: transform 0.4s ease;
+      }
+      .home-announcement.is-hidden { transform: translateY(-100%); }
+      .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+      .home-announcement__text {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 3rem;
+      }
+      .home-announcement__text span { color: #EC0201; font-weight: 600; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* ══════════════════════════════════════
+         NAV
+         ══════════════════════════════════════ */
+      .home-nav {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        padding: 1rem 2rem; background: #fff; position: fixed; top: 28px;
+        left: 0; right: 0; z-index: 50; transition: transform 0.4s ease;
+      }
+      .home-nav.is-hidden { transform: translateY(calc(-100% - 28px)); }
+      .home-nav__logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+      .home-nav__logo img { width: 100px; height: auto; display: block; }
+      .home-nav__links { display: flex; gap: 4rem; margin-left: 3rem; }
+      .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-nav__col a {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .home-nav__col a.is-red { color: #EC0201; }
+      .home-nav__col a:hover { opacity: 0.5; }
+      .home-nav__right { display: flex; align-items: flex-start; gap: 1rem; flex-shrink: 0; }
+      .home-nav__cart {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: baseline; gap: 0.2em;
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1;
+      }
+      .home-nav__cart-count { color: #EC0201; font-weight: 600; }
+      .home-nav__cart:hover { opacity: 0.5; }
+      .home-nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+      .home-nav__hamburger svg { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .home-mobile-menu {
+        position: fixed; inset: 0; z-index: 100; background: #fff;
+        display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem;
+        transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .home-mobile-menu.is-open { transform: translateY(0); }
+      .home-mobile-menu__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+      .home-mobile-menu__logo { display: flex; align-items: center; text-decoration: none; }
+      .home-mobile-menu__logo img { width: 90px; height: auto; display: block; }
+      .home-mobile-menu__close { background: none; border: none; cursor: pointer; padding: 0; }
+      .home-mobile-menu__close svg { display: block; }
+      .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
+      .home-mobile-menu__links a {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
+        text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
+        padding: 0.7rem 0; border-bottom: 1px solid #e5e5e5; transition: opacity 0.2s ease;
+      }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e5e5e5; }
+      .home-mobile-menu__links a:hover { opacity: 0.4; }
+      .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #999; text-decoration: none; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         SHARED
+         ══════════════════════════════════════ */
+      .home-section-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase; margin: 0.25rem 0 0;
+      }
+
+      /* ══════════════════════════════════════
+         ABOUT — HERO
+         ══════════════════════════════════════ */
+      .about-hero {
+        padding: 120px 2rem 0;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+        min-height: 70vh;
+      }
+
+      .about-hero__content { max-width: 520px; }
+
+      .about-hero__title {
+        font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 600; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0 0 0.5rem; line-height: 1.05;
+      }
+
+      .about-hero__title em { font-style: italic; color: #EC0201; }
+
+      .about-hero__desc {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.02em;
+        margin: 1.5rem 0 2rem; max-width: 440px;
+      }
+
+      .about-hero__stats { display: flex; gap: 2rem; }
+
+      .about-hero__stat { display: flex; flex-direction: column; gap: 0.2rem; }
+
+      .about-hero__stat-number {
+        font-family: var(--font-display); font-size: 1.75rem; font-weight: 700;
+        color: var(--neon); text-shadow: var(--neon-glow); letter-spacing: -0.02em;
+      }
+
+      .about-hero__stat-label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: #999; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .about-hero__image {
+        width: 100%; height: 100%; min-height: 400px;
+        object-fit: cover; display: block;
+      }
+
+      /* ══════════════════════════════════════
+         ABOUT — MISSION / VALUES
+         ══════════════════════════════════════ */
+      .about-mission {
+        background: #1a1a1a; padding: 5rem 2rem;
+      }
+
+      .about-mission__heading {
+        text-align: center; margin-bottom: 4rem;
+      }
+
+      .about-mission__heading-title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #fff; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.3rem;
+      }
+
+      .about-mission__heading-title em { font-style: italic; color: var(--neon); text-shadow: var(--neon-glow); }
+
+      .about-mission__heading-sub {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: rgba(255,255,255,0.4); letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .about-mission__grid {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+      }
+
+      .about-mission__card {
+        display: flex; flex-direction: column; gap: 0.75rem;
+        padding: 2.5rem; border-right: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .about-mission__card:last-child { border-right: none; }
+
+      .about-mission__num {
+        font-family: var(--font-display); font-size: 3rem; font-weight: 700;
+        color: rgba(255,255,255,0.04); letter-spacing: -0.04em; line-height: 1;
+        margin-bottom: -0.5rem;
+      }
+
+      .about-mission__label {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        color: var(--neon); letter-spacing: 0.04em; text-transform: uppercase;
+        text-shadow: var(--neon-glow);
+      }
+
+      .about-mission__title {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+        color: #fff; text-transform: uppercase; letter-spacing: -0.01em; margin: 0;
+      }
+
+      .about-mission__desc {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: rgba(255,255,255,0.45); line-height: 1.8; letter-spacing: 0.02em;
+      }
+
+      /* ══════════════════════════════════════
+         ABOUT — STORY
+         ══════════════════════════════════════ */
+      .about-story {
+        padding: 4rem 2rem;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+      }
+
+      .about-story__image {
+        width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      }
+
+      .about-story__content { max-width: 480px; }
+
+      .about-story__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.25rem;
+      }
+
+      .about-story__title em { font-style: italic; }
+
+      .about-story__text {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.02em;
+        margin: 1.5rem 0 0;
+      }
+
+      .about-story__text + .about-story__text { margin-top: 1rem; }
+
+      /* ══════════════════════════════════════
+         ABOUT — TEAM
+         ══════════════════════════════════════ */
+      .about-team {
+        padding: 4rem 2rem;
+        background: #fafafa;
+      }
+
+      .about-team__header {
+        display: flex; align-items: flex-end; justify-content: space-between;
+        margin-bottom: 2.5rem;
+      }
+
+      .about-team__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0;
+      }
+
+      .about-team__title em { font-style: italic; }
+
+      .about-team__count {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #999; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .about-team__grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      }
+
+      .about-team__card {
+        display: flex; flex-direction: column; overflow: hidden;
+        background: #fff;
+      }
+
+      .about-team__photo-wrap {
+        position: relative; aspect-ratio: 3/4; overflow: hidden;
+        background: #f0f0f0;
+      }
+
+      .about-team__photo {
+        width: 100%; height: 100%; object-fit: cover;
+        display: block; transition: transform 0.4s ease;
+      }
+
+      .about-team__card:hover .about-team__photo { transform: scale(1.04); }
+
+      .about-team__initials {
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+        color: #e5e5e5; text-transform: uppercase; letter-spacing: -0.02em;
+        background: #f5f5f5;
+      }
+
+      .about-team__social {
+        position: absolute; bottom: 0.75rem; right: 0.75rem;
+        display: flex; gap: 0.4rem; opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .about-team__card:hover .about-team__social { opacity: 1; }
+
+      .about-team__social a {
+        width: 28px; height: 28px; background: rgba(255,255,255,0.9);
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s ease;
+      }
+
+      .about-team__social a:hover { background: #fff; }
+
+      .about-team__social svg {
+        width: 14px; height: 14px; stroke: #1a1a1a; fill: none; stroke-width: 2;
+      }
+
+      .about-team__info { padding: 1rem; }
+
+      .about-team__name {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em; margin: 0;
+      }
+
+      .about-team__role {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: var(--neon); letter-spacing: 0.02em; text-transform: uppercase;
+        margin-top: 0.2rem;
+      }
+
+      .about-team__bio {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #999; line-height: 1.5; letter-spacing: 0.02em;
+        margin-top: 0.5rem;
+      }
+
+      /* ══════════════════════════════════════
+         ABOUT — NUMBERS BAND
+         ══════════════════════════════════════ */
+      .about-numbers {
+        background: #1a1a1a; padding: 3rem 2rem;
+        display: flex; align-items: center; justify-content: space-around;
+        gap: 2rem; flex-wrap: wrap;
+      }
+
+      .about-numbers__item {
+        display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+        text-align: center;
+      }
+
+      .about-numbers__value {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+        color: var(--neon); text-shadow: var(--neon-glow-strong);
+        letter-spacing: -0.02em;
+      }
+
+      .about-numbers__label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: rgba(255,255,255,0.5); letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      /* ══════════════════════════════════════
+         ABOUT — CTA
+         ══════════════════════════════════════ */
+      .about-cta {
+        padding: 4rem 2rem; text-align: center;
+      }
+
+      .about-cta__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 600; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.5rem;
+      }
+
+      .about-cta__title em { font-style: italic; }
+
+      .about-cta__sub {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #888; letter-spacing: 0.02em; text-transform: uppercase;
+        margin: 0 0 2rem; max-width: 500px; margin-left: auto; margin-right: auto;
+        line-height: 1.5;
+      }
+
+      .about-cta__buttons { display: flex; gap: 1rem; justify-content: center; }
+
+      .about-cta__btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+        padding: 1rem 2.5rem; cursor: pointer; transition: all 0.2s ease;
+        display: inline-block;
+      }
+
+      .about-cta__btn--primary {
+        color: #fff; background: #1a1a1a; border: 1.5px solid #1a1a1a;
+      }
+
+      .about-cta__btn--primary:hover { background: #EC0201; border-color: #EC0201; }
+
+      .about-cta__btn--secondary {
+        color: #1a1a1a; background: none; border: 1.5px solid #e5e5e5;
+      }
+
+      .about-cta__btn--secondary:hover { border-color: #1a1a1a; }
+
+      /* ══════════════════════════════════════
+         PROMO / NEWSLETTER / TRUST / FOOTER
+         ══════════════════════════════════════ */
+      .home-promo { position: relative; z-index: 2; background: #EC0201; overflow: hidden; padding: 0.7rem 0; }
+      .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
+      .home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+      .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
+      @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-newsletter__input::placeholder { color: #000; }
+      .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+      .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.02em; opacity: 0.7; }
+
+      .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+      .home-trust__item { display: flex; align-items: center; gap: 1rem; }
+      .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
+
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e5e5e5; padding: 3rem 2rem 1.5rem; }
+      .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+      .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+      .home-footer__logo { display: inline-flex; }
+      .home-footer__logo img { width: 120px; height: auto; display: block; }
+      .home-footer__socials { display: flex; gap: 0.8rem; }
+      .home-footer__socials a { display: flex; align-items: center; justify-content: center; }
+      .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
+      .home-footer__socials a:hover svg { opacity: 0.5; }
+      .home-footer__columns { display: flex; gap: 4rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s ease; }
+      .home-footer__col-links a:hover { color: #000; }
+      .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e5e5e5; }
+      .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.02em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #555; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stars { display: flex; gap: 0.25rem; }
+      .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
+      .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .home-footer__bottom { border-top: 1px solid #e5e5e5; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
+      .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #999; letter-spacing: 0.02em; }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .about-mission__grid { grid-template-columns: 1fr; gap: 0; }
+        .about-mission__card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .about-mission__card:last-child { border-bottom: none; }
+      }
+
+      @media (max-width: 768px) {
+        .home-announcement { height: 24px; }
+        .home-announcement__text { font-size: 0.5rem; padding: 0 2rem; }
+        .home-nav { padding: 0.5rem 1.5rem; align-items: center; top: 24px; }
+        .home-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+        .home-nav__links { display: none; }
+        .home-nav__hamburger { display: block; }
+
+        .about-hero { grid-template-columns: 1fr; padding: 100px 1.5rem 0; min-height: auto; gap: 2rem; }
+        .about-hero__content { max-width: 100%; }
+        .about-hero__image { min-height: 300px; }
+
+        .about-mission { padding: 2.5rem 1.5rem; }
+        .about-mission__card { padding: 1.5rem 0; }
+
+        .about-story { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; gap: 1.5rem; }
+        .about-story__content { max-width: 100%; }
+
+        .about-team { padding: 2.5rem 1.5rem; }
+        .about-team__grid { grid-template-columns: 1fr; gap: 1rem; max-width: 360px; }
+
+        .about-numbers { padding: 2rem 1.5rem; gap: 1.5rem; }
+        .about-numbers__value { font-size: 1.5rem; }
+
+        .about-cta { padding: 2.5rem 1.5rem; }
+        .about-cta__buttons { flex-direction: column; align-items: center; }
+
+        .home-newsletter { padding: 2rem 1.5rem; }
+        .home-newsletter__subtitle { font-size: 0.625rem; }
+        .home-trust { padding: 1.5rem; gap: 1rem; justify-content: flex-start; }
+        .home-trust__label { font-size: 0.5rem; }
+        .home-footer { padding: 2rem 1.5rem 1.5rem; }
+        .home-footer__main { flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+        .home-footer__columns { gap: 3rem; }
+        .home-footer__stats { flex-wrap: wrap; gap: 1rem; }
+        .home-footer__stat { padding-right: 1rem; margin-right: 0; }
+        .home-footer__bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Announcement Marquee -->
+    <div class="home-announcement" id="homeAnnouncement">
+      <div class="home-announcement__track">
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="home-nav" id="homeNav">
+      <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+      <div class="home-nav__links">
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>
+        <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
+        <div class="home-nav__col"><a href="../support/#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
+      </div>
+      <div class="home-nav__right">
+        <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count">0</span>)</a>
+      </div>
+      <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="home-mobile-menu" id="mobileMenu">
+      <div class="home-mobile-menu__header">
+        <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+        <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="home-mobile-menu__links">
+        <a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="../support/#faq">FAQ</a>
+      </div>
+      <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
+    </div>
+
+    <main>
+      <!-- Hero -->
+      <section class="about-hero">
+        <div class="about-hero__content">
+          <h1 class="about-hero__title">Built For<br/>The <em>Open Road</em></h1>
+          <p class="home-section-sub">Our Story</p>
+          <p class="about-hero__desc">AWAY was born from a simple idea — that every journey deserves more space. Founded in India, we design and engineer premium rooftop cargo systems that are as tough as the terrain and as refined as the drive. From weekend getaways to cross-country expeditions, we build gear that moves with you.</p>
+          <div class="about-hero__stats">
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-number">10K+</span>
+              <span class="about-hero__stat-label">Happy Customers</span>
+            </div>
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-number">24+</span>
+              <span class="about-hero__stat-label">Dealers</span>
+            </div>
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-number">18</span>
+              <span class="about-hero__stat-label">Cities</span>
+            </div>
+          </div>
+        </div>
+        <img class="about-hero__image" src="../assets/brand-story.jpg" alt="AWAY Rooftop Cargo" loading="lazy" />
+      </section>
+
+      <!-- Mission / Values -->
+      <section class="about-mission">
+        <div class="about-mission__heading">
+          <h2 class="about-mission__heading-title">What We <em>Stand For</em></h2>
+          <p class="about-mission__heading-sub">Our Core Values</p>
+        </div>
+        <div class="about-mission__grid">
+          <div class="about-mission__card">
+            <span class="about-mission__num">01</span>
+            <span class="about-mission__label">Our Mission</span>
+            <h3 class="about-mission__title">Adventure Without Limits</h3>
+            <p class="about-mission__desc">We believe every road trip should be limitless. Our mission is to create cargo solutions that give you the freedom to pack everything you need — without compromise on style, safety, or aerodynamics.</p>
+          </div>
+          <div class="about-mission__card">
+            <span class="about-mission__num">02</span>
+            <span class="about-mission__label">Our Promise</span>
+            <h3 class="about-mission__title">Quality You Can Trust</h3>
+            <p class="about-mission__desc">Every AWAY product goes through rigorous testing — from UV exposure and impact resistance to waterproofing and load stress. We stand behind every product with a 1-year warranty because we build things that last.</p>
+          </div>
+          <div class="about-mission__card">
+            <span class="about-mission__num">03</span>
+            <span class="about-mission__label">Our Vision</span>
+            <h3 class="about-mission__title">Made in India, For the World</h3>
+            <p class="about-mission__desc">We're proving that world-class automotive accessories can be designed and built right here in India. Our goal is to put AWAY on rooftops across the globe — starting with every highway at home.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Brand Story -->
+      <section class="about-story">
+        <img class="about-story__image" src="../assets/hero.jpg" alt="AWAY on the road" loading="lazy" />
+        <div class="about-story__content">
+          <h2 class="about-story__title">How It All <em>Started</em></h2>
+          <p class="home-section-sub">The Journey</p>
+          <p class="about-story__text">It started with a road trip that ran out of space. Bags tied to the roof with bungee cords, gear soaked in a sudden downpour, and a frustrating lack of quality options in the Indian market. That's when the AWAY team decided to build something better.</p>
+          <p class="about-story__text">We spent months studying global leaders in rooftop cargo, then engineered products specifically for Indian roads, weather, and vehicles. The result — aerodynamic roofboxes, waterproof roofbags, and universal-fit roofracks that rival the best in the world, at a price point that makes sense for Indian adventurers.</p>
+          <p class="about-story__text">Today, with over 10,000 happy customers and 24 authorized dealers across India, AWAY is the name that adventure enthusiasts trust when they hit the road.</p>
+        </div>
+      </section>
+
+      <!-- Team -->
+      <section class="about-team" id="team">
+        <div class="about-team__header">
+          <div>
+            <h2 class="about-team__title">Meet The <em>Team</em></h2>
+            <p class="home-section-sub">The People Behind AWAY</p>
+          </div>
+          <span class="about-team__count">3 Members</span>
+        </div>
+
+        <div class="about-team__grid">
+          <div class="about-team__card">
+            <div class="about-team__photo-wrap">
+              <div class="about-team__initials">SJ</div>
+              <div class="about-team__social">
+                <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              </div>
+            </div>
+            <div class="about-team__info">
+              <h3 class="about-team__name">Shrenik Jain</h3>
+              <p class="about-team__role">Founder & CEO</p>
+              <p class="about-team__bio">Visionary behind AWAY. Building India's premium rooftop cargo brand from the ground up.</p>
+            </div>
+          </div>
+
+          <div class="about-team__card">
+            <div class="about-team__photo-wrap">
+              <div class="about-team__initials">KG</div>
+              <div class="about-team__social">
+                <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              </div>
+            </div>
+            <div class="about-team__info">
+              <h3 class="about-team__name">Krish Gajjar</h3>
+              <p class="about-team__role">Head of Operations</p>
+              <p class="about-team__bio">Driving strategy and operations, scaling AWAY across India's dealer network and supply chain.</p>
+            </div>
+          </div>
+
+          <div class="about-team__card">
+            <div class="about-team__photo-wrap">
+              <div class="about-team__initials">S</div>
+              <div class="about-team__social">
+                <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              </div>
+            </div>
+            <div class="about-team__info">
+              <h3 class="about-team__name">Sajid</h3>
+              <p class="about-team__role">Head of Engineering</p>
+              <p class="about-team__bio">Engineering mind behind every AWAY product — from concept to road-ready reality.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Numbers Band -->
+      <div class="about-numbers">
+        <div class="about-numbers__item">
+          <span class="about-numbers__value">10,000+</span>
+          <span class="about-numbers__label">Units Sold</span>
+        </div>
+        <div class="about-numbers__item">
+          <span class="about-numbers__value">24+</span>
+          <span class="about-numbers__label">Authorized Dealers</span>
+        </div>
+        <div class="about-numbers__item">
+          <span class="about-numbers__value">4.5&#9733;</span>
+          <span class="about-numbers__label">Google Rating</span>
+        </div>
+        <div class="about-numbers__item">
+          <span class="about-numbers__value">18</span>
+          <span class="about-numbers__label">Cities Covered</span>
+        </div>
+        <div class="about-numbers__item">
+          <span class="about-numbers__value">1 Year</span>
+          <span class="about-numbers__label">Warranty on All Products</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <section class="about-cta">
+        <h2 class="about-cta__title">Ready To Go <em>Away?</em></h2>
+        <p class="about-cta__sub">Explore our range of premium rooftop cargo systems or find an authorized dealer near you.</p>
+        <div class="about-cta__buttons">
+          <a href="../shop/" class="about-cta__btn about-cta__btn--primary">Shop Now</a>
+          <a href="../dealers/" class="about-cta__btn about-cta__btn--secondary">Find a Dealer</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Promo Marquee -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="home-newsletter">
+      <h2 class="home-newsletter__title">0% Spam. 100% Away.</h2>
+      <p class="home-newsletter__subtitle">We love a clean mail inbox, so we only send our subscribers important things: promotions you can't miss or news that will blow your mind.</p>
+      <form class="home-newsletter__form" onsubmit="return false;">
+        <input class="home-newsletter__input" type="email" placeholder="Email Address" required />
+        <button class="home-newsletter__submit" aria-label="Subscribe">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <p class="home-newsletter__privacy">Consult our privacy policy for more information on how we obtain and process information.</p>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="home-trust">
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="home-trust__label">Express Shipping from India</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M1 10h22"/></svg>
+        <span class="home-trust__label">Free Shipping</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="home-trust__label">30 Days Return Policy</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4l3 3"/><path d="M7 3v2M17 3v2"/></svg>
+        <span class="home-trust__label">100% Secure Payment</span>
+      </div>
+      <div class="home-trust__item">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span class="home-trust__label">1 Year Warranty</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+      <div class="home-footer__main">
+        <div class="home-footer__brand">
+          <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+          <div class="home-footer__socials">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="home-footer__columns">
+          <div>
+            <h4 class="home-footer__col-title">Brand</h4>
+            <div class="home-footer__col-links">
+              <a href="../about/">About Us</a>
+              <a href="#">Sustainability</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="home-footer__col-title">Help</h4>
+            <div class="home-footer__col-links">
+              <a href="../support/#faq">FAQs</a>
+              <a href="../support/#contact">Contact</a>
+              <a href="#">Shipping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-footer__stats">
+        <div class="home-footer__stat">
+          <span class="home-footer__stat-label">Happy Customers</span>
+          <span class="home-footer__stat-value">10,000+</span>
+        </div>
+        <div class="home-footer__stat">
+          <span class="home-footer__stat-label">Google Reviews</span>
+          <span class="home-footer__stat-value">
+            4.5
+            <span class="home-footer__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="home-footer__bottom">
+        <div class="home-footer__payments">
+          <img src="../assets/amex.png" alt="Amex" />
+          <img src="../assets/gpay.png" alt="Google Pay" />
+          <img src="../assets/mastercard.png" alt="Mastercard" />
+          <img src="../assets/visa.png" alt="Visa" />
+          <img src="../assets/upi.png" alt="UPI" />
+        </div>
+        <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        /* ── NAV + ANNOUNCEMENT: hide on scroll down, show on scroll up ── */
+        const nav = document.getElementById('homeNav');
+        const announcement = document.getElementById('homeAnnouncement');
+        let lastY = 0;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              if (y > lastY && y > 100) {
+                nav.classList.add('is-hidden');
+                announcement.classList.add('is-hidden');
+              } else {
+                nav.classList.remove('is-hidden');
+                announcement.classList.remove('is-hidden');
+              }
+              lastY = y;
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        /* ── MOBILE MENU ── */
+        const mobileMenu = document.getElementById('mobileMenu');
+        const openBtn = document.getElementById('hamburgerOpen');
+        const closeBtn = document.getElementById('hamburgerClose');
+
+        openBtn.addEventListener('click', () => {
+          mobileMenu.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = '';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

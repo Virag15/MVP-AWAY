@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Premium rooftop cargo systems. Shop roofboxes, roofbags, crossbars and roofracks." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <title>Product — AWAY</title>
+
+    <style>
+      /* ══════════════════════════════════════
+         CSS VARIABLES
+         ══════════════════════════════════════ */
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         ANNOUNCEMENT BAR
+         ══════════════════════════════════════ */
+      .home-announcement {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 51;
+        background: #1a1a1a; overflow: hidden; height: 28px;
+        display: flex; align-items: center; transition: transform 0.4s ease;
+      }
+      .home-announcement.is-hidden { transform: translateY(-100%); }
+      .home-announcement__track { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; }
+      .home-announcement__text {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #fff; letter-spacing: 0.01em; text-transform: uppercase; padding: 0 3rem;
+      }
+      .home-announcement__text span { color: #EC0201; font-weight: 600; }
+      @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* ══════════════════════════════════════
+         NAV
+         ══════════════════════════════════════ */
+      .home-nav {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        padding: 1rem 2rem; background: #fff; position: fixed; top: 28px;
+        left: 0; right: 0; z-index: 50; transition: transform 0.4s ease;
+      }
+      .home-nav.is-hidden { transform: translateY(calc(-100% - 28px)); }
+      .home-nav__logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+      .home-nav__logo img { width: 100px; height: auto; display: block; }
+      .home-nav__links { display: flex; gap: 4rem; margin-left: 3rem; }
+      .home-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-nav__col a {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #1a1a1a;
+        text-decoration: none; line-height: 1.5; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .home-nav__col a.is-red { color: #EC0201; }
+      .home-nav__col a:hover { opacity: 0.5; }
+      .home-nav__right { display: flex; align-items: flex-start; gap: 1rem; flex-shrink: 0; }
+      .home-nav__cart {
+        background: none; border: none; cursor: pointer; padding: 0;
+        display: inline-flex; align-items: baseline; gap: 0.2em;
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #EC0201; text-decoration: none; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1;
+      }
+      .home-nav__cart-count { color: #EC0201; font-weight: 600; }
+      .home-nav__cart:hover { opacity: 0.5; }
+      .home-nav__hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+      .home-nav__hamburger svg { display: block; }
+
+      /* ── MOBILE MENU ── */
+      .home-mobile-menu {
+        position: fixed; inset: 0; z-index: 100; background: #fff;
+        display: flex; flex-direction: column; padding: 1rem 1.5rem 2rem;
+        transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .home-mobile-menu.is-open { transform: translateY(0); }
+      .home-mobile-menu__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+      .home-mobile-menu__logo { display: flex; align-items: center; text-decoration: none; }
+      .home-mobile-menu__logo img { width: 90px; height: auto; display: block; }
+      .home-mobile-menu__close { background: none; border: none; cursor: pointer; padding: 0; }
+      .home-mobile-menu__close svg { display: block; }
+      .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
+      .home-mobile-menu__links a {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
+        text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
+        padding: 0.7rem 0; border-bottom: 1px solid #e3dede; transition: opacity 0.2s ease;
+      }
+      .home-mobile-menu__links a:first-child { border-top: 1px solid #e3dede; }
+      .home-mobile-menu__links a:hover { opacity: 0.4; }
+      .home-mobile-menu__footer { margin-top: auto; display: flex; gap: 1.5rem; }
+      .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #9a8f8f; text-decoration: none; letter-spacing: 0.01em; }
+
+      /* ══════════════════════════════════════
+         PDP — LAYOUT
+         ══════════════════════════════════════ */
+      .pdp-layout {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+        padding-top: 90px; min-height: 100vh;
+      }
+
+      /* ══════════════════════════════════════
+         PDP — GALLERY (left, scrollable)
+         ══════════════════════════════════════ */
+      .pdp-gallery { display: flex; flex-direction: column; gap: 2px; }
+      .pdp-gallery__item { width: 100%; position: relative; }
+      .pdp-gallery__img { width: 100%; display: block; object-fit: cover; }
+      .pdp-gallery__video { width: 100%; display: block; object-fit: cover; }
+      .pdp-gallery__counter {
+        position: absolute; bottom: 0.75rem; right: 0.75rem;
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #fff; letter-spacing: 0.01em; text-transform: uppercase;
+        background: rgba(0,0,0,0.45); padding: 0.3rem 0.6rem;
+      }
+
+      /* ══════════════════════════════════════
+         PDP — DETAILS (right, sticky)
+         ══════════════════════════════════════ */
+      .pdp-details {
+        position: sticky; top: 90px; align-self: start;
+        padding: 2.5rem 2.5rem 2.5rem 2rem;
+        display: flex; flex-direction: column;
+      }
+
+      /* ── Breadcrumb ── */
+      .pdp-breadcrumb { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 2rem; flex-wrap: wrap; }
+      .pdp-breadcrumb__link {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+        text-decoration: none; transition: color 0.2s ease;
+      }
+      .pdp-breadcrumb__link:hover { color: #1a1a1a; }
+      .pdp-breadcrumb__sep { font-size: 0.5rem; color: #d1c8c8; }
+      .pdp-breadcrumb__current {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+
+      /* ── Name / Variant / Price / Badge ── */
+      .pdp-name {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 600; color: #1a1a1a; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.25rem; line-height: 1.1;
+      }
+      .pdp-variant {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 1rem;
+      }
+      .pdp-price {
+        font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: -0.01em; margin: 0 0 1rem;
+        display: flex; align-items: baseline; gap: 0.5rem;
+      }
+      .pdp-price__original {
+        font-size: 0.9rem; font-weight: 500; color: #9a8f8f;
+        text-decoration: line-through;
+      }
+      .pdp-price__sale {
+        color: #39FF14; font-weight: 600;
+      }
+      .pdp-badge {
+        display: inline-block; font-family: var(--font-body); font-size: 0.5rem;
+        font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em;
+        background: #EC0201; color: #fff; padding: 0.35rem 0.7rem;
+        margin-bottom: 1.5rem; line-height: 1;
+      }
+      .pdp-badge--pick { background: #1a1a1a; }
+      .pdp-badge--sale { background: #EC0201; }
+      .pdp-badge:empty { display: none; }
+
+      /* ── Divider ── */
+      .pdp-divider { border: none; border-top: 1px solid #e3dede; margin: 0 0 1.5rem; }
+
+      /* ── Colour selector ── */
+      .pdp-colours { margin-bottom: 1.5rem; }
+      .pdp-colours__label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+        margin-bottom: 0.75rem; display: block;
+      }
+      .pdp-colours__swatches { display: flex; gap: 1rem; flex-wrap: wrap; }
+      .pdp-colour {
+        display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+        text-decoration: none; cursor: pointer; transition: opacity 0.15s ease;
+      }
+      .pdp-colour:hover { opacity: 0.7; }
+      .pdp-colour__swatch {
+        width: 28px; height: 28px; border-radius: 2px;
+        border: 1.5px solid #e3dede; transition: all 0.15s ease;
+      }
+      .pdp-colour.is-active .pdp-colour__swatch {
+        border-color: #1a1a1a; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #1a1a1a;
+      }
+      .pdp-colour__name {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .pdp-colour.is-active .pdp-colour__name { color: #1a1a1a; font-weight: 600; }
+
+      /* ── Car compatibility checker ── */
+      .pdp-compat { margin-bottom: 1.5rem; }
+      .pdp-compat__header {
+        display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;
+      }
+      .pdp-compat__icon {
+        width: 18px; height: 18px; stroke: #EC0201; fill: none; stroke-width: 1.5;
+        stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
+      }
+      .pdp-compat__label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .pdp-compat__grid {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .pdp-compat__cell { display: flex; flex-direction: column; gap: 0.2rem; }
+      .pdp-compat__cell-label {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 500;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .pdp-compat__select {
+        width: 100%; font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #1a1a1a; letter-spacing: 0.01em;
+        border: none; border-bottom: 1px solid #e3dede; padding: 0.5rem 1.5rem 0.5rem 0;
+        background: transparent; appearance: none; -webkit-appearance: none; border-radius: 0; cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 0 center; background-size: 10px;
+        transition: border-color 0.2s ease, opacity 0.2s ease;
+      }
+      .pdp-compat__select:focus { outline: none; border-color: #EC0201; }
+      .pdp-compat__select:disabled { opacity: 0.35; cursor: not-allowed; }
+      .pdp-compat__check-btn {
+        width: 100%; font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #1a1a1a;
+        background: transparent; border: 1px solid #e3dede; padding: 0.7rem; cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .pdp-compat__check-btn:hover { border-color: #1a1a1a; }
+      .pdp-compat__check-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+      .pdp-compat__result {
+        margin-top: 0.5rem; padding: 0; overflow: hidden;
+        max-height: 0; transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+      .pdp-compat__result.is-compatible,
+      .pdp-compat__result.is-incompatible { max-height: 80px; padding: 0.6rem 0; }
+      .pdp-compat__result.is-compatible .pdp-compat__result-text { color: #1a1a1a; }
+      .pdp-compat__result.is-incompatible .pdp-compat__result-text { color: #EC0201; }
+      .pdp-compat__result-text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        display: flex; align-items: center; gap: 0.5rem;
+      }
+      .pdp-compat__result-icon { width: 14px; height: 14px; flex-shrink: 0; }
+      .pdp-compat__result-detail {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; margin-top: 0.2rem; padding-left: 1.4rem;
+      }
+
+      /* ── Action Buttons ── */
+      .pdp-actions { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+      .pdp-add-cart {
+        width: 100%; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
+        background: #1a1a1a; border: none; padding: 1.2rem; cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .pdp-add-cart:hover { background: #333; }
+      .pdp-buy-now {
+        width: 100%; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #EC0201;
+        background: #fff; border: 1px solid #EC0201; padding: calc(1.2rem - 1px);
+        cursor: pointer; transition: all 0.2s ease;
+      }
+      .pdp-buy-now:hover { background: #EC0201; color: #fff; }
+
+      /* ── Specs Accordion ── */
+      .pdp-specs { border-top: 1px solid #e3dede; }
+      .pdp-specs__section { border-bottom: 1px solid #e3dede; }
+      .pdp-specs__header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.2rem 0; cursor: pointer; background: none; border: none;
+        width: 100%; text-align: left;
+      }
+      .pdp-specs__head-left { display: flex; align-items: baseline; gap: 0.6rem; }
+      .pdp-specs__num {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.01em;
+      }
+      .pdp-specs__label {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .pdp-specs__icon {
+        width: 14px; height: 14px; stroke: #999; fill: none; stroke-width: 2;
+        transition: transform 0.3s ease; flex-shrink: 0;
+      }
+      .pdp-specs__section.is-open .pdp-specs__icon { transform: rotate(45deg); }
+      .pdp-specs__body {
+        max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+      }
+      .pdp-specs__section.is-open .pdp-specs__body { max-height: 300px; }
+      .pdp-specs__content {
+        padding: 0 0 1.2rem; font-family: var(--font-body); font-size: 0.75rem;
+        font-weight: 400; color: #6b6262; letter-spacing: 0.01em; line-height: 1.8;
+      }
+
+      /* ── Brand ── */
+      .pdp-brand {
+        margin-top: 1.5rem; font-family: var(--font-body); font-size: 0.625rem;
+        font-weight: 600; color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+        display: flex; align-items: center; gap: 0.5rem;
+      }
+      .pdp-brand__dot { width: 6px; height: 6px; background: #EC0201; border-radius: 50%; }
+
+      /* ── Mobile Dots ── */
+      .pdp-dots {
+        display: none; justify-content: center; gap: 0.5rem; padding: 1rem 0;
+      }
+      .pdp-dots__dot {
+        width: 6px; height: 6px; border-radius: 50%; background: #e3dede;
+        border: none; padding: 0; cursor: pointer; transition: background 0.2s ease;
+      }
+      .pdp-dots__dot.is-active { background: #1a1a1a; }
+
+      /* ══════════════════════════════════════
+         PROMO / NEWSLETTER / TRUST / FOOTER
+         ══════════════════════════════════════ */
+      .home-promo { position: relative; z-index: 2; background: #EC0201; overflow: hidden; padding: 0.7rem 0; }
+      .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
+      .home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+      .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
+      @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .home-newsletter { position: relative; z-index: 2; background: #EC0201; padding: 3rem 2rem; }
+      .home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+      .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
+      .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
+      .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.01em; text-transform: uppercase; }
+      .home-newsletter__input::placeholder { color: #000; }
+      .home-newsletter__submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+      .home-newsletter__submit svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; }
+      .home-newsletter__privacy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #000; letter-spacing: 0.01em; opacity: 0.7; }
+
+      .home-trust { position: relative; z-index: 2; background: #fff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+      .home-trust__item { display: flex; align-items: center; gap: 1rem; }
+      .home-trust__item svg { width: 28px; height: 28px; stroke: #1a1a1a; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+      .home-trust__label { font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; color: #1a1a1a; letter-spacing: 0.01em; text-transform: uppercase; white-space: nowrap; }
+
+      .home-footer { position: relative; z-index: 2; background: #fff; border-top: 1px solid #e3dede; padding: 3rem 2rem 1.5rem; }
+      .home-footer__main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+      .home-footer__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+      .home-footer__logo { display: inline-flex; }
+      .home-footer__logo img { width: 120px; height: auto; display: block; }
+      .home-footer__socials { display: flex; gap: 0.8rem; }
+      .home-footer__socials a { display: flex; align-items: center; justify-content: center; }
+      .home-footer__socials svg { width: 20px; height: 20px; transition: opacity 0.2s ease; }
+      .home-footer__socials a:hover svg { opacity: 0.5; }
+      .home-footer__columns { display: flex; gap: 4rem; }
+      .home-footer__col-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 0.8rem; }
+      .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
+      .home-footer__col-links a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #5c5454; text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s ease; }
+      .home-footer__col-links a:hover { color: #000; }
+      .home-footer__stats { display: flex; gap: 0; margin-bottom: 2.5rem; }
+      .home-footer__stat { display: flex; flex-direction: column; gap: 0.5rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid #e3dede; }
+      .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+      .home-footer__stat-label { font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; color: #000; letter-spacing: 0.01em; text-transform: uppercase; }
+      .home-footer__stat-value { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #5c5454; display: flex; align-items: center; gap: 0.5rem; }
+      .home-footer__stars { display: flex; gap: 0.25rem; }
+      .home-footer__stars svg { width: 14px; height: 14px; fill: #1a1a1a; }
+      .home-footer__stars svg.empty { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .home-footer__bottom { border-top: 1px solid #e3dede; padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+      .home-footer__payments { display: flex; gap: 0.5rem; align-items: center; }
+      .home-footer__payments img { height: 18px; width: 28px; object-fit: contain; display: block; }
+      .home-footer__copy { font-family: var(--font-body); font-size: 0.625rem; font-weight: 400; color: #9a8f8f; letter-spacing: 0.01em; }
+
+      /* ══════════════════════════════════════
+         PRODUCT CARD (for Related/Suggested)
+         ══════════════════════════════════════ */
+      .home-product { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+      .home-product__img-wrap { position: relative; background: #fff; overflow: hidden; aspect-ratio: 1 / 1; margin-bottom: 1rem; }
+      .home-product__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+      .home-product:hover .home-product__img { transform: scale(1.04); }
+      .home-product__badge {
+        position: absolute; top: 0.75rem; left: 0.75rem; font-family: var(--font-body);
+        font-size: 0.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em;
+        background: #EC0201; color: #fff; padding: 0.3rem 0.6rem; line-height: 1; z-index: 1;
+      }
+      .home-product__badge--pick { background: #1a1a1a; }
+      .home-product__add {
+        position: absolute; top: 0.75rem; right: 0.75rem; font-family: var(--font-body);
+        font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.01em;
+        color: #1a1a1a; background: rgba(255,255,255,0.88); border: none; padding: 0.35rem 0.6rem;
+        cursor: pointer; z-index: 1; line-height: 1; transition: background 0.2s ease;
+      }
+      .home-product__add:hover { background: #fff; }
+      .home-product__info {
+        position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: flex-end;
+        justify-content: space-between; padding: 3rem 0.85rem 0.85rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%); z-index: 1;
+      }
+      .home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
+      .home-product__price { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: #fff; white-space: nowrap; flex-shrink: 0; display: flex; align-items: baseline; gap: 0.35rem; }
+      .home-product__price--sale { color: #39FF14; font-weight: 600; }
+      .home-product__price--original { font-size: 0.7rem; font-weight: 400; color: rgba(255,255,255,0.6); text-decoration: line-through; }
+
+      /* ══════════════════════════════════════
+         PDP — SHARED SECTION HEADER
+         ══════════════════════════════════════ */
+      .pdp-section__num {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #EC0201; letter-spacing: 0.01em;
+      }
+      .pdp-section__title {
+        font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        font-weight: 600; color: #1a1a1a; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;
+      }
+
+      /* ══════════════════════════════════════
+         PDP — REVIEWS & RATINGS
+         ══════════════════════════════════════ */
+      .pdp-reviews { background: #faf8f8; border-top: 1px solid #e3dede; }
+      .pdp-reviews__inner { padding: 3rem 2rem; }
+      .pdp-reviews__header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 2.5rem;
+      }
+      .pdp-reviews__header-left { display: flex; align-items: baseline; gap: 0.6rem; }
+      .pdp-reviews__write-btn {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
+        background: #EC0201; border: none; padding: 0.7rem 1.5rem;
+        cursor: pointer; transition: background 0.2s ease;
+      }
+      .pdp-reviews__write-btn:hover { background: #c70100; }
+
+      /* ── Summary Row ── */
+      .pdp-reviews__summary {
+        display: grid; grid-template-columns: auto 1fr; gap: 2.5rem;
+        align-items: start; margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem; border-bottom: 1px solid #e3dede;
+      }
+      .pdp-reviews__score { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; min-width: 80px; }
+      .pdp-reviews__avg {
+        font-family: var(--font-display); font-size: 3rem; font-weight: 600;
+        color: #EC0201; line-height: 1; letter-spacing: -0.02em;
+      }
+      .pdp-reviews__stars { display: flex; gap: 0.15rem; }
+      .pdp-reviews__total {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase; margin-top: 0.15rem;
+      }
+      .pdp-reviews__bars { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.35rem; }
+      .pdp-reviews__bar-row { display: flex; align-items: center; gap: 0.75rem; }
+      .pdp-reviews__bar-label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #1a1a1a; width: 0.75rem; text-align: right; flex-shrink: 0;
+      }
+      .pdp-reviews__bar-track { flex: 1; height: 6px; background: #e3dede; position: relative; overflow: hidden; }
+      .pdp-reviews__bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: #EC0201; transition: width 0.6s ease; }
+      .pdp-reviews__bar-count {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; width: 2rem; text-align: left; flex-shrink: 0;
+      }
+
+      /* ── Review Cards Grid ── */
+      .pdp-reviews__list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .pdp-reviews__card {
+        background: #fff; padding: 1.5rem; border: 1px solid #e3dede;
+        display: flex; flex-direction: column; gap: 0.75rem;
+      }
+      .pdp-reviews__card-top { display: flex; align-items: center; justify-content: space-between; }
+      .pdp-reviews__card-stars { display: flex; gap: 0.1rem; }
+      .pdp-reviews__verified {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        color: #EC0201; letter-spacing: 0.01em; text-transform: uppercase;
+        background: rgba(236,2,1,0.06); padding: 0.25rem 0.5rem; line-height: 1;
+      }
+      .pdp-reviews__card-text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #5c5454; line-height: 1.7; letter-spacing: 0.01em; margin: 0;
+        display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+      }
+      .pdp-reviews__card-meta { display: flex; align-items: center; gap: 0.75rem; margin-top: auto; }
+      .pdp-reviews__card-name {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .pdp-reviews__card-date {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em;
+      }
+
+      /* ── Write Review Modal ── */
+      .pdp-review-modal {
+        position: fixed; inset: 0; z-index: 200; display: none;
+        align-items: center; justify-content: center;
+        background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+      }
+      .pdp-review-modal.is-open { display: flex; }
+      .pdp-review-modal__box {
+        background: #fff; width: 100%; max-width: 480px; margin: 1.5rem;
+        padding: 2.5rem 2rem; position: relative;
+      }
+      .pdp-review-modal__close {
+        position: absolute; top: 1rem; right: 1rem; background: none;
+        border: none; cursor: pointer; padding: 0;
+      }
+      .pdp-review-modal__close svg { width: 18px; height: 18px; stroke: #999; fill: none; stroke-width: 2; }
+      .pdp-review-modal__close:hover svg { stroke: #1a1a1a; }
+      .pdp-review-modal__title {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.02em;
+        margin: 0 0 0.35rem;
+      }
+      .pdp-review-modal__subtitle {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+        margin: 0 0 2rem;
+      }
+      .pdp-review-modal__stars {
+        display: flex; gap: 0.35rem; margin-bottom: 1.5rem;
+      }
+      .pdp-review-modal__star {
+        background: none; border: none; cursor: pointer; padding: 0; transition: transform 0.15s ease;
+      }
+      .pdp-review-modal__star:hover { transform: scale(1.15); }
+      .pdp-review-modal__star svg { width: 24px; height: 24px; }
+      .pdp-review-modal__field {
+        width: 100%; font-family: var(--font-body); font-size: 0.75rem;
+        font-weight: 400; color: #1a1a1a; letter-spacing: 0.01em;
+        border: 1px solid #e3dede; padding: 0.75rem 1rem; margin-bottom: 0.75rem;
+        background: #fff; border-radius: 0; appearance: none; -webkit-appearance: none;
+        transition: border-color 0.2s ease;
+      }
+      .pdp-review-modal__field:focus { outline: none; border-color: #EC0201; }
+      .pdp-review-modal__field::placeholder { color: #bbb; }
+      textarea.pdp-review-modal__field { resize: vertical; min-height: 100px; }
+      .pdp-review-modal__submit {
+        width: 100%; font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
+        background: #EC0201; border: none; padding: 1rem; cursor: pointer;
+        transition: background 0.2s ease; margin-top: 0.5rem;
+      }
+      .pdp-review-modal__submit:hover { background: #c70100; }
+
+      /* ══════════════════════════════════════
+         PDP — PRODUCT ROW (Related + Suggested)
+         ══════════════════════════════════════ */
+      .pdp-related, .pdp-suggested { background: #fff; border-top: 1px solid #e3dede; }
+      .pdp-row__inner { padding: 3rem 2rem; }
+      .pdp-row__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+      .pdp-row__header-left { display: flex; align-items: baseline; gap: 0.6rem; }
+      .pdp-row__arrows { display: flex; gap: 0.5rem; }
+      .pdp-row__arrow {
+        background: none; border: 1px solid #e3dede; width: 32px; height: 32px;
+        display: flex; align-items: center; justify-content: center; cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .pdp-row__arrow:hover { background: #1a1a1a; border-color: #1a1a1a; }
+      .pdp-row__arrow:hover svg { stroke: #fff; }
+      .pdp-row__arrow svg { width: 14px; height: 14px; stroke: #6b6262; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .pdp-row__grid {
+        display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 0.5rem;
+      }
+      .pdp-row__grid::-webkit-scrollbar { display: none; }
+      .pdp-row__grid .home-product { flex: 0 0 calc(25% - 1.125rem); min-width: 220px; scroll-snap-align: start; }
+
+      /* ══════════════════════════════════════
+         SIDE CART
+         ══════════════════════════════════════ */
+      .side-cart-overlay {
+        position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,0.4);
+        opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      }
+      .side-cart-overlay.is-open { opacity: 1; pointer-events: auto; }
+      .side-cart {
+        position: fixed; top: 0; right: 0; bottom: 0; z-index: 200;
+        width: 100%; max-width: 400px; background: #fff;
+        display: flex; flex-direction: column;
+        transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+      }
+      .side-cart.is-open { transform: translateX(0); }
+      .side-cart__header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.5rem; border-bottom: 1px solid #e3dede;
+      }
+      .side-cart__title {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #1a1a1a;
+      }
+      .side-cart__count {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em;
+      }
+      .side-cart__close {
+        background: none; border: none; cursor: pointer; padding: 0;
+      }
+      .side-cart__close svg { width: 20px; height: 20px; stroke: #999; fill: none; stroke-width: 2; }
+      .side-cart__close:hover svg { stroke: #1a1a1a; }
+      .side-cart__body {
+        flex: 1; overflow-y: auto; padding: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .side-cart__empty {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        height: 100%; padding: 2rem; text-align: center;
+      }
+      .side-cart__empty-icon { width: 40px; height: 40px; stroke: #d1c8c8; fill: none; stroke-width: 1.5; margin-bottom: 1rem; }
+      .side-cart__empty-text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em;
+      }
+      .side-cart__item {
+        display: grid; grid-template-columns: 70px 1fr; gap: 0.75rem;
+        padding: 1rem 1.5rem; border-bottom: 1px solid #f0ecec;
+      }
+      .side-cart__item-img {
+        width: 70px; height: 70px; object-fit: cover; background: #f5f2f2;
+      }
+      .side-cart__item-details { display: flex; flex-direction: column; justify-content: center; gap: 0.15rem; }
+      .side-cart__item-name {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em;
+      }
+      .side-cart__item-variant {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .side-cart__item-price {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #1a1a1a; margin-top: 0.15rem;
+      }
+      .side-cart__item-actions {
+        display: flex; align-items: center; gap: 0.75rem; margin-top: 0.4rem;
+      }
+      .side-cart__qty-btn {
+        width: 22px; height: 22px; border: 1px solid #e3dede; background: #fff;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; transition: all 0.15s ease; padding: 0; line-height: 1;
+      }
+      .side-cart__qty-btn:hover { border-color: #1a1a1a; }
+      .side-cart__qty {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; min-width: 16px; text-align: center;
+      }
+      .side-cart__remove {
+        background: none; border: none; cursor: pointer; padding: 0; margin-left: auto;
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #9a8f8f; text-transform: uppercase; letter-spacing: 0.01em;
+        text-decoration: underline; transition: color 0.15s ease;
+      }
+      .side-cart__remove:hover { color: #EC0201; }
+      .side-cart__footer {
+        border-top: 1px solid #e3dede; padding: 1.25rem 1.5rem;
+      }
+      .side-cart__subtotal {
+        display: flex; justify-content: space-between; align-items: baseline;
+        margin-bottom: 0.75rem;
+      }
+      .side-cart__subtotal-label {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
+        color: #9a8f8f; text-transform: uppercase; letter-spacing: 0.02em;
+      }
+      .side-cart__subtotal-value {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+        color: #1a1a1a;
+      }
+      .side-cart__checkout {
+        width: 100%; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
+        background: #1a1a1a; border: none; padding: 1.1rem; cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .side-cart__checkout:hover { background: #333; }
+      .side-cart__continue {
+        width: 100%; font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; text-transform: uppercase; letter-spacing: 0.01em;
+        background: none; border: none; cursor: pointer;
+        padding: 0.75rem; text-align: center; transition: color 0.15s ease;
+      }
+      .side-cart__continue:hover { color: #1a1a1a; }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 768px) {
+        .home-announcement { height: 24px; }
+        .home-announcement__text { font-size: 0.5rem; padding: 0 2rem; }
+        .home-nav { padding: 0.5rem 1.5rem; align-items: center; top: 24px; }
+        .home-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+        .home-nav__links { display: none; }
+        .home-nav__hamburger { display: block; }
+
+        .pdp-layout {
+          display: flex; flex-direction: column; padding-top: 70px;
+        }
+        .pdp-gallery {
+          flex-direction: row; overflow-x: auto;
+          scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; gap: 0;
+        }
+        .pdp-gallery::-webkit-scrollbar { display: none; }
+        .pdp-gallery__item {
+          flex: 0 0 100%; min-width: 100%; scroll-snap-align: start;
+        }
+        .pdp-gallery__img { aspect-ratio: 1 / 1; object-fit: cover; }
+        .pdp-dots { display: flex; }
+        .pdp-details {
+          position: static; height: auto; overflow: visible; padding: 1.5rem;
+        }
+        .pdp-compat__grid { grid-template-columns: 1fr; }
+
+        .home-newsletter { padding: 2rem 1.5rem; }
+        .home-newsletter__subtitle { font-size: 0.625rem; }
+        .home-trust { padding: 1.5rem; gap: 1rem; justify-content: flex-start; }
+        .home-trust__label { font-size: 0.5rem; }
+        .home-footer { padding: 2rem 1.5rem 1.5rem; }
+        .home-footer__main { flex-direction: column; gap: 2rem; margin-bottom: 2rem; }
+        .home-footer__columns { gap: 3rem; }
+        .home-footer__stats { flex-wrap: wrap; gap: 1rem; }
+        .home-footer__stat { padding-right: 1rem; margin-right: 0; }
+        .home-footer__bottom { flex-direction: column; gap: 1rem; align-items: flex-start; }
+
+        /* Reviews Mobile */
+        .pdp-reviews__inner { padding: 2rem 1.5rem; }
+        .pdp-reviews__summary { grid-template-columns: 1fr; gap: 1.5rem; }
+        .pdp-reviews__score { flex-direction: row; gap: 1rem; align-items: center; }
+        .pdp-reviews__list { grid-template-columns: 1fr; }
+
+        /* Product Row Mobile */
+        .pdp-row__inner { padding: 2rem 1.5rem; }
+        .pdp-row__grid .home-product { flex: 0 0 70%; min-width: 200px; }
+
+        /* Side Cart Mobile */
+        .side-cart { max-width: 100%; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Announcement Marquee -->
+    <div class="home-announcement" id="homeAnnouncement">
+      <div class="home-announcement__track">
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+        <span class="home-announcement__text">Free shipping on all orders over <span>&#8377;10,000</span></span>
+        <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
+        <span class="home-announcement__text">Engineered for the open road — Built to last</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="home-nav" id="homeNav">
+      <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+      <div class="home-nav__links">
+        <div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>
+        <div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>
+        <div class="home-nav__col"><a href="../support/#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+        <div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>
+      </div>
+      <div class="home-nav__right">
+        <button class="home-nav__cart" id="openSideCart">Cart (<span class="home-nav__cart-count" id="navCartCount">0</span>)</button>
+      </div>
+      <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="home-mobile-menu" id="mobileMenu">
+      <div class="home-mobile-menu__header">
+        <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+        <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="home-mobile-menu__links">
+        <a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>
+        <a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="../support/#faq">FAQ</a>
+      </div>
+      <div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>
+    </div>
+
+    <main>
+      <div class="pdp-layout">
+        <!-- LEFT: Gallery -->
+        <div class="pdp-gallery" id="pdpGallery"></div>
+
+        <!-- Mobile Dot Indicators -->
+        <div class="pdp-dots" id="pdpDots"></div>
+
+        <!-- RIGHT: Product Details -->
+        <div class="pdp-details" id="pdpDetails">
+          <nav class="pdp-breadcrumb" id="pdpBreadcrumb"></nav>
+          <h1 class="pdp-name" id="pdpName"></h1>
+          <p class="pdp-variant" id="pdpVariant"></p>
+          <p class="pdp-price" id="pdpPrice"></p>
+          <span class="pdp-badge" id="pdpBadge"></span>
+          <hr class="pdp-divider" />
+          <div class="pdp-colours" id="pdpColours">
+            <span class="pdp-colours__label">Colour</span>
+            <div class="pdp-colours__swatches" id="pdpSwatches"></div>
+          </div>
+          <div class="pdp-compat" id="pdpCompat">
+            <div class="pdp-compat__header">
+              <svg class="pdp-compat__icon" viewBox="0 0 24 24"><path d="M7 17h10M5 13l1.5-6h11L19 13M3 17h18v-4H3zM6 17v2M18 17v2"/></svg>
+              <span class="pdp-compat__label">Check Compatibility</span>
+            </div>
+            <div class="pdp-compat__grid">
+              <div class="pdp-compat__cell">
+                <span class="pdp-compat__cell-label">Brand</span>
+                <select class="pdp-compat__select" id="compatBrand"><option value="">Select</option></select>
+              </div>
+              <div class="pdp-compat__cell">
+                <span class="pdp-compat__cell-label">Model</span>
+                <select class="pdp-compat__select" id="compatModel" disabled><option value="">Select</option></select>
+              </div>
+              <div class="pdp-compat__cell">
+                <span class="pdp-compat__cell-label">Year</span>
+                <select class="pdp-compat__select" id="compatYear" disabled><option value="">Select</option></select>
+              </div>
+            </div>
+            <button class="pdp-compat__check-btn" id="compatCheck" disabled>Check Compatibility</button>
+            <div class="pdp-compat__result" id="compatResult"></div>
+          </div>
+          <div class="pdp-actions">
+            <button class="pdp-add-cart" id="pdpAddCart">Add to Cart</button>
+            <button class="pdp-buy-now" id="pdpBuyNow">Buy Now</button>
+          </div>
+          <div class="pdp-specs" id="pdpSpecs"></div>
+          <div class="pdp-brand" id="pdpBrand"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Related Products -->
+    <section class="pdp-related" id="pdpRelated"></section>
+
+    <!-- You May Also Like -->
+    <section class="pdp-suggested" id="pdpSuggested"></section>
+
+    <!-- Reviews & Ratings -->
+    <section class="pdp-reviews" id="pdpReviews"></section>
+
+    <!-- Write a Review Modal -->
+    <div class="pdp-review-modal" id="reviewModal">
+      <div class="pdp-review-modal__box">
+        <button class="pdp-review-modal__close" id="closeReviewModal" aria-label="Close">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <h4 class="pdp-review-modal__title">Write a Review</h4>
+        <p class="pdp-review-modal__subtitle">Share your experience with this product</p>
+        <div class="pdp-review-modal__stars" id="modalStars">
+          <button class="pdp-review-modal__star" data-star="1"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="2"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="3"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="4"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="5"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+        </div>
+        <input class="pdp-review-modal__field" type="text" id="reviewName" placeholder="Your Name" />
+        <textarea class="pdp-review-modal__field" id="reviewText" placeholder="Write your review here…"></textarea>
+        <button class="pdp-review-modal__submit" id="submitReview">Submit Review</button>
+      </div>
+    </div>
+
+    <!-- Side Cart Overlay -->
+    <div class="side-cart-overlay" id="sideCartOverlay"></div>
+
+    <!-- Side Cart -->
+    <aside class="side-cart" id="sideCart">
+      <div class="side-cart__header">
+        <div>
+          <span class="side-cart__title">Your Cart</span>
+          <span class="side-cart__count" id="sideCartCount">(0 items)</span>
+        </div>
+        <button class="side-cart__close" id="sideCartClose" aria-label="Close cart">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="side-cart__body" id="sideCartBody"></div>
+      <div class="side-cart__footer" id="sideCartFooter"></div>
+    </aside>
+
+    <!-- Promo Marquee -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+        <span class="home-promo__text">Free Shipping Over &#8377;10,000 <span>&bull;</span> New Arrivals Every Week <span>&bull;</span> 30-Day Easy Returns <span>&bull;</span> Built for Adventure <span>&bull;</span> Premium Quality Guaranteed <span>&bull;</span></span>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="home-newsletter">
+      <h2 class="home-newsletter__title">0% Spam. 100% Away.</h2>
+      <p class="home-newsletter__subtitle">We love a clean mail inbox, so we only send our subscribers important things: promotions you can't miss or news that will blow your mind.</p>
+      <form class="home-newsletter__form" onsubmit="return false;">
+        <input class="home-newsletter__input" type="email" placeholder="Email Address" required />
+        <button class="home-newsletter__submit" aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="home-newsletter__privacy">Consult our privacy policy for more information on how we obtain and process information.</p>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="home-trust">
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="home-trust__label">Express Shipping from India</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M1 10h22"/></svg><span class="home-trust__label">Free Shipping</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="home-trust__label">30 Days Return Policy</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4l3 3"/><path d="M7 3v2M17 3v2"/></svg><span class="home-trust__label">100% Secure Payment</span></div>
+      <div class="home-trust__item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="home-trust__label">1 Year Warranty</span></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+      <div class="home-footer__main">
+        <div class="home-footer__brand">
+          <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
+          <div class="home-footer__socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+        <div class="home-footer__columns">
+          <div><h4 class="home-footer__col-title">Brand</h4><div class="home-footer__col-links"><a href="../about/">About Us</a><a href="#">Sustainability</a></div></div>
+          <div><h4 class="home-footer__col-title">Help</h4><div class="home-footer__col-links"><a href="../support/#faq">FAQs</a><a href="../support/#contact">Contact</a><a href="#">Shipping</a></div></div>
+        </div>
+      </div>
+      <div class="home-footer__stats">
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Happy Customers</span><span class="home-footer__stat-value">10,000+</span></div>
+        <div class="home-footer__stat"><span class="home-footer__stat-label">Google Reviews</span><span class="home-footer__stat-value">4.5<span class="home-footer__stars"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span></span></div>
+      </div>
+      <div class="home-footer__bottom">
+        <div class="home-footer__payments"><img src="../assets/amex.png" alt="Amex"/><img src="../assets/gpay.png" alt="Google Pay"/><img src="../assets/mastercard.png" alt="Mastercard"/><img src="../assets/visa.png" alt="Visa"/><img src="../assets/upi.png" alt="UPI"/></div>
+        <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        /* ══════════════════════════════════════
+           PRODUCT DATA
+           ══════════════════════════════════════ */
+        const PRODUCTS = [
+          { id:'roofbox-540l-glossy', name:'Roofbox 540L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:24999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-540l-textured', name:'Roofbox 540L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:26999, car:['universal'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbox-450l-glossy', name:'Roofbox 450L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:19999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-450l-textured', name:'Roofbox 450L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:21999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbox-540l-white', name:'Roofbox 540L', variant:'White Edition', category:'roofbox', brand:'AWAY Pro', colour:'white', price:27999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbox-1.png' },
+          { id:'roofbox-450l-silver', name:'Roofbox 450L', variant:'Silver', category:'roofbox', brand:'AWAY Pro', colour:'silver', price:22999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-roofbox-2.png' },
+          { id:'roofbag-explorer-xl', name:'Explorer XL', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:7999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-1.png' },
+          { id:'roofbag-adventure-pro', name:'Adventure Pro', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:8999, originalPrice:11249, car:['universal'], badge:'Save 20%', badgeType:'sale', image:'../assets/product-roofbag-2.png' },
+          { id:'roofbag-compact', name:'Roofbag Compact', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
+          { id:'roofbag-sport', name:'Roofbag Sport', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:6999, car:['hatchback','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofbag-2.png' },
+          { id:'roofbag-weekend', name:'Roofbag Weekend', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:4999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-roofbag-1.png' },
+          { id:'crossbar-aero-black', name:'Aero Crossbars', variant:'Black', category:'crossbars', brand:'AWAY', colour:'black', price:6999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-aero-silver', name:'Aero Crossbars', variant:'Silver', category:'crossbars', brand:'AWAY', colour:'silver', price:7499, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-heavy-duty', name:'Heavy Duty Crossbars', variant:'', category:'crossbars', brand:'AWAY Pro', colour:'black', price:9999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-crossbar-1.png' },
+          { id:'crossbar-universal', name:'Universal Fit Crossbars', variant:'', category:'crossbars', brand:'AWAY', colour:'silver', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/product-crossbar-1.png' },
+          { id:'roofrack-platform', name:'Platform Rack', variant:'Standard', category:'roofrack', brand:'AWAY', colour:'black', price:14999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-platform-lg', name:'Platform Rack', variant:'Large', category:'roofrack', brand:'AWAY Pro', colour:'black', price:18999, car:['suv'], badge:'', badgeType:'', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-basket', name:'Basket Rack Pro', variant:'', category:'roofrack', brand:'AWAY', colour:'black', price:12999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-low-profile', name:'Low Profile Rack', variant:'', category:'roofrack', brand:'AWAY', colour:'silver', price:11999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/product-roofrack-1.png' },
+          { id:'roofrack-expedition', name:'Expedition Rack', variant:'', category:'roofrack', brand:'AWAY Pro', colour:'black', price:22999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/product-roofrack-1.png' },
+        ];
+
+        const COLOUR_HEX = { black:'#1a1a1a', white:'#ffffff', silver:'#c0c0c0', grey:'#808080' };
+
+        const CATEGORY_LABELS = { roofbox:'Roofbox', roofbag:'Roofbag', crossbars:'Crossbars', roofrack:'Roofrack' };
+
+        /* ══════════════════════════════════════
+           GALLERY MAPPING PER CATEGORY
+           ══════════════════════════════════════ */
+        const GALLERY_MAP = {
+          roofbox: [
+            { type:'image', src:'__PRODUCT__' },
+            { type:'image', src:'../assets/desc1.webp' },
+            { type:'video', src:'../assets/Roofbox_Video_With_New_Terrain.webm' },
+            { type:'image', src:'../assets/desc3.webp' },
+            { type:'image', src:'../assets/featured1.webp' },
+            { type:'image', src:'../assets/aerodynamic.png' },
+          ],
+          roofbag: [
+            { type:'image', src:'__PRODUCT__' },
+            { type:'image', src:'../assets/desc2.webp' },
+            { type:'video', src:'../assets/upscaled-video.webm' },
+            { type:'image', src:'../assets/desc4.webp' },
+            { type:'image', src:'../assets/weatherproof.png' },
+          ],
+          crossbars: [
+            { type:'image', src:'__PRODUCT__' },
+            { type:'image', src:'../assets/desc1.webp' },
+            { type:'video', src:'../assets/Roofbox_Video_With_New_Terrain.webm' },
+            { type:'image', src:'../assets/heavy-duty-strusts.png' },
+            { type:'image', src:'../assets/featured2.webp' },
+          ],
+          roofrack: [
+            { type:'image', src:'__PRODUCT__' },
+            { type:'image', src:'../Images%20and%20Video/3XO%20in%20Snow.png' },
+            { type:'video', src:'../assets/Roofbox_Video_With_New_Terrain.webm' },
+            { type:'image', src:'../assets/desc3.webp' },
+            { type:'image', src:'../Images%20and%20Video/Camping%20with%20Jimny.png' },
+            { type:'image', src:'../assets/featured3.webp' },
+          ],
+        };
+
+        /* ══════════════════════════════════════
+           SPECS PER CATEGORY
+           ══════════════════════════════════════ */
+        const SPECS_MAP = {
+          roofbox: [
+            { num:'01', label:'Details', content:'Premium ABS plastic roofbox designed for maximum aerodynamic performance. Available in 450L and 540L capacity. Dual-side opening with central locking system. Fits all standard roof bars with universal U-bolt mounting.' },
+            { num:'02', label:'Specifications', content:'Capacity: 450L / 540L\nDimensions: 200 x 80 x 40 cm (540L)\nWeight: 18 kg (540L)\nMax Load: 75 kg\nMaterial: ABS Plastic, UV-Resistant\nLock: Central lock with 2 keys' },
+            { num:'03', label:'Shipping & Returns', content:'Free shipping on orders over \u20B910,000.\nDelivery: 5-7 business days across India.\n30-day return policy.\n1 Year Manufacturer Warranty.\nIncludes: Roofbox, Mounting Hardware, Lock Set, Installation Guide.' },
+          ],
+          roofbag: [
+            { num:'01', label:'Details', content:'Waterproof roofbag crafted from heavy-duty 600D Oxford fabric with PVC lining. Folds flat for compact storage. Universal fit — works with or without roof bars. Reinforced seams for all-weather protection.' },
+            { num:'02', label:'Specifications', content:'Capacity: 300L – 450L (varies by model)\nDimensions: 120 x 90 x 45 cm (expanded)\nWeight: 3.5 kg\nMaterial: 600D Oxford, PVC Waterproof Lining\nClosure: Heavy-duty zippers + storm flap' },
+            { num:'03', label:'Shipping & Returns', content:'Free shipping on orders over \u20B910,000.\nDelivery: 5-7 business days across India.\n30-day return policy.\n1 Year Manufacturer Warranty.\nIncludes: Roofbag, 8 Adjustable Straps, Protective Mat, Storage Bag.' },
+          ],
+          crossbars: [
+            { num:'01', label:'Details', content:'Aerodynamic aluminium crossbars engineered for low wind noise and maximum load capacity. Quick-release clamp system for tool-free installation. Compatible with flush rails, raised rails, and fixed mounting points.' },
+            { num:'02', label:'Specifications', content:'Span: 120 cm (adjustable)\nMax Load: 100 kg (pair)\nWeight: 4.2 kg (pair)\nMaterial: Anodized Aluminium, Aero Profile\nMounting: Universal clamp system' },
+            { num:'03', label:'Shipping & Returns', content:'Free shipping on orders over \u20B910,000.\nDelivery: 5-7 business days across India.\n30-day return policy.\n1 Year Manufacturer Warranty.\nIncludes: 2x Crossbars, Mounting Clamps, T-Bolts, Allen Key Set.' },
+          ],
+          roofrack: [
+            { num:'01', label:'Details', content:'Heavy-duty roof rack platform built for serious overlanding and cargo hauling. Powder-coated steel construction with aluminium deck slats. Integrated accessory channels for mounting lights, awnings, and gear.' },
+            { num:'02', label:'Specifications', content:'Platform: 140 x 100 cm (Standard) / 160 x 120 cm (Large)\nMax Load: 150 kg (dynamic) / 300 kg (static)\nWeight: 22 kg\nMaterial: Powder-Coated Steel, Aluminium Decking\nFinish: Matte Black' },
+            { num:'03', label:'Shipping & Returns', content:'Free shipping on orders over \u20B910,000.\nDelivery: 7-10 business days across India.\n30-day return policy.\n1 Year Manufacturer Warranty.\nIncludes: Rack Platform, Side Rails, Mounting Kit, Wind Deflector.' },
+          ],
+        };
+
+        /* ══════════════════════════════════════
+           URL ROUTING
+           ══════════════════════════════════════ */
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const product = PRODUCTS.find(p => p.id === productId);
+
+        if (!product) {
+          window.location.replace('../shop/');
+          return;
+        }
+
+        /* ══════════════════════════════════════
+           UTILITY
+           ══════════════════════════════════════ */
+        function formatPrice(n) {
+          return '\u20B9 ' + n.toLocaleString('en-IN');
+        }
+
+        function capitalize(s) {
+          return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        /* ══════════════════════════════════════
+           RENDER BREADCRUMB
+           ══════════════════════════════════════ */
+        function renderBreadcrumb(p) {
+          const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
+          document.getElementById('pdpBreadcrumb').innerHTML =
+            `<a href="../home/" class="pdp-breadcrumb__link">Home</a>` +
+            `<span class="pdp-breadcrumb__sep">/</span>` +
+            `<a href="../shop/" class="pdp-breadcrumb__link">Shop</a>` +
+            `<span class="pdp-breadcrumb__sep">/</span>` +
+            `<a href="../shop/" class="pdp-breadcrumb__link">${CATEGORY_LABELS[p.category]}</a>` +
+            `<span class="pdp-breadcrumb__sep">/</span>` +
+            `<span class="pdp-breadcrumb__current">${displayName}</span>`;
+        }
+
+        /* ══════════════════════════════════════
+           RENDER PRODUCT INFO
+           ══════════════════════════════════════ */
+        function renderProductInfo(p) {
+          const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
+          document.title = `${displayName} — AWAY`;
+
+          document.getElementById('pdpName').textContent = p.name;
+          document.getElementById('pdpVariant').textContent = p.variant || '';
+          const priceEl = document.getElementById('pdpPrice');
+          if (p.originalPrice) {
+            priceEl.innerHTML = `<span class="pdp-price__sale">${formatPrice(p.price)}</span><span class="pdp-price__original">${formatPrice(p.originalPrice)}</span>`;
+          } else {
+            priceEl.textContent = formatPrice(p.price);
+          }
+
+          const badgeEl = document.getElementById('pdpBadge');
+          badgeEl.textContent = p.badge || '';
+          badgeEl.className = 'pdp-badge';
+          if (p.badgeType === 'pick') badgeEl.classList.add('pdp-badge--pick');
+          if (p.badgeType === 'sale') badgeEl.classList.add('pdp-badge--sale');
+
+          document.getElementById('pdpBrand').innerHTML =
+            `<span class="pdp-brand__dot"></span> ${p.brand}`;
+        }
+
+        /* ══════════════════════════════════════
+           RENDER GALLERY
+           ══════════════════════════════════════ */
+        function renderGallery(p) {
+          const items = GALLERY_MAP[p.category] || [];
+          const total = items.length;
+          const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
+
+          document.getElementById('pdpGallery').innerHTML = items.map((item, i) => {
+            const src = item.src === '__PRODUCT__' ? p.image : item.src;
+            const counter = `<span class="pdp-gallery__counter">${i + 1} / ${total}</span>`;
+
+            if (item.type === 'video') {
+              return `<div class="pdp-gallery__item">
+                <video class="pdp-gallery__video" autoplay muted loop playsinline>
+                  <source src="${src}" type="video/webm" />
+                </video>
+                ${counter}
+              </div>`;
+            }
+            return `<div class="pdp-gallery__item">
+              <img class="pdp-gallery__img" src="${src}" alt="${displayName}" loading="${i === 0 ? 'eager' : 'lazy'}" />
+              ${counter}
+            </div>`;
+          }).join('');
+        }
+
+        /* ══════════════════════════════════════
+           RENDER COLOUR SELECTOR
+           ══════════════════════════════════════ */
+        function renderColourSelector(p) {
+          // Find siblings: same name (product line) but different variants
+          const siblings = PRODUCTS.filter(s => s.name === p.name);
+
+          // If only one variant, hide the colour section
+          if (siblings.length <= 1) {
+            document.getElementById('pdpColours').style.display = 'none';
+            return;
+          }
+
+          // Deduplicate by colour
+          const seen = new Set();
+          const unique = siblings.filter(s => {
+            if (seen.has(s.colour)) return false;
+            seen.add(s.colour);
+            return true;
+          });
+
+          document.getElementById('pdpSwatches').innerHTML = unique.map(s => {
+            const isActive = s.id === p.id ? ' is-active' : '';
+            const hex = COLOUR_HEX[s.colour] || '#ccc';
+            return `<a href="../product/?id=${s.id}" class="pdp-colour${isActive}">
+              <span class="pdp-colour__swatch" style="background:${hex}"></span>
+              <span class="pdp-colour__name">${capitalize(s.colour)}</span>
+            </a>`;
+          }).join('');
+        }
+
+        /* ══════════════════════════════════════
+           CAR COMPATIBILITY DATABASE
+           ══════════════════════════════════════ */
+        const CAR_DB = {
+          'Maruti Suzuki': {
+            'Brezza': { years: [2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Grand Vitara': { years: [2022,2023,2024,2025], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Ertiga': { years: [2018,2019,2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Swift': { years: [2018,2019,2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Baleno': { years: [2022,2023,2024,2025], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Jimny': { years: [2023,2024,2025], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'Hyundai': {
+            'Creta': { years: [2020,2021,2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Venue': { years: [2019,2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'i20': { years: [2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Tucson': { years: [2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Alcazar': { years: [2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'Tata': {
+            'Nexon': { years: [2020,2021,2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Harrier': { years: [2019,2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Safari': { years: [2021,2022,2023,2024,2025], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Punch': { years: [2021,2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Altroz': { years: [2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+          },
+          'Mahindra': {
+            'Thar': { years: [2020,2021,2022,2023,2024,2025], roofType: 'Hard Top', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'XUV700': { years: [2021,2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Scorpio N': { years: [2022,2023,2024,2025], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'XUV3OO': { years: [2019,2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Bolero': { years: [2020,2021,2022,2023,2024], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'Kia': {
+            'Seltos': { years: [2019,2020,2021,2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Sonet': { years: [2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Carens': { years: [2022,2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'EV6': { years: [2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+          },
+          'Toyota': {
+            'Fortuner': { years: [2016,2017,2018,2019,2020,2021,2022,2023,2024], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Innova Crysta': { years: [2016,2017,2018,2019,2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Innova Hycross': { years: [2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Urban Cruiser Hyryder': { years: [2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'MG': {
+            'Hector': { years: [2019,2020,2021,2022,2023,2024], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+            'Astor': { years: [2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Gloster': { years: [2020,2021,2022,2023,2024], roofType: 'Raised Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'Honda': {
+            'City': { years: [2020,2021,2022,2023,2024], roofType: 'None', fits: { roofbox:false, roofbag:true, crossbars:false, roofrack:false } },
+            'Elevate': { years: [2023,2024,2025], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+          },
+          'Skoda': {
+            'Kushaq': { years: [2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Kodiaq': { years: [2017,2018,2019,2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+          'Volkswagen': {
+            'Taigun': { years: [2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:false } },
+            'Tiguan': { years: [2017,2018,2019,2020,2021,2022,2023,2024], roofType: 'Flush Rails', fits: { roofbox:true, roofbag:true, crossbars:true, roofrack:true } },
+          },
+        };
+
+        /* ══════════════════════════════════════
+           INIT COMPATIBILITY CHECKER
+           ══════════════════════════════════════ */
+        function initCompatChecker(p) {
+          const brandSelect = document.getElementById('compatBrand');
+          const modelSelect = document.getElementById('compatModel');
+          const yearSelect = document.getElementById('compatYear');
+          const checkBtn = document.getElementById('compatCheck');
+          const resultEl = document.getElementById('compatResult');
+
+          // Populate brands
+          Object.keys(CAR_DB).sort().forEach(brand => {
+            brandSelect.add(new Option(brand, brand));
+          });
+
+          // Brand change → populate models
+          brandSelect.addEventListener('change', () => {
+            modelSelect.innerHTML = '<option value="">Select</option>';
+            yearSelect.innerHTML = '<option value="">Select</option>';
+            yearSelect.disabled = true;
+            checkBtn.disabled = true;
+            resultEl.innerHTML = '';
+            resultEl.className = 'pdp-compat__result';
+
+            const brand = brandSelect.value;
+            if (!brand) { modelSelect.disabled = true; return; }
+            modelSelect.disabled = false;
+            Object.keys(CAR_DB[brand]).sort().forEach(model => {
+              modelSelect.add(new Option(model, model));
+            });
+          });
+
+          // Model change → populate years
+          modelSelect.addEventListener('change', () => {
+            yearSelect.innerHTML = '<option value="">Select</option>';
+            checkBtn.disabled = true;
+            resultEl.innerHTML = '';
+            resultEl.className = 'pdp-compat__result';
+
+            const brand = brandSelect.value;
+            const model = modelSelect.value;
+            if (!model) { yearSelect.disabled = true; return; }
+            yearSelect.disabled = false;
+            CAR_DB[brand][model].years.forEach(y => {
+              yearSelect.add(new Option(y, y));
+            });
+          });
+
+          // Year change → enable check button
+          yearSelect.addEventListener('change', () => {
+            checkBtn.disabled = !yearSelect.value;
+            resultEl.innerHTML = '';
+            resultEl.className = 'pdp-compat__result';
+          });
+
+          // Check compatibility
+          checkBtn.addEventListener('click', () => {
+            const brand = brandSelect.value;
+            const model = modelSelect.value;
+            const year = yearSelect.value;
+            const carData = CAR_DB[brand][model];
+            const isCompatible = carData.fits[p.category];
+
+            if (isCompatible) {
+              resultEl.className = 'pdp-compat__result is-compatible';
+              resultEl.innerHTML =
+                `<div class="pdp-compat__result-text">` +
+                  `<svg class="pdp-compat__result-icon" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>` +
+                  `Compatible with ${brand} ${model}` +
+                `</div>` +
+                `<div class="pdp-compat__result-detail">${year} · ${carData.roofType}</div>`;
+            } else {
+              resultEl.className = 'pdp-compat__result is-incompatible';
+              const reason = carData.roofType === 'None'
+                ? 'This car has no roof rails — only roofbags are supported.'
+                : 'This product is not compatible with this car\u2019s roof type.';
+              resultEl.innerHTML =
+                `<div class="pdp-compat__result-text">` +
+                  `<svg class="pdp-compat__result-icon" viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>` +
+                  `Not compatible with ${brand} ${model}` +
+                `</div>` +
+                `<div class="pdp-compat__result-detail">${reason}</div>`;
+            }
+          });
+        }
+
+        /* ══════════════════════════════════════
+           RENDER SPECS ACCORDION
+           ══════════════════════════════════════ */
+        function renderSpecs(p) {
+          const specs = SPECS_MAP[p.category] || [];
+          document.getElementById('pdpSpecs').innerHTML = specs.map((s, i) =>
+            `<div class="pdp-specs__section${i === 0 ? ' is-open' : ''}">
+              <button class="pdp-specs__header" type="button">
+                <span class="pdp-specs__head-left">
+                  <span class="pdp-specs__num">|${s.num}|</span>
+                  <span class="pdp-specs__label">${s.label}</span>
+                </span>
+                <svg class="pdp-specs__icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <div class="pdp-specs__body">
+                <div class="pdp-specs__content">${s.content.replace(/\n/g, '<br>')}</div>
+              </div>
+            </div>`
+          ).join('');
+
+          // Accordion toggle
+          document.getElementById('pdpSpecs').addEventListener('click', (e) => {
+            const header = e.target.closest('.pdp-specs__header');
+            if (!header) return;
+            header.closest('.pdp-specs__section').classList.toggle('is-open');
+          });
+        }
+
+        /* ══════════════════════════════════════
+           REVIEWS DATA
+           ══════════════════════════════════════ */
+        const REVIEWS_DATA = {
+          roofbox: {
+            average: 4.6, total: 124, distribution: [78, 30, 10, 4, 2],
+            reviews: [
+              { name:'Arjun M.', date:'2026-01-15', rating:5, text:'Took this on a Leh-Ladakh trip with the family. Fit perfectly on my Creta. Zero leaks even in heavy rain near Rohtang. The dual-side opening is a game changer.', verified:true },
+              { name:'Priya S.', date:'2025-12-28', rating:5, text:'Looks incredibly sleek on my white XUV700. Installation was straightforward with the included hardware. Wind noise is barely noticeable at highway speeds.', verified:true },
+              { name:'Rahul K.', date:'2025-11-10', rating:4, text:'Great build quality. Only wish the keys were a bit sturdier. Otherwise, the box is spacious and secure. Perfect for weekend getaways.', verified:true },
+              { name:'Sneha D.', date:'2025-10-22', rating:5, text:'We drove Mumbai to Goa with 4 large bags inside. Still had room to spare. The matte finish looks premium. Highly recommend for road trip families.', verified:false },
+            ],
+          },
+          roofbag: {
+            average: 4.4, total: 89, distribution: [48, 25, 10, 4, 2],
+            reviews: [
+              { name:'Vikram T.', date:'2026-02-01', rating:5, text:'No roof rails on my Swift, so this was the perfect solution. Straps held tight even at 100+ km/h. Completely waterproof \u2014 tested in a Mumbai downpour.', verified:true },
+              { name:'Anita R.', date:'2025-12-15', rating:4, text:'Folds up really compact. I keep it in the boot permanently for spontaneous trips. Only 4 stars because the zippers could be smoother.', verified:true },
+              { name:'Deepak J.', date:'2025-11-30', rating:5, text:'Used this for a camping trip to Coorg. Fit all our tents and sleeping bags. The protective mat saved our car paint. Great value for money.', verified:true },
+              { name:'Meera P.', date:'2025-10-05', rating:4, text:'Does what it says. Waterproof, spacious, easy to install. Would love a version with more strap padding though.', verified:false },
+            ],
+          },
+          crossbars: {
+            average: 4.7, total: 67, distribution: [42, 18, 5, 1, 1],
+            reviews: [
+              { name:'Sanjay B.', date:'2026-01-20', rating:5, text:'Installed these on my Seltos in literally 4 minutes. No tools needed. Rock solid even with a full roofbox mounted on top.', verified:true },
+              { name:'Kavitha N.', date:'2025-12-10', rating:5, text:'Silent at highway speeds. The aero profile really works. Previously had a cheap set that whistled like crazy. Night and day difference.', verified:true },
+              { name:'Amit G.', date:'2025-11-18', rating:4, text:'Good quality aluminium. The clamp system is well-designed. Slight flex under heavy load but within acceptable limits per the spec sheet.', verified:true },
+            ],
+          },
+          roofrack: {
+            average: 4.8, total: 43, distribution: [32, 8, 2, 1, 0],
+            reviews: [
+              { name:'Rajesh V.', date:'2026-02-10', rating:5, text:'This rack turned my Thar into an overlanding beast. Mounted a rooftop tent and awning using the T-slot channels. Absolute unit.', verified:true },
+              { name:'Nisha K.', date:'2025-12-25', rating:5, text:'The powder coating has survived 6 months of coastal salt air without a single chip. Heavy-duty is an understatement. Love it.', verified:true },
+              { name:'Karthik S.', date:'2025-11-05', rating:4, text:'Slightly heavy to install solo, but once it is on, it is not coming off. The wind deflector makes a noticeable difference in fuel economy.', verified:true },
+            ],
+          },
+        };
+
+        /* ══════════════════════════════════════
+           RENDER STARS HELPER
+           ══════════════════════════════════════ */
+        function renderStars(rating, size) {
+          const sz = size === 'sm' ? 12 : 16;
+          let html = '';
+          for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(rating)) {
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#EC0201" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+            } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#EC0201" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+            } else {
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+            }
+          }
+          return html;
+        }
+
+        /* ══════════════════════════════════════
+           RENDER REVIEWS
+           ══════════════════════════════════════ */
+        function renderReviews(p) {
+          const data = REVIEWS_DATA[p.category];
+          if (!data) return;
+          const maxBar = Math.max(...data.distribution);
+
+          document.getElementById('pdpReviews').innerHTML =
+            `<div class="pdp-reviews__inner">` +
+              `<div class="pdp-reviews__header">` +
+                `<div class="pdp-reviews__header-left">` +
+                  `<span class="pdp-section__num">|06|</span>` +
+                  `<h3 class="pdp-section__title">Reviews</h3>` +
+                `</div>` +
+                `<button class="pdp-reviews__write-btn" id="openReviewModal">Write a Review</button>` +
+              `</div>` +
+
+              `<div class="pdp-reviews__summary">` +
+                `<div class="pdp-reviews__score">` +
+                  `<span class="pdp-reviews__avg">${data.average}</span>` +
+                  `<div class="pdp-reviews__stars">${renderStars(data.average, 'lg')}</div>` +
+                  `<span class="pdp-reviews__total">${data.total} Reviews</span>` +
+                `</div>` +
+                `<div class="pdp-reviews__bars">` +
+                  data.distribution.map((count, i) => {
+                    const starNum = 5 - i;
+                    const pct = maxBar > 0 ? (count / maxBar) * 100 : 0;
+                    return `<div class="pdp-reviews__bar-row">` +
+                      `<span class="pdp-reviews__bar-label">${starNum}</span>` +
+                      `<div class="pdp-reviews__bar-track"><div class="pdp-reviews__bar-fill" style="width:${pct}%"></div></div>` +
+                      `<span class="pdp-reviews__bar-count">${count}</span>` +
+                    `</div>`;
+                  }).join('') +
+                `</div>` +
+              `</div>` +
+
+              `<hr class="pdp-divider" />` +
+
+              `<div class="pdp-reviews__list">` +
+                data.reviews.map(r => {
+                  const dateStr = new Date(r.date).toLocaleDateString('en-IN', { year:'numeric', month:'short', day:'numeric' });
+                  return `<div class="pdp-reviews__card">` +
+                    `<div class="pdp-reviews__card-top">` +
+                      `<div class="pdp-reviews__card-stars">${renderStars(r.rating, 'sm')}</div>` +
+                      (r.verified ? `<span class="pdp-reviews__verified">Verified Purchase</span>` : '') +
+                    `</div>` +
+                    `<p class="pdp-reviews__card-text">${r.text}</p>` +
+                    `<div class="pdp-reviews__card-meta">` +
+                      `<span class="pdp-reviews__card-name">${r.name}</span>` +
+                      `<span class="pdp-reviews__card-date">${dateStr}</span>` +
+                    `</div>` +
+                  `</div>`;
+                }).join('') +
+              `</div>` +
+            `</div>`;
+        }
+
+        /* ══════════════════════════════════════
+           RENDER PRODUCT ROW (shared)
+           ══════════════════════════════════════ */
+        function renderProductRow(containerId, products, sectionNum, title) {
+          if (!products.length) {
+            document.getElementById(containerId).style.display = 'none';
+            return;
+          }
+          const container = document.getElementById(containerId);
+          container.innerHTML =
+            `<div class="pdp-row__inner">` +
+              `<div class="pdp-row__header">` +
+                `<div class="pdp-row__header-left">` +
+                  `<span class="pdp-section__num">|${sectionNum}|</span>` +
+                  `<h3 class="pdp-section__title">${title}</h3>` +
+                `</div>` +
+                `<div class="pdp-row__arrows">` +
+                  `<button class="pdp-row__arrow pdp-row__arrow--prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>` +
+                  `<button class="pdp-row__arrow pdp-row__arrow--next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>` +
+                `</div>` +
+              `</div>` +
+              `<div class="pdp-row__grid">` +
+                products.map(p => {
+                  const badgeClass = p.badgeType === 'pick' ? ' home-product__badge--pick' : '';
+                  const badgeHtml = p.badge ? `<span class="home-product__badge${badgeClass}">${p.badge}</span>` : '';
+                  const displayName = p.variant ? `${p.name} ${p.variant}` : p.name;
+                  return `<a href="../product/?id=${p.id}" class="home-product">` +
+                    `<div class="home-product__img-wrap">` +
+                      badgeHtml +
+                      `<img src="${p.image}" alt="${displayName}" class="home-product__img" loading="lazy" />` +
+                      `<div class="home-product__info">` +
+                        `<p class="home-product__name">${p.name}</p>` +
+                        `<span class="home-product__price">${p.originalPrice ? `<span class="home-product__price--sale">${formatPrice(p.price)}</span> <span class="home-product__price--original">${formatPrice(p.originalPrice)}</span>` : formatPrice(p.price)}</span>` +
+                      `</div>` +
+                    `</div>` +
+                  `</a>`;
+                }).join('') +
+              `</div>` +
+            `</div>`;
+
+          // Arrow navigation
+          const grid = container.querySelector('.pdp-row__grid');
+          const scrollAmt = () => {
+            const card = grid.querySelector('.home-product');
+            return card ? card.offsetWidth + 24 : 300;
+          };
+          container.querySelector('.pdp-row__arrow--prev').addEventListener('click', () => grid.scrollBy({ left: -scrollAmt(), behavior:'smooth' }));
+          container.querySelector('.pdp-row__arrow--next').addEventListener('click', () => grid.scrollBy({ left: scrollAmt(), behavior:'smooth' }));
+        }
+
+        function renderRelatedProducts(p) {
+          const related = PRODUCTS.filter(item => item.category === p.category && item.id !== p.id);
+          renderProductRow('pdpRelated', related, '04', 'Related Products');
+        }
+
+        function renderSuggestedProducts(p) {
+          const suggested = PRODUCTS.filter(item => item.category !== p.category).slice(0, 6);
+          renderProductRow('pdpSuggested', suggested, '05', 'You May Also Like');
+        }
+
+        /* ══════════════════════════════════════
+           MOBILE CAROUSEL
+           ══════════════════════════════════════ */
+        function initMobileCarousel() {
+          const gallery = document.getElementById('pdpGallery');
+          const dotsEl = document.getElementById('pdpDots');
+          const items = gallery.querySelectorAll('.pdp-gallery__item');
+
+          if (!items.length) return;
+
+          // Build dots
+          items.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'pdp-dots__dot' + (i === 0 ? ' is-active' : '');
+            dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+            dot.addEventListener('click', () => {
+              items[i].scrollIntoView({ behavior:'smooth', inline:'start', block:'nearest' });
+            });
+            dotsEl.appendChild(dot);
+          });
+
+          // Update dots on scroll
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const idx = [...items].indexOf(entry.target);
+                dotsEl.querySelectorAll('.pdp-dots__dot').forEach((d, i) => {
+                  d.classList.toggle('is-active', i === idx);
+                });
+              }
+            });
+          }, { root: gallery, threshold: 0.5 });
+
+          items.forEach(item => observer.observe(item));
+        }
+
+        /* ══════════════════════════════════════
+           NAV + MOBILE MENU
+           ══════════════════════════════════════ */
+        const nav = document.getElementById('homeNav');
+        const announcement = document.getElementById('homeAnnouncement');
+        let lastY = 0, ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const y = window.scrollY;
+              if (y > lastY && y > 100) { nav.classList.add('is-hidden'); announcement.classList.add('is-hidden'); }
+              else { nav.classList.remove('is-hidden'); announcement.classList.remove('is-hidden'); }
+              lastY = y; ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        document.getElementById('hamburgerOpen').addEventListener('click', () => { mobileMenu.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
+        document.getElementById('hamburgerClose').addEventListener('click', () => { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = '';
+          }
+        });
+
+        /* ══════════════════════════════════════
+           INIT
+           ══════════════════════════════════════ */
+        renderBreadcrumb(product);
+        renderProductInfo(product);
+        renderGallery(product);
+        renderColourSelector(product);
+        initCompatChecker(product);
+        renderSpecs(product);
+        renderReviews(product);
+        renderRelatedProducts(product);
+        renderSuggestedProducts(product);
+
+        /* ══════════════════════════════════════
+           SIDE CART
+           ══════════════════════════════════════ */
+        const cart = JSON.parse(localStorage.getItem('awayCart') || '[]');
+        const sideCart = document.getElementById('sideCart');
+        const sideCartOverlay = document.getElementById('sideCartOverlay');
+        const sideCartBody = document.getElementById('sideCartBody');
+        const sideCartFooter = document.getElementById('sideCartFooter');
+        const sideCartCount = document.getElementById('sideCartCount');
+        const navCartCount = document.getElementById('navCartCount');
+
+        function saveCart() { localStorage.setItem('awayCart', JSON.stringify(cart)); }
+
+        function openCart() {
+          sideCart.classList.add('is-open');
+          sideCartOverlay.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeCart() {
+          sideCart.classList.remove('is-open');
+          sideCartOverlay.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+
+        document.getElementById('openSideCart').addEventListener('click', openCart);
+        document.getElementById('sideCartClose').addEventListener('click', closeCart);
+        sideCartOverlay.addEventListener('click', closeCart);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && sideCart.classList.contains('is-open')) closeCart();
+        });
+
+        function updateCartUI() {
+          const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+          navCartCount.textContent = totalItems;
+          sideCartCount.textContent = `(${totalItems} item${totalItems !== 1 ? 's' : ''})`;
+
+          if (!cart.length) {
+            sideCartBody.innerHTML =
+              `<div class="side-cart__empty">` +
+                `<svg class="side-cart__empty-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>` +
+                `<span class="side-cart__empty-text">Your cart is empty</span>` +
+              `</div>`;
+            sideCartFooter.innerHTML = '';
+            return;
+          }
+
+          sideCartBody.innerHTML = cart.map((item, i) => {
+            const priceHtml = item.originalPrice
+              ? `<span style="color:#39FF14;font-weight:600">${formatPrice(item.price)}</span> <span style="font-size:0.65rem;color:#999;text-decoration:line-through">${formatPrice(item.originalPrice)}</span>`
+              : formatPrice(item.price);
+            return `<div class="side-cart__item" data-index="${i}">` +
+              `<img class="side-cart__item-img" src="${item.image}" alt="${item.name}" />` +
+              `<div class="side-cart__item-details">` +
+                `<span class="side-cart__item-name">${item.name}</span>` +
+                (item.variant ? `<span class="side-cart__item-variant">${item.variant}</span>` : '') +
+                `<span class="side-cart__item-price">${priceHtml}</span>` +
+                `<div class="side-cart__item-actions">` +
+                  `<button class="side-cart__qty-btn" data-action="minus" data-index="${i}">&minus;</button>` +
+                  `<span class="side-cart__qty">${item.qty}</span>` +
+                  `<button class="side-cart__qty-btn" data-action="plus" data-index="${i}">+</button>` +
+                  `<button class="side-cart__remove" data-index="${i}">Remove</button>` +
+                `</div>` +
+              `</div>` +
+            `</div>`;
+          }).join('');
+
+          // Free product offer
+          const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+          const freeProductHtml = subtotal >= 15000
+            ? `<div style="padding:0.6rem 1.5rem;border-bottom:1px solid #f0ecec;background:rgba(236,2,1,0.03);display:flex;align-items:center;gap:0.6rem;">` +
+                `<span style="font-family:var(--font-body);font-size:0.45rem;font-weight:600;color:#fff;background:#EC0201;padding:0.2rem 0.4rem;text-transform:uppercase;letter-spacing:0.01em;line-height:1;white-space:nowrap;">Free</span>` +
+                `<div style="display:flex;flex-direction:column;gap:0.1rem;">` +
+                  `<span style="font-family:var(--font-display);font-size:0.6rem;font-weight:600;color:#1a1a1a;text-transform:uppercase;">Cargo Net Organizer</span>` +
+                  `<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:400;color:#9a8f8f;">Added free with your order</span>` +
+                `</div>` +
+                `<span style="font-family:var(--font-display);font-size:0.6rem;font-weight:600;color:#EC0201;margin-left:auto;white-space:nowrap;">FREE</span>` +
+              `</div>`
+            : (subtotal > 0
+              ? `<div style="padding:0.5rem 1.5rem;border-bottom:1px solid #f0ecec;background:rgba(236,2,1,0.02);">` +
+                  `<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:400;color:#9a8f8f;letter-spacing:0.01em;">Add ₹${(15000 - subtotal).toLocaleString('en-IN')} more for a </span>` +
+                  `<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:600;color:#EC0201;letter-spacing:0.01em;">FREE Cargo Net Organizer</span>` +
+                `</div>`
+              : '');
+          sideCartBody.innerHTML += freeProductHtml;
+
+          sideCartFooter.innerHTML =
+            `<div class="side-cart__subtotal">` +
+              `<span class="side-cart__subtotal-label">Subtotal</span>` +
+              `<span class="side-cart__subtotal-value">${formatPrice(subtotal)}</span>` +
+            `</div>` +
+            `<button class="side-cart__checkout" onclick="window.location.href='../checkout/'">Checkout</button>` +
+            `<button class="side-cart__continue" id="continueShopping">Continue Shopping</button>`;
+
+          document.getElementById('continueShopping').addEventListener('click', closeCart);
+        }
+
+        // Delegated events for cart item actions
+        sideCartBody.addEventListener('click', (e) => {
+          const btn = e.target.closest('[data-action]');
+          const removeBtn = e.target.closest('.side-cart__remove');
+          if (btn) {
+            const idx = parseInt(btn.dataset.index);
+            if (btn.dataset.action === 'plus') { cart[idx].qty++; }
+            else if (btn.dataset.action === 'minus') {
+              cart[idx].qty--;
+              if (cart[idx].qty <= 0) cart.splice(idx, 1);
+            }
+            saveCart(); updateCartUI();
+          } else if (removeBtn) {
+            const idx = parseInt(removeBtn.dataset.index);
+            cart.splice(idx, 1);
+            saveCart(); updateCartUI();
+          }
+        });
+
+        function addToCart(p) {
+          const existing = cart.find(item => item.id === p.id);
+          if (existing) {
+            existing.qty++;
+          } else {
+            cart.push({
+              id: p.id, name: p.name, variant: p.variant || '',
+              price: p.price, originalPrice: p.originalPrice || 0,
+              image: p.image, qty: 1
+            });
+          }
+          saveCart(); updateCartUI(); openCart();
+        }
+
+        // Add to Cart handler
+        document.getElementById('pdpAddCart').addEventListener('click', () => addToCart(product));
+
+        // Buy Now handler
+        document.getElementById('pdpBuyNow').addEventListener('click', () => {
+          addToCart(product);
+        });
+
+        // Add buttons on related/suggested product cards
+        document.addEventListener('click', (e) => {
+          const addBtn = e.target.closest('.home-product__add');
+          if (!addBtn) return;
+          e.preventDefault();
+          e.stopPropagation();
+          const card = addBtn.closest('.home-product');
+          if (!card) return;
+          const href = card.getAttribute('href') || '';
+          const idMatch = href.match(/id=([^&]+)/);
+          if (!idMatch) return;
+          const p = PRODUCTS.find(prod => prod.id === idMatch[1]);
+          if (p) addToCart(p);
+        });
+
+        // Init cart UI
+        updateCartUI();
+
+        // Review Modal
+        const reviewModal = document.getElementById('reviewModal');
+        let selectedRating = 0;
+
+        document.getElementById('openReviewModal').addEventListener('click', () => {
+          reviewModal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        });
+
+        function closeModal() {
+          reviewModal.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+
+        document.getElementById('closeReviewModal').addEventListener('click', closeModal);
+        reviewModal.addEventListener('click', (e) => { if (e.target === reviewModal) closeModal(); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && reviewModal.classList.contains('is-open')) closeModal();
+        });
+
+        // Star selection
+        const modalStars = document.querySelectorAll('#modalStars .pdp-review-modal__star');
+        function updateStars(rating) {
+          modalStars.forEach((btn, i) => {
+            const svg = btn.querySelector('svg');
+            if (i < rating) {
+              svg.setAttribute('fill', '#EC0201');
+              svg.setAttribute('stroke', 'none');
+            } else {
+              svg.setAttribute('fill', 'none');
+              svg.setAttribute('stroke', '#EC0201');
+            }
+          });
+        }
+
+        modalStars.forEach(btn => {
+          btn.addEventListener('mouseenter', () => updateStars(parseInt(btn.dataset.star)));
+          btn.addEventListener('click', () => { selectedRating = parseInt(btn.dataset.star); updateStars(selectedRating); });
+        });
+        document.getElementById('modalStars').addEventListener('mouseleave', () => updateStars(selectedRating));
+
+        // Submit review
+        document.getElementById('submitReview').addEventListener('click', () => {
+          const name = document.getElementById('reviewName').value.trim();
+          const text = document.getElementById('reviewText').value.trim();
+          if (!selectedRating) { alert('Please select a star rating.'); return; }
+          if (!name) { alert('Please enter your name.'); return; }
+          if (!text) { alert('Please write your review.'); return; }
+
+          const data = REVIEWS_DATA[product.category];
+          if (data) {
+            data.reviews.unshift({
+              name, text, rating: selectedRating, date: new Date().toISOString().slice(0,10),
+              verified: false
+            });
+            data.total++;
+            renderReviews(product);
+            // Re-attach open button listener
+            document.getElementById('openReviewModal').addEventListener('click', () => {
+              reviewModal.classList.add('is-open');
+              document.body.style.overflow = 'hidden';
+            });
+          }
+
+          // Reset & close
+          selectedRating = 0;
+          updateStars(0);
+          document.getElementById('reviewName').value = '';
+          document.getElementById('reviewText').value = '';
+          closeModal();
+        });
+
+        if (window.innerWidth <= 768) {
+          initMobileCarousel();
+        }
+
+      })();
+    </script>
+  </body>
+</html>
