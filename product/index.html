@@ -269,13 +269,6 @@
         transition: all 0.2s ease;
       }
       .pdp-add-cart:hover { background: #333; }
-      .pdp-buy-now {
-        width: 100%; font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
-        text-transform: uppercase; letter-spacing: 0.01em; color: #EC0201;
-        background: #fff; border: 1px solid #EC0201; padding: calc(1.2rem - 1px);
-        cursor: pointer; transition: all 0.2s ease;
-      }
-      .pdp-buy-now:hover { background: #EC0201; color: #fff; }
 
       /* ── Specs Accordion ── */
       .pdp-specs { border-top: 1px solid #e3dede; }
@@ -687,6 +680,84 @@
       }
       .side-cart__continue:hover { color: #1a1a1a; }
 
+      /* ── Side Cart Coupon ── */
+      .side-cart__coupon { padding: 0.75rem 1.5rem 0; }
+      .side-cart__coupon-row { display: flex; gap: 0; }
+      .side-cart__coupon-input {
+        flex: 1; min-width: 0; font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #1a1a1a; border: 1px solid #e3dede; border-right: none;
+        padding: 0.6rem 0.75rem; background: transparent; letter-spacing: 0.02em;
+      }
+      .side-cart__coupon-input:focus { outline: none; border-color: #1a1a1a; }
+      .side-cart__coupon-input::placeholder { color: #ccc; text-transform: uppercase; }
+      .side-cart__coupon-btn {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.03em; color: #fff;
+        background: #1a1a1a; border: none; padding: 0.6rem 1rem; cursor: pointer;
+        transition: background 0.15s ease; white-space: nowrap;
+      }
+      .side-cart__coupon-btn:hover { background: #EC0201; }
+      .side-cart__coupon-msg {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        letter-spacing: 0.01em; text-transform: uppercase; padding: 0.35rem 0 0;
+      }
+      .side-cart__coupon-msg--ok { color: #22c55e; }
+      .side-cart__coupon-msg--err { color: #EC0201; }
+      .side-cart__coupon-applied {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0.5rem 0.65rem; border: 1px dashed #22c55e; background: rgba(34,197,94,0.04);
+      }
+      .side-cart__coupon-applied-info {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
+        color: #22c55e; letter-spacing: 0.02em;
+      }
+      .side-cart__coupon-remove {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #9a8f8f; background: none; border: none; cursor: pointer;
+        text-decoration: underline; text-transform: uppercase; letter-spacing: 0.01em;
+      }
+      .side-cart__coupon-remove:hover { color: #EC0201; }
+      .side-cart__codes {
+        padding: 0.5rem 1.5rem 0;
+      }
+      .side-cart__codes-title {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
+        color: #9a8f8f; letter-spacing: 0.02em; text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      .side-cart__code {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0.4rem 0.55rem; border: 1px dashed #e3dede;
+        cursor: pointer; transition: all 0.15s ease; margin-bottom: 0.3rem;
+      }
+      .side-cart__code:hover { border-color: #EC0201; background: rgba(236,2,1,0.03); }
+      .side-cart__code-name {
+        font-family: var(--font-display); font-size: 0.6rem; font-weight: 600;
+        color: #EC0201; letter-spacing: 0.02em;
+      }
+      .side-cart__code-desc {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em;
+      }
+      .side-cart__code-use {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
+        color: #9a8f8f; text-transform: uppercase; letter-spacing: 0.02em;
+        background: none; border: none; cursor: pointer; padding: 0;
+      }
+      .side-cart__code-use:hover { color: #EC0201; }
+      .side-cart__discount {
+        display: flex; justify-content: space-between; align-items: baseline;
+        margin-bottom: 0.25rem;
+      }
+      .side-cart__discount-label {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: #22c55e; text-transform: uppercase; letter-spacing: 0.02em;
+      }
+      .side-cart__discount-value {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #22c55e;
+      }
+
       /* ══════════════════════════════════════
          RESPONSIVE
          ══════════════════════════════════════ */
@@ -833,7 +904,6 @@
           </div>
           <div class="pdp-actions">
             <button class="pdp-add-cart" id="pdpAddCart">Add to Cart</button>
-            <button class="pdp-buy-now" id="pdpBuyNow">Buy Now</button>
           </div>
           <div class="pdp-specs" id="pdpSpecs"></div>
           <div class="pdp-brand" id="pdpBrand"></div>
@@ -1675,15 +1745,116 @@
               : '');
           sideCartBody.innerHTML += freeProductHtml;
 
+          // Coupon state
+          const savedCoupon = JSON.parse(localStorage.getItem('awayCoupon') || 'null');
+          const shipping = subtotal >= 10000 ? 0 : 499;
+          let discountHtml = '';
+          let discountAmt = 0;
+
+          if (savedCoupon) {
+            const c = COUPONS.find(cp => cp.code === savedCoupon.code);
+            if (c) {
+              if (c.type === 'percent') discountAmt = Math.round(subtotal * c.discount / 100);
+              else if (c.type === 'flat') discountAmt = c.discount;
+              else if (c.type === 'shipping') discountAmt = shipping;
+              if (c.min && subtotal < c.min) {
+                localStorage.removeItem('awayCoupon');
+                discountAmt = 0;
+              }
+            }
+          }
+
+          if (savedCoupon && discountAmt > 0) {
+            discountHtml =
+              `<div class="side-cart__discount">` +
+                `<span class="side-cart__discount-label">Discount (${savedCoupon.code})</span>` +
+                `<span class="side-cart__discount-value">-${formatPrice(discountAmt)}</span>` +
+              `</div>`;
+          }
+
+          const couponSectionHtml = savedCoupon && discountAmt > 0
+            ? `<div class="side-cart__coupon">` +
+                `<div class="side-cart__coupon-applied">` +
+                  `<span class="side-cart__coupon-applied-info">${savedCoupon.code} applied — you save ${formatPrice(discountAmt)}</span>` +
+                  `<button class="side-cart__coupon-remove" id="scCouponRemove">Remove</button>` +
+                `</div>` +
+              `</div>`
+            : `<div class="side-cart__coupon">` +
+                `<div class="side-cart__coupon-row">` +
+                  `<input class="side-cart__coupon-input" id="scCouponIn" type="text" placeholder="Coupon code" />` +
+                  `<button class="side-cart__coupon-btn" id="scCouponBtn">Apply</button>` +
+                `</div>` +
+                `<div id="scCouponMsg"></div>` +
+              `</div>` +
+              `<div class="side-cart__codes">` +
+                `<p class="side-cart__codes-title">Available Coupons</p>` +
+                COUPONS.map(c =>
+                  `<div class="side-cart__code" data-code="${c.code}">` +
+                    `<div><span class="side-cart__code-name">${c.code}</span><br><span class="side-cart__code-desc">${c.desc}</span></div>` +
+                    `<button class="side-cart__code-use">Apply</button>` +
+                  `</div>`
+                ).join('') +
+              `</div>`;
+
           sideCartFooter.innerHTML =
             `<div class="side-cart__subtotal">` +
               `<span class="side-cart__subtotal-label">Subtotal</span>` +
               `<span class="side-cart__subtotal-value">${formatPrice(subtotal)}</span>` +
             `</div>` +
-            `<button class="side-cart__checkout" onclick="window.location.href='../checkout/'">Checkout</button>` +
+            discountHtml +
+            couponSectionHtml +
+            `<button class="side-cart__checkout" onclick="window.location.href='../checkout/'" style="margin-top:0.75rem">Checkout</button>` +
             `<button class="side-cart__continue" id="continueShopping">Continue Shopping</button>`;
 
           document.getElementById('continueShopping').addEventListener('click', closeCart);
+          bindCouponEvents(subtotal, shipping);
+        }
+
+        const COUPONS = [
+          { code: 'AWAY10', discount: 10, type: 'percent', desc: '10% off your order', min: 0 },
+          { code: 'FIRST500', discount: 500, type: 'flat', desc: '\u20B9500 off on first order', min: 5000 },
+          { code: 'FREESHIP', discount: 499, type: 'shipping', desc: 'Free shipping on any order', min: 0 }
+        ];
+
+        function applyCoupon(code, subtotal, shipping) {
+          const coupon = COUPONS.find(c => c.code === code);
+          if (!coupon) return { ok: false, msg: 'Invalid coupon code' };
+          let amt = 0;
+          if (coupon.type === 'percent') amt = Math.round(subtotal * coupon.discount / 100);
+          else if (coupon.type === 'flat') amt = coupon.discount;
+          else if (coupon.type === 'shipping') amt = shipping;
+          if (coupon.min && subtotal < coupon.min) return { ok: false, msg: `Min. order \u20B9${coupon.min.toLocaleString('en-IN')} required` };
+          localStorage.setItem('awayCoupon', JSON.stringify({ code: coupon.code, discount: amt }));
+          return { ok: true, amt };
+        }
+
+        function bindCouponEvents(subtotal, shipping) {
+          const applyBtn = document.getElementById('scCouponBtn');
+          const removeBtn = document.getElementById('scCouponRemove');
+          if (applyBtn) {
+            applyBtn.addEventListener('click', () => {
+              const input = document.getElementById('scCouponIn');
+              const msg = document.getElementById('scCouponMsg');
+              const code = input.value.trim().toUpperCase();
+              if (!code) { msg.innerHTML = ''; return; }
+              const result = applyCoupon(code, subtotal, shipping);
+              if (result.ok) { updateCartUI(); }
+              else { msg.innerHTML = `<p class="side-cart__coupon-msg side-cart__coupon-msg--err">${result.msg}</p>`; }
+            });
+            // Available coupon click-to-apply
+            sideCartFooter.querySelectorAll('.side-cart__code').forEach(card => {
+              card.addEventListener('click', () => {
+                document.getElementById('scCouponIn').value = card.dataset.code;
+                applyBtn.click();
+              });
+            });
+          }
+          if (removeBtn) {
+            removeBtn.addEventListener('click', () => {
+              localStorage.removeItem('awayCoupon');
+              updateCartUI();
+            });
+          }
         }
 
         // Delegated events for cart item actions
@@ -1722,10 +1893,6 @@
         // Add to Cart handler
         document.getElementById('pdpAddCart').addEventListener('click', () => addToCart(product));
 
-        // Buy Now handler
-        document.getElementById('pdpBuyNow').addEventListener('click', () => {
-          addToCart(product);
-        });
 
         // Add buttons on related/suggested product cards
         document.addEventListener('click', (e) => {

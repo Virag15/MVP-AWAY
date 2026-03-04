@@ -116,7 +116,7 @@
       .home-mobile-menu__footer a { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: var(--co-text-muted); text-decoration: none; letter-spacing: 0.01em; }
 
       /* ══════════════════════════════════════
-         CHECKOUT PAGE
+         CHECKOUT LAYOUT
          ══════════════════════════════════════ */
       .co {
         display: grid; grid-template-columns: 1fr 440px;
@@ -133,7 +133,7 @@
         display: inline-flex; align-items: center; gap: 0.4rem;
         font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
         color: var(--co-text-muted); letter-spacing: 0.01em; text-transform: uppercase;
-        text-decoration: none; transition: color var(--co-ease-fast); margin-bottom: var(--co-space-xl);
+        text-decoration: none; transition: color var(--co-ease-fast); margin-bottom: var(--co-space-lg);
       }
       .co-back:hover { color: var(--co-text); }
       .co-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
@@ -149,39 +149,88 @@
         margin-bottom: var(--co-space-xl);
       }
 
-      /* ── Auth Tabs ── */
-      .co-tabs {
-        display: flex; gap: 0; margin-bottom: var(--co-space-lg);
+      /* ── Progress Indicator ── */
+      .co-progress {
+        display: flex; align-items: center; gap: 0; margin-bottom: var(--co-space-xl);
+        padding-bottom: var(--co-space-lg); border-bottom: 1px solid var(--co-border);
       }
-      .co-tab {
+      .co-progress__step {
+        display: flex; align-items: center; gap: 0.5rem; cursor: default;
+      }
+      .co-progress__num {
+        width: 32px; height: 32px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-display); font-size: 0.65rem; font-weight: 600;
+        border: 1.5px solid var(--co-border); color: var(--co-text-muted);
+        transition: all 0.3s ease; flex-shrink: 0;
+      }
+      .co-progress__label {
         font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
-        text-transform: uppercase; letter-spacing: 0.02em; color: var(--co-text-muted);
-        background: none; border: none; padding: 0.7rem 0; margin-right: var(--co-space-lg);
-        cursor: pointer; transition: all var(--co-ease-fast);
-        border-bottom: 2px solid transparent;
+        color: var(--co-text-muted); text-transform: uppercase; letter-spacing: 0.02em;
+        transition: color 0.3s ease; white-space: nowrap;
       }
-      .co-tab.is-active { color: var(--co-text); border-bottom-color: var(--co-accent); font-weight: 600; }
-      .co-tab:hover { color: var(--co-text); }
+      .co-progress__line {
+        flex: 1; height: 1px; background: var(--co-border);
+        margin: 0 var(--co-space-sm); transition: background 0.3s ease;
+      }
+      .co-progress__step.is-active .co-progress__num {
+        border-color: var(--co-text); color: #fff; background: var(--co-text);
+      }
+      .co-progress__step.is-active .co-progress__label { color: var(--co-text); font-weight: 600; }
+      .co-progress__step.is-done .co-progress__num {
+        border-color: var(--co-success); color: #fff; background: var(--co-success);
+      }
+      .co-progress__step.is-done .co-progress__label { color: var(--co-success); }
+      .co-progress__line.is-done { background: var(--co-success); }
 
-      /* ── Login panel ── */
-      .co-login { display: none; margin-bottom: var(--co-space-lg); }
-      .co-login.is-active { display: block; }
+      /* ── Steps ── */
+      .co-step { display: none; }
+      .co-step.is-active { display: block; }
 
-      /* ── Section ── */
-      .co-section { margin-bottom: var(--co-space-lg); }
-      .co-section-head {
-        display: flex; align-items: center; gap: 0.75rem;
-        margin-bottom: var(--co-space-md); padding-bottom: 0.85rem;
-        border-bottom: 1px solid var(--co-border);
+      /* ── Phone Input ── */
+      .co-phone-row {
+        display: flex; align-items: stretch; border-bottom: 1px solid var(--co-border);
       }
-      .co-section-num {
-        font-family: var(--font-display); font-size: 1.5rem; font-weight: 300;
-        color: var(--co-border); line-height: 1; letter-spacing: -0.02em;
+      .co-phone-prefix {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+        color: var(--co-text-muted); padding: 0.6rem 0.6rem 0.6rem 0;
+        display: flex; align-items: center; white-space: nowrap;
       }
-      .co-section-label {
-        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
-        color: var(--co-text); text-transform: uppercase; letter-spacing: 0.01em;
+      .co-phone-input {
+        flex: 1; font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: var(--co-text); border: none; padding: 0.6rem 0;
+        background: transparent; letter-spacing: 0.05em;
       }
+      .co-phone-input:focus { outline: none; }
+      .co-phone-input::placeholder { color: #ccc; }
+
+      /* ── OTP ── */
+      .co-otp-send {
+        width: 100%; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
+        background: var(--co-text); border: none; padding: 1.1rem; cursor: pointer;
+        transition: background var(--co-ease); margin-top: var(--co-space-lg);
+      }
+      .co-otp-send:hover { background: var(--co-accent); }
+      .co-otp-send:disabled { background: var(--co-border); color: var(--co-text-muted); cursor: not-allowed; }
+
+      .co-otp-section { margin-top: var(--co-space-lg); }
+      .co-otp-boxes {
+        display: flex; gap: var(--co-space-sm); margin: var(--co-space-sm) 0 var(--co-space-lg);
+      }
+      .co-otp-box {
+        width: 56px; height: 56px; text-align: center;
+        font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
+        color: var(--co-text); border: 1.5px solid var(--co-border); background: transparent;
+        transition: border-color var(--co-ease-fast);
+      }
+      .co-otp-box:focus { outline: none; border-color: var(--co-text); }
+      .co-otp-timer {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: var(--co-text-muted); letter-spacing: 0.01em; text-transform: uppercase;
+        margin-bottom: var(--co-space-sm);
+      }
+      .co-otp-timer span { color: var(--co-accent); font-weight: 600; }
 
       /* ── Inputs ── */
       .co-row { display: grid; gap: var(--co-space-md); margin-bottom: 0; }
@@ -206,6 +255,16 @@
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
         background-repeat: no-repeat; background-position: right 0 center; background-size: 10px;
       }
+
+      /* ── Navigation (Back / Continue) ── */
+      .co-nav { display: flex; gap: var(--co-space-sm); margin-top: var(--co-space-lg); }
+      .co-nav-back {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.02em; color: var(--co-text-muted);
+        background: none; border: 1px solid var(--co-border); padding: 1rem var(--co-space-lg);
+        cursor: pointer; transition: all var(--co-ease-fast);
+      }
+      .co-nav-back:hover { border-color: var(--co-text); color: var(--co-text); }
 
       /* ── Payment ── */
       .co-pay-list { display: flex; flex-direction: column; gap: 0; margin-bottom: var(--co-space-sm); }
@@ -238,14 +297,16 @@
 
       /* ── Submit ── */
       .co-submit {
-        width: 100%; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
+        flex: 1; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
         background: var(--co-text); border: none; padding: 1.25rem; cursor: pointer;
-        transition: background var(--co-ease); margin-top: var(--co-space-sm);
+        transition: background var(--co-ease);
       }
       .co-submit:hover { background: var(--co-accent); }
 
-      /* ── RIGHT: Summary ── */
+      /* ══════════════════════════════════════
+         RIGHT: SUMMARY (Collapsible)
+         ══════════════════════════════════════ */
       .co-summary {
         background: var(--co-bg-dark); color: #fff;
         padding: var(--co-space-xl) var(--co-space-lg);
@@ -253,14 +314,39 @@
         min-height: calc(100vh - 135px);
         display: flex; flex-direction: column;
       }
-      .co-summary-head {
+
+      .co-summary-toggle {
+        display: flex; align-items: center; justify-content: space-between;
+        cursor: pointer; padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--co-border-dark);
+        margin-bottom: var(--co-space-lg);
+        -webkit-user-select: none; user-select: none;
+      }
+      .co-summary-toggle__left {
         font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
-        margin-bottom: var(--co-space-lg); padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--co-border-dark);
       }
-      .co-summary-count {
+      .co-summary-toggle__count {
         font-weight: 400; color: rgba(255,255,255,0.4); margin-left: var(--co-space-xs);
+      }
+      .co-summary-toggle__right {
+        display: flex; align-items: center; gap: 0.6rem;
+      }
+      .co-summary-toggle__total {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+        color: #fff;
+      }
+      .co-summary-toggle__chevron {
+        width: 16px; height: 16px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+      .co-summary.is-expanded .co-summary-toggle__chevron { transform: rotate(180deg); }
+
+      .co-summary-content {
+        max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+      }
+      .co-summary.is-expanded .co-summary-content {
+        max-height: 2000px;
       }
 
       /* items */
@@ -307,6 +393,7 @@
         color: #fff;
       }
       .co-row-val--free { color: var(--co-accent); font-weight: 600; }
+      .co-row-val--discount { color: var(--co-success); font-weight: 600; }
 
       .co-total {
         display: flex; justify-content: space-between; align-items: baseline;
@@ -322,63 +409,21 @@
         color: #fff; letter-spacing: -0.02em;
       }
 
-      /* coupon */
-      .co-coupon { margin-top: var(--co-space-lg); }
-      .co-coupon-row { display: flex; gap: 0; }
-      .co-coupon-input {
-        flex: 1; min-width: 0; font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
-        color: #fff; border: 1px solid var(--co-border-dark); border-right: none;
-        padding: 0.75rem; background: transparent;
-        letter-spacing: 0.02em;
+      /* applied coupon label */
+      .co-coupon-applied {
+        margin-top: var(--co-space-sm); display: flex; align-items: center; justify-content: space-between;
+        padding: 0.5rem 0.65rem; border: 1px dashed var(--co-success); background: rgba(74,222,128,0.06);
       }
-      .co-coupon-input:focus { outline: none; border-color: rgba(255,255,255,0.35); }
-      .co-coupon-input::placeholder { color: rgba(255,255,255,0.35); text-transform: uppercase; }
-      .co-coupon-btn {
-        font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
-        text-transform: uppercase; letter-spacing: 0.03em; color: var(--co-text);
-        background: #fff; border: none; padding: 0.75rem 1.25rem; cursor: pointer;
-        transition: all var(--co-ease-fast); white-space: nowrap;
+      .co-coupon-applied-info {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 600;
+        color: var(--co-success); letter-spacing: 0.02em; text-transform: uppercase;
       }
-      .co-coupon-btn:hover { background: var(--co-accent); color: #fff; }
-      .co-coupon-msg {
-        font-family: var(--font-body); font-size: 0.55rem; font-weight: 500;
-        letter-spacing: 0.01em; text-transform: uppercase; padding: var(--co-space-xs) 0 0;
-      }
-      .co-coupon-msg--ok { color: var(--co-success); }
-      .co-coupon-msg--err { color: var(--co-accent); }
-
-      /* available coupons */
-      .co-codes {
-        margin-top: 1.25rem; padding-top: var(--co-space-sm); border-top: 1px solid var(--co-bg-dark-subtle);
-      }
-      .co-codes-title {
-        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
-        color: rgba(255,255,255,0.35); letter-spacing: 0.02em; text-transform: uppercase;
-        margin-bottom: 0.6rem;
-      }
-      .co-codes-list { display: flex; flex-direction: column; gap: 0.35rem; }
-      .co-code {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 0.55rem 0.65rem; border: 1px dashed var(--co-border-dark);
-        cursor: pointer; transition: all 0.15s ease;
-      }
-      .co-code:hover { border-color: var(--co-accent); background: rgba(236,2,1,0.05); }
-      .co-code-left { display: flex; flex-direction: column; gap: 0.1rem; }
-      .co-code-name {
-        font-family: var(--font-display); font-size: 0.65rem; font-weight: 600;
-        color: var(--co-accent); letter-spacing: 0.02em;
-      }
-      .co-code-desc {
+      .co-coupon-applied-remove {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
-        color: rgba(255,255,255,0.4); letter-spacing: 0.01em;
+        color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+        text-decoration: underline; text-transform: uppercase; letter-spacing: 0.01em;
       }
-      .co-code-use {
-        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
-        color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.02em;
-        background: none; border: none; cursor: pointer; padding: 0;
-        transition: color 0.15s ease;
-      }
-      .co-code-use:hover { color: var(--co-accent); }
+      .co-coupon-applied-remove:hover { color: var(--co-accent); }
 
       /* free gift */
       .co-gift {
@@ -500,6 +545,7 @@
         .co-item { grid-template-columns: 50px 1fr auto; gap: var(--co-space-xs); }
         .co-item-img { width: 50px; height: 50px; }
         .co-card { padding-left: var(--co-space-lg); }
+        .co-progress__label { display: none; }
 
         .home-trust { padding: var(--co-space-md); gap: var(--co-space-sm); justify-content: flex-start; flex-direction: column; align-items: flex-start; }
         .home-trust__item svg { width: 22px; height: 22px; }
@@ -521,6 +567,7 @@
         .co-row { gap: 0; }
         .co-item { grid-template-columns: 44px 1fr auto; gap: 0.4rem; padding: 0.6rem 0; }
         .co-item-img { width: 44px; height: 44px; }
+        .co-otp-box { width: 48px; height: 48px; font-size: 1.2rem; }
 
         .co-empty { padding: var(--co-space-xl) var(--co-space-sm); }
         .co-empty h2 { font-size: 1.2rem; }
@@ -622,18 +669,18 @@
       (function () {
         'use strict';
 
-        const cart = JSON.parse(localStorage.getItem('awayCart') || '[]');
-        const layout = document.getElementById('coLayout');
+        var cart = JSON.parse(localStorage.getItem('awayCart') || '[]');
+        var layout = document.getElementById('coLayout');
 
         function fmt(n) {
           return '\u20B9 ' + n.toLocaleString('en-IN');
         }
 
         // Nav cart count
-        const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+        var totalItems = cart.reduce(function(s, i) { return s + i.qty; }, 0);
         document.getElementById('navCartCount').textContent = totalItems;
 
-        // Empty
+        // Empty state
         if (!cart.length) {
           layout.innerHTML =
             '<div class="co-empty">' +
@@ -642,16 +689,45 @@
               '<p>Looks like you haven\'t added anything yet.</p>' +
               '<a href="../shop/">Continue Shopping</a>' +
             '</div>';
+          initNav();
           return;
         }
 
-        const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-        const shipping = subtotal >= 10000 ? 0 : 499;
-        const total = subtotal + shipping;
+        // ── Calculate totals ──
+        var subtotal = cart.reduce(function(s, i) { return s + i.price * i.qty; }, 0);
+        var shipping = subtotal >= 10000 ? 0 : 499;
+        var discountAmt = 0;
+        var savedCoupon = JSON.parse(localStorage.getItem('awayCoupon') || 'null');
 
-        // Items
-        const itemsHtml = cart.map(i => {
-          const pr = i.originalPrice
+        // Validate saved coupon
+        var COUPONS = [
+          { code: 'AWAY10', discount: 10, type: 'percent', min: 0 },
+          { code: 'FIRST500', discount: 500, type: 'flat', min: 5000 },
+          { code: 'FREESHIP', discount: 499, type: 'shipping', min: 0 }
+        ];
+
+        if (savedCoupon) {
+          var coupon = COUPONS.find(function(c) { return c.code === savedCoupon.code; });
+          if (coupon) {
+            if (coupon.type === 'percent') discountAmt = Math.round(subtotal * coupon.discount / 100);
+            else if (coupon.type === 'flat') discountAmt = coupon.discount;
+            else if (coupon.type === 'shipping') discountAmt = shipping;
+            if (coupon.min && subtotal < coupon.min) {
+              localStorage.removeItem('awayCoupon');
+              savedCoupon = null;
+              discountAmt = 0;
+            }
+          } else {
+            localStorage.removeItem('awayCoupon');
+            savedCoupon = null;
+          }
+        }
+
+        var total = Math.max(0, subtotal + shipping - discountAmt);
+
+        // ── Items HTML ──
+        var itemsHtml = cart.map(function(i) {
+          var pr = i.originalPrice
             ? '<span class="co-item-price--sale">' + fmt(i.price * i.qty) + '</span>' +
               '<span class="co-item-price--old">' + fmt(i.originalPrice * i.qty) + '</span>'
             : fmt(i.price * i.qty);
@@ -666,7 +742,27 @@
           '</div>';
         }).join('');
 
-        const STATES = ['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Delhi','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal'];
+        // ── Coupon display ──
+        var couponHtml = '';
+        var discountLineHtml = '';
+        if (savedCoupon && discountAmt > 0) {
+          discountLineHtml =
+            '<div class="co-row-line">' +
+              '<span class="co-row-label">Discount (' + savedCoupon.code + ')</span>' +
+              '<span class="co-row-val co-row-val--discount">-' + fmt(discountAmt) + '</span>' +
+            '</div>';
+          couponHtml =
+            '<div class="co-coupon-applied">' +
+              '<span class="co-coupon-applied-info">' + savedCoupon.code + ' applied \u2014 you save ' + fmt(discountAmt) + '</span>' +
+              '<button class="co-coupon-applied-remove" id="coCouponRemove">Remove</button>' +
+            '</div>';
+        }
+
+        var STATES = ['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Delhi','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal'];
+
+        // ══════════════════════════════════════
+        //  BUILD LAYOUT
+        // ══════════════════════════════════════
 
         layout.innerHTML =
           /* ── LEFT: FORM ── */
@@ -678,192 +774,196 @@
             '<h1 class="co-title">Secure <strong>Checkout</strong></h1>' +
             '<p class="co-subtitle">' + totalItems + ' item' + (totalItems > 1 ? 's' : '') + ' in your cart</p>' +
 
-            /* tabs */
-            '<div class="co-tabs">' +
-              '<button class="co-tab is-active" data-t="guest">Guest Checkout</button>' +
-              '<button class="co-tab" data-t="login">Sign In</button>' +
+            /* ── Progress Bar ── */
+            '<div class="co-progress">' +
+              '<div class="co-progress__step is-active" data-step="1">' +
+                '<span class="co-progress__num">01</span>' +
+                '<span class="co-progress__label">Verify</span>' +
+              '</div>' +
+              '<div class="co-progress__line" data-after="1"></div>' +
+              '<div class="co-progress__step" data-step="2">' +
+                '<span class="co-progress__num">02</span>' +
+                '<span class="co-progress__label">Address</span>' +
+              '</div>' +
+              '<div class="co-progress__line" data-after="2"></div>' +
+              '<div class="co-progress__step" data-step="3">' +
+                '<span class="co-progress__num">03</span>' +
+                '<span class="co-progress__label">Pay</span>' +
+              '</div>' +
             '</div>' +
 
-            /* login */
-            '<div class="co-login" id="coLogin">' +
+            /* ── Step 1: Phone + OTP ── */
+            '<div class="co-step is-active" id="coStep1">' +
               '<div class="co-group">' +
-                '<label class="co-label">Email</label>' +
-                '<input class="co-input" type="email" placeholder="your@email.com" />' +
+                '<label class="co-label">Mobile Number</label>' +
+                '<div class="co-phone-row">' +
+                  '<span class="co-phone-prefix">+91</span>' +
+                  '<input class="co-phone-input" id="coPhone" type="tel" placeholder="98765 43210" maxlength="10" />' +
+                '</div>' +
               '</div>' +
-              '<div class="co-group">' +
-                '<label class="co-label">Password</label>' +
-                '<input class="co-input" type="password" placeholder="Enter your password" />' +
+              '<button class="co-otp-send" id="coOtpSend">Send OTP</button>' +
+              '<div class="co-otp-section" id="coOtpSection" style="display:none">' +
+                '<div class="co-otp-timer" id="coOtpTimer">OTP sent! Resend in <span id="coTimerVal">30</span>s</div>' +
+                '<label class="co-label">Enter 4-digit OTP</label>' +
+                '<div class="co-otp-boxes" id="coOtpBoxes">' +
+                  '<input class="co-otp-box" type="text" inputmode="numeric" maxlength="1" />' +
+                  '<input class="co-otp-box" type="text" inputmode="numeric" maxlength="1" />' +
+                  '<input class="co-otp-box" type="text" inputmode="numeric" maxlength="1" />' +
+                  '<input class="co-otp-box" type="text" inputmode="numeric" maxlength="1" />' +
+                '</div>' +
+                '<div class="co-nav">' +
+                  '<button class="co-submit" id="coVerify" disabled>Verify & Continue</button>' +
+                '</div>' +
               '</div>' +
-              '<button class="co-submit" style="margin-top:0">Sign In & Continue</button>' +
             '</div>' +
 
-            /* guest form */
-            '<div id="coGuest">' +
-
-              /* 01 Contact */
-              '<div class="co-section">' +
-                '<div class="co-section-head">' +
-                  '<span class="co-section-num">01</span>' +
-                  '<span class="co-section-label">Contact Information</span>' +
+            /* ── Step 2: Address ── */
+            '<div class="co-step" id="coStep2">' +
+              '<div class="co-row co-row--2">' +
+                '<div class="co-group">' +
+                  '<label class="co-label">First Name</label>' +
+                  '<input class="co-input" id="coFirstName" type="text" placeholder="First name" />' +
                 '</div>' +
-                '<div class="co-row co-row--2">' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">Email Address</label>' +
-                    '<input class="co-input" type="email" placeholder="your@email.com" />' +
+                '<div class="co-group">' +
+                  '<label class="co-label">Last Name</label>' +
+                  '<input class="co-input" id="coLastName" type="text" placeholder="Last name" />' +
+                '</div>' +
+              '</div>' +
+              '<div class="co-group">' +
+                '<label class="co-label">Email Address</label>' +
+                '<input class="co-input" id="coEmail" type="email" placeholder="your@email.com" />' +
+              '</div>' +
+              '<div class="co-group">' +
+                '<label class="co-label">Street Address</label>' +
+                '<input class="co-input" id="coStreet" type="text" placeholder="123 Main Street" />' +
+              '</div>' +
+              '<div class="co-group">' +
+                '<label class="co-label">Apartment / Suite (Optional)</label>' +
+                '<input class="co-input" type="text" placeholder="Apt, suite, etc." />' +
+              '</div>' +
+              '<div class="co-row co-row--3">' +
+                '<div class="co-group">' +
+                  '<label class="co-label">City</label>' +
+                  '<input class="co-input" id="coCity" type="text" placeholder="City" />' +
+                '</div>' +
+                '<div class="co-group">' +
+                  '<label class="co-label">State</label>' +
+                  '<select class="co-input" id="coState"><option value="">Select</option>' + STATES.map(function(s) { return '<option value="' + s + '">' + s + '</option>'; }).join('') + '</select>' +
+                '</div>' +
+                '<div class="co-group">' +
+                  '<label class="co-label">PIN Code</label>' +
+                  '<input class="co-input" id="coPIN" type="text" placeholder="110001" maxlength="6" />' +
+                '</div>' +
+              '</div>' +
+              '<div class="co-nav">' +
+                '<button class="co-nav-back" id="coBack2">Back</button>' +
+                '<button class="co-submit" id="coNext2">Continue to Payment</button>' +
+              '</div>' +
+            '</div>' +
+
+            /* ── Step 3: Payment ── */
+            '<div class="co-step" id="coStep3">' +
+              '<div class="co-pay-list" id="coPayList">' +
+                '<div class="co-pay is-on" data-m="card">' +
+                  '<div class="co-pay-dot"><span></span></div>' +
+                  '<span class="co-pay-name">Credit / Debit Card</span>' +
+                  '<div class="co-pay-icons">' +
+                    '<img src="../assets/visa.png" alt="Visa"/><img src="../assets/mastercard.png" alt="MC"/><img src="../assets/amex.png" alt="Amex"/>' +
                   '</div>' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">Phone Number</label>' +
-                    '<input class="co-input" type="tel" placeholder="+91 98765 43210" />' +
+                '</div>' +
+                '<div class="co-pay" data-m="upi">' +
+                  '<div class="co-pay-dot"><span></span></div>' +
+                  '<span class="co-pay-name">UPI</span>' +
+                  '<div class="co-pay-icons">' +
+                    '<img src="../assets/upi.png" alt="UPI"/><img src="../assets/gpay.png" alt="GPay"/>' +
                   '</div>' +
+                '</div>' +
+                '<div class="co-pay" data-m="cod">' +
+                  '<div class="co-pay-dot"><span></span></div>' +
+                  '<span class="co-pay-name">Cash on Delivery</span>' +
                 '</div>' +
               '</div>' +
 
-              /* 02 Shipping */
-              '<div class="co-section">' +
-                '<div class="co-section-head">' +
-                  '<span class="co-section-num">02</span>' +
-                  '<span class="co-section-label">Shipping Address</span>' +
-                '</div>' +
-                '<div class="co-row co-row--2">' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">First Name</label>' +
-                    '<input class="co-input" type="text" placeholder="First name" />' +
-                  '</div>' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">Last Name</label>' +
-                    '<input class="co-input" type="text" placeholder="Last name" />' +
-                  '</div>' +
-                '</div>' +
+              /* card fields */
+              '<div class="co-card is-on" id="coCardFields">' +
                 '<div class="co-group">' +
-                  '<label class="co-label">Street Address</label>' +
-                  '<input class="co-input" type="text" placeholder="123 Main Street" />' +
-                '</div>' +
-                '<div class="co-group">' +
-                  '<label class="co-label">Apartment / Suite (Optional)</label>' +
-                  '<input class="co-input" type="text" placeholder="Apt, suite, etc." />' +
+                  '<label class="co-label">Card Number</label>' +
+                  '<input class="co-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" />' +
                 '</div>' +
                 '<div class="co-row co-row--3">' +
                   '<div class="co-group">' +
-                    '<label class="co-label">City</label>' +
-                    '<input class="co-input" type="text" placeholder="City" />' +
+                    '<label class="co-label">Expiry</label>' +
+                    '<input class="co-input" type="text" placeholder="MM / YY" maxlength="7" />' +
                   '</div>' +
                   '<div class="co-group">' +
-                    '<label class="co-label">State</label>' +
-                    '<select class="co-input"><option value="">Select</option>' + STATES.map(function(s) { return '<option value="' + s + '">' + s + '</option>'; }).join('') + '</select>' +
+                    '<label class="co-label">CVV</label>' +
+                    '<input class="co-input" type="text" placeholder="123" maxlength="4" />' +
                   '</div>' +
                   '<div class="co-group">' +
-                    '<label class="co-label">PIN Code</label>' +
-                    '<input class="co-input" type="text" placeholder="110001" maxlength="6" />' +
+                    '<label class="co-label">Name on Card</label>' +
+                    '<input class="co-input" type="text" placeholder="Full name" />' +
                   '</div>' +
                 '</div>' +
               '</div>' +
 
-              /* 03 Payment */
-              '<div class="co-section">' +
-                '<div class="co-section-head">' +
-                  '<span class="co-section-num">03</span>' +
-                  '<span class="co-section-label">Payment Method</span>' +
-                '</div>' +
-                '<div class="co-pay-list" id="coPayList">' +
-                  '<div class="co-pay is-on" data-m="card">' +
-                    '<div class="co-pay-dot"><span></span></div>' +
-                    '<span class="co-pay-name">Credit / Debit Card</span>' +
-                    '<div class="co-pay-icons">' +
-                      '<img src="../assets/visa.png" alt="Visa"/><img src="../assets/mastercard.png" alt="MC"/><img src="../assets/amex.png" alt="Amex"/>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="co-pay" data-m="upi">' +
-                    '<div class="co-pay-dot"><span></span></div>' +
-                    '<span class="co-pay-name">UPI</span>' +
-                    '<div class="co-pay-icons">' +
-                      '<img src="../assets/upi.png" alt="UPI"/><img src="../assets/gpay.png" alt="GPay"/>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="co-pay" data-m="cod">' +
-                    '<div class="co-pay-dot"><span></span></div>' +
-                    '<span class="co-pay-name">Cash on Delivery</span>' +
-                  '</div>' +
-                '</div>' +
-
-                /* card fields */
-                '<div class="co-card is-on" id="coCardFields">' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">Card Number</label>' +
-                    '<input class="co-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" />' +
-                  '</div>' +
-                  '<div class="co-row co-row--3">' +
-                    '<div class="co-group">' +
-                      '<label class="co-label">Expiry</label>' +
-                      '<input class="co-input" type="text" placeholder="MM / YY" maxlength="7" />' +
-                    '</div>' +
-                    '<div class="co-group">' +
-                      '<label class="co-label">CVV</label>' +
-                      '<input class="co-input" type="text" placeholder="123" maxlength="4" />' +
-                    '</div>' +
-                    '<div class="co-group">' +
-                      '<label class="co-label">Name on Card</label>' +
-                      '<input class="co-input" type="text" placeholder="Full name" />' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-
-                /* UPI field */
-                '<div class="co-card" id="coUpiField">' +
-                  '<div class="co-group">' +
-                    '<label class="co-label">UPI ID</label>' +
-                    '<input class="co-input" type="text" placeholder="yourname@upi" />' +
-                  '</div>' +
+              /* UPI field */
+              '<div class="co-card" id="coUpiField">' +
+                '<div class="co-group">' +
+                  '<label class="co-label">UPI ID</label>' +
+                  '<input class="co-input" type="text" placeholder="yourname@upi" />' +
                 '</div>' +
               '</div>' +
 
-              '<button class="co-submit" id="coSubmit">Place Order \u2014 ' + fmt(total) + '</button>' +
-
+              '<div class="co-nav">' +
+                '<button class="co-nav-back" id="coBack3">Back</button>' +
+                '<button class="co-submit" id="coSubmit">Place Order \u2014 ' + fmt(total) + '</button>' +
+              '</div>' +
             '</div>' +
+
           '</div>' +
 
           /* ── RIGHT: SUMMARY ── */
-          '<div class="co-summary">' +
-            '<div class="co-summary-head">Your Order <span class="co-summary-count">(' + totalItems + ')</span></div>' +
-            '<div class="co-items">' + itemsHtml + '</div>' +
-
-            '<div class="co-break">' +
-              '<div class="co-row-line">' +
-                '<span class="co-row-label">Subtotal</span>' +
-                '<span class="co-row-val">' + fmt(subtotal) + '</span>' +
-              '</div>' +
-              '<div class="co-row-line">' +
-                '<span class="co-row-label">Shipping</span>' +
-                '<span class="co-row-val' + (shipping === 0 ? ' co-row-val--free' : '') + '">' + (shipping === 0 ? 'Free' : fmt(shipping)) + '</span>' +
+          '<div class="co-summary" id="coSummary">' +
+            '<div class="co-summary-toggle" id="coSummaryToggle">' +
+              '<span class="co-summary-toggle__left">Order Summary <span class="co-summary-toggle__count">(' + totalItems + ')</span></span>' +
+              '<div class="co-summary-toggle__right">' +
+                '<span class="co-summary-toggle__total">' + fmt(total) + '</span>' +
+                '<svg class="co-summary-toggle__chevron" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>' +
               '</div>' +
             '</div>' +
+            '<div class="co-summary-content">' +
+              '<div class="co-items">' + itemsHtml + '</div>' +
 
-            '<div class="co-total">' +
-              '<span class="co-total-label">Total</span>' +
-              '<span class="co-total-val">' + fmt(total) + '</span>' +
-            '</div>' +
-
-            '<div class="co-coupon">' +
-              '<div class="co-coupon-row">' +
-                '<input class="co-coupon-input" id="coCouponIn" type="text" placeholder="Coupon code" />' +
-                '<button class="co-coupon-btn" id="coCouponBtn">Apply</button>' +
-              '</div>' +
-              '<div id="coCouponMsg"></div>' +
-            '</div>' +
-
-            '<div class="co-codes">' +
-              '<p class="co-codes-title">Available Coupons</p>' +
-              '<div class="co-codes-list" id="coCodesList"></div>' +
-            '</div>' +
-
-            (subtotal >= 15000 ?
-              '<div class="co-gift">' +
-                '<span class="co-gift-tag">Free</span>' +
-                '<div class="co-gift-info">' +
-                  '<span class="co-gift-name">Cargo Net Organizer</span>' +
-                  '<span class="co-gift-note">Free with orders over \u20B915,000</span>' +
+              '<div class="co-break">' +
+                '<div class="co-row-line">' +
+                  '<span class="co-row-label">Subtotal</span>' +
+                  '<span class="co-row-val">' + fmt(subtotal) + '</span>' +
                 '</div>' +
-                '<span class="co-gift-price">\u20B9 0</span>' +
-              '</div>' : '') +
+                '<div class="co-row-line">' +
+                  '<span class="co-row-label">Shipping</span>' +
+                  '<span class="co-row-val' + (shipping === 0 ? ' co-row-val--free' : '') + '">' + (shipping === 0 ? 'Free' : fmt(shipping)) + '</span>' +
+                '</div>' +
+                discountLineHtml +
+              '</div>' +
+
+              '<div class="co-total">' +
+                '<span class="co-total-label">Total</span>' +
+                '<span class="co-total-val">' + fmt(total) + '</span>' +
+              '</div>' +
+
+              couponHtml +
+
+              (subtotal >= 15000 ?
+                '<div class="co-gift">' +
+                  '<span class="co-gift-tag">Free</span>' +
+                  '<div class="co-gift-info">' +
+                    '<span class="co-gift-name">Cargo Net Organizer</span>' +
+                    '<span class="co-gift-note">Free with orders over \u20B915,000</span>' +
+                  '</div>' +
+                  '<span class="co-gift-price">\u20B9 0</span>' +
+                '</div>' : '') +
+
+            '</div>' +
 
             '<div class="co-secure">' +
               '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>' +
@@ -871,18 +971,112 @@
             '</div>' +
           '</div>';
 
-        /* ── Tabs ── */
-        document.querySelectorAll('.co-tab').forEach(function(tab) {
-          tab.addEventListener('click', function() {
-            document.querySelectorAll('.co-tab').forEach(function(t) { t.classList.remove('is-active'); });
-            tab.classList.add('is-active');
-            var isLogin = tab.dataset.t === 'login';
-            document.getElementById('coLogin').classList.toggle('is-active', isLogin);
-            document.getElementById('coGuest').style.display = isLogin ? 'none' : '';
+        // ══════════════════════════════════════
+        //  STEP NAVIGATION
+        // ══════════════════════════════════════
+
+        var currentStep = 1;
+
+        function goToStep(n) {
+          currentStep = n;
+          // Hide all steps
+          document.querySelectorAll('.co-step').forEach(function(s) { s.classList.remove('is-active'); });
+          document.getElementById('coStep' + n).classList.add('is-active');
+
+          // Update progress
+          document.querySelectorAll('.co-progress__step').forEach(function(s) {
+            var sn = parseInt(s.dataset.step);
+            s.classList.remove('is-active', 'is-done');
+            if (sn === n) s.classList.add('is-active');
+            else if (sn < n) s.classList.add('is-done');
+          });
+          document.querySelectorAll('.co-progress__line').forEach(function(l) {
+            var after = parseInt(l.dataset.after);
+            l.classList.toggle('is-done', after < n);
+          });
+
+          // Scroll to top of form
+          document.querySelector('.co-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── Step 1: OTP Flow ──
+        var phoneInput = document.getElementById('coPhone');
+        var otpSendBtn = document.getElementById('coOtpSend');
+        var otpSection = document.getElementById('coOtpSection');
+        var otpBoxes = document.querySelectorAll('.co-otp-box');
+        var verifyBtn = document.getElementById('coVerify');
+        var timerEl = document.getElementById('coTimerVal');
+
+        otpSendBtn.addEventListener('click', function() {
+          var phone = phoneInput.value.replace(/\s/g, '');
+          if (phone.length < 10) {
+            phoneInput.focus();
+            phoneInput.style.borderBottomColor = 'var(--co-accent)';
+            setTimeout(function() { phoneInput.style.borderBottomColor = ''; }, 1500);
+            return;
+          }
+          // Show OTP section
+          otpSection.style.display = 'block';
+          otpSendBtn.disabled = true;
+          otpSendBtn.textContent = 'OTP Sent';
+          otpBoxes[0].focus();
+
+          // Timer countdown
+          var sec = 30;
+          timerEl.textContent = sec;
+          var timer = setInterval(function() {
+            sec--;
+            timerEl.textContent = sec;
+            if (sec <= 0) {
+              clearInterval(timer);
+              otpSendBtn.disabled = false;
+              otpSendBtn.textContent = 'Resend OTP';
+            }
+          }, 1000);
+        });
+
+        // OTP auto-advance
+        otpBoxes.forEach(function(box, i) {
+          box.addEventListener('input', function() {
+            if (box.value.length === 1 && i < otpBoxes.length - 1) {
+              otpBoxes[i + 1].focus();
+            }
+            // Check if all filled
+            var filled = Array.from(otpBoxes).every(function(b) { return b.value.length === 1; });
+            verifyBtn.disabled = !filled;
+          });
+          box.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && !box.value && i > 0) {
+              otpBoxes[i - 1].focus();
+            }
           });
         });
 
-        /* ── Payment ── */
+        verifyBtn.addEventListener('click', function() {
+          goToStep(2);
+        });
+
+        // ── Step 2: Address ──
+        document.getElementById('coBack2').addEventListener('click', function() { goToStep(1); });
+        document.getElementById('coNext2').addEventListener('click', function() {
+          // Basic validation
+          var fields = ['coFirstName', 'coLastName', 'coEmail', 'coStreet', 'coCity', 'coState', 'coPIN'];
+          var valid = true;
+          fields.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (!el.value.trim()) {
+              el.style.borderBottomColor = 'var(--co-accent)';
+              setTimeout(function() { el.style.borderBottomColor = ''; }, 1500);
+              if (valid) el.focus();
+              valid = false;
+            }
+          });
+          if (valid) goToStep(3);
+        });
+
+        // ── Step 3: Payment ──
+        document.getElementById('coBack3').addEventListener('click', function() { goToStep(2); });
+
         document.querySelectorAll('.co-pay').forEach(function(opt) {
           opt.addEventListener('click', function() {
             document.querySelectorAll('.co-pay').forEach(function(o) { o.classList.remove('is-on'); });
@@ -893,90 +1087,57 @@
           });
         });
 
-        /* ── Coupons ── */
-        var COUPONS = [
-          { code: 'AWAY10', discount: 10, type: 'percent', desc: '10% off your order', min: 0 },
-          { code: 'FIRST500', discount: 500, type: 'flat', desc: '\u20B9500 off on first order', min: 5000 },
-          { code: 'FREESHIP', discount: 499, type: 'shipping', desc: 'Free shipping on any order', min: 0 }
-        ];
-
-        var codesList = document.getElementById('coCodesList');
-        if (codesList) {
-          codesList.innerHTML = COUPONS.map(function(c) {
-            return '<div class="co-code" data-code="' + c.code + '">' +
-              '<div class="co-code-left">' +
-                '<span class="co-code-name">' + c.code + '</span>' +
-                '<span class="co-code-desc">' + c.desc + '</span>' +
-              '</div>' +
-              '<button class="co-code-use">Apply</button>' +
-            '</div>';
-          }).join('');
-          codesList.querySelectorAll('.co-code').forEach(function(card) {
-            card.addEventListener('click', function() {
-              document.getElementById('coCouponIn').value = card.dataset.code;
-              document.getElementById('coCouponBtn').click();
-            });
-          });
-        }
-
-        document.getElementById('coCouponBtn').addEventListener('click', function() {
-          var input = document.getElementById('coCouponIn');
-          var msg = document.getElementById('coCouponMsg');
-          var code = input.value.trim().toUpperCase();
-          var coupon = COUPONS.find(function(c) { return c.code === code; });
-          if (coupon) {
-            var discountAmt = 0;
-            if (coupon.type === 'percent') discountAmt = Math.round(subtotal * coupon.discount / 100);
-            else if (coupon.type === 'flat') discountAmt = coupon.discount;
-            else if (coupon.type === 'shipping') discountAmt = shipping;
-            if (coupon.min && subtotal < coupon.min) {
-              msg.innerHTML = '<p class="co-coupon-msg co-coupon-msg--err">Min. order \u20B9' + coupon.min.toLocaleString('en-IN') + ' required</p>';
-            } else {
-              msg.innerHTML = '<p class="co-coupon-msg co-coupon-msg--ok">Applied! You save ' + fmt(discountAmt) + '</p>';
-              var totalEl = document.querySelector('.co-total-val');
-              var submitBtn = document.getElementById('coSubmit');
-              var newTotal = Math.max(0, total - discountAmt);
-              if (totalEl) totalEl.textContent = fmt(newTotal);
-              if (submitBtn) submitBtn.textContent = 'Place Order \u2014 ' + fmt(newTotal);
-            }
-          } else {
-            msg.innerHTML = code ? '<p class="co-coupon-msg co-coupon-msg--err">Invalid coupon code</p>' : '';
-          }
-        });
-
-        /* ── Submit ── */
+        // ── Submit ──
         document.getElementById('coSubmit').addEventListener('click', function() {
           alert('Order placed successfully! Thank you for shopping with AWAY.');
           localStorage.removeItem('awayCart');
+          localStorage.removeItem('awayCoupon');
           window.location.href = '../home/';
         });
 
-        /* ── Scroll ── */
-        var lastScroll = 0;
-        var announcement = document.getElementById('homeAnnouncement');
-        var nav = document.getElementById('homeNav');
-        window.addEventListener('scroll', function() {
-          var y = window.scrollY;
-          if (y > 60 && y > lastScroll) {
-            announcement.classList.add('is-hidden');
-            nav.classList.add('is-hidden');
-          } else {
-            announcement.classList.remove('is-hidden');
-            nav.classList.remove('is-hidden');
-          }
-          lastScroll = y;
-        }, { passive: true });
+        // ── Coupon Remove ──
+        var couponRemoveBtn = document.getElementById('coCouponRemove');
+        if (couponRemoveBtn) {
+          couponRemoveBtn.addEventListener('click', function() {
+            localStorage.removeItem('awayCoupon');
+            window.location.reload();
+          });
+        }
 
-        /* ── Mobile menu ── */
-        var mobileMenu = document.getElementById('mobileMenu');
-        document.getElementById('hamburgerOpen').addEventListener('click', function() { mobileMenu.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
-        document.getElementById('hamburgerClose').addEventListener('click', function() { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; });
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-            mobileMenu.classList.remove('is-open');
-            document.body.style.overflow = '';
-          }
+        // ── Collapsible Summary ──
+        document.getElementById('coSummaryToggle').addEventListener('click', function() {
+          document.getElementById('coSummary').classList.toggle('is-expanded');
         });
+
+        // ── Nav / Scroll / Mobile Menu ──
+        initNav();
+
+        function initNav() {
+          var lastScroll = 0;
+          var announcement = document.getElementById('homeAnnouncement');
+          var nav = document.getElementById('homeNav');
+          window.addEventListener('scroll', function() {
+            var y = window.scrollY;
+            if (y > 60 && y > lastScroll) {
+              announcement.classList.add('is-hidden');
+              nav.classList.add('is-hidden');
+            } else {
+              announcement.classList.remove('is-hidden');
+              nav.classList.remove('is-hidden');
+            }
+            lastScroll = y;
+          }, { passive: true });
+
+          var mobileMenu = document.getElementById('mobileMenu');
+          document.getElementById('hamburgerOpen').addEventListener('click', function() { mobileMenu.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
+          document.getElementById('hamburgerClose').addEventListener('click', function() { mobileMenu.classList.remove('is-open'); document.body.style.overflow = ''; });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+              mobileMenu.classList.remove('is-open');
+              document.body.style.overflow = '';
+            }
+          });
+        }
 
       })();
     </script>
