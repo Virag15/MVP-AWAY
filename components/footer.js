@@ -35,7 +35,7 @@
         '<div class="home-footer__stat"><span class="home-footer__stat-label">Google Reviews</span><span class="home-footer__stat-value">4.5<span class="home-footer__stars"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg class="empty" viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span></span></div>' +
       '</div>' +
       '<div class="home-footer__bottom">' +
-        '<div class="home-footer__payments"><img src="../assets/amex.png" alt="Amex"/><img src="../assets/gpay.png" alt="Google Pay"/><img src="../assets/mastercard.png" alt="Mastercard"/><img src="../assets/visa.png" alt="Visa"/><img src="../assets/upi.png" alt="UPI"/></div>' +
+        '<div class="home-footer__payments"><img src="../assets/amex.webp" alt="Amex"/><img src="../assets/gpay.webp" alt="Google Pay"/><img src="../assets/mastercard.webp" alt="Mastercard"/><img src="../assets/visa.webp" alt="Visa"/><img src="../assets/upi.webp" alt="UPI"/></div>' +
         '<span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>' +
       '</div>' +
     '</footer>';

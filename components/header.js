@@ -27,7 +27,7 @@
       '<div class="home-nav__links">' +
         '<div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>' +
         '<div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>' +
-        '<div class="home-nav__col"><a href="../support/#faq">FAQ</a><a href="#">Instagram</a><a href="#">Facebook</a></div>' +
+        '<div class="home-nav__col"><a href="../compare/">Compare</a><a href="../support/#faq">FAQ</a><a href="#">Instagram</a></div>' +
         '<div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>' +
       '</div>' +
       '<div class="home-nav__right">' +
@@ -48,7 +48,7 @@
       '</div>' +
       '<div class="home-mobile-menu__links">' +
         '<a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>' +
-        '<a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a><a href="../support/#faq">FAQ</a>' +
+        '<a href="../compare/">Compare</a><a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a>' +
       '</div>' +
       '<div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>' +
     '</div>' +

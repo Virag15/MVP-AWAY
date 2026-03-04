@@ -183,6 +183,12 @@
       scroll-snap-type: none;
     }
 
+    .home-bestsellers__grid .home-product {
+      flex: 0 0 calc(25% - 1.125rem);
+      min-width: 280px;
+      scroll-snap-align: start;
+    }
+
     /* ── CATEGORIES ── */
     .home-categories {
       position: relative;
@@ -493,6 +499,14 @@
     /* ══════════════════════════════════════
          RESPONSIVE — MOBILE (home-page-specific)
          ══════════════════════════════════════ */
+    /* Performance: defer rendering of off-screen sections */
+    .home-icons,
+    .home-editorial,
+    .home-style {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+
     @media (max-width: 768px) {
       .home-hero {
         height: 100vh;
@@ -506,6 +520,11 @@
 
       .home-bestsellers {
         padding: 2rem 1.5rem;
+      }
+
+      .home-bestsellers__grid .home-product {
+        flex: 0 0 70%;
+        min-width: 220px;
       }
 
       .home-categories {
@@ -545,7 +564,7 @@
     <!-- Hero — pinned behind everything -->
     <section class="home-hero">
       <video class="home-hero__img" autoplay muted loop playsinline>
-        <source src="../assets/videos/Roofbox_Video_With_New_Terrain.mp4" type="video/mp4" />
+        <source src="../assets/videos/Roofbox_Video_With_New_Terrain.webm" type="video/webm" />
       </video>
     </section>
 
@@ -560,7 +579,7 @@
       </div>
       <div class="home-categories__grid">
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/RoofBox.jpg" alt="Roofbox" loading="lazy" />
+          <img src="../assets/RoofBox.webp" alt="Roofbox" loading="lazy" decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofbox</p>
@@ -572,7 +591,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag" loading="lazy" />
+          <img src="../assets/Roofbag%20on%20car.webp" alt="Roofbag" loading="lazy" decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofbag</p>
@@ -584,7 +603,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg" alt="Roofrack" loading="lazy" />
+          <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Roofrack" loading="lazy" decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofrack</p>
@@ -596,7 +615,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg" alt="Crossbars" loading="lazy" />
+          <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Crossbars" loading="lazy" decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Crossbars</p>
@@ -644,8 +663,8 @@
               data-name="Roofbox 540L"
               data-variant="Glossy"
               data-price="24999"
-              data-image="../assets/RoofBox.jpg">Add</button>
-            <img src="../assets/RoofBox.jpg" alt="Roofbox 540L Glossy" class="home-product__img" loading="lazy" />
+              data-image="../assets/RoofBox.webp">Add</button>
+            <img src="../assets/RoofBox.webp" alt="Roofbox 540L Glossy" class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 24,999</span>
@@ -662,8 +681,8 @@
               data-name="Roofbox 540L"
               data-variant="Textured"
               data-price="26999"
-              data-image="../assets/RoofBox2.png">Add</button>
-            <img src="../assets/RoofBox2.png" alt="Roofbox 540L Textured" class="home-product__img" loading="lazy" />
+              data-image="../assets/RoofBox2.webp">Add</button>
+            <img src="../assets/RoofBox2.webp" alt="Roofbox 540L Textured" class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 26,999</span>
@@ -679,8 +698,8 @@
               data-id="roofbag-explorer-xl"
               data-name="Explorer XL"
               data-price="7999"
-              data-image="../assets/Roofbag%20on%20car.png">Add</button>
-            <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag Explorer XL" class="home-product__img" loading="lazy" />
+              data-image="../assets/Roofbag%20on%20car.webp">Add</button>
+            <img src="../assets/Roofbag%20on%20car.webp" alt="Roofbag Explorer XL" class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Explorer XL</p>
               <span class="home-product__price">&#8377; 7,999</span>
@@ -697,9 +716,9 @@
               data-name="Aero Crossbars"
               data-variant="Black"
               data-price="6999"
-              data-image="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg">Add</button>
-            <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg" alt="Aero Crossbars" class="home-product__img"
-              loading="lazy" />
+              data-image="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp">Add</button>
+            <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Aero Crossbars" class="home-product__img"
+              loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Aero Crossbars</p>
               <span class="home-product__price">&#8377; 6,999</span>
@@ -715,9 +734,9 @@
               data-id="roofrack-platform"
               data-name="Platform Rack"
               data-price="14999"
-              data-image="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg">Add</button>
-            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg" alt="Platform Rack" class="home-product__img"
-              loading="lazy" />
+              data-image="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp">Add</button>
+            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Platform Rack" class="home-product__img"
+              loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Platform Rack</p>
               <span class="home-product__price">&#8377; 14,999</span>
@@ -734,9 +753,9 @@
               data-name="Adventure Pro"
               data-price="8999"
               data-original-price="11249"
-              data-image="../assets/Roofbag%20on%20car.png">Add</button>
-            <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag Adventure Pro" class="home-product__img"
-              loading="lazy" />
+              data-image="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp">Add</button>
+            <img src="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp" alt="Roofbag Adventure Pro" class="home-product__img"
+              loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Adventure Pro</p>
               <span class="home-product__price"><span class="home-product__price--sale">&#8377; 8,999</span> <span
@@ -762,19 +781,19 @@
       </div>
       <div class="home-icons__grid">
         <div class="home-icons__card">
-          <img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.jpg" alt="Community photo" loading="lazy" />
+          <img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.webp" alt="Community photo" loading="lazy" decoding="async" />
           <span class="home-icons__handle">@adventurerkim</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/Jimny%20Render/Jimny02.jpg" alt="Community photo" loading="lazy" />
+          <img src="../assets/Jimny%20Render/Jimny02.webp" alt="Community photo" loading="lazy" decoding="async" />
           <span class="home-icons__handle">@overlndlife</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/KIA%20Seltos%20/Kia-seltos1.jpg" alt="Community photo" loading="lazy" />
+          <img src="../assets/KIA%20Seltos%20/Kia-seltos1.webp" alt="Community photo" loading="lazy" decoding="async" />
           <span class="home-icons__handle">@rooftopnomad</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue1.jpg" alt="Community photo" loading="lazy" />
+          <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue1.webp" alt="Community photo" loading="lazy" decoding="async" />
           <span class="home-icons__handle">@weekndexplorer</span>
         </div>
       </div>
@@ -796,7 +815,7 @@
 
   <!-- Editorial Banner -->
   <section class="home-editorial">
-    <img src="../assets/hero.png" alt="AWAY" class="home-editorial__img" loading="lazy" />
+    <img src="../assets/hero.webp" alt="AWAY" class="home-editorial__img" loading="lazy" decoding="async" />
   </section>
 
   <!-- How to Style -->
@@ -813,32 +832,32 @@
     </div>
     <div class="home-style__grid">
       <div class="home-style__card">
-        <video autoplay muted loop playsinline>
-          <source src="../assets/videos/Cinematic_Snowy_Mountain_Car_Animation.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="none">
+          <source src="../assets/videos/Cinematic_Snowy_Mountain_Car_Animation.webm" type="video/webm" />
         </video>
         <span class="home-style__handle">@adventurerkim</span>
       </div>
       <div class="home-style__card">
-        <video autoplay muted loop playsinline>
-          <source src="../assets/videos/Roofbox_Video_With_New_Terrain.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="none">
+          <source src="../assets/videos/Roofbox_Video_With_New_Terrain.webm" type="video/webm" />
         </video>
         <span class="home-style__handle">@constanza_vazquez</span>
       </div>
       <div class="home-style__card">
-        <video autoplay muted loop playsinline>
-          <source src="../assets/videos/ew.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="none">
+          <source src="../assets/videos/ew.webm" type="video/webm" />
         </video>
         <span class="home-style__handle">@barbara_ines</span>
       </div>
       <div class="home-style__card">
-        <video autoplay muted loop playsinline>
-          <source src="../assets/videos/Retro_Roofbox_Product_Video_Generation.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="none">
+          <source src="../assets/videos/Retro_Roofbox_Product_Video_Generation.webm" type="video/webm" />
         </video>
         <span class="home-style__handle">@mario.ibeas</span>
       </div>
       <div class="home-style__card">
-        <video autoplay muted loop playsinline>
-          <source src="../assets/videos/ew.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="none">
+          <source src="../assets/videos/ew.webm" type="video/webm" />
         </video>
         <span class="home-style__handle">@rooftopnomad</span>
       </div>
@@ -901,6 +920,19 @@
           grid.scrollLeft = scrollLeft - (x - startX) * 1.5;
         });
       }
+
+      /* ── Lazy-load off-screen videos ── */
+      document.querySelectorAll('video[preload="none"]').forEach(video => {
+        const io = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            video.preload = 'auto';
+            video.load();
+            video.play();
+            io.disconnect();
+          }
+        }, { rootMargin: '300px' });
+        io.observe(video);
+      });
 
     })();
   </script>

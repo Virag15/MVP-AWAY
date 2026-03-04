@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Compare rooftop cargo products side by side. Roofboxes, roofbags, crossbars and roofracks." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <link rel="stylesheet" href="../components/shared.css">
+    <title>Compare Products — AWAY</title>
+
+    <style>
+      :root {
+        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: #fff; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         PAGE HEADER
+         ══════════════════════════════════════ */
+      .cmp-header {
+        padding: 120px 2rem 0;
+        display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      }
+      .cmp-header__title {
+        font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600; color: #000; letter-spacing: -0.02em; text-transform: uppercase; margin: 0;
+      }
+      .cmp-header__title em { font-style: italic; }
+      .cmp-header__sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase; white-space: nowrap;
+      }
+
+      /* ══════════════════════════════════════
+         SELECTOR SECTION
+         ══════════════════════════════════════ */
+      /* ── Category Selector Strip ── */
+      .cmp-cats {
+        padding: 2rem 2rem 0;
+        display: flex; align-items: center; gap: 0;
+        border-bottom: 1px solid #e3dede;
+      }
+      .cmp-cats__label {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 600;
+        color: #9a8f8f; letter-spacing: 0.02em; text-transform: uppercase;
+        margin-right: 1.5rem; white-space: nowrap;
+      }
+      .cmp-cat {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #9a8f8f;
+        background: none; border: none; border-bottom: 2px solid transparent;
+        padding: 0.8rem 1.5rem; cursor: pointer; white-space: nowrap;
+        transition: all 0.2s ease; position: relative;
+      }
+      .cmp-cat:hover { color: #1a1a1a; }
+      .cmp-cat.is-active {
+        color: #1a1a1a; font-weight: 600;
+        border-bottom-color: #EC0201;
+      }
+      .cmp-cat__count {
+        font-size: 0.45rem; font-weight: 600; color: #9a8f8f;
+        margin-left: 0.3rem;
+      }
+      .cmp-cat.is-active .cmp-cat__count { color: #EC0201; }
+
+      .cmp-selectors {
+        padding: 2rem 2rem 2rem;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      }
+
+      /* ── Individual Slot ── */
+      .cmp-slot {
+        position: relative; overflow: hidden;
+        display: flex; flex-direction: column;
+        background: #faf8f8;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Slot number badge */
+      .cmp-slot__num {
+        position: absolute; top: 0; left: 0; z-index: 2;
+        width: 28px; height: 28px;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        color: #fff; background: #1a1a1a; letter-spacing: 0.02em;
+      }
+      .cmp-slot.is-filled .cmp-slot__num { background: #EC0201; }
+
+      /* ── Empty State ── */
+      .cmp-slot__empty {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 3rem 2rem; min-height: 420px; cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .cmp-slot__empty:hover { background: #f5f2f2; }
+      .cmp-slot__empty-ring {
+        width: 72px; height: 72px; border-radius: 50%;
+        border: 1.5px dashed #d1c8c8; display: flex; align-items: center; justify-content: center;
+        margin-bottom: 1.25rem; transition: all 0.3s ease;
+      }
+      .cmp-slot__empty:hover .cmp-slot__empty-ring {
+        border-color: #EC0201; border-style: solid;
+        transform: scale(1.05);
+      }
+      .cmp-slot__empty-ring svg {
+        width: 24px; height: 24px; stroke: #d1c8c8; fill: none; stroke-width: 1.5;
+        transition: stroke 0.3s ease;
+      }
+      .cmp-slot__empty:hover .cmp-slot__empty-ring svg { stroke: #EC0201; }
+      .cmp-slot__empty-label {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+      .cmp-slot__empty-hint {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+
+      /* ── Filled State ── */
+      .cmp-slot__product {
+        display: flex; flex-direction: column; align-items: center; width: 100%;
+        animation: slotFadeIn 0.4s ease both;
+      }
+      @keyframes slotFadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .cmp-slot__img-wrap {
+        width: 100%; aspect-ratio: 1/1; background: #f0edec; overflow: hidden;
+        position: relative;
+      }
+      .cmp-slot__img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .cmp-slot:hover .cmp-slot__img { transform: scale(1.04); }
+      .cmp-slot__badge {
+        position: absolute; top: 0.75rem; left: 0.75rem; z-index: 1;
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em;
+        background: #EC0201; color: #fff; padding: 0.25rem 0.5rem; line-height: 1;
+      }
+      .cmp-slot__badge--pick { background: #1a1a1a; }
+      .cmp-slot__details {
+        width: 100%; padding: 1.25rem 1.25rem 0;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem;
+      }
+      .cmp-slot__category {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase;
+      }
+      .cmp-slot__name {
+        font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2;
+      }
+      .cmp-slot__variant {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .cmp-slot__price-row {
+        display: flex; align-items: baseline; gap: 0.4rem; margin-top: 0.4rem;
+      }
+      .cmp-slot__price {
+        font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: #1a1a1a;
+      }
+      .cmp-slot__price--sale { color: #EC0201; }
+      .cmp-slot__price--original {
+        font-size: 0.7rem; font-weight: 400; color: #9a8f8f; text-decoration: line-through;
+      }
+      .cmp-slot__actions {
+        width: 100%; padding: 1rem 1.25rem 1.25rem;
+        display: flex; gap: 0.5rem; align-items: center;
+      }
+      .cmp-slot__add {
+        flex: 1; font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
+        background: #1a1a1a; border: none; padding: 0.75rem 1rem; cursor: pointer;
+        transition: background 0.2s ease; text-align: center;
+      }
+      .cmp-slot__add:hover { background: #333; }
+      .cmp-slot__swap {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: #9a8f8f; background: none; border: 1px solid #e3dede;
+        padding: 0.65rem 0.75rem; cursor: pointer; text-transform: uppercase;
+        letter-spacing: 0.01em; transition: all 0.15s ease; white-space: nowrap;
+      }
+      .cmp-slot__swap:hover { border-color: #1a1a1a; color: #1a1a1a; }
+      .cmp-slot__remove {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #9a8f8f; background: none; border: none; cursor: pointer;
+        text-transform: uppercase; letter-spacing: 0.01em;
+        padding: 0.65rem 0; transition: color 0.15s ease;
+      }
+      .cmp-slot__remove:hover { color: #EC0201; }
+
+      /* ══════════════════════════════════════
+         PRODUCT PICKER MODAL
+         ══════════════════════════════════════ */
+      .cmp-picker-overlay {
+        position: fixed; inset: 0; z-index: 199;
+        background: rgba(0,0,0,0.45); backdrop-filter: blur(2px);
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .cmp-picker-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+      .cmp-picker {
+        position: fixed; top: 50%; left: 50%; z-index: 200;
+        transform: translate(-50%, -50%) scale(0.96);
+        width: 90vw; max-width: 720px; max-height: 85vh;
+        background: #fff; display: flex; flex-direction: column;
+        opacity: 0; pointer-events: none;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      }
+      .cmp-picker.is-open {
+        opacity: 1; pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .cmp-picker__header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.5rem 1.75rem; border-bottom: 1px solid #e3dede; flex-shrink: 0;
+      }
+      .cmp-picker__title {
+        font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #1a1a1a;
+      }
+      .cmp-picker__close {
+        background: none; border: none; cursor: pointer; padding: 0;
+        transition: opacity 0.2s ease;
+      }
+      .cmp-picker__close:hover { opacity: 0.5; }
+      .cmp-picker__close svg { width: 18px; height: 18px; stroke: #1a1a1a; fill: none; stroke-width: 2; }
+
+      /* Category Tabs */
+      .cmp-picker__tabs {
+        display: flex; gap: 0; border-bottom: 1px solid #e3dede; flex-shrink: 0;
+        overflow-x: auto; scrollbar-width: none;
+      }
+      .cmp-picker__tabs::-webkit-scrollbar { display: none; }
+      .cmp-picker__tab {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #9a8f8f;
+        background: none; border: none; border-bottom: 2px solid transparent;
+        padding: 1rem 1.5rem; cursor: pointer; white-space: nowrap;
+        transition: all 0.2s ease;
+      }
+      .cmp-picker__tab:hover { color: #1a1a1a; }
+      .cmp-picker__tab.is-active {
+        color: #1a1a1a; font-weight: 600;
+        border-bottom-color: #EC0201;
+      }
+      .cmp-picker__tab-count {
+        font-size: 0.45rem; font-weight: 600; color: #9a8f8f;
+        margin-left: 0.3rem;
+      }
+      .cmp-picker__tab.is-active .cmp-picker__tab-count { color: #EC0201; }
+
+      /* Product Grid in picker */
+      .cmp-picker__grid {
+        flex: 1; overflow-y: auto; padding: 1.25rem;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .cmp-pick-card {
+        background: #faf8f8; cursor: pointer;
+        display: flex; flex-direction: column; overflow: hidden;
+        transition: all 0.2s ease; position: relative;
+      }
+      .cmp-pick-card:hover { background: #f0edec; }
+      .cmp-pick-card.is-selected {
+        outline: 2px solid #EC0201; outline-offset: -2px;
+      }
+      .cmp-pick-card.is-taken {
+        opacity: 0.35; pointer-events: none;
+      }
+      .cmp-pick-card__img-wrap {
+        width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #f0edec;
+      }
+      .cmp-pick-card__img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .cmp-pick-card:hover .cmp-pick-card__img { transform: scale(1.04); }
+      .cmp-pick-card__info { padding: 0.75rem; }
+      .cmp-pick-card__name {
+        font-family: var(--font-display); font-size: 0.65rem; font-weight: 600;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0em;
+        margin-bottom: 0.1rem; line-height: 1.3;
+      }
+      .cmp-pick-card__variant {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .cmp-pick-card__price {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #1a1a1a; margin-top: 0.35rem;
+      }
+      .cmp-pick-card__price--sale { color: #EC0201; }
+      .cmp-pick-card__price--original {
+        font-size: 0.55rem; font-weight: 400; color: #9a8f8f;
+        text-decoration: line-through; margin-left: 0.25rem;
+      }
+      .cmp-pick-card__check {
+        position: absolute; top: 0.5rem; right: 0.5rem;
+        width: 20px; height: 20px; border-radius: 50%;
+        background: #EC0201; display: none;
+        align-items: center; justify-content: center;
+      }
+      .cmp-pick-card.is-selected .cmp-pick-card__check { display: flex; }
+      .cmp-pick-card__check svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 3; }
+      .cmp-pick-card__badge {
+        position: absolute; top: 0.5rem; left: 0.5rem;
+        font-family: var(--font-body); font-size: 0.4rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em;
+        background: #EC0201; color: #fff; padding: 0.2rem 0.4rem; line-height: 1;
+      }
+      .cmp-pick-card__badge--pick { background: #1a1a1a; }
+
+      .cmp-picker__empty {
+        grid-column: 1 / -1; text-align: center; padding: 3rem;
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+
+      /* ══════════════════════════════════════
+         COMPARISON TABLE
+         ══════════════════════════════════════ */
+      .cmp-table-wrap { padding: 0 2rem 3rem; }
+      .cmp-table { width: 100%; border-collapse: collapse; }
+
+      .cmp-table__section-header td {
+        font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em; color: #1a1a1a;
+        padding: 1.5rem 0 0.5rem; border-bottom: 1.5px solid #1a1a1a;
+      }
+
+      .cmp-table__row td {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #5c5454; padding: 0.75rem 1rem 0.75rem 0;
+        border-bottom: 1px solid #f0ecec; vertical-align: top; line-height: 1.5;
+      }
+      .cmp-table__row td:first-child {
+        font-weight: 600; color: #1a1a1a; text-transform: uppercase;
+        font-size: 0.625rem; letter-spacing: 0.01em; width: 160px; white-space: nowrap;
+      }
+
+      .cmp-table__row td .cmp-check {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 18px; height: 18px; border-radius: 50%;
+      }
+      .cmp-check--yes { background: #1a1a1a; }
+      .cmp-check--yes svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 2.5; }
+      .cmp-check--no { background: #f0ecec; }
+      .cmp-check--no svg { width: 10px; height: 10px; stroke: #ccc; fill: none; stroke-width: 2.5; }
+
+      .cmp-empty-state { padding: 4rem 2rem; text-align: center; }
+      .cmp-empty-state__text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #9a8f8f; letter-spacing: 0.01em; text-transform: uppercase;
+      }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 900px) {
+        .cmp-cats { padding: 1.5rem 1.5rem 0; overflow-x: auto; scrollbar-width: none; }
+        .cmp-cats::-webkit-scrollbar { display: none; }
+        .cmp-cats__label { display: none; }
+        .cmp-cat { padding: 0.7rem 1rem; font-size: 0.6rem; }
+        .cmp-selectors { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; }
+        .cmp-slot__empty { min-height: 200px; padding: 2rem 1.5rem; }
+        .cmp-header { padding: 100px 1.5rem 0; }
+        .cmp-table-wrap { padding: 0 1.5rem 2rem; overflow-x: auto; }
+        .cmp-table { min-width: 600px; }
+        .cmp-table__row td:first-child { width: 120px; }
+        .cmp-picker { width: 96vw; max-height: 90vh; }
+        .cmp-picker__grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      }
+
+      @media (max-width: 480px) {
+        .cmp-header { padding: 90px 1rem 0; }
+        .cmp-selectors { padding: 1rem; gap: 0.75rem; }
+        .cmp-table-wrap { padding: 0 1rem 2rem; }
+        .cmp-picker__grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; padding: 0.75rem; }
+        .cmp-pick-card__info { padding: 0.5rem; }
+        .cmp-picker__tab { padding: 0.75rem 1rem; font-size: 0.55rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="site-header"></div>
+
+    <!-- PAGE HEADER -->
+    <div class="cmp-header">
+      <div>
+        <h1 class="cmp-header__title">Compare <em>Products</em></h1>
+        <p class="home-section-sub" style="margin-top:0.3rem">Find your perfect match</p>
+      </div>
+      <span class="cmp-header__sub">Select up to 3 products</span>
+    </div>
+
+    <!-- CATEGORY STRIP -->
+    <div class="cmp-cats" id="cmpCats"></div>
+
+    <!-- SELECTOR SLOTS -->
+    <div class="cmp-selectors" id="cmpSelectors"></div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="cmp-table-wrap" id="cmpTableWrap"></div>
+
+    <!-- PRODUCT PICKER MODAL -->
+    <div class="cmp-picker-overlay" id="pickerOverlay"></div>
+    <div class="cmp-picker" id="pickerModal">
+      <div class="cmp-picker__header">
+        <span class="cmp-picker__title" id="pickerTitle">Select a Product</span>
+        <button class="cmp-picker__close" id="pickerClose" aria-label="Close picker">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="cmp-picker__tabs" id="pickerTabs"></div>
+      <div class="cmp-picker__grid" id="pickerGrid"></div>
+    </div>
+
+    <!-- PROMO MARQUEE -->
+    <div class="home-promo">
+      <div class="home-promo__track">
+        <span class="home-promo__text">Engineered for the open road <span>&mdash;</span> Built to last</span>
+        <span class="home-promo__text">Free shipping over &#8377;10,000 <span>&mdash;</span> 30 Day Returns</span>
+        <span class="home-promo__text">Premium Rooftop Cargo Systems <span>&mdash;</span> Made for India</span>
+        <span class="home-promo__text">Engineered for the open road <span>&mdash;</span> Built to last</span>
+        <span class="home-promo__text">Free shipping over &#8377;10,000 <span>&mdash;</span> 30 Day Returns</span>
+        <span class="home-promo__text">Premium Rooftop Cargo Systems <span>&mdash;</span> Made for India</span>
+      </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script src="../components/header.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <script>
+    (function () {
+      'use strict';
+
+      /* ══════════════════════════════════════
+         PRODUCT DATA
+         ══════════════════════════════════════ */
+      var PRODUCTS = [
+        { id:'roofbox-540l-glossy', name:'Roofbox 540L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:24999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/RoofBox.webp' },
+        { id:'roofbox-540l-textured', name:'Roofbox 540L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:26999, car:['universal'], badge:'Staff Pick', badgeType:'pick', image:'../assets/RoofBox2.webp' },
+        { id:'roofbox-450l-glossy', name:'Roofbox 450L', variant:'Glossy', category:'roofbox', brand:'AWAY', colour:'black', price:19999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/Roofbox-450.webp' },
+        { id:'roofbox-450l-textured', name:'Roofbox 450L', variant:'Textured', category:'roofbox', brand:'AWAY', colour:'grey', price:21999, car:['universal'], badge:'', badgeType:'', image:'../assets/Roofbox-4501.webp' },
+        { id:'roofbox-540l-white', name:'Roofbox 540L', variant:'White Edition', category:'roofbox', brand:'AWAY Pro', colour:'white', price:27999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/RoofBox.88.webp' },
+        { id:'roofbox-450l-silver', name:'Roofbox 450L', variant:'Silver', category:'roofbox', brand:'AWAY Pro', colour:'silver', price:22999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/Roofbox-4502.webp' },
+        { id:'roofbag-explorer-xl', name:'Explorer XL', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:7999, car:['universal'], badge:'New In', badgeType:'new', image:'../assets/Roofbag%20on%20car.webp' },
+        { id:'roofbag-adventure-pro', name:'Adventure Pro', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:8999, originalPrice:11249, car:['universal'], badge:'Save 20%', badgeType:'sale', image:'../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp' },
+        { id:'roofbag-compact', name:'Roofbag Compact', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/Roofbox-4503.webp' },
+        { id:'roofbag-sport', name:'Roofbag Sport', variant:'', category:'roofbag', brand:'AWAY', colour:'black', price:6999, car:['hatchback','sedan'], badge:'New In', badgeType:'new', image:'../assets/Roofbox-45088.webp' },
+        { id:'roofbag-weekend', name:'Roofbag Weekend', variant:'', category:'roofbag', brand:'AWAY', colour:'grey', price:4999, car:['universal'], badge:'', badgeType:'', image:'../assets/Roofbox-4502.webp' },
+        { id:'crossbar-aero-black', name:'Aero Crossbars', variant:'Black', category:'crossbars', brand:'AWAY', colour:'black', price:6999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp' },
+        { id:'crossbar-aero-silver', name:'Aero Crossbars', variant:'Silver', category:'crossbars', brand:'AWAY', colour:'silver', price:7499, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/Cross%20bar%20render%20/Hyundai%20Venue%20/Hyundai-Venue.webp' },
+        { id:'crossbar-heavy-duty', name:'Heavy Duty Crossbars', variant:'', category:'crossbars', brand:'AWAY Pro', colour:'black', price:9999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/Cross%20bar%20render%20/Thar%20Roxx/Thar-Roxx.144.webp' },
+        { id:'crossbar-universal', name:'Universal Fit Crossbars', variant:'', category:'crossbars', brand:'AWAY', colour:'silver', price:5999, car:['universal'], badge:'', badgeType:'', image:'../assets/Cross%20bar%20render%20/XUV%20700/XUV-700-ROOFBOX.webp' },
+        { id:'roofrack-platform', name:'Platform Rack', variant:'Standard', category:'roofrack', brand:'AWAY', colour:'black', price:14999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp' },
+        { id:'roofrack-platform-lg', name:'Platform Rack', variant:'Large', category:'roofrack', brand:'AWAY Pro', colour:'black', price:18999, car:['suv'], badge:'', badgeType:'', image:'../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.136.webp' },
+        { id:'roofrack-basket', name:'Basket Rack Pro', variant:'', category:'roofrack', brand:'AWAY', colour:'black', price:12999, car:['suv','sedan'], badge:'New In', badgeType:'new', image:'../assets/XUV%20700%20Roofbox%20render%20/XUV-700-ROOFBOX-render.webp' },
+        { id:'roofrack-low-profile', name:'Low Profile Rack', variant:'', category:'roofrack', brand:'AWAY', colour:'silver', price:11999, car:['suv','sedan'], badge:'', badgeType:'', image:'../assets/XUV%20700%20Roofbox%20render%20/XUV-700-ROOFBOX1-render.webp' },
+        { id:'roofrack-expedition', name:'Expedition Rack', variant:'', category:'roofrack', brand:'AWAY Pro', colour:'black', price:22999, car:['suv'], badge:'Staff Pick', badgeType:'pick', image:'../assets/XUV%20700%20/XUV-700-ROOFBOX.webp' },
+      ];
+
+      var CATEGORY_LABELS = { roofbox:'Roofbox', roofbag:'Roofbag', crossbars:'Crossbars', roofrack:'Roofrack' };
+      var CATEGORIES = ['all','roofbox','roofbag','crossbars','roofrack'];
+      var CATEGORY_TAB_LABELS = { all:'All Products', roofbox:'Roofbox', roofbag:'Roofbag', crossbars:'Crossbars', roofrack:'Roofrack' };
+
+      var SPECS = {
+        roofbox: { capacity:'450L / 540L', dimensions:'200 x 80 x 40 cm (540L)', weight:'18 kg (540L)', maxLoad:'75 kg', material:'ABS Plastic, UV-Resistant', lock:'Central lock with 2 keys', opening:'Dual-side', mounting:'Universal U-bolt', warranty:'1 Year', waterproof:true, aerodynamic:true, foldable:false, fitsWithoutBars:false },
+        roofbag: { capacity:'300L \u2013 450L (varies by model)', dimensions:'120 x 90 x 45 cm (expanded)', weight:'3.5 kg', maxLoad:'50 kg', material:'600D Oxford, PVC Waterproof Lining', lock:'Heavy-duty zippers + storm flap', opening:'Top-load zipper', mounting:'8 adjustable straps', warranty:'1 Year', waterproof:true, aerodynamic:false, foldable:true, fitsWithoutBars:true },
+        crossbars: { capacity:'\u2014', dimensions:'120 cm span (adjustable)', weight:'4.2 kg (pair)', maxLoad:'100 kg (pair)', material:'Anodized Aluminium, Aero Profile', lock:'Anti-theft end caps', opening:'\u2014', mounting:'Universal clamp system', warranty:'1 Year', waterproof:true, aerodynamic:true, foldable:false, fitsWithoutBars:false },
+        roofrack: { capacity:'\u2014', dimensions:'140 x 100 cm (Std) / 160 x 120 cm (Lg)', weight:'22 kg', maxLoad:'150 kg dynamic / 300 kg static', material:'Powder-Coated Steel, Aluminium Decking', lock:'Integrated accessory channels', opening:'\u2014', mounting:'Vehicle-specific brackets', warranty:'1 Year', waterproof:true, aerodynamic:false, foldable:false, fitsWithoutBars:false },
+      };
+
+      /* ══════════════════════════════════════
+         STATE
+         ══════════════════════════════════════ */
+      var slots = [null, null, null];
+      var activeCategory = 'all'; // main page category filter
+      var activePickerSlot = -1;
+      var activePickerCat = 'all';
+
+      /* ══════════════════════════════════════
+         UTILS
+         ══════════════════════════════════════ */
+      function fmt(n) { return '\u20B9 ' + n.toLocaleString('en-IN'); }
+      function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+      function find(id) { return PRODUCTS.find(function(p) { return p.id === id; }); }
+      function dname(p) { return p.variant ? p.name + ' ' + p.variant : p.name; }
+
+      function checkSvg() { return '<span class="cmp-check cmp-check--yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>'; }
+      function crossSvg() { return '<span class="cmp-check cmp-check--no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>'; }
+
+      /* ══════════════════════════════════════
+         RENDER CATEGORY STRIP
+         ══════════════════════════════════════ */
+      function renderCatStrip() {
+        var el = document.getElementById('cmpCats');
+        el.innerHTML = '<span class="cmp-cats__label">Category</span>' +
+          CATEGORIES.map(function(cat) {
+            var count = cat === 'all' ? PRODUCTS.length : PRODUCTS.filter(function(p) { return p.category === cat; }).length;
+            var active = activeCategory === cat ? ' is-active' : '';
+            return '<button class="cmp-cat' + active + '" data-cat="' + cat + '">' +
+              CATEGORY_TAB_LABELS[cat] +
+              '<span class="cmp-cat__count">(' + count + ')</span>' +
+            '</button>';
+          }).join('');
+      }
+
+      document.getElementById('cmpCats').addEventListener('click', function(e) {
+        var btn = e.target.closest('.cmp-cat');
+        if (!btn) return;
+        var newCat = btn.dataset.cat;
+        if (newCat === activeCategory) return;
+        activeCategory = newCat;
+        // Clear slots when switching category
+        slots = [null, null, null];
+        renderCatStrip();
+        renderSlots();
+        renderTable();
+      });
+
+      /* ══════════════════════════════════════
+         RENDER SELECTOR SLOTS
+         ══════════════════════════════════════ */
+      function renderSlots() {
+        var el = document.getElementById('cmpSelectors');
+        el.innerHTML = slots.map(function(id, i) {
+          var p = id ? find(id) : null;
+          var numHtml = '<span class="cmp-slot__num">' + (i + 1) + '</span>';
+
+          if (!p) {
+            return '<div class="cmp-slot" data-slot="' + i + '">' +
+              numHtml +
+              '<div class="cmp-slot__empty" data-action="open-picker" data-slot="' + i + '">' +
+                '<div class="cmp-slot__empty-ring">' +
+                  '<svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+                '</div>' +
+                '<span class="cmp-slot__empty-label">Add Product</span>' +
+                '<span class="cmp-slot__empty-hint">Tap to browse catalog</span>' +
+              '</div>' +
+            '</div>';
+          }
+
+          var badgeHtml = p.badge
+            ? '<span class="cmp-slot__badge' + (p.badgeType === 'pick' ? ' cmp-slot__badge--pick' : '') + '">' + p.badge + '</span>'
+            : '';
+
+          var priceHtml = p.originalPrice
+            ? '<span class="cmp-slot__price cmp-slot__price--sale">' + fmt(p.price) + '</span>' +
+              '<span class="cmp-slot__price--original">' + fmt(p.originalPrice) + '</span>'
+            : '<span class="cmp-slot__price">' + fmt(p.price) + '</span>';
+
+          return '<div class="cmp-slot is-filled" data-slot="' + i + '">' +
+            numHtml +
+            '<div class="cmp-slot__product">' +
+              '<div class="cmp-slot__img-wrap">' +
+                badgeHtml +
+                '<img class="cmp-slot__img" src="' + p.image + '" alt="' + dname(p) + '" loading="lazy" />' +
+              '</div>' +
+              '<div class="cmp-slot__details">' +
+                '<span class="cmp-slot__category">' + (CATEGORY_LABELS[p.category] || '') + '</span>' +
+                '<span class="cmp-slot__name">' + p.name + '</span>' +
+                (p.variant ? '<span class="cmp-slot__variant">' + p.variant + '</span>' : '') +
+                '<div class="cmp-slot__price-row">' + priceHtml + '</div>' +
+              '</div>' +
+              '<div class="cmp-slot__actions">' +
+                '<button class="cmp-slot__add" data-id="' + p.id + '">Add to Cart</button>' +
+                '<button class="cmp-slot__swap" data-action="open-picker" data-slot="' + i + '">Swap</button>' +
+                '<button class="cmp-slot__remove" data-slot="' + i + '">Remove</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      /* ══════════════════════════════════════
+         PRODUCT PICKER MODAL
+         ══════════════════════════════════════ */
+      var overlay = document.getElementById('pickerOverlay');
+      var modal = document.getElementById('pickerModal');
+
+      function openPicker(slotIdx) {
+        activePickerSlot = slotIdx;
+        activePickerCat = activeCategory; // default to the page category
+        var titleEl = document.getElementById('pickerTitle');
+        titleEl.textContent = activeCategory === 'all'
+          ? 'Select a Product'
+          : 'Select a ' + CATEGORY_TAB_LABELS[activeCategory];
+        renderPickerTabs();
+        renderPickerGrid();
+        overlay.classList.add('is-open');
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePicker() {
+        overlay.classList.remove('is-open');
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        activePickerSlot = -1;
+      }
+
+      document.getElementById('pickerClose').addEventListener('click', closePicker);
+      overlay.addEventListener('click', closePicker);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closePicker();
+      });
+
+      function renderPickerTabs() {
+        var tabsEl = document.getElementById('pickerTabs');
+        // If a category is selected on the main page, only show that + all
+        var tabCats = activeCategory === 'all' ? CATEGORIES : ['all', activeCategory];
+        tabsEl.innerHTML = tabCats.map(function(cat) {
+          var count = cat === 'all' ? PRODUCTS.length : PRODUCTS.filter(function(p) { return p.category === cat; }).length;
+          var isActive = activePickerCat === cat ? ' is-active' : '';
+          return '<button class="cmp-picker__tab' + isActive + '" data-cat="' + cat + '">' +
+            CATEGORY_TAB_LABELS[cat] +
+            '<span class="cmp-picker__tab-count">(' + count + ')</span>' +
+          '</button>';
+        }).join('');
+      }
+
+      function renderPickerGrid() {
+        var gridEl = document.getElementById('pickerGrid');
+        var filtered = activePickerCat === 'all'
+          ? PRODUCTS
+          : PRODUCTS.filter(function(p) { return p.category === activePickerCat; });
+
+        if (!filtered.length) {
+          gridEl.innerHTML = '<div class="cmp-picker__empty">No products in this category</div>';
+          return;
+        }
+
+        gridEl.innerHTML = filtered.map(function(p) {
+          var isSelected = slots[activePickerSlot] === p.id;
+          var isTaken = !isSelected && slots.indexOf(p.id) !== -1;
+          var cls = 'cmp-pick-card' + (isSelected ? ' is-selected' : '') + (isTaken ? ' is-taken' : '');
+
+          var badgeHtml = p.badge
+            ? '<span class="cmp-pick-card__badge' + (p.badgeType === 'pick' ? ' cmp-pick-card__badge--pick' : '') + '">' + p.badge + '</span>'
+            : '';
+
+          var priceHtml = p.originalPrice
+            ? '<span class="cmp-pick-card__price cmp-pick-card__price--sale">' + fmt(p.price) + '</span>' +
+              '<span class="cmp-pick-card__price--original">' + fmt(p.originalPrice) + '</span>'
+            : '<span class="cmp-pick-card__price">' + fmt(p.price) + '</span>';
+
+          return '<div class="' + cls + '" data-id="' + p.id + '">' +
+            '<div class="cmp-pick-card__img-wrap">' +
+              badgeHtml +
+              '<span class="cmp-pick-card__check"><svg viewBox="0 0 24 24" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>' +
+              '<img class="cmp-pick-card__img" src="' + p.image + '" alt="' + dname(p) + '" loading="lazy" />' +
+            '</div>' +
+            '<div class="cmp-pick-card__info">' +
+              '<div class="cmp-pick-card__name">' + p.name + '</div>' +
+              (p.variant ? '<div class="cmp-pick-card__variant">' + p.variant + '</div>' : '') +
+              '<div>' + priceHtml + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      // Picker tab clicks
+      document.getElementById('pickerTabs').addEventListener('click', function(e) {
+        var tab = e.target.closest('.cmp-picker__tab');
+        if (!tab) return;
+        activePickerCat = tab.dataset.cat;
+        renderPickerTabs();
+        renderPickerGrid();
+      });
+
+      // Picker card clicks
+      document.getElementById('pickerGrid').addEventListener('click', function(e) {
+        var card = e.target.closest('.cmp-pick-card');
+        if (!card || card.classList.contains('is-taken')) return;
+        var id = card.dataset.id;
+
+        if (slots[activePickerSlot] === id) {
+          // Deselect
+          slots[activePickerSlot] = null;
+        } else {
+          slots[activePickerSlot] = id;
+        }
+
+        closePicker();
+        renderSlots();
+        renderTable();
+      });
+
+      /* ══════════════════════════════════════
+         SLOT EVENT DELEGATION
+         ══════════════════════════════════════ */
+      document.getElementById('cmpSelectors').addEventListener('click', function(e) {
+        // Open picker
+        var openBtn = e.target.closest('[data-action="open-picker"]');
+        if (openBtn) {
+          openPicker(parseInt(openBtn.dataset.slot));
+          return;
+        }
+        // Remove
+        var removeBtn = e.target.closest('.cmp-slot__remove');
+        if (removeBtn) {
+          slots[parseInt(removeBtn.dataset.slot)] = null;
+          renderSlots();
+          renderTable();
+          return;
+        }
+        // Add to cart
+        var addBtn = e.target.closest('.cmp-slot__add');
+        if (addBtn) {
+          var p = find(addBtn.dataset.id);
+          if (p && window.addToCart) window.addToCart(p);
+        }
+      });
+
+      /* ══════════════════════════════════════
+         RENDER COMPARISON TABLE
+         ══════════════════════════════════════ */
+      function renderTable() {
+        var selected = slots.filter(Boolean).map(find).filter(Boolean);
+        var wrap = document.getElementById('cmpTableWrap');
+
+        if (selected.length < 2) {
+          wrap.innerHTML = '<div class="cmp-empty-state"><p class="cmp-empty-state__text">Select at least 2 products to compare</p></div>';
+          return;
+        }
+
+        var cols = selected.length + 1;
+        function secRow(label) { return '<tr class="cmp-table__section-header"><td colspan="' + cols + '">' + label + '</td></tr>'; }
+        function dRow(label, vals) { return '<tr class="cmp-table__row"><td>' + label + '</td>' + vals.map(function(v) { return '<td>' + v + '</td>'; }).join('') + '</tr>'; }
+        function bRow(label, vals) { return '<tr class="cmp-table__row"><td>' + label + '</td>' + vals.map(function(v) { return '<td>' + (v ? checkSvg() : crossSvg()) + '</td>'; }).join('') + '</tr>'; }
+
+        var h = '<table class="cmp-table">';
+
+        h += secRow('Overview');
+        h += dRow('Product', selected.map(function(p) { return '<strong>' + dname(p) + '</strong>'; }));
+        h += dRow('Category', selected.map(function(p) { return CATEGORY_LABELS[p.category] || p.category; }));
+        h += dRow('Brand', selected.map(function(p) { return p.brand; }));
+        h += dRow('Colour', selected.map(function(p) { return cap(p.colour); }));
+        h += dRow('Price', selected.map(function(p) {
+          return p.originalPrice
+            ? '<span style="color:#EC0201;font-weight:600">' + fmt(p.price) + '</span> <span style="font-size:0.65rem;color:#9a8f8f;text-decoration:line-through">' + fmt(p.originalPrice) + '</span>'
+            : '<strong>' + fmt(p.price) + '</strong>';
+        }));
+        h += dRow('Compatibility', selected.map(function(p) { return p.car.map(cap).join(', '); }));
+
+        h += secRow('Specifications');
+        h += dRow('Capacity', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].capacity : '\u2014'; }));
+        h += dRow('Dimensions', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].dimensions : '\u2014'; }));
+        h += dRow('Weight', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].weight : '\u2014'; }));
+        h += dRow('Max Load', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].maxLoad : '\u2014'; }));
+        h += dRow('Material', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].material : '\u2014'; }));
+        h += dRow('Lock / Closure', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].lock : '\u2014'; }));
+        h += dRow('Mounting', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].mounting : '\u2014'; }));
+        h += dRow('Warranty', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].warranty : '\u2014'; }));
+
+        h += secRow('Features');
+        h += bRow('Waterproof', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].waterproof : false; }));
+        h += bRow('Aerodynamic', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].aerodynamic : false; }));
+        h += bRow('Foldable', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].foldable : false; }));
+        h += bRow('Fits Without Bars', selected.map(function(p) { return SPECS[p.category] ? SPECS[p.category].fitsWithoutBars : false; }));
+
+        h += secRow('Shipping & Returns');
+        h += dRow('Free Shipping', selected.map(function(p) {
+          return p.price >= 10000
+            ? checkSvg() + ' <span style="font-size:0.6rem;color:#22c55e;margin-left:0.3rem">Eligible</span>'
+            : crossSvg() + ' <span style="font-size:0.6rem;color:#9a8f8f;margin-left:0.3rem">Orders over \u20B910,000</span>';
+        }));
+        h += dRow('Delivery', selected.map(function(p) { return p.category === 'roofrack' ? '7\u201310 business days' : '5\u20137 business days'; }));
+        h += dRow('Returns', selected.map(function() { return '30-day return policy'; }));
+
+        h += '</table>';
+        wrap.innerHTML = h;
+      }
+
+      /* ══════════════════════════════════════
+         URL PARAMS
+         ══════════════════════════════════════ */
+      var params = new URLSearchParams(window.location.search);
+      ['p1','p2','p3'].forEach(function(key, i) {
+        var id = params.get(key);
+        if (id && find(id)) slots[i] = id;
+      });
+      // Auto-detect category from URL params
+      var firstProduct = slots.filter(Boolean).map(find).filter(Boolean)[0];
+      if (firstProduct) activeCategory = firstProduct.category;
+
+      /* ══════════════════════════════════════
+         INIT
+         ══════════════════════════════════════ */
+      renderCatStrip();
+      renderSlots();
+      renderTable();
+
+    })();
+    </script>
+  </body>
+</html>
