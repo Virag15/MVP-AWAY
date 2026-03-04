@@ -7,6 +7,7 @@
   <meta name="description" content="AWAY — Premium rooftop cargo systems. Engineered for the open road." />
   <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+  <link rel="stylesheet" href="../components/shared.css">
   <title>AWAY — Rooftop Cargo Systems</title>
   <style>
     /* ══════════════════════════════════════
@@ -53,256 +54,6 @@
     /* ══════════════════════════════════════
          HOME PAGE — Editorial Minimalism
          ══════════════════════════════════════ */
-
-    /* ── ANNOUNCEMENT BAR ── */
-    .home-announcement {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 51;
-      background: #1a1a1a;
-      overflow: hidden;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      transition: transform 0.4s ease;
-    }
-
-    .home-announcement.is-hidden {
-      transform: translateY(-100%);
-    }
-
-    .home-announcement__track {
-      display: flex;
-      white-space: nowrap;
-      animation: marquee 30s linear infinite;
-    }
-
-    .home-announcement__text {
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      font-weight: 400;
-      color: #fff;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      padding: 0 3rem;
-    }
-
-    .home-announcement__text span {
-      color: #EC0201;
-      font-weight: 600;
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* ── NAV ── */
-    .home-nav {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: #fff;
-      position: fixed;
-      top: 28px;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      transition: transform 0.4s ease;
-    }
-
-    .home-nav.is-hidden {
-      transform: translateY(calc(-100% - 28px));
-    }
-
-    .home-nav__logo {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-
-    .home-nav__logo img {
-      width: 100px;
-      height: auto;
-      display: block;
-    }
-
-    .home-nav__links {
-      display: flex;
-      gap: 4rem;
-      margin-left: 3rem;
-    }
-
-    .home-nav__col {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .home-nav__col a {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #1a1a1a;
-      text-decoration: none;
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-
-    .home-nav__col a.is-red {
-      color: #EC0201;
-    }
-
-    .home-nav__col a:hover {
-      opacity: 0.5;
-    }
-
-    .home-nav__right {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      flex-shrink: 0;
-    }
-
-    .home-nav__cart {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.2em;
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      font-weight: 400;
-      color: #EC0201;
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-
-    .home-nav__cart-count {
-      color: #EC0201;
-      font-weight: 600;
-    }
-
-    .home-nav__cart:hover {
-      opacity: 0.5;
-    }
-
-    /* ── HAMBURGER (mobile) ── */
-    .home-nav__hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      flex-shrink: 0;
-    }
-
-    .home-nav__hamburger svg {
-      display: block;
-    }
-
-    /* ── MOBILE MENU ── */
-    .home-mobile-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem 1.5rem 2rem;
-      transform: translateY(-100%);
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .home-mobile-menu.is-open {
-      transform: translateY(0);
-    }
-
-    .home-mobile-menu__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 3rem;
-    }
-
-    .home-mobile-menu__logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .home-mobile-menu__logo img {
-      width: 90px;
-      height: auto;
-      display: block;
-    }
-
-    .home-mobile-menu__close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .home-mobile-menu__close svg {
-      display: block;
-    }
-
-    .home-mobile-menu__links {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .home-mobile-menu__links a {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 600;
-      color: #000;
-      text-decoration: none;
-      letter-spacing: 0em;
-      text-transform: uppercase;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid #e3dede;
-      transition: opacity 0.2s ease;
-    }
-
-    .home-mobile-menu__links a:first-child {
-      border-top: 1px solid #e3dede;
-    }
-
-    .home-mobile-menu__links a:hover {
-      opacity: 0.4;
-    }
-
-    .home-mobile-menu__footer {
-      margin-top: auto;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .home-mobile-menu__footer a {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #9a8f8f;
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
 
     /* ── HERO (sticky — stays behind video) ── */
     .home-hero {
@@ -430,127 +181,6 @@
     .home-bestsellers__grid.is-dragging {
       cursor: grabbing;
       scroll-snap-type: none;
-    }
-
-    /* ── PRODUCT CARD ── */
-    .home-product {
-      flex: 0 0 calc(25% - 1.125rem);
-      min-width: 220px;
-      scroll-snap-align: start;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .home-product__img-wrap {
-      position: relative;
-      background: #fff;
-      overflow: hidden;
-      aspect-ratio: 1 / 1;
-      margin-bottom: 1rem;
-    }
-
-    .home-product__img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .home-product:hover .home-product__img {
-      transform: scale(1.04);
-    }
-
-    .home-product__badge {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      font-family: var(--font-body);
-      font-size: 0.5rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      background: #EC0201;
-      color: #fff;
-      padding: 0.3rem 0.6rem;
-      line-height: 1;
-      z-index: 1;
-    }
-
-    .home-product__badge--pick {
-      background: #1a1a1a;
-    }
-
-    .home-product__add {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-family: var(--font-body);
-      font-size: 0.5rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      color: #1a1a1a;
-      background: rgba(255, 255, 255, 0.88);
-      border: none;
-      padding: 0.35rem 0.6rem;
-      cursor: pointer;
-      z-index: 1;
-      line-height: 1;
-      transition: background 0.2s ease;
-    }
-
-    .home-product__add:hover {
-      background: #fff;
-    }
-
-    .home-product__info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 3rem 0.85rem 0.85rem;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
-      z-index: 1;
-    }
-
-    .home-product__name {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0em;
-      margin: 0;
-    }
-
-    .home-product__price {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 500;
-      color: #fff;
-      white-space: nowrap;
-      flex-shrink: 0;
-      display: flex;
-      align-items: baseline;
-      gap: 0.35rem;
-    }
-
-    .home-product__price--sale {
-      color: #39FF14;
-      font-weight: 600;
-    }
-
-    .home-product__price--original {
-      font-size: 0.7rem;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: line-through;
     }
 
     /* ── CATEGORIES ── */
@@ -747,36 +377,7 @@
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* ── PROMO MARQUEE ── */
-    .home-promo {
-      position: relative;
-      z-index: 2;
-      background: #EC0201;
-      overflow: hidden;
-      padding: 0.7rem 0;
-    }
-
-    .home-promo__track {
-      display: flex;
-      white-space: nowrap;
-      animation: promoScroll 20s linear infinite;
-    }
-
-    .home-promo__text {
-      font-family: var(--font-display);
-      font-size: clamp(0.75rem, 1.5vw, 1rem);
-      font-weight: 500;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0em;
-      padding: 0 1.5rem;
-    }
-
-    .home-promo__text span {
-      opacity: 0.4;
-      padding: 0 1rem;
-    }
-
+    /* ── PROMO MARQUEE (page-specific animation) ── */
     @keyframes promoScroll {
       0% {
         transform: translateX(0);
@@ -889,334 +490,10 @@
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* ── NEWSLETTER ── */
-    .home-newsletter {
-      position: relative;
-      z-index: 2;
-      background: #EC0201;
-      padding: 3rem 2rem;
-    }
-
-    .home-newsletter__title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 2.5rem);
-      font-weight: 600;
-      color: #000;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      margin: 0 0 0.8rem;
-    }
-
-    .home-newsletter__subtitle {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #000;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      margin: 0 0 2.5rem;
-      max-width: 700px;
-      line-height: 1.5;
-    }
-
-    .home-newsletter__form {
-      display: flex;
-      align-items: center;
-      border-bottom: 1.5px solid #000;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-      max-width: 100%;
-    }
-
-    .home-newsletter__input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #000;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-
-    .home-newsletter__input::placeholder {
-      color: #000;
-    }
-
-    .home-newsletter__submit {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .home-newsletter__submit svg {
-      width: 20px;
-      height: 20px;
-      stroke: #000;
-      fill: none;
-      stroke-width: 2;
-    }
-
-    .home-newsletter__privacy {
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      font-weight: 400;
-      color: #000;
-      letter-spacing: 0.01em;
-      opacity: 0.7;
-    }
-
-    /* ── TRUST BADGES ── */
-    .home-trust {
-      position: relative;
-      z-index: 2;
-      background: #fff;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .home-trust__item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .home-trust__item svg {
-      width: 28px;
-      height: 28px;
-      stroke: #1a1a1a;
-      fill: none;
-      stroke-width: 1.5;
-      flex-shrink: 0;
-    }
-
-    .home-trust__label {
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* ── FOOTER ── */
-    .home-footer {
-      position: relative;
-      z-index: 2;
-      background: #fff;
-      border-top: 1px solid #e3dede;
-      padding: 3rem 2rem 1.5rem;
-    }
-
-    .home-footer__main {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2.5rem;
-    }
-
-    .home-footer__brand {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .home-footer__logo {
-      display: inline-flex;
-    }
-
-    .home-footer__logo img {
-      width: 120px;
-      height: auto;
-      display: block;
-    }
-
-    .home-footer__socials {
-      display: flex;
-      gap: 0.8rem;
-    }
-
-    .home-footer__socials a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .home-footer__socials svg {
-      width: 20px;
-      height: 20px;
-      transition: opacity 0.2s ease;
-    }
-
-    .home-footer__socials a:hover svg {
-      opacity: 0.5;
-    }
-
-    .home-footer__columns {
-      display: flex;
-      gap: 4rem;
-    }
-
-    .home-footer__col-title {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #000;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-      margin: 0 0 0.8rem;
-    }
-
-    .home-footer__col-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .home-footer__col-links a {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #5c5454;
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 0.2s ease;
-    }
-
-    .home-footer__col-links a:hover {
-      color: #000;
-    }
-
-    /* ── FOOTER STATS ── */
-    .home-footer__stats {
-      display: flex;
-      gap: 0;
-      margin-bottom: 2.5rem;
-    }
-
-    .home-footer__stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding-right: 2rem;
-      margin-right: 2rem;
-      border-right: 1px solid #e3dede;
-    }
-
-    .home-footer__stat:last-child {
-      border-right: none;
-      margin-right: 0;
-      padding-right: 0;
-    }
-
-    .home-footer__stat-label {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #000;
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-
-    .home-footer__stat-value {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #5c5454;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .home-footer__stars {
-      display: flex;
-      gap: 0.25rem;
-    }
-
-    .home-footer__stars svg {
-      width: 14px;
-      height: 14px;
-      fill: #1a1a1a;
-    }
-
-    .home-footer__stars svg.empty {
-      fill: none;
-      stroke: #1a1a1a;
-      stroke-width: 1.5;
-    }
-
-    /* ── FOOTER BOTTOM ── */
-    .home-footer__bottom {
-      border-top: 1px solid #e3dede;
-      padding-top: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .home-footer__payments {
-      display: flex;
-      gap: 0.5rem;
-      /* 1 × base unit */
-      align-items: center;
-    }
-
-    .home-footer__payments img {
-      height: 18px;
-      width: 28px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .home-footer__copy {
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      font-weight: 400;
-      color: #9a8f8f;
-      letter-spacing: 0.01em;
-    }
-
     /* ══════════════════════════════════════
-         RESPONSIVE — MOBILE
+         RESPONSIVE — MOBILE (home-page-specific)
          ══════════════════════════════════════ */
     @media (max-width: 768px) {
-      .home-announcement {
-        height: 24px;
-      }
-
-      .home-announcement__text {
-        font-size: 0.5rem;
-        padding: 0 2rem;
-      }
-
-      .home-nav {
-        padding: 0.5rem 1.5rem;
-        align-items: center;
-        top: 24px;
-      }
-
-      .home-nav.is-hidden {
-        transform: translateY(calc(-100% - 24px));
-      }
-
-      .home-nav__links {
-        display: none;
-      }
-
-      .home-nav__hamburger {
-        display: block;
-      }
-
       .home-hero {
         height: 100vh;
         padding: 80px 15px 15px;
@@ -1229,11 +506,6 @@
 
       .home-bestsellers {
         padding: 2rem 1.5rem;
-      }
-
-      .home-product {
-        flex: 0 0 70%;
-        min-width: 200px;
       }
 
       .home-categories {
@@ -1262,141 +534,18 @@
         flex: 0 0 60%;
         min-width: 180px;
       }
-
-      .home-newsletter {
-        padding: 2rem 1.5rem;
-      }
-
-      .home-newsletter__subtitle {
-        font-size: 0.625rem;
-      }
-
-      .home-trust {
-        padding: 1.5rem 1.5rem;
-        gap: 1rem;
-        justify-content: flex-start;
-      }
-
-      .home-trust__label {
-        font-size: 0.5rem;
-      }
-
-      .home-footer {
-        padding: 2rem 1.5rem 1.5rem;
-      }
-
-      .home-footer__main {
-        flex-direction: column;
-        gap: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .home-footer__columns {
-        gap: 3rem;
-      }
-
-      .home-footer__stats {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .home-footer__stat {
-        padding-right: 1rem;
-        margin-right: 0;
-      }
-
-      .home-footer__bottom {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Announcement Marquee -->
-  <div class="home-announcement" id="homeAnnouncement">
-    <div class="home-announcement__track">
-      <span class="home-announcement__text">Free shipping on all orders over <span>$150</span></span>
-      <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
-      <span class="home-announcement__text">Engineered for the open road — Built to last</span>
-      <span class="home-announcement__text">Free shipping on all orders over <span>$150</span></span>
-      <span class="home-announcement__text">New arrivals — Roofbox 540L now available</span>
-      <span class="home-announcement__text">Engineered for the open road — Built to last</span>
-    </div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="home-nav" id="homeNav">
-    <a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
-    <div class="home-nav__links">
-      <div class="home-nav__col">
-        <a href="../home/">Home</a>
-        <a href="../about/">About</a>
-        <a href="../support/">Contact</a>
-      </div>
-      <div class="home-nav__col">
-        <a href="../shop/">Roofbox</a>
-        <a href="../shop/">Roofbag</a>
-        <a href="../shop/">Roofrack</a>
-      </div>
-      <div class="home-nav__col">
-        <a href="../support/#faq">FAQ</a>
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-      </div>
-      <div class="home-nav__col">
-        <a href="../dealers/" class="is-red">Dealers</a>
-        <a href="#" class="is-red">Rent</a>
-      </div>
-    </div>
-    <div class="home-nav__right">
-      <a href="#" class="home-nav__cart">Cart (<span class="home-nav__cart-count" id="cartCount">0</span>)</a>
-    </div>
-    <button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="7" x2="21" y2="7" />
-        <line x1="3" y1="17" x2="21" y2="17" />
-      </svg>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="home-mobile-menu" id="mobileMenu">
-    <div class="home-mobile-menu__header">
-      <a href="../home/" class="home-mobile-menu__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
-      <button class="home-mobile-menu__close" id="hamburgerClose" aria-label="Close menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"
-          stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-    </div>
-    <div class="home-mobile-menu__links">
-      <a href="../home/">Home</a>
-      <a href="../about/">About</a>
-      <a href="../shop/">Roofbox</a>
-      <a href="../shop/">Roofbag</a>
-      <a href="../shop/">Roofrack</a>
-      <a href="#" style="color: #EC0201;">Rent</a>
-      <a href="../dealers/" style="color: #EC0201;">Dealers</a>
-      <a href="../support/">Support</a>
-      <a href="../support/#faq">FAQ</a>
-    </div>
-    <div class="home-mobile-menu__footer">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">Privacy</a>
-    </div>
-  </div>
+  <div id="site-header"></div>
 
   <main>
     <!-- Hero — pinned behind everything -->
     <section class="home-hero">
       <video class="home-hero__img" autoplay muted loop playsinline>
-        <source src="../assets/videos/Roofbox_Video_With_New_Terrain.webm" type="video/mp4" />
+        <source src="../assets/videos/Roofbox_Video_With_New_Terrain.mp4" type="video/mp4" />
       </video>
     </section>
 
@@ -1411,7 +560,7 @@
       </div>
       <div class="home-categories__grid">
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/540%20Gloss.png" alt="Roofbox" loading="lazy" />
+          <img src="../assets/RoofBox.jpg" alt="Roofbox" loading="lazy" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofbox</p>
@@ -1423,7 +572,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Roofbag.png" alt="Roofbag" loading="lazy" />
+          <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag" loading="lazy" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofbag</p>
@@ -1435,7 +584,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/540%20Gloss%20on%20car.png" alt="Roofrack" loading="lazy" />
+          <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg" alt="Roofrack" loading="lazy" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofrack</p>
@@ -1447,7 +596,7 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/450%20Gloss%20on%20car.png" alt="Crossbars" loading="lazy" />
+          <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg" alt="Crossbars" loading="lazy" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Crossbars</p>
@@ -1490,9 +639,13 @@
         <a href="../product/?id=roofbox-540l-glossy" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add">Add</button>
-            <img src="../assets/540%20Gloss.png" alt="Roofbox 540L Glossy" class="home-product__img"
-              loading="lazy" />
+            <button class="home-product__add"
+              data-id="roofbox-540l-glossy"
+              data-name="Roofbox 540L"
+              data-variant="Glossy"
+              data-price="24999"
+              data-image="../assets/RoofBox.jpg">Add</button>
+            <img src="../assets/RoofBox.jpg" alt="Roofbox 540L Glossy" class="home-product__img" loading="lazy" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 24,999</span>
@@ -1504,9 +657,13 @@
         <a href="../product/?id=roofbox-540l-textured" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
-            <button class="home-product__add">Add</button>
-            <img src="../assets/540%20Tex.png" alt="Roofbox 540L Textured" class="home-product__img"
-              loading="lazy" />
+            <button class="home-product__add"
+              data-id="roofbox-540l-textured"
+              data-name="Roofbox 540L"
+              data-variant="Textured"
+              data-price="26999"
+              data-image="../assets/RoofBox2.png">Add</button>
+            <img src="../assets/RoofBox2.png" alt="Roofbox 540L Textured" class="home-product__img" loading="lazy" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 26,999</span>
@@ -1518,9 +675,12 @@
         <a href="../product/?id=roofbag-explorer-xl" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add">Add</button>
-            <img src="../assets/Roofbag.png" alt="Roofbag Explorer XL" class="home-product__img"
-              loading="lazy" />
+            <button class="home-product__add"
+              data-id="roofbag-explorer-xl"
+              data-name="Explorer XL"
+              data-price="7999"
+              data-image="../assets/Roofbag%20on%20car.png">Add</button>
+            <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag Explorer XL" class="home-product__img" loading="lazy" />
             <div class="home-product__info">
               <p class="home-product__name">Explorer XL</p>
               <span class="home-product__price">&#8377; 7,999</span>
@@ -1532,8 +692,14 @@
         <a href="../product/?id=crossbar-aero-black" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add">Add</button>
-            <img src="../assets/450%20Gloss%20on%20car.png" alt="Aero Crossbars" class="home-product__img" loading="lazy" />
+            <button class="home-product__add"
+              data-id="crossbar-aero-black"
+              data-name="Aero Crossbars"
+              data-variant="Black"
+              data-price="6999"
+              data-image="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg">Add</button>
+            <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.jpg" alt="Aero Crossbars" class="home-product__img"
+              loading="lazy" />
             <div class="home-product__info">
               <p class="home-product__name">Aero Crossbars</p>
               <span class="home-product__price">&#8377; 6,999</span>
@@ -1545,8 +711,13 @@
         <a href="../product/?id=roofrack-platform" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
-            <button class="home-product__add">Add</button>
-            <img src="../assets/540%20Gloss%20on%20car.png" alt="Platform Rack" class="home-product__img" loading="lazy" />
+            <button class="home-product__add"
+              data-id="roofrack-platform"
+              data-name="Platform Rack"
+              data-price="14999"
+              data-image="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg">Add</button>
+            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.jpg" alt="Platform Rack" class="home-product__img"
+              loading="lazy" />
             <div class="home-product__info">
               <p class="home-product__name">Platform Rack</p>
               <span class="home-product__price">&#8377; 14,999</span>
@@ -1558,7 +729,12 @@
         <a href="../product/?id=roofbag-adventure-pro" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">Save 20%</span>
-            <button class="home-product__add">Add</button>
+            <button class="home-product__add"
+              data-id="roofbag-adventure-pro"
+              data-name="Adventure Pro"
+              data-price="8999"
+              data-original-price="11249"
+              data-image="../assets/Roofbag%20on%20car.png">Add</button>
             <img src="../assets/Roofbag%20on%20car.png" alt="Roofbag Adventure Pro" class="home-product__img"
               loading="lazy" />
             <div class="home-product__info">
@@ -1586,19 +762,19 @@
       </div>
       <div class="home-icons__grid">
         <div class="home-icons__card">
-          <img src="../assets/3XO%20in%20Snow.png" alt="Community photo" loading="lazy" />
+          <img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.jpg" alt="Community photo" loading="lazy" />
           <span class="home-icons__handle">@adventurerkim</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/Camping%20with%20Jimny.png" alt="Community photo" loading="lazy" />
+          <img src="../assets/Jimny%20Render/Jimny02.jpg" alt="Community photo" loading="lazy" />
           <span class="home-icons__handle">@overlndlife</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/IMG_0052.PNG" alt="Community photo" loading="lazy" />
+          <img src="../assets/KIA%20Seltos%20/Kia-seltos1.jpg" alt="Community photo" loading="lazy" />
           <span class="home-icons__handle">@rooftopnomad</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/3XO%20in%20Snow.png" alt="Community photo" loading="lazy" />
+          <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue1.jpg" alt="Community photo" loading="lazy" />
           <span class="home-icons__handle">@weekndexplorer</span>
         </div>
       </div>
@@ -1644,7 +820,7 @@
       </div>
       <div class="home-style__card">
         <video autoplay muted loop playsinline>
-          <source src="../assets/videos/Realistic_Cinematic_Car_Commercial_Video.mp4" type="video/mp4" />
+          <source src="../assets/videos/Roofbox_Video_With_New_Terrain.mp4" type="video/mp4" />
         </video>
         <span class="home-style__handle">@constanza_vazquez</span>
       </div>
@@ -1686,189 +862,13 @@
       information.</p>
   </section>
 
-  <!-- Trust Badges -->
-  <div class="home-trust">
-    <div class="home-trust__item">
-      <svg viewBox="0 0 24 24">
-        <path d="M1 12l5-5v3h8V7l5 5-5 5v-3H6v3z" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-      <span class="home-trust__label">Express Shipping from India</span>
-    </div>
-    <div class="home-trust__item">
-      <svg viewBox="0 0 24 24">
-        <rect x="1" y="6" width="22" height="13" rx="2" />
-        <path d="M1 10h22" />
-      </svg>
-      <span class="home-trust__label">Free Shipping</span>
-    </div>
-    <div class="home-trust__item">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 6v6l4 2" />
-      </svg>
-      <span class="home-trust__label">30 Days Return Policy</span>
-    </div>
-    <div class="home-trust__item">
-      <svg viewBox="0 0 24 24">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M12 8v4l3 3" />
-        <path d="M7 3v2M17 3v2" />
-      </svg>
-      <span class="home-trust__label">100% Secure Payment</span>
-    </div>
-    <div class="home-trust__item">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-      <span class="home-trust__label">1 Year Warranty</span>
-    </div>
-  </div>
+  <div id="site-footer"></div>
 
-  <!-- Footer -->
-  <footer class="home-footer">
-    <div class="home-footer__main">
-      <div class="home-footer__brand">
-        <a href="../home/" class="home-footer__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>
-        <div class="home-footer__socials">
-          <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-            </svg>
-          </a>
-          <a href="#" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="m22 8-6 4 6 4V8Z" />
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-            </svg>
-          </a>
-          <a href="#" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path
-                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="home-footer__columns">
-        <div>
-          <h4 class="home-footer__col-title">Brand</h4>
-          <div class="home-footer__col-links">
-            <a href="../about/">About Us</a>
-            <a href="#">Sustainability</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="home-footer__col-title">Help</h4>
-          <div class="home-footer__col-links">
-            <a href="../support/#faq">FAQs</a>
-            <a href="../support/#contact">Contact</a>
-            <a href="#">Shipping</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="home-footer__stats">
-      <div class="home-footer__stat">
-        <span class="home-footer__stat-label">Happy Customers</span>
-        <span class="home-footer__stat-value">10,000+</span>
-      </div>
-      <div class="home-footer__stat">
-        <span class="home-footer__stat-label">Google Reviews</span>
-        <span class="home-footer__stat-value">
-          4.5
-          <span class="home-footer__stars">
-            <svg viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-            <svg viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-            <svg viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-            <svg viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-            <svg class="empty" viewBox="0 0 24 24">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-          </span>
-        </span>
-      </div>
-    </div>
-
-    <div class="home-footer__bottom">
-      <div class="home-footer__payments">
-        <img src="../assets/amex.png" alt="Amex" />
-        <img src="../assets/gpay.png" alt="Google Pay" />
-        <img src="../assets/mastercard.png" alt="Mastercard" />
-        <img src="../assets/visa.png" alt="Visa" />
-        <img src="../assets/upi.png" alt="UPI" />
-      </div>
-      <span class="home-footer__copy">&copy; 2026 AWAY. All rights reserved.</span>
-    </div>
-  </footer>
+  <script src="../components/header.js"></script>
+  <script src="../components/footer.js"></script>
 
   <script>
     (() => {
-      /* ── NAV + ANNOUNCEMENT: hide on scroll down, show on scroll up ── */
-      const nav = document.getElementById('homeNav');
-      const announcement = document.getElementById('homeAnnouncement');
-      let lastY = 0;
-      let ticking = false;
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const y = window.scrollY;
-            if (y > lastY && y > 100) {
-              nav.classList.add('is-hidden');
-              announcement.classList.add('is-hidden');
-            } else {
-              nav.classList.remove('is-hidden');
-              announcement.classList.remove('is-hidden');
-            }
-            lastY = y;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-
-      /* ── MOBILE MENU ── */
-      const mobileMenu = document.getElementById('mobileMenu');
-      const openBtn = document.getElementById('hamburgerOpen');
-      const closeBtn = document.getElementById('hamburgerClose');
-
-      openBtn.addEventListener('click', () => {
-        mobileMenu.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-      });
-
-      closeBtn.addEventListener('click', () => {
-        mobileMenu.classList.remove('is-open');
-        document.body.style.overflow = '';
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-          mobileMenu.classList.remove('is-open');
-          document.body.style.overflow = '';
-        }
-      });
-
       /* ── BEST SELLERS: arrow navigation + drag scroll ── */
       const grid = document.getElementById('bsGrid');
       const prevBtn = document.getElementById('bsPrev');
