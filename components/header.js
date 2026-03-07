@@ -23,20 +23,105 @@
 
     /* Nav */
     '<nav class="home-nav" id="homeNav">' +
-      '<a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>' +
-      '<div class="home-nav__links">' +
-        '<div class="home-nav__col"><a href="../home/">Home</a><a href="../about/">About</a><a href="../support/">Contact</a></div>' +
-        '<div class="home-nav__col"><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a></div>' +
-        '<div class="home-nav__col"><a href="../compare/">Compare</a><a href="../support/#faq">FAQ</a><a href="#">Instagram</a></div>' +
-        '<div class="home-nav__col"><a href="../dealers/" class="is-red">Dealers</a><a href="#" class="is-red">Rent</a></div>' +
+      '<div class="home-nav__left">' +
+        '<div class="home-nav__item" data-menu="home">' +
+          '<a href="../home/" class="home-nav__link">Home</a>' +
+          '<div class="home-nav__mega">' +
+            '<div class="home-nav__mega-inner home-nav__mega-inner--compact">' +
+              '<div class="home-nav__mega-col">' +
+                '<span class="home-nav__mega-heading">Explore</span>' +
+                '<a href="../home/" class="home-nav__mega-link">Home</a>' +
+                '<a href="../about/" class="home-nav__mega-link">About Us</a>' +
+                '<a href="../compare/" class="home-nav__mega-link">Compare Products</a>' +
+              '</div>' +
+              '<div class="home-nav__mega-images">' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/hero.webp" alt="AWAY" />' +
+                '</div>' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/540%20Gloss%20on%20car.webp" alt="AWAY Roofbox" />' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="home-nav__item" data-menu="shop">' +
+          '<a href="../shop/" class="home-nav__link">Shop</a>' +
+          '<div class="home-nav__mega">' +
+            '<div class="home-nav__mega-inner">' +
+              '<div class="home-nav__mega-col">' +
+                '<span class="home-nav__mega-heading">Roofboxes</span>' +
+                '<a href="../product/?id=roofbox-540l-glossy" class="home-nav__mega-link">Roofbox 540L Glossy</a>' +
+                '<a href="../product/?id=roofbox-540l-textured" class="home-nav__mega-link">Roofbox 540L Textured</a>' +
+                '<a href="../product/?id=roofbox-450l-glossy" class="home-nav__mega-link">Roofbox 450L Glossy</a>' +
+                '<a href="../product/?id=roofbox-450l-textured" class="home-nav__mega-link">Roofbox 450L Textured</a>' +
+              '</div>' +
+              '<div class="home-nav__mega-col">' +
+                '<span class="home-nav__mega-heading">Roofbags</span>' +
+                '<a href="../product/?id=roofbag-explorer-xl" class="home-nav__mega-link">Explorer XL</a>' +
+                '<a href="../product/?id=roofbag-adventure-pro" class="home-nav__mega-link">Adventure Pro</a>' +
+                '<a href="../product/?id=roofbag-compact" class="home-nav__mega-link">Roofbag Compact</a>' +
+                '<a href="../product/?id=roofbag-sport" class="home-nav__mega-link">Roofbag Sport</a>' +
+              '</div>' +
+              '<div class="home-nav__mega-col">' +
+                '<span class="home-nav__mega-heading">Roofracks</span>' +
+                '<a href="../product/?id=roofrack-platform" class="home-nav__mega-link">Platform Rack Standard</a>' +
+                '<a href="../product/?id=roofrack-platform-lg" class="home-nav__mega-link">Platform Rack Large</a>' +
+                '<a href="../product/?id=roofrack-basket" class="home-nav__mega-link">Basket Rack Pro</a>' +
+                '<a href="../product/?id=roofrack-low-profile" class="home-nav__mega-link">Low Profile Rack</a>' +
+              '</div>' +
+              '<div class="home-nav__mega-images">' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/RoofBox.webp" alt="Roofbox 540L" />' +
+                '</div>' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Platform Rack" />' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="home-nav__mega-footer">' +
+              '<a href="../shop/" class="home-nav__mega-shopall">Shop All \u2192</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<a href="#" class="home-nav__link home-nav__link--single">Rent</a>' +
+        '<div class="home-nav__item" data-menu="support">' +
+          '<a href="../support/" class="home-nav__link">Support</a>' +
+          '<div class="home-nav__mega">' +
+            '<div class="home-nav__mega-inner home-nav__mega-inner--compact">' +
+              '<div class="home-nav__mega-col">' +
+                '<span class="home-nav__mega-heading">Help</span>' +
+                '<a href="../support/" class="home-nav__mega-link">Support Center</a>' +
+                '<a href="#" class="home-nav__mega-link">Warranty</a>' +
+                '<a href="../dealers/" class="home-nav__mega-link">Find a Dealer</a>' +
+              '</div>' +
+              '<div class="home-nav__mega-images">' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.webp" alt="AWAY Support" />' +
+                '</div>' +
+                '<div class="home-nav__mega-img-wrap">' +
+                  '<img src="../assets/Jimny%20Render/Jimny02.webp" alt="AWAY Products" />' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
+      '<a href="../home/" class="home-nav__logo"><img src="../assets/away-light.svg" alt="AWAY" /></a>' +
       '<div class="home-nav__right">' +
-        '<button class="home-nav__cart" id="openSideCart">Cart (<span class="home-nav__cart-count" id="navCartCount">0</span>)</button>' +
+        '<a href="#" class="home-nav__icon" aria-label="Account">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
+        '</a>' +
+        '<button class="home-nav__icon home-nav__cart-icon" id="openSideCart" aria-label="Cart">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>' +
+          '<span class="home-nav__cart-count" id="navCartCount">0</span>' +
+        '</button>' +
       '</div>' +
       '<button class="home-nav__hamburger" id="hamburgerOpen" aria-label="Open menu">' +
         '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>' +
       '</button>' +
     '</nav>' +
+    '<div class="home-nav__mega-overlay" id="megaOverlay"></div>' +
 
     /* Mobile Menu */
     '<div class="home-mobile-menu" id="mobileMenu">' +
@@ -47,8 +132,25 @@
         '</button>' +
       '</div>' +
       '<div class="home-mobile-menu__links">' +
-        '<a href="../home/">Home</a><a href="../about/">About</a><a href="../shop/">Roofbox</a><a href="../shop/">Roofbag</a><a href="../shop/">Roofrack</a>' +
-        '<a href="../compare/">Compare</a><a href="#" style="color:#EC0201;">Rent</a><a href="../dealers/" style="color:#EC0201;">Dealers</a><a href="../support/">Support</a>' +
+        '<div class="home-mobile-menu__group">' +
+          '<button class="home-mobile-menu__toggle" data-target="mobileHome">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>' +
+          '<div class="home-mobile-menu__sub" id="mobileHome">' +
+            '<a href="../home/">Home</a><a href="../about/">About</a><a href="../compare/">Compare</a>' +
+          '</div>' +
+        '</div>' +
+        '<div class="home-mobile-menu__group">' +
+          '<button class="home-mobile-menu__toggle" data-target="mobileShop">Shop <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>' +
+          '<div class="home-mobile-menu__sub" id="mobileShop">' +
+            '<a href="../shop/">Roofboxes</a><a href="../shop/">Roofbags</a><a href="../shop/">Roofracks</a>' +
+          '</div>' +
+        '</div>' +
+        '<a href="#">Rent</a>' +
+        '<div class="home-mobile-menu__group">' +
+          '<button class="home-mobile-menu__toggle" data-target="mobileSupport">Support <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>' +
+          '<div class="home-mobile-menu__sub" id="mobileSupport">' +
+            '<a href="../support/">Support</a><a href="#">Warranty</a>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
       '<div class="home-mobile-menu__footer"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Privacy</a></div>' +
     '</div>' +
@@ -72,20 +174,40 @@
     '</aside>';
 
   // ══════════════════════════════════════
-  //  SCROLL HIDE
+  //  SCROLL BEHAVIOUR
   // ══════════════════════════════════════
 
   var lastScroll = 0;
   var announcement = document.getElementById('homeAnnouncement');
   var nav = document.getElementById('homeNav');
+  var isHomePage = !!document.querySelector('.home-hero');
+
+  // Only on home page desktop: start hidden so hero gets full viewport
+  if (isHomePage && window.innerWidth > 768) {
+    announcement.classList.add('is-hidden');
+    nav.classList.add('is-hidden');
+  }
+
   window.addEventListener('scroll', function () {
     var y = window.scrollY;
-    if (y > 60 && y > lastScroll) {
-      announcement.classList.add('is-hidden');
-      nav.classList.add('is-hidden');
+    if (isHomePage && window.innerWidth > 768) {
+      // Home page desktop: show on scroll-up, hide on scroll-down
+      if (y > lastScroll && y > 60) {
+        announcement.classList.add('is-hidden');
+        nav.classList.add('is-hidden');
+      } else if (y < lastScroll) {
+        announcement.classList.remove('is-hidden');
+        nav.classList.remove('is-hidden');
+      }
     } else {
-      announcement.classList.remove('is-hidden');
-      nav.classList.remove('is-hidden');
+      // All other pages + mobile: always visible at top, hide/show on scroll
+      if (y > 60 && y > lastScroll) {
+        announcement.classList.add('is-hidden');
+        nav.classList.add('is-hidden');
+      } else {
+        announcement.classList.remove('is-hidden');
+        nav.classList.remove('is-hidden');
+      }
     }
     lastScroll = y;
   }, { passive: true });
@@ -108,6 +230,64 @@
       mobileMenu.classList.remove('is-open');
       document.body.style.overflow = '';
     }
+  });
+
+  // Mobile accordion toggles
+  var mobileToggles = mobileMenu.querySelectorAll('.home-mobile-menu__toggle');
+  mobileToggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      var isOpen = btn.classList.contains('is-open');
+      // Close all
+      mobileToggles.forEach(function (b) {
+        b.classList.remove('is-open');
+        document.getElementById(b.dataset.target).classList.remove('is-open');
+      });
+      // Toggle current
+      if (!isOpen) {
+        btn.classList.add('is-open');
+        target.classList.add('is-open');
+      }
+    });
+  });
+
+  // ══════════════════════════════════════
+  //  MEGA MENU (desktop hover)
+  // ══════════════════════════════════════
+
+  var megaOverlay = document.getElementById('megaOverlay');
+  var navItems = nav.querySelectorAll('.home-nav__item');
+  var closeTimer = null;
+
+  function openMenu(item) {
+    clearTimeout(closeTimer);
+    // Close other items
+    navItems.forEach(function (other) {
+      if (other !== item) other.classList.remove('is-open');
+    });
+    item.classList.add('is-open');
+    megaOverlay.classList.add('is-open');
+  }
+
+  function closeAllMenus() {
+    navItems.forEach(function (item) { item.classList.remove('is-open'); });
+    megaOverlay.classList.remove('is-open');
+  }
+
+  function scheduleClose() {
+    closeTimer = setTimeout(closeAllMenus, 200);
+  }
+
+  navItems.forEach(function (item) {
+    item.addEventListener('mouseenter', function () { openMenu(item); });
+    item.addEventListener('mouseleave', scheduleClose);
+  });
+
+  megaOverlay.addEventListener('mouseenter', closeAllMenus);
+  megaOverlay.addEventListener('click', closeAllMenus);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAllMenus();
   });
 
   // ══════════════════════════════════════
@@ -169,7 +349,7 @@
 
     sideCartBody.innerHTML = cart.map(function (item, i) {
       var priceHtml = item.originalPrice
-        ? '<span style="color:#39FF14;font-weight:600">' + formatPrice(item.price) + '</span> <span style="font-size:0.65rem;color:#999;text-decoration:line-through">' + formatPrice(item.originalPrice) + '</span>'
+        ? '<span style="color:#1a1a1a;font-weight:600">' + formatPrice(item.price) + '</span> <span style="font-size:0.65rem;color:#999;text-decoration:line-through">' + formatPrice(item.originalPrice) + '</span>'
         : formatPrice(item.price);
       return '<div class="side-cart__item" data-index="' + i + '">' +
         '<img class="side-cart__item-img" src="' + item.image + '" alt="' + item.name + '" />' +
@@ -190,18 +370,18 @@
     // Free product offer
     var subtotal = cart.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0);
     var freeHtml = subtotal >= 15000
-      ? '<div style="padding:0.6rem 1.5rem;border-bottom:1px solid #f0ecec;background:rgba(236,2,1,0.03);display:flex;align-items:center;gap:0.6rem;">' +
-          '<span style="font-family:var(--font-body);font-size:0.45rem;font-weight:600;color:#fff;background:#EC0201;padding:0.2rem 0.4rem;text-transform:uppercase;letter-spacing:0.01em;line-height:1;white-space:nowrap;">Free</span>' +
+      ? '<div style="padding:0.6rem 1.5rem;border-bottom:1px solid #f0ecec;background:#f5f5f5;display:flex;align-items:center;gap:0.6rem;">' +
+          '<span style="font-family:var(--font-body);font-size:0.45rem;font-weight:600;color:#fff;background:#1a1a1a;padding:0.2rem 0.4rem;text-transform:uppercase;letter-spacing:0.01em;line-height:1;white-space:nowrap;">Free</span>' +
           '<div style="display:flex;flex-direction:column;gap:0.1rem;">' +
             '<span style="font-family:var(--font-display);font-size:0.6rem;font-weight:600;color:#1a1a1a;text-transform:uppercase;">Cargo Net Organizer</span>' +
             '<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:400;color:#9a8f8f;">Added free with your order</span>' +
           '</div>' +
-          '<span style="font-family:var(--font-display);font-size:0.6rem;font-weight:600;color:#EC0201;margin-left:auto;white-space:nowrap;">FREE</span>' +
+          '<span style="font-family:var(--font-display);font-size:0.6rem;font-weight:600;color:#1a1a1a;margin-left:auto;white-space:nowrap;">FREE</span>' +
         '</div>'
       : (subtotal > 0
-        ? '<div style="padding:0.5rem 1.5rem;border-bottom:1px solid #f0ecec;background:rgba(236,2,1,0.02);">' +
+        ? '<div style="padding:0.5rem 1.5rem;border-bottom:1px solid #f0ecec;background:#f9f9f9;">' +
             '<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:400;color:#9a8f8f;letter-spacing:0.01em;">Add \u20B9' + (15000 - subtotal).toLocaleString('en-IN') + ' more for a </span>' +
-            '<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:600;color:#EC0201;letter-spacing:0.01em;">FREE Cargo Net Organizer</span>' +
+            '<span style="font-family:var(--font-body);font-size:0.5rem;font-weight:600;color:#1a1a1a;letter-spacing:0.01em;">FREE Cargo Net Organizer</span>' +
           '</div>'
         : '');
     sideCartBody.innerHTML += freeHtml;

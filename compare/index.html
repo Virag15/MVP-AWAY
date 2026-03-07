@@ -11,7 +11,7 @@
 
     <style>
       :root {
-        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       }
 
@@ -63,13 +63,13 @@
       .cmp-cat:hover { color: #1a1a1a; }
       .cmp-cat.is-active {
         color: #1a1a1a; font-weight: 600;
-        border-bottom-color: #EC0201;
+        border-bottom-color: #1a1a1a;
       }
       .cmp-cat__count {
         font-size: 0.45rem; font-weight: 600; color: #9a8f8f;
         margin-left: 0.3rem;
       }
-      .cmp-cat.is-active .cmp-cat__count { color: #EC0201; }
+      .cmp-cat.is-active .cmp-cat__count { color: #1a1a1a; }
 
       .cmp-selectors {
         padding: 2rem 2rem 2rem;
@@ -92,7 +92,7 @@
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
         color: #fff; background: #1a1a1a; letter-spacing: 0.02em;
       }
-      .cmp-slot.is-filled .cmp-slot__num { background: #EC0201; }
+      .cmp-slot.is-filled .cmp-slot__num { background: #1a1a1a; }
 
       /* ── Empty State ── */
       .cmp-slot__empty {
@@ -107,14 +107,14 @@
         margin-bottom: 1.25rem; transition: all 0.3s ease;
       }
       .cmp-slot__empty:hover .cmp-slot__empty-ring {
-        border-color: #EC0201; border-style: solid;
+        border-color: #1a1a1a; border-style: solid;
         transform: scale(1.05);
       }
       .cmp-slot__empty-ring svg {
         width: 24px; height: 24px; stroke: #d1c8c8; fill: none; stroke-width: 1.5;
         transition: stroke 0.3s ease;
       }
-      .cmp-slot__empty:hover .cmp-slot__empty-ring svg { stroke: #EC0201; }
+      .cmp-slot__empty:hover .cmp-slot__empty-ring svg { stroke: #1a1a1a; }
       .cmp-slot__empty-label {
         font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
         color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
@@ -147,7 +147,7 @@
         position: absolute; top: 0.75rem; left: 0.75rem; z-index: 1;
         font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.01em;
-        background: #EC0201; color: #fff; padding: 0.25rem 0.5rem; line-height: 1;
+        background: #1a1a1a; color: #fff; padding: 0.25rem 0.5rem; line-height: 1;
       }
       .cmp-slot__badge--pick { background: #1a1a1a; }
       .cmp-slot__details {
@@ -156,7 +156,7 @@
       }
       .cmp-slot__category {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
-        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
       }
       .cmp-slot__name {
         font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
@@ -172,7 +172,7 @@
       .cmp-slot__price {
         font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: #1a1a1a;
       }
-      .cmp-slot__price--sale { color: #EC0201; }
+      .cmp-slot__price--sale { color: #1a1a1a; }
       .cmp-slot__price--original {
         font-size: 0.7rem; font-weight: 400; color: #9a8f8f; text-decoration: line-through;
       }
@@ -200,7 +200,7 @@
         text-transform: uppercase; letter-spacing: 0.01em;
         padding: 0.65rem 0; transition: color 0.15s ease;
       }
-      .cmp-slot__remove:hover { color: #EC0201; }
+      .cmp-slot__remove:hover { color: #1a1a1a; }
 
       /* ══════════════════════════════════════
          PRODUCT PICKER MODAL
@@ -258,13 +258,13 @@
       .cmp-picker__tab:hover { color: #1a1a1a; }
       .cmp-picker__tab.is-active {
         color: #1a1a1a; font-weight: 600;
-        border-bottom-color: #EC0201;
+        border-bottom-color: #1a1a1a;
       }
       .cmp-picker__tab-count {
         font-size: 0.45rem; font-weight: 600; color: #9a8f8f;
         margin-left: 0.3rem;
       }
-      .cmp-picker__tab.is-active .cmp-picker__tab-count { color: #EC0201; }
+      .cmp-picker__tab.is-active .cmp-picker__tab-count { color: #1a1a1a; }
 
       /* Product Grid in picker */
       .cmp-picker__grid {
@@ -280,7 +280,7 @@
       }
       .cmp-pick-card:hover { background: #f0edec; }
       .cmp-pick-card.is-selected {
-        outline: 2px solid #EC0201; outline-offset: -2px;
+        outline: 2px solid #1a1a1a; outline-offset: -2px;
       }
       .cmp-pick-card.is-taken {
         opacity: 0.35; pointer-events: none;
@@ -307,7 +307,7 @@
         font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
         color: #1a1a1a; margin-top: 0.35rem;
       }
-      .cmp-pick-card__price--sale { color: #EC0201; }
+      .cmp-pick-card__price--sale { color: #1a1a1a; }
       .cmp-pick-card__price--original {
         font-size: 0.55rem; font-weight: 400; color: #9a8f8f;
         text-decoration: line-through; margin-left: 0.25rem;
@@ -315,7 +315,7 @@
       .cmp-pick-card__check {
         position: absolute; top: 0.5rem; right: 0.5rem;
         width: 20px; height: 20px; border-radius: 50%;
-        background: #EC0201; display: none;
+        background: #1a1a1a; display: none;
         align-items: center; justify-content: center;
       }
       .cmp-pick-card.is-selected .cmp-pick-card__check { display: flex; }
@@ -324,7 +324,7 @@
         position: absolute; top: 0.5rem; left: 0.5rem;
         font-family: var(--font-body); font-size: 0.4rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.01em;
-        background: #EC0201; color: #fff; padding: 0.2rem 0.4rem; line-height: 1;
+        background: #1a1a1a; color: #fff; padding: 0.2rem 0.4rem; line-height: 1;
       }
       .cmp-pick-card__badge--pick { background: #1a1a1a; }
 
@@ -760,7 +760,7 @@
         h += dRow('Colour', selected.map(function(p) { return cap(p.colour); }));
         h += dRow('Price', selected.map(function(p) {
           return p.originalPrice
-            ? '<span style="color:#EC0201;font-weight:600">' + fmt(p.price) + '</span> <span style="font-size:0.65rem;color:#9a8f8f;text-decoration:line-through">' + fmt(p.originalPrice) + '</span>'
+            ? '<span style="color:#1a1a1a;font-weight:600">' + fmt(p.price) + '</span> <span style="font-size:0.65rem;color:#9a8f8f;text-decoration:line-through">' + fmt(p.originalPrice) + '</span>'
             : '<strong>' + fmt(p.price) + '</strong>';
         }));
         h += dRow('Compatibility', selected.map(function(p) { return p.car.map(cap).join(', '); }));

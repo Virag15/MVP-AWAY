@@ -14,7 +14,7 @@
          CSS VARIABLES
          ══════════════════════════════════════ */
       :root {
-        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       }
 
@@ -90,16 +90,16 @@
         text-decoration: line-through;
       }
       .pdp-price__sale {
-        color: #39FF14; font-weight: 600;
+        color: #1a1a1a; font-weight: 600;
       }
       .pdp-badge {
         display: inline-block; font-family: var(--font-body); font-size: 0.5rem;
         font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em;
-        background: #EC0201; color: #fff; padding: 0.35rem 0.7rem;
+        background: #1a1a1a; color: #fff; padding: 0.35rem 0.7rem;
         margin-bottom: 1.5rem; line-height: 1;
       }
       .pdp-badge--pick { background: #1a1a1a; }
-      .pdp-badge--sale { background: #EC0201; }
+      .pdp-badge--sale { background: #1a1a1a; }
       .pdp-badge:empty { display: none; }
 
       /* ── Divider ── */
@@ -137,7 +137,7 @@
         display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;
       }
       .pdp-compat__icon {
-        width: 18px; height: 18px; stroke: #EC0201; fill: none; stroke-width: 1.5;
+        width: 18px; height: 18px; stroke: #1a1a1a; fill: none; stroke-width: 1.5;
         stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
       }
       .pdp-compat__label {
@@ -162,7 +162,7 @@
         background-repeat: no-repeat; background-position: right 0 center; background-size: 10px;
         transition: border-color 0.2s ease, opacity 0.2s ease;
       }
-      .pdp-compat__select:focus { outline: none; border-color: #EC0201; }
+      .pdp-compat__select:focus { outline: none; border-color: #1a1a1a; }
       .pdp-compat__select:disabled { opacity: 0.35; cursor: not-allowed; }
       .pdp-compat__check-btn {
         width: 100%; font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
@@ -179,7 +179,7 @@
       .pdp-compat__result.is-compatible,
       .pdp-compat__result.is-incompatible { max-height: 80px; padding: 0.6rem 0; }
       .pdp-compat__result.is-compatible .pdp-compat__result-text { color: #1a1a1a; }
-      .pdp-compat__result.is-incompatible .pdp-compat__result-text { color: #EC0201; }
+      .pdp-compat__result.is-incompatible .pdp-compat__result-text { color: #1a1a1a; }
       .pdp-compat__result-text {
         font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
         display: flex; align-items: center; gap: 0.5rem;
@@ -211,7 +211,7 @@
       .pdp-specs__head-left { display: flex; align-items: baseline; gap: 0.6rem; }
       .pdp-specs__num {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
-        color: #EC0201; letter-spacing: 0.01em;
+        color: #1a1a1a; letter-spacing: 0.01em;
       }
       .pdp-specs__label {
         font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
@@ -237,7 +237,7 @@
         font-weight: 600; color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
         display: flex; align-items: center; gap: 0.5rem;
       }
-      .pdp-brand__dot { width: 6px; height: 6px; background: #EC0201; border-radius: 50%; }
+      .pdp-brand__dot { width: 6px; height: 6px; background: #1a1a1a; border-radius: 50%; }
 
       /* ── Mobile Dots ── */
       .pdp-dots {
@@ -254,7 +254,7 @@
          ══════════════════════════════════════ */
       .pdp-section__num {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
-        color: #EC0201; letter-spacing: 0.01em;
+        color: #1a1a1a; letter-spacing: 0.01em;
       }
       .pdp-section__title {
         font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem);
@@ -274,7 +274,7 @@
       .pdp-reviews__write-btn {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
-        background: #EC0201; border: none; padding: 0.7rem 1.5rem;
+        background: #1a1a1a; border: none; padding: 0.7rem 1.5rem;
         cursor: pointer; transition: background 0.2s ease;
       }
       .pdp-reviews__write-btn:hover { background: #c70100; }
@@ -288,7 +288,7 @@
       .pdp-reviews__score { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; min-width: 80px; }
       .pdp-reviews__avg {
         font-family: var(--font-display); font-size: 3rem; font-weight: 600;
-        color: #EC0201; line-height: 1; letter-spacing: -0.02em;
+        color: #1a1a1a; line-height: 1; letter-spacing: -0.02em;
       }
       .pdp-reviews__stars { display: flex; gap: 0.15rem; }
       .pdp-reviews__total {
@@ -302,7 +302,7 @@
         color: #1a1a1a; width: 0.75rem; text-align: right; flex-shrink: 0;
       }
       .pdp-reviews__bar-track { flex: 1; height: 6px; background: #e3dede; position: relative; overflow: hidden; }
-      .pdp-reviews__bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: #EC0201; transition: width 0.6s ease; }
+      .pdp-reviews__bar-fill { position: absolute; top: 0; left: 0; height: 100%; background: #1a1a1a; transition: width 0.6s ease; }
       .pdp-reviews__bar-count {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
         color: #9a8f8f; width: 2rem; text-align: left; flex-shrink: 0;
@@ -318,7 +318,7 @@
       .pdp-reviews__card-stars { display: flex; gap: 0.1rem; }
       .pdp-reviews__verified {
         font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
-        color: #EC0201; letter-spacing: 0.01em; text-transform: uppercase;
+        color: #1a1a1a; letter-spacing: 0.01em; text-transform: uppercase;
         background: rgba(236,2,1,0.06); padding: 0.25rem 0.5rem; line-height: 1;
       }
       .pdp-reviews__card-text {
@@ -378,13 +378,13 @@
         background: #fff; border-radius: 0; appearance: none; -webkit-appearance: none;
         transition: border-color 0.2s ease;
       }
-      .pdp-review-modal__field:focus { outline: none; border-color: #EC0201; }
+      .pdp-review-modal__field:focus { outline: none; border-color: #1a1a1a; }
       .pdp-review-modal__field::placeholder { color: #bbb; }
       textarea.pdp-review-modal__field { resize: vertical; min-height: 100px; }
       .pdp-review-modal__submit {
         width: 100%; font-family: var(--font-body); font-size: 0.625rem; font-weight: 600;
         text-transform: uppercase; letter-spacing: 0.01em; color: #fff;
-        background: #EC0201; border: none; padding: 1rem; cursor: pointer;
+        background: #1a1a1a; border: none; padding: 1rem; cursor: pointer;
         transition: background 0.2s ease; margin-top: 0.5rem;
       }
       .pdp-review-modal__submit:hover { background: #c70100; }
@@ -520,11 +520,11 @@
         <h4 class="pdp-review-modal__title">Write a Review</h4>
         <p class="pdp-review-modal__subtitle">Share your experience with this product</p>
         <div class="pdp-review-modal__stars" id="modalStars">
-          <button class="pdp-review-modal__star" data-star="1"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
-          <button class="pdp-review-modal__star" data-star="2"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
-          <button class="pdp-review-modal__star" data-star="3"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
-          <button class="pdp-review-modal__star" data-star="4"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
-          <button class="pdp-review-modal__star" data-star="5"><svg viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="1"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="2"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="3"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="4"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
+          <button class="pdp-review-modal__star" data-star="5"><svg viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button>
         </div>
         <input class="pdp-review-modal__field" type="text" id="reviewName" placeholder="Your Name" />
         <textarea class="pdp-review-modal__field" id="reviewText" placeholder="Write your review here…"></textarea>
@@ -915,7 +915,7 @@
                 : 'This product is not compatible with this car\u2019s roof type.';
               resultEl.innerHTML =
                 `<div class="pdp-compat__result-text">` +
-                  `<svg class="pdp-compat__result-icon" viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>` +
+                  `<svg class="pdp-compat__result-icon" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>` +
                   `Not compatible with ${brand} ${model}` +
                 `</div>` +
                 `<div class="pdp-compat__result-detail">${reason}</div>`;
@@ -999,11 +999,11 @@
           let html = '';
           for (let i = 1; i <= 5; i++) {
             if (i <= Math.floor(rating)) {
-              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#EC0201" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#1a1a1a" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
             } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
-              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#EC0201" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#1a1a1a" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
             } else {
-              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="#EC0201" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
+              html += `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>`;
             }
           }
           return html;
@@ -1205,11 +1205,11 @@
           modalStars.forEach((btn, i) => {
             const svg = btn.querySelector('svg');
             if (i < rating) {
-              svg.setAttribute('fill', '#EC0201');
+              svg.setAttribute('fill', '#1a1a1a');
               svg.setAttribute('stroke', 'none');
             } else {
               svg.setAttribute('fill', 'none');
-              svg.setAttribute('stroke', '#EC0201');
+              svg.setAttribute('stroke', '#1a1a1a');
             }
           });
         }

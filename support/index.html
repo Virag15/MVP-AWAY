@@ -14,9 +14,9 @@
          CSS VARIABLES
          ══════════════════════════════════════ */
       :root {
-        --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        --neon: #EC0201;
+        --neon: #1a1a1a;
         --neon-glow: 0 0 6px rgba(236, 2, 1, 0.4), 0 0 18px rgba(236, 2, 1, 0.15);
         --neon-glow-strong: 0 0 8px rgba(236, 2, 1, 0.6), 0 0 25px rgba(236, 2, 1, 0.25), 0 0 50px rgba(236, 2, 1, 0.1);
       }
@@ -33,7 +33,7 @@
          ══════════════════════════════════════ */
       .home-section-sub {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase; margin: 0.25rem 0 0;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase; margin: 0.25rem 0 0;
       }
 
       /* ══════════════════════════════════════
@@ -85,12 +85,12 @@
 
       .support-quick__arrow {
         font-family: var(--font-body); font-size: 0.6rem; font-weight: 600;
-        color: #EC0201; text-transform: uppercase; letter-spacing: 0.02em;
+        color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.02em;
         display: inline-flex; align-items: center; gap: 0.3rem;
         margin-top: auto;
       }
 
-      .support-quick__arrow svg { width: 12px; height: 12px; stroke: #EC0201; fill: none; stroke-width: 2; }
+      .support-quick__arrow svg { width: 12px; height: 12px; stroke: #1a1a1a; fill: none; stroke-width: 2; }
 
       /* ══════════════════════════════════════
          SUPPORT — TRACK ORDER BAR
@@ -181,7 +181,7 @@
 
       .support-faq__tab.is-active {
         color: #1a1a1a; font-weight: 600;
-        border-bottom-color: #EC0201;
+        border-bottom-color: #1a1a1a;
       }
 
       /* ── FAQ Accordion ── */
@@ -201,7 +201,7 @@
         transition: color 0.2s ease;
       }
 
-      .support-faq__question:hover { color: #EC0201; }
+      .support-faq__question:hover { color: #1a1a1a; }
 
       .support-faq__question svg {
         width: 14px; height: 14px; stroke: #999; fill: none; stroke-width: 2;
@@ -209,7 +209,7 @@
       }
 
       .support-faq__item.is-open .support-faq__question svg {
-        transform: rotate(45deg); stroke: #EC0201;
+        transform: rotate(45deg); stroke: #1a1a1a;
       }
 
       .support-faq__answer {
@@ -246,7 +246,7 @@
 
       .support-contact__form-sub {
         font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
-        color: #EC0201; letter-spacing: 0.02em; text-transform: uppercase;
+        color: #1a1a1a; letter-spacing: 0.02em; text-transform: uppercase;
         margin: 0 0 2rem;
       }
 
@@ -291,7 +291,7 @@
         transition: background 0.2s ease; align-self: flex-start;
       }
 
-      .support-form__submit:hover { background: #EC0201; }
+      .support-form__submit:hover { background: #1a1a1a; }
 
       /* ── Custom Searchable Dropdown ── */
       .cdd { position: relative; }
@@ -364,7 +364,7 @@
 
       .cdd__opt.is-active::after {
         content: ''; width: 5px; height: 5px;
-        background: #EC0201; border-radius: 50%; flex-shrink: 0;
+        background: #1a1a1a; border-radius: 50%; flex-shrink: 0;
       }
 
       .cdd__opt--empty {
@@ -545,7 +545,7 @@
           </div>
           <div class="support-faq__item">
             <button class="support-faq__question">Do you have physical stores? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-            <div class="support-faq__answer">AWAY products are available through our network of 24+ authorized dealers across India. You can find the nearest dealer on our <a href="../dealers/" style="color:#EC0201;">Dealer Locator</a> page. You can also purchase directly from our website with free shipping on orders over &#8377;10,000.</div>
+            <div class="support-faq__answer">AWAY products are available through our network of 24+ authorized dealers across India. You can find the nearest dealer on our <a href="../dealers/" style="color:#1a1a1a;">Dealer Locator</a> page. You can also purchase directly from our website with free shipping on orders over &#8377;10,000.</div>
           </div>
           <div class="support-faq__item">
             <button class="support-faq__question">Can I rent an AWAY roofbox instead of buying? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
@@ -621,7 +621,7 @@
           </div>
           <div class="support-faq__item">
             <button class="support-faq__question">Can a dealer install the roofbox for me? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-            <div class="support-faq__answer">Absolutely. All our authorized dealers offer professional installation services. Some dealers include free installation with purchase. Find a dealer near you on our <a href="../dealers/" style="color:#EC0201;">Dealer Locator</a> page and contact them directly for installation availability.</div>
+            <div class="support-faq__answer">Absolutely. All our authorized dealers offer professional installation services. Some dealers include free installation with purchase. Find a dealer near you on our <a href="../dealers/" style="color:#1a1a1a;">Dealer Locator</a> page and contact them directly for installation availability.</div>
           </div>
           <div class="support-faq__item">
             <button class="support-faq__question">What is the maximum speed with a roofbox installed? <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>

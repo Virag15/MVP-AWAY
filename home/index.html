@@ -14,7 +14,7 @@
          CSS VARIABLES
          ══════════════════════════════════════ */
     :root {
-      --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -63,7 +63,7 @@
       height: 100vh;
       background: transparent;
       overflow: hidden;
-      padding: 100px 30px 30px;
+      padding: 0;
     }
 
     .home-hero__img {
@@ -78,7 +78,7 @@
       font-family: var(--font-body);
       font-size: 0.625rem;
       font-weight: 400;
-      color: #EC0201;
+      color: #666;
       letter-spacing: 0.01em;
       text-transform: uppercase;
       margin: 0.25rem 0 0;
@@ -89,7 +89,7 @@
       font-family: var(--font-body);
       font-size: 0.625rem;
       font-weight: 400;
-      color: #EC0201;
+      color: #666;
       letter-spacing: 0.01em;
       text-transform: uppercase;
       text-decoration: none;
@@ -105,7 +105,7 @@
       position: relative;
       z-index: 2;
       background: #fff;
-      padding: 0 2rem 3rem;
+      padding: 2rem 3rem;
     }
 
     .home-bestsellers__header {
@@ -341,7 +341,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 600;
-      color: #EC0201;
+      color: #666;
       letter-spacing: -0.02em;
       text-transform: uppercase;
       margin: 0;
@@ -449,7 +449,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 600;
-      color: #EC0201;
+      color: #666;
       letter-spacing: -0.02em;
       text-transform: uppercase;
       font-style: italic;
@@ -510,7 +510,7 @@
     @media (max-width: 768px) {
       .home-hero {
         height: 100vh;
-        padding: 80px 15px 15px;
+        padding: 0;
       }
 
       .home-hero__img {
@@ -603,7 +603,8 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Roofrack" loading="lazy" decoding="async" />
+          <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Roofrack" loading="lazy"
+            decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Roofrack</p>
@@ -615,7 +616,8 @@
           </div>
         </a>
         <a href="../shop/" class="home-categories__card">
-          <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Crossbars" loading="lazy" decoding="async" />
+          <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Crossbars" loading="lazy"
+            decoding="async" />
           <div class="home-categories__info">
             <div class="home-categories__left">
               <p class="home-categories__name">Crossbars</p>
@@ -658,13 +660,10 @@
         <a href="../product/?id=roofbox-540l-glossy" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add"
-              data-id="roofbox-540l-glossy"
-              data-name="Roofbox 540L"
-              data-variant="Glossy"
-              data-price="24999"
-              data-image="../assets/RoofBox.webp">Add</button>
-            <img src="../assets/RoofBox.webp" alt="Roofbox 540L Glossy" class="home-product__img" loading="lazy" decoding="async" />
+            <button class="home-product__add" data-id="roofbox-540l-glossy" data-name="Roofbox 540L"
+              data-variant="Glossy" data-price="24999" data-image="../assets/RoofBox.webp">Add</button>
+            <img src="../assets/RoofBox.webp" alt="Roofbox 540L Glossy" class="home-product__img" loading="lazy"
+              decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 24,999</span>
@@ -676,13 +675,10 @@
         <a href="../product/?id=roofbox-540l-textured" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
-            <button class="home-product__add"
-              data-id="roofbox-540l-textured"
-              data-name="Roofbox 540L"
-              data-variant="Textured"
-              data-price="26999"
-              data-image="../assets/RoofBox2.webp">Add</button>
-            <img src="../assets/RoofBox2.webp" alt="Roofbox 540L Textured" class="home-product__img" loading="lazy" decoding="async" />
+            <button class="home-product__add" data-id="roofbox-540l-textured" data-name="Roofbox 540L"
+              data-variant="Textured" data-price="26999" data-image="../assets/RoofBox2.webp">Add</button>
+            <img src="../assets/RoofBox2.webp" alt="Roofbox 540L Textured" class="home-product__img" loading="lazy"
+              decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Roofbox 540L</p>
               <span class="home-product__price">&#8377; 26,999</span>
@@ -694,12 +690,10 @@
         <a href="../product/?id=roofbag-explorer-xl" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add"
-              data-id="roofbag-explorer-xl"
-              data-name="Explorer XL"
-              data-price="7999"
+            <button class="home-product__add" data-id="roofbag-explorer-xl" data-name="Explorer XL" data-price="7999"
               data-image="../assets/Roofbag%20on%20car.webp">Add</button>
-            <img src="../assets/Roofbag%20on%20car.webp" alt="Roofbag Explorer XL" class="home-product__img" loading="lazy" decoding="async" />
+            <img src="../assets/Roofbag%20on%20car.webp" alt="Roofbag Explorer XL" class="home-product__img"
+              loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Explorer XL</p>
               <span class="home-product__price">&#8377; 7,999</span>
@@ -711,14 +705,11 @@
         <a href="../product/?id=crossbar-aero-black" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge">New In</span>
-            <button class="home-product__add"
-              data-id="crossbar-aero-black"
-              data-name="Aero Crossbars"
-              data-variant="Black"
-              data-price="6999"
+            <button class="home-product__add" data-id="crossbar-aero-black" data-name="Aero Crossbars"
+              data-variant="Black" data-price="6999"
               data-image="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp">Add</button>
-            <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Aero Crossbars" class="home-product__img"
-              loading="lazy" decoding="async" />
+            <img src="../assets/Cross%20bar%20render%20/Kia%20Seltos%20/Kia-seltos.webp" alt="Aero Crossbars"
+              class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Aero Crossbars</p>
               <span class="home-product__price">&#8377; 6,999</span>
@@ -730,13 +721,10 @@
         <a href="../product/?id=roofrack-platform" class="home-product">
           <div class="home-product__img-wrap">
             <span class="home-product__badge home-product__badge--pick">Staff Pick</span>
-            <button class="home-product__add"
-              data-id="roofrack-platform"
-              data-name="Platform Rack"
-              data-price="14999"
+            <button class="home-product__add" data-id="roofrack-platform" data-name="Platform Rack" data-price="14999"
               data-image="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp">Add</button>
-            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Platform Rack" class="home-product__img"
-              loading="lazy" decoding="async" />
+            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Platform Rack"
+              class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Platform Rack</p>
               <span class="home-product__price">&#8377; 14,999</span>
@@ -747,15 +735,12 @@
         <!-- Card 6 (scroll to reveal) -->
         <a href="../product/?id=roofbag-adventure-pro" class="home-product">
           <div class="home-product__img-wrap">
-            <span class="home-product__badge">Save 20%</span>
-            <button class="home-product__add"
-              data-id="roofbag-adventure-pro"
-              data-name="Adventure Pro"
-              data-price="8999"
-              data-original-price="11249"
+            <span class="home-product__badge home-product__badge--sale">Save 20%</span>
+            <button class="home-product__add" data-id="roofbag-adventure-pro" data-name="Adventure Pro"
+              data-price="8999" data-original-price="11249"
               data-image="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp">Add</button>
-            <img src="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp" alt="Roofbag Adventure Pro" class="home-product__img"
-              loading="lazy" decoding="async" />
+            <img src="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp" alt="Roofbag Adventure Pro"
+              class="home-product__img" loading="lazy" decoding="async" />
             <div class="home-product__info">
               <p class="home-product__name">Adventure Pro</p>
               <span class="home-product__price"><span class="home-product__price--sale">&#8377; 8,999</span> <span
@@ -781,7 +766,8 @@
       </div>
       <div class="home-icons__grid">
         <div class="home-icons__card">
-          <img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.webp" alt="Community photo" loading="lazy" decoding="async" />
+          <img src="../assets/XUV%20700%20/XUV-700-ROOFBOX.webp" alt="Community photo" loading="lazy"
+            decoding="async" />
           <span class="home-icons__handle">@adventurerkim</span>
         </div>
         <div class="home-icons__card">
@@ -793,7 +779,8 @@
           <span class="home-icons__handle">@rooftopnomad</span>
         </div>
         <div class="home-icons__card">
-          <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue1.webp" alt="Community photo" loading="lazy" decoding="async" />
+          <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue1.webp" alt="Community photo" loading="lazy"
+            decoding="async" />
           <span class="home-icons__handle">@weekndexplorer</span>
         </div>
       </div>
