@@ -1,0 +1,1721 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Rent premium rooftop cargo systems. Try before you buy, save money on one-off trips." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <link rel="stylesheet" href="../components/shared.css">
+    <title>Rent — AWAY</title>
+
+    <style>
+      :root {
+        --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --rl-text: #1a1a1a;
+        --rl-text-muted: #9a8f8f;
+        --rl-border: #e3dede;
+        --rl-bg: #fff;
+        --rl-bg-alt: #f5f2f2;
+        --rl-bg-dark: #1a1a1a;
+        --rl-success: #22c55e;
+        --rl-error: #ef4444;
+        --rl-blue: #0ea5e9;
+        --rl-ease: 0.25s ease;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: var(--rl-bg); color: var(--rl-text); -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* Shared subtitle */
+      .rl-section-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #666; letter-spacing: 0.02em; text-transform: uppercase;
+        margin: 0.25rem 0 0;
+      }
+
+      /* ══════════════════════════════════════
+         1. HERO
+         ══════════════════════════════════════ */
+      .rl-hero {
+        position: relative; height: 100vh; overflow: hidden;
+        display: flex; align-items: center; justify-content: flex-start;
+      }
+      .rl-hero__video {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; z-index: 0;
+      }
+      .rl-hero__overlay {
+        position: absolute; inset: 0; z-index: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.35) 100%);
+      }
+      .rl-hero__content {
+        position: relative; z-index: 2;
+        padding: 0 3rem; max-width: 680px;
+      }
+      .rl-hero__eyebrow {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 500;
+        color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .rl-hero__title {
+        font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800; color: #fff; text-transform: uppercase;
+        letter-spacing: -0.02em; line-height: 1; margin: 0 0 1.25rem;
+      }
+      .rl-hero__title em { font-style: italic; }
+      .rl-hero__desc {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: rgba(255,255,255,0.75); line-height: 1.7; letter-spacing: 0.02em;
+        max-width: 480px; margin-bottom: 2rem;
+      }
+      .rl-hero__actions { display: flex; gap: 0.75rem; margin-bottom: 3rem; }
+      .rl-hero__cta {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: var(--rl-text); background: #fff; border: 1.5px solid #fff;
+        padding: 1rem 2.5rem; text-decoration: none;
+        transition: all 0.2s ease; display: inline-block;
+      }
+      .rl-hero__cta:hover { background: var(--rl-bg-alt); }
+      .rl-hero__cta--ghost {
+        color: #fff; background: none; border: 1.5px solid rgba(255,255,255,0.4);
+      }
+      .rl-hero__cta--ghost:hover { border-color: #fff; background: none; }
+
+      .rl-hero__stats { display: flex; gap: 2.5rem; }
+      .rl-hero__stat { display: flex; flex-direction: column; gap: 0.2rem; }
+      .rl-hero__stat-num {
+        font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+      }
+      .rl-hero__stat-label {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: rgba(255,255,255,0.5); letter-spacing: 0.02em; text-transform: uppercase;
+      }
+
+      .rl-hero__scroll {
+        position: absolute; bottom: 2rem; left: 50%;
+        transform: translateX(-50%); z-index: 2;
+        animation: rlBounce 2s ease infinite; cursor: pointer;
+      }
+      .rl-hero__scroll svg {
+        width: 20px; height: 20px; stroke: rgba(255,255,255,0.4);
+        fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+      @keyframes rlBounce {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(8px); }
+      }
+
+      /* ══════════════════════════════════════
+         2. WHY RENT — BENEFITS
+         ══════════════════════════════════════ */
+      .rl-benefits { background: var(--rl-bg); padding: 5rem 2rem; }
+      .rl-benefits__header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        margin-bottom: 3rem;
+      }
+      .rl-benefits__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-benefits__title em { font-style: italic; }
+
+      .rl-benefits__grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+      }
+      .rl-benefits__card {
+        opacity: 0; transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .rl-benefits__card.is-visible {
+        opacity: 1; transform: translateY(0);
+      }
+      .rl-benefits__icon {
+        width: 56px; height: 56px; border-radius: 50%;
+        background: var(--rl-bg-alt);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 1.25rem;
+      }
+      .rl-benefits__icon svg {
+        width: 24px; height: 24px; stroke: var(--rl-text); fill: none; stroke-width: 1.5;
+        stroke-linecap: round; stroke-linejoin: round;
+      }
+      .rl-benefits__card-title {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+        color: var(--rl-text); text-transform: uppercase; letter-spacing: -0.01em;
+        margin: 0 0 0.5rem;
+      }
+      .rl-benefits__card-desc {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.02em;
+      }
+
+      /* ══════════════════════════════════════
+         3. HOW IT WORKS
+         ══════════════════════════════════════ */
+      .rl-process { background: var(--rl-bg-dark); padding: 5rem 2rem; }
+      .rl-process__header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        margin-bottom: 3rem;
+      }
+      .rl-process__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #fff; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-process__accent {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #666; letter-spacing: -0.02em;
+        text-transform: uppercase; font-style: italic; margin: 0;
+      }
+      .rl-process__timeline {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      }
+      .rl-process__step {
+        padding: 2rem; border-right: 1px solid rgba(255,255,255,0.08);
+      }
+      .rl-process__step:last-child { border-right: none; }
+      .rl-process__num {
+        font-family: var(--font-display); font-size: 3.5rem; font-weight: 700;
+        color: rgba(255,255,255,0.04); letter-spacing: -0.04em; line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .rl-process__step-title {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+        color: #fff; text-transform: uppercase; letter-spacing: -0.01em;
+        margin: 0 0 0.5rem;
+      }
+      .rl-process__step-desc {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: rgba(255,255,255,0.45); line-height: 1.8; letter-spacing: 0.02em;
+      }
+
+      /* ══════════════════════════════════════
+         4. RENTAL PRODUCTS
+         ══════════════════════════════════════ */
+      .rl-products { background: var(--rl-bg-alt); padding: 5rem 2rem; }
+      .rl-products__header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        margin-bottom: 3rem;
+      }
+      .rl-products__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-products__title em { font-style: italic; }
+      .rl-products__view-all {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em; text-transform: uppercase;
+        text-decoration: none; transition: opacity 0.2s ease;
+      }
+      .rl-products__view-all:hover { opacity: 0.6; }
+
+      .rl-products__grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      }
+      .rl-products__card {
+        background: #fff; overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+      .rl-products__card:hover { transform: translateY(-4px); }
+      .rl-products__img-wrap {
+        position: relative; aspect-ratio: 4/3; overflow: hidden; background: #fff;
+      }
+      .rl-products__img-wrap img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .rl-products__card:hover .rl-products__img-wrap img {
+        transform: scale(1.04);
+      }
+      .rl-products__badge {
+        position: absolute; top: 0.75rem; left: 0.75rem;
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.01em;
+        background: var(--rl-blue); color: #fff;
+        padding: 0.3rem 0.6rem; line-height: 1; z-index: 1;
+      }
+      .rl-products__body { padding: 1.25rem; }
+      .rl-products__name {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+        color: var(--rl-text); text-transform: uppercase;
+        letter-spacing: -0.01em; margin: 0 0 0.75rem;
+      }
+      .rl-products__attrs {
+        display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem;
+      }
+      .rl-products__attr {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        background: var(--rl-bg-alt); color: var(--rl-text-muted);
+        padding: 0.2rem 0.5rem;
+      }
+      .rl-products__pricing {
+        border-top: 1px solid var(--rl-border); padding-top: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .rl-products__price-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        padding: 0.35rem 0;
+      }
+      .rl-products__price-label {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em;
+      }
+      .rl-products__price-value {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        color: var(--rl-text);
+      }
+      .rl-products__price-row--deposit .rl-products__price-label {
+        color: var(--rl-text-muted);
+      }
+      .rl-products__price-row--deposit .rl-products__price-value {
+        color: var(--rl-text-muted); font-weight: 500;
+      }
+      .rl-products__rent-btn {
+        display: block; width: 100%; text-align: center;
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: #fff; background: var(--rl-text); border: none;
+        padding: 0.9rem; cursor: pointer; text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .rl-products__rent-btn:hover { background: #333; }
+
+      /* ══════════════════════════════════════
+         5. RENT VS BUY
+         ══════════════════════════════════════ */
+      .rl-compare { background: var(--rl-bg); padding: 5rem 2rem; }
+      .rl-compare__header {
+        text-align: center; margin-bottom: 3rem;
+      }
+      .rl-compare__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-compare__title em { font-style: italic; }
+
+      .rl-compare__table {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        max-width: 800px; margin: 0 auto;
+      }
+      .rl-compare__col {
+        border: 1.5px solid var(--rl-border); padding: 2rem; position: relative;
+      }
+      .rl-compare__col--highlight {
+        border-color: var(--rl-text);
+      }
+      .rl-compare__col-badge {
+        position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        background: var(--rl-text); color: #fff;
+        padding: 0.3rem 1rem; white-space: nowrap;
+      }
+      .rl-compare__col-header { margin-bottom: 1.5rem; }
+      .rl-compare__col-title {
+        font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+        text-transform: uppercase; color: var(--rl-text); margin: 0 0 0.3rem;
+      }
+      .rl-compare__col-price {
+        font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+        color: var(--rl-text); display: block;
+      }
+      .rl-compare__col-note {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: var(--rl-text-muted); letter-spacing: 0.01em; display: block;
+        margin-top: 0.2rem;
+      }
+      .rl-compare__list { list-style: none; padding: 0; margin: 0; }
+      .rl-compare__item {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; padding: 0.6rem 0; border-bottom: 1px solid #f5f2f2;
+      }
+      .rl-compare__item:last-child { border-bottom: none; }
+      .rl-compare__item svg {
+        width: 16px; height: 16px; fill: none; stroke-width: 2;
+        stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
+      }
+      .rl-compare__item--pro svg { stroke: var(--rl-success); }
+      .rl-compare__cta {
+        display: block; width: 100%; text-align: center;
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: #fff; background: var(--rl-text);
+        padding: 0.9rem; text-decoration: none; margin-top: 1.5rem;
+        transition: background 0.2s ease;
+      }
+      .rl-compare__cta:hover { background: #333; }
+
+      .rl-compare__savings {
+        display: flex; align-items: center; gap: 1.25rem;
+        background: var(--rl-bg-alt); padding: 1.5rem 2rem;
+        margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;
+      }
+      .rl-compare__savings-icon {
+        width: 40px; height: 40px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .rl-compare__savings-icon svg {
+        width: 28px; height: 28px; stroke: var(--rl-success); fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      }
+      .rl-compare__savings-title {
+        font-family: var(--font-display); font-size: 0.9rem; font-weight: 700;
+        color: var(--rl-text); text-transform: uppercase; display: block;
+        margin-bottom: 0.2rem;
+      }
+      .rl-compare__savings-desc {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em; line-height: 1.5; display: block;
+      }
+
+      /* ══════════════════════════════════════
+         QUIZ — Find Your Perfect AWAY
+         ══════════════════════════════════════ */
+      .rl-quiz { background: var(--rl-bg-dark); padding: 5rem 2rem; }
+      .rl-quiz__header { text-align: center; margin-bottom: 3rem; }
+      .rl-quiz__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #fff; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-quiz__title em { font-style: italic; color: #999; }
+
+      .rl-quiz__container { max-width: 700px; margin: 0 auto; }
+      .rl-quiz__progress {
+        display: flex; gap: 0.5rem; margin-bottom: 2rem; justify-content: center;
+      }
+      .rl-quiz__progress-dot {
+        width: 10px; height: 10px; border-radius: 50%;
+        background: rgba(255,255,255,0.2); transition: background var(--rl-ease);
+      }
+      .rl-quiz__progress-dot.is-active { background: #fff; }
+      .rl-quiz__progress-dot.is-done { background: var(--rl-success); }
+
+      .rl-quiz__step {
+        display: none; animation: rlQuizFadeIn 0.3s ease;
+      }
+      .rl-quiz__step.is-active { display: block; }
+      @keyframes rlQuizFadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .rl-quiz__question {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+        color: #fff; text-align: center; margin-bottom: 1.5rem;
+      }
+      .rl-quiz__options {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem;
+      }
+      .rl-quiz__option {
+        background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.15);
+        padding: 1.5rem 1rem; text-align: center; cursor: pointer;
+        transition: all var(--rl-ease);
+      }
+      .rl-quiz__option:hover {
+        border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+      }
+      .rl-quiz__option.is-selected {
+        border-color: #fff; background: rgba(255,255,255,0.1);
+      }
+      .rl-quiz__option-icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
+      .rl-quiz__option-label {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+        color: #fff; text-transform: uppercase; letter-spacing: 0.02em;
+        display: block; margin-bottom: 0.3rem;
+      }
+      .rl-quiz__option-desc {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #999; line-height: 1.4;
+      }
+
+      .rl-quiz__result { display: none; text-align: center; animation: rlQuizFadeIn 0.4s ease; }
+      .rl-quiz__result.is-active { display: block; }
+      .rl-quiz__result-badge {
+        display: inline-block;
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        color: var(--rl-bg-dark); background: var(--rl-success);
+        padding: 0.35rem 1.2rem; margin-bottom: 1.5rem;
+      }
+      .rl-quiz__result-title {
+        font-family: var(--font-display); font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        font-weight: 800; color: #fff; text-transform: uppercase;
+        letter-spacing: -0.02em; margin-bottom: 0.5rem;
+      }
+      .rl-quiz__result-desc {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #999; line-height: 1.6; max-width: 500px; margin: 0 auto 2rem;
+      }
+      .rl-quiz__result-cta {
+        display: inline-block;
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: var(--rl-bg-dark); background: #fff;
+        padding: 0.9rem 2.5rem; text-decoration: none;
+        transition: background var(--rl-ease);
+      }
+      .rl-quiz__result-cta:hover { background: #e5e5e5; }
+      .rl-quiz__result-alt {
+        display: block; margin-top: 1rem;
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #666; text-decoration: underline;
+      }
+      .rl-quiz__restart {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: #666; cursor: pointer; margin-top: 1.5rem;
+        background: none; border: none;
+      }
+      .rl-quiz__restart:hover { color: #999; }
+      .rl-quiz__restart svg {
+        width: 14px; height: 14px; stroke: currentColor; fill: none;
+        stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      /* ══════════════════════════════════════
+         CALCULATOR — See Your Savings
+         ══════════════════════════════════════ */
+      .rl-calc { background: var(--rl-bg-alt); padding: 5rem 2rem; }
+      .rl-calc__header { text-align: center; margin-bottom: 3rem; }
+      .rl-calc__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-calc__title em { font-style: italic; }
+
+      .rl-calc__container { max-width: 800px; margin: 0 auto; }
+      .rl-calc__sliders {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        margin-bottom: 2.5rem;
+      }
+      .rl-calc__slider-label {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 500;
+        color: #666; text-transform: uppercase; letter-spacing: 0.03em;
+        display: flex; justify-content: space-between; align-items: baseline;
+        margin-bottom: 0.8rem;
+      }
+      .rl-calc__slider-value {
+        font-family: var(--font-display); font-size: 1.2rem; font-weight: 800;
+        color: var(--rl-text);
+      }
+      .rl-calc__range {
+        -webkit-appearance: none; appearance: none;
+        width: 100%; height: 4px; background: var(--rl-border);
+        outline: none; border-radius: 2px;
+      }
+      .rl-calc__range::-webkit-slider-thumb {
+        -webkit-appearance: none; appearance: none;
+        width: 20px; height: 20px; background: var(--rl-text);
+        border-radius: 50%; cursor: pointer; border: 3px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      }
+      .rl-calc__range::-moz-range-thumb {
+        width: 20px; height: 20px; background: var(--rl-text);
+        border-radius: 50%; cursor: pointer; border: 3px solid #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      }
+      .rl-calc__results {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      }
+      .rl-calc__card {
+        background: #fff; border: 1.5px solid var(--rl-border); padding: 2rem; text-align: center;
+      }
+      .rl-calc__card--rent { border-color: var(--rl-text); }
+      .rl-calc__card-label {
+        font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.03em;
+        color: var(--rl-text-muted); margin-bottom: 0.5rem;
+      }
+      .rl-calc__card-amount {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 800; color: var(--rl-text); margin-bottom: 0.4rem;
+      }
+      .rl-calc__card-note {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #999; line-height: 1.5;
+      }
+      .rl-calc__verdict {
+        text-align: center; margin-top: 2rem;
+        padding: 1.5rem; background: #fff; border: 1.5px solid var(--rl-border);
+      }
+      .rl-calc__verdict-text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        color: var(--rl-text); line-height: 1.5;
+      }
+      .rl-calc__verdict-text strong { font-weight: 700; color: var(--rl-success); }
+      .rl-calc__verdict-cta {
+        display: inline-block; margin-top: 1rem;
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        color: #fff; background: var(--rl-text);
+        padding: 0.7rem 2rem; text-decoration: none;
+        transition: background var(--rl-ease);
+      }
+      .rl-calc__verdict-cta:hover { background: #333; }
+
+      /* ══════════════════════════════════════
+         GALLERY — Adventure Awaits
+         ══════════════════════════════════════ */
+      .rl-gallery { background: var(--rl-bg); padding: 5rem 2rem; }
+      .rl-gallery__header { text-align: center; margin-bottom: 3rem; }
+      .rl-gallery__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-gallery__title em { font-style: italic; }
+      .rl-gallery__grid {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem; max-width: 1100px; margin: 0 auto;
+      }
+      .rl-gallery__item {
+        position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4 / 3;
+      }
+      .rl-gallery__item--wide { grid-column: span 2; }
+      .rl-gallery__item img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .rl-gallery__item:hover img { transform: scale(1.05); }
+      .rl-gallery__overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+        display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 1.2rem; opacity: 0; transition: opacity 0.3s ease;
+      }
+      .rl-gallery__item:hover .rl-gallery__overlay { opacity: 1; }
+      .rl-gallery__caption {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+        color: #fff; text-transform: uppercase; letter-spacing: 0.02em;
+      }
+      .rl-gallery__sub {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: rgba(255,255,255,0.7); margin-top: 0.2rem;
+      }
+
+      /* ══════════════════════════════════════
+         6. TESTIMONIALS
+         ══════════════════════════════════════ */
+      .rl-testimonials { background: var(--rl-bg-dark); padding: 5rem 2rem; }
+      .rl-testimonials__header {
+        display: flex; align-items: baseline; justify-content: space-between;
+        margin-bottom: 3rem;
+      }
+      .rl-testimonials__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #fff; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-testimonials__accent {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #666; letter-spacing: -0.02em;
+        text-transform: uppercase; font-style: italic; margin: 0;
+      }
+      .rl-testimonials__arrows { display: flex; gap: 0.5rem; }
+      .rl-testimonials__arrow {
+        background: none; border: none; width: 32px; height: 32px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: background 0.2s ease;
+      }
+      .rl-testimonials__arrow:hover { background: #fff; }
+      .rl-testimonials__arrow svg {
+        width: 14px; height: 14px; stroke: rgba(255,255,255,0.5);
+        fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+      .rl-testimonials__arrow:hover svg { stroke: var(--rl-text); }
+
+      .rl-testimonials__track {
+        display: flex; gap: 1.5rem; overflow-x: auto;
+        scroll-snap-type: x mandatory; scrollbar-width: none;
+        cursor: grab; -webkit-overflow-scrolling: touch;
+      }
+      .rl-testimonials__track::-webkit-scrollbar { display: none; }
+      .rl-testimonials__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+      .rl-testimonials__card {
+        flex: 0 0 calc(33.333% - 1rem); min-width: 300px;
+        scroll-snap-align: start;
+        background: rgba(255,255,255,0.04); padding: 2rem;
+      }
+      .rl-testimonials__stars {
+        display: flex; gap: 0.2rem; margin-bottom: 1rem;
+      }
+      .rl-testimonials__stars svg {
+        width: 14px; height: 14px; fill: #fff;
+      }
+      .rl-testimonials__quote {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: rgba(255,255,255,0.8); line-height: 1.7; letter-spacing: 0.01em;
+        margin: 0 0 1.5rem;
+      }
+      .rl-testimonials__author {
+        display: flex; align-items: center; gap: 0.75rem;
+      }
+      .rl-testimonials__initials {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
+        color: rgba(255,255,255,0.5); flex-shrink: 0;
+      }
+      .rl-testimonials__name {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+        color: #fff; text-transform: uppercase; display: block;
+      }
+      .rl-testimonials__meta {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.02em;
+        display: block; margin-top: 0.15rem;
+      }
+
+      /* ══════════════════════════════════════
+         7. FAQ
+         ══════════════════════════════════════ */
+      .rl-faq { background: var(--rl-bg-alt); padding: 5rem 2rem; }
+      .rl-faq__header {
+        text-align: center; margin-bottom: 3rem;
+      }
+      .rl-faq__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800; color: #000; letter-spacing: -0.02em;
+        text-transform: uppercase; margin: 0;
+      }
+      .rl-faq__title em { font-style: italic; }
+      .rl-faq__list { max-width: 800px; margin: 0 auto; }
+      .rl-faq__item { border-bottom: 1px solid var(--rl-border); }
+      .rl-faq__question {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+        color: var(--rl-text); letter-spacing: 0.01em;
+        background: none; border: none; width: 100%; text-align: left;
+        padding: 1.5rem 0; cursor: pointer;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        transition: opacity 0.2s ease;
+      }
+      .rl-faq__question:hover { opacity: 0.7; }
+      .rl-faq__question svg {
+        width: 14px; height: 14px; stroke: #999; fill: none; stroke-width: 2;
+        flex-shrink: 0; transition: transform 0.3s ease;
+        stroke-linecap: round;
+      }
+      .rl-faq__item.is-open .rl-faq__question svg {
+        transform: rotate(45deg); stroke: var(--rl-text);
+      }
+      .rl-faq__answer {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.01em;
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0;
+      }
+      .rl-faq__item.is-open .rl-faq__answer {
+        max-height: 300px; padding: 0 0 1.5rem;
+      }
+
+      /* ══════════════════════════════════════
+         8. FINAL CTA
+         ══════════════════════════════════════ */
+      .rl-final-cta {
+        padding: 5rem 2rem; text-align: center; background: var(--rl-bg);
+      }
+      .rl-final-cta__title {
+        font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 800; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.75rem;
+      }
+      .rl-final-cta__title em { font-style: italic; }
+      .rl-final-cta__sub {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+        color: #888; letter-spacing: 0.02em;
+        margin: 0 auto 2rem; max-width: 500px; line-height: 1.6;
+      }
+      .rl-final-cta__actions {
+        display: flex; gap: 0.75rem; justify-content: center;
+      }
+      .rl-final-cta__btn {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none;
+        padding: 1rem 2.5rem; transition: all 0.2s ease; display: inline-block;
+      }
+      .rl-final-cta__btn--primary {
+        color: #fff; background: var(--rl-text); border: 1.5px solid var(--rl-text);
+      }
+      .rl-final-cta__btn--primary:hover { background: #333; border-color: #333; }
+      .rl-final-cta__btn--secondary {
+        color: var(--rl-text); background: none; border: 1.5px solid var(--rl-border);
+      }
+      .rl-final-cta__btn--secondary:hover { border-color: var(--rl-text); }
+
+      .rl-final-cta__trust {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: var(--rl-text-muted); letter-spacing: 0.02em; text-transform: uppercase;
+        margin-top: 2rem;
+        display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      }
+      .rl-final-cta__trust svg {
+        width: 16px; height: 16px; stroke: var(--rl-success); fill: none;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      /* ══════════════════════════════════════
+         PERFORMANCE
+         ══════════════════════════════════════ */
+      .rl-process, .rl-products, .rl-compare, .rl-quiz, .rl-calc, .rl-gallery, .rl-testimonials, .rl-faq, .rl-final-cta {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 600px;
+      }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 768px) {
+        .rl-hero__content { padding: 0 1.5rem; }
+        .rl-hero__actions { flex-direction: column; gap: 0.5rem; }
+        .rl-hero__cta, .rl-hero__cta--ghost { text-align: center; }
+        .rl-hero__stats { gap: 1.5rem; }
+        .rl-hero__stat-num { font-size: 1.2rem; }
+
+        .rl-benefits { padding: 3rem 1.5rem; }
+        .rl-benefits__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+        .rl-process { padding: 3rem 1.5rem; }
+        .rl-process__timeline { grid-template-columns: 1fr; gap: 0; }
+        .rl-process__step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 0; }
+        .rl-process__step:last-child { border-bottom: none; }
+        .rl-process__num { font-size: 2.5rem; }
+
+        .rl-products { padding: 3rem 1.5rem; }
+        .rl-products__grid { grid-template-columns: 1fr; gap: 1rem; }
+
+        .rl-compare { padding: 3rem 1.5rem; }
+        .rl-compare__table { grid-template-columns: 1fr; }
+
+        .rl-quiz { padding: 3rem 1.5rem; }
+        .rl-quiz__options { grid-template-columns: 1fr 1fr; }
+
+        .rl-calc { padding: 3rem 1.5rem; }
+        .rl-calc__sliders { grid-template-columns: 1fr; }
+        .rl-calc__results { grid-template-columns: 1fr; }
+
+        .rl-gallery { padding: 3rem 1.5rem; }
+        .rl-gallery__grid { grid-template-columns: 1fr 1fr; }
+        .rl-gallery__item--wide { grid-column: span 1; }
+
+        .rl-testimonials { padding: 3rem 1.5rem; }
+        .rl-testimonials__card { flex: 0 0 85%; min-width: 280px; }
+
+        .rl-faq { padding: 3rem 1.5rem; }
+        .rl-final-cta { padding: 3rem 1.5rem; }
+        .rl-final-cta__actions { flex-direction: column; align-items: center; }
+      }
+
+      @media (max-width: 480px) {
+        .rl-benefits__grid { grid-template-columns: 1fr; }
+        .rl-hero__stats { flex-direction: column; gap: 0.75rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="site-header"></div>
+
+    <main>
+      <!-- ═══ 1. HERO ═══ -->
+      <section class="rl-hero">
+        <video class="rl-hero__video" autoplay muted loop playsinline>
+          <source src="../assets/videos/Roofbox_Video_With_New_Terrain.webm" type="video/webm" />
+        </video>
+        <div class="rl-hero__overlay"></div>
+        <div class="rl-hero__content">
+          <p class="rl-hero__eyebrow">Away Rentals</p>
+          <h1 class="rl-hero__title">Adventure<br/>Without The <em>Commitment</em></h1>
+          <p class="rl-hero__desc">Premium rooftop cargo systems from &#8377;499/day. Pick up from a dealer. Return when you're done.</p>
+          <div class="rl-hero__actions">
+            <a href="../rental/" class="rl-hero__cta">Start Renting</a>
+            <a href="#how-it-works" class="rl-hero__cta rl-hero__cta--ghost">See How It Works</a>
+          </div>
+          <div class="rl-hero__stats">
+            <div class="rl-hero__stat">
+              <span class="rl-hero__stat-num">500+</span>
+              <span class="rl-hero__stat-label">Rentals Completed</span>
+            </div>
+            <div class="rl-hero__stat">
+              <span class="rl-hero__stat-num">4.8&#9733;</span>
+              <span class="rl-hero__stat-label">Renter Rating</span>
+            </div>
+            <div class="rl-hero__stat">
+              <span class="rl-hero__stat-num">24+</span>
+              <span class="rl-hero__stat-label">Pickup Locations</span>
+            </div>
+          </div>
+        </div>
+        <div class="rl-hero__scroll" id="rlScrollDown">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+      </section>
+
+      <!-- ═══ 2. WHY RENT ═══ -->
+      <section class="rl-benefits" id="why-rent">
+        <div class="rl-benefits__header">
+          <div>
+            <h2 class="rl-benefits__title">Why <em>Rent?</em></h2>
+            <p class="rl-section-sub">Smart Reasons To Rent With AWAY</p>
+          </div>
+        </div>
+        <div class="rl-benefits__grid" id="rlBenefitsGrid">
+          <div class="rl-benefits__card">
+            <div class="rl-benefits__icon">
+              <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <h3 class="rl-benefits__card-title">Save &#8377;20,000+</h3>
+            <p class="rl-benefits__card-desc">Rent a premium roofbox for a fraction of the purchase price. Perfect for one-off trips or seasonal use.</p>
+          </div>
+          <div class="rl-benefits__card">
+            <div class="rl-benefits__icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+            </div>
+            <h3 class="rl-benefits__card-title">Zero Commitment</h3>
+            <p class="rl-benefits__card-desc">No long-term storage, no maintenance headaches. Rent when you need it, return when you don't.</p>
+          </div>
+          <div class="rl-benefits__card">
+            <div class="rl-benefits__icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3 class="rl-benefits__card-title">Dealer Installed</h3>
+            <p class="rl-benefits__card-desc">Pick up from any of our 24+ authorized dealers. Professional installation included free with every rental.</p>
+          </div>
+          <div class="rl-benefits__card">
+            <div class="rl-benefits__icon">
+              <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <h3 class="rl-benefits__card-title">Try Before You Buy</h3>
+            <p class="rl-benefits__card-desc">Test any AWAY product on your own vehicle and your own trip. Love it? Apply your rental toward a purchase.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 3. HOW IT WORKS ═══ -->
+      <section class="rl-process" id="how-it-works">
+        <div class="rl-process__header">
+          <div>
+            <div style="display:flex;align-items:baseline;gap:0.6rem;">
+              <h2 class="rl-process__title">How It</h2>
+              <span class="rl-process__accent">Works</span>
+            </div>
+            <p class="rl-section-sub" style="color:rgba(255,255,255,0.35);">Rent In 4 Simple Steps</p>
+          </div>
+        </div>
+        <div class="rl-process__timeline">
+          <div class="rl-process__step">
+            <div class="rl-process__num">01</div>
+            <h3 class="rl-process__step-title">Choose Your Gear</h3>
+            <p class="rl-process__step-desc">Browse our range of roofboxes and roofbags. Select the size and style that fits your trip and vehicle.</p>
+          </div>
+          <div class="rl-process__step">
+            <div class="rl-process__num">02</div>
+            <h3 class="rl-process__step-title">Pick Your Dates</h3>
+            <p class="rl-process__step-desc">Set your rental period — from a weekend getaway to a month-long expedition. Longer rentals get better daily rates.</p>
+          </div>
+          <div class="rl-process__step">
+            <div class="rl-process__num">03</div>
+            <h3 class="rl-process__step-title">Collect From Dealer</h3>
+            <p class="rl-process__step-desc">Pick up from any of 24+ AWAY dealers across India. We install it on your vehicle, free of charge.</p>
+          </div>
+          <div class="rl-process__step">
+            <div class="rl-process__num">04</div>
+            <h3 class="rl-process__step-title">Hit The Road &amp; Return</h3>
+            <p class="rl-process__step-desc">Enjoy your trip with 540L of extra storage. Return to the same dealer when you're done — we handle the rest.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 4. RENTAL PRODUCTS ═══ -->
+      <section class="rl-products">
+        <div class="rl-products__header">
+          <div>
+            <h2 class="rl-products__title">What You Can <em>Rent</em></h2>
+            <p class="rl-section-sub">Our Rental Fleet</p>
+          </div>
+          <a href="../rental/" class="rl-products__view-all">View All</a>
+        </div>
+        <div class="rl-products__grid">
+          <!-- Card 1 -->
+          <div class="rl-products__card">
+            <div class="rl-products__img-wrap">
+              <span class="rl-products__badge">Most Popular</span>
+              <img src="../assets/RoofBox.webp" alt="Roofbox 540L" loading="lazy" decoding="async" />
+            </div>
+            <div class="rl-products__body">
+              <h3 class="rl-products__name">Roofbox 540L Glossy</h3>
+              <div class="rl-products__attrs">
+                <span class="rl-products__attr">540 Litres</span>
+                <span class="rl-products__attr">75kg Max</span>
+                <span class="rl-products__attr">Aerodynamic</span>
+              </div>
+              <div class="rl-products__pricing">
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">1–5 Days</span>
+                  <span class="rl-products__price-value">&#8377;2,499</span>
+                </div>
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">6+ Days</span>
+                  <span class="rl-products__price-value">&#8377;399/day</span>
+                </div>
+                <div class="rl-products__price-row rl-products__price-row--deposit">
+                  <span class="rl-products__price-label">Refundable Deposit</span>
+                  <span class="rl-products__price-value">&#8377;5,000</span>
+                </div>
+              </div>
+              <a href="../rental/" class="rl-products__rent-btn">Rent This</a>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="rl-products__card">
+            <div class="rl-products__img-wrap">
+              <img src="../assets/RoofBox2.webp" alt="Roofbox 540L Textured" loading="lazy" decoding="async" />
+            </div>
+            <div class="rl-products__body">
+              <h3 class="rl-products__name">Roofbox 540L Textured</h3>
+              <div class="rl-products__attrs">
+                <span class="rl-products__attr">540 Litres</span>
+                <span class="rl-products__attr">75kg Max</span>
+                <span class="rl-products__attr">Textured</span>
+              </div>
+              <div class="rl-products__pricing">
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">1–5 Days</span>
+                  <span class="rl-products__price-value">&#8377;2,999</span>
+                </div>
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">6+ Days</span>
+                  <span class="rl-products__price-value">&#8377;449/day</span>
+                </div>
+                <div class="rl-products__price-row rl-products__price-row--deposit">
+                  <span class="rl-products__price-label">Refundable Deposit</span>
+                  <span class="rl-products__price-value">&#8377;5,000</span>
+                </div>
+              </div>
+              <a href="../rental/" class="rl-products__rent-btn">Rent This</a>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="rl-products__card">
+            <div class="rl-products__img-wrap">
+              <img src="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp" alt="Roofbox 450L" loading="lazy" decoding="async" />
+            </div>
+            <div class="rl-products__body">
+              <h3 class="rl-products__name">Roofbox 450L Glossy</h3>
+              <div class="rl-products__attrs">
+                <span class="rl-products__attr">450 Litres</span>
+                <span class="rl-products__attr">60kg Max</span>
+                <span class="rl-products__attr">Compact</span>
+              </div>
+              <div class="rl-products__pricing">
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">1–5 Days</span>
+                  <span class="rl-products__price-value">&#8377;1,999</span>
+                </div>
+                <div class="rl-products__price-row">
+                  <span class="rl-products__price-label">6+ Days</span>
+                  <span class="rl-products__price-value">&#8377;349/day</span>
+                </div>
+                <div class="rl-products__price-row rl-products__price-row--deposit">
+                  <span class="rl-products__price-label">Refundable Deposit</span>
+                  <span class="rl-products__price-value">&#8377;4,000</span>
+                </div>
+              </div>
+              <a href="../rental/" class="rl-products__rent-btn">Rent This</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 5. CHOOSE YOUR WAY ═══ -->
+      <section class="rl-compare">
+        <div class="rl-compare__header">
+          <h2 class="rl-compare__title">Choose Your <em>Way</em></h2>
+          <p class="rl-section-sub">Two Great Options For Every Adventurer</p>
+        </div>
+        <div class="rl-compare__table">
+          <!-- Buy Column -->
+          <div class="rl-compare__col rl-compare__col--highlight">
+            <div class="rl-compare__col-badge">Own It Forever</div>
+            <div class="rl-compare__col-header">
+              <h3 class="rl-compare__col-title">Buy</h3>
+              <span class="rl-compare__col-price">&#8377;24,999</span>
+              <span class="rl-compare__col-note">One-time investment</span>
+            </div>
+            <ul class="rl-compare__list">
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Yours to keep forever
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Ready whenever you are
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Best value for frequent travellers
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Customize &amp; accessorize freely
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Premium build, lifetime durability
+              </li>
+            </ul>
+            <a href="../shop/" class="rl-compare__cta">Shop Now</a>
+          </div>
+          <!-- Rent Column -->
+          <div class="rl-compare__col rl-compare__col--highlight">
+            <div class="rl-compare__col-badge">Try It First</div>
+            <div class="rl-compare__col-header">
+              <h3 class="rl-compare__col-title">Rent</h3>
+              <span class="rl-compare__col-price">From &#8377;399/day</span>
+              <span class="rl-compare__col-note">Pay only when you need it</span>
+            </div>
+            <ul class="rl-compare__list">
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Perfect for occasional trips
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                No storage or maintenance
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Free professional installation
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Try before you commit to buying
+              </li>
+              <li class="rl-compare__item rl-compare__item--pro">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Apply rental credit toward purchase
+              </li>
+            </ul>
+            <a href="../rental/" class="rl-compare__cta">Start Renting</a>
+          </div>
+        </div>
+        <div class="rl-compare__savings">
+          <span class="rl-compare__savings-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <div>
+            <span class="rl-compare__savings-title">Either Way, You're Covered</span>
+            <span class="rl-compare__savings-desc">Every AWAY product comes with dealer support, a satisfaction guarantee, and our adventurer community. Rent or buy — the road is yours.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ QUIZ — Find Your Perfect AWAY ═══ -->
+      <section class="rl-quiz" id="quiz">
+        <div class="rl-quiz__header">
+          <h2 class="rl-quiz__title">Find Your Perfect <em>AWAY</em></h2>
+          <p class="rl-section-sub" style="color:#999;">Answer 3 quick questions</p>
+        </div>
+        <div class="rl-quiz__container" id="rlQuiz">
+          <div class="rl-quiz__progress">
+            <span class="rl-quiz__progress-dot is-active" data-step="1"></span>
+            <span class="rl-quiz__progress-dot" data-step="2"></span>
+            <span class="rl-quiz__progress-dot" data-step="3"></span>
+          </div>
+
+          <!-- Q1: Frequency -->
+          <div class="rl-quiz__step is-active" data-step="1">
+            <p class="rl-quiz__question">How often do you travel with extra cargo?</p>
+            <div class="rl-quiz__options">
+              <div class="rl-quiz__option" data-value="rare">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Occasionally</span>
+                <span class="rl-quiz__option-desc">1–2 trips per year</span>
+              </div>
+              <div class="rl-quiz__option" data-value="sometimes">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Regularly</span>
+                <span class="rl-quiz__option-desc">3–5 trips per year</span>
+              </div>
+              <div class="rl-quiz__option" data-value="often">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Frequently</span>
+                <span class="rl-quiz__option-desc">6+ trips per year</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2: Cargo type -->
+          <div class="rl-quiz__step" data-step="2">
+            <p class="rl-quiz__question">What do you typically carry?</p>
+            <div class="rl-quiz__options">
+              <div class="rl-quiz__option" data-value="light">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Luggage</span>
+                <span class="rl-quiz__option-desc">Suitcases &amp; travel bags</span>
+              </div>
+              <div class="rl-quiz__option" data-value="sports">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/><path d="M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Sports Gear</span>
+                <span class="rl-quiz__option-desc">Bikes, boards, adventure gear</span>
+              </div>
+              <div class="rl-quiz__option" data-value="camping">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/><path d="M12 14l-4 8h8l-4-8z"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Camping</span>
+                <span class="rl-quiz__option-desc">Tents, sleeping bags, gear</span>
+              </div>
+              <div class="rl-quiz__option" data-value="everything">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Everything</span>
+                <span class="rl-quiz__option-desc">Family trips, mixed cargo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3: Priority -->
+          <div class="rl-quiz__step" data-step="3">
+            <p class="rl-quiz__question">What matters most to you?</p>
+            <div class="rl-quiz__options">
+              <div class="rl-quiz__option" data-value="cost">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Best Value</span>
+                <span class="rl-quiz__option-desc">Lowest cost per trip</span>
+              </div>
+              <div class="rl-quiz__option" data-value="flex">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Flexibility</span>
+                <span class="rl-quiz__option-desc">No commitment, try different options</span>
+              </div>
+              <div class="rl-quiz__option" data-value="own">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Ownership</span>
+                <span class="rl-quiz__option-desc">Own my gear, always ready to go</span>
+              </div>
+              <div class="rl-quiz__option" data-value="try">
+                <span class="rl-quiz__option-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="rl-quiz__option-label">Try First</span>
+                <span class="rl-quiz__option-desc">Test before committing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div class="rl-quiz__result" id="rlQuizResult">
+            <div class="rl-quiz__result-badge" id="rlQuizBadge">Perfect Match</div>
+            <h3 class="rl-quiz__result-title" id="rlQuizRecTitle"></h3>
+            <p class="rl-quiz__result-desc" id="rlQuizRecDesc"></p>
+            <a href="#" class="rl-quiz__result-cta" id="rlQuizRecCta"></a>
+            <a href="#" class="rl-quiz__result-alt" id="rlQuizRecAlt"></a>
+            <button class="rl-quiz__restart" id="rlQuizRestart">
+              <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+              Retake Quiz
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ CALCULATOR — See Your Savings ═══ -->
+      <section class="rl-calc">
+        <div class="rl-calc__header">
+          <h2 class="rl-calc__title">See Your <em>Savings</em></h2>
+          <p class="rl-section-sub">Slide to compare costs</p>
+        </div>
+        <div class="rl-calc__container">
+          <div class="rl-calc__sliders">
+            <div class="rl-calc__slider-group">
+              <label class="rl-calc__slider-label">
+                Trips per year
+                <span class="rl-calc__slider-value" id="rlCalcTrips">3</span>
+              </label>
+              <input type="range" class="rl-calc__range" id="rlCalcTripsRange" min="1" max="12" value="3" />
+            </div>
+            <div class="rl-calc__slider-group">
+              <label class="rl-calc__slider-label">
+                Average trip duration
+                <span class="rl-calc__slider-value" id="rlCalcDays">5 days</span>
+              </label>
+              <input type="range" class="rl-calc__range" id="rlCalcDaysRange" min="1" max="21" value="5" />
+            </div>
+          </div>
+          <div class="rl-calc__results">
+            <div class="rl-calc__card rl-calc__card--buy">
+              <div class="rl-calc__card-label">Buy Once</div>
+              <div class="rl-calc__card-amount" id="rlCalcBuyAmt">&#8377;24,999</div>
+              <div class="rl-calc__card-note" id="rlCalcBuyNote">One-time investment, use on all 3 trips</div>
+            </div>
+            <div class="rl-calc__card rl-calc__card--rent">
+              <div class="rl-calc__card-label">Rent Each Trip</div>
+              <div class="rl-calc__card-amount" id="rlCalcRentAmt">&#8377;7,497</div>
+              <div class="rl-calc__card-note" id="rlCalcRentNote">3 trips &times; 5 days per year</div>
+            </div>
+          </div>
+          <div class="rl-calc__verdict" id="rlCalcVerdict">
+            <p class="rl-calc__verdict-text" id="rlCalcVerdictText">
+              At this rate, <strong>renting saves you &#8377;17,502 this year</strong>. Rent now and buy later when you're ready.
+            </p>
+            <a href="../rental/" class="rl-calc__verdict-cta" id="rlCalcVerdictCta">Start Renting</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ GALLERY — Adventure Awaits ═══ -->
+      <section class="rl-gallery">
+        <div class="rl-gallery__header">
+          <h2 class="rl-gallery__title">Adventure <em>Awaits</em></h2>
+          <p class="rl-section-sub">AWAY Products In The Wild</p>
+        </div>
+        <div class="rl-gallery__grid">
+          <div class="rl-gallery__item rl-gallery__item--wide">
+            <img src="../assets/Safari%20roofbox%20540%20render/Safari-Roofbox-540.webp" alt="Tata Safari with AWAY Roofbox 540L" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Tata Safari</span>
+              <span class="rl-gallery__sub">Roofbox 540L Matte</span>
+            </div>
+          </div>
+          <div class="rl-gallery__item">
+            <img src="../assets/Jimny%20Render/Jimny03.webp" alt="Maruti Jimny with AWAY Roofbox" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Maruti Jimny</span>
+              <span class="rl-gallery__sub">Roofbox 450L Glossy</span>
+            </div>
+          </div>
+          <div class="rl-gallery__item">
+            <img src="../assets/KIA%20Seltos%20/Kia-seltos.webp" alt="Kia Seltos with AWAY Roofbox" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Kia Seltos</span>
+              <span class="rl-gallery__sub">Roofbox 450L Glossy</span>
+            </div>
+          </div>
+          <div class="rl-gallery__item">
+            <img src="../assets/Hyundai%20Venue%20/Hyundai-Venue.webp" alt="Hyundai Venue with AWAY Roofbox" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Hyundai Venue</span>
+              <span class="rl-gallery__sub">Roofbox 450L</span>
+            </div>
+          </div>
+          <div class="rl-gallery__item rl-gallery__item--wide">
+            <img src="../assets/XUV%20700%20Roofbox%20render%20/XUV-700-ROOFBOX-render.webp" alt="Mahindra XUV700 with AWAY Roofbox" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Mahindra XUV700</span>
+              <span class="rl-gallery__sub">Roofbox 540L Glossy</span>
+            </div>
+          </div>
+          <div class="rl-gallery__item">
+            <img src="../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp" alt="Maruti Fronx with AWAY Roofbox" loading="lazy" decoding="async" />
+            <div class="rl-gallery__overlay">
+              <span class="rl-gallery__caption">Maruti Fronx</span>
+              <span class="rl-gallery__sub">Roofbox 450L</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 6. TESTIMONIALS ═══ -->
+      <section class="rl-testimonials">
+        <div class="rl-testimonials__header">
+          <div>
+            <div style="display:flex;align-items:baseline;gap:0.6rem;">
+              <h2 class="rl-testimonials__title">Renter</h2>
+              <span class="rl-testimonials__accent">Stories</span>
+            </div>
+            <p class="rl-section-sub" style="color:rgba(255,255,255,0.35);">What Our Renters Say</p>
+          </div>
+          <div class="rl-testimonials__arrows">
+            <button class="rl-testimonials__arrow" id="testPrev" aria-label="Previous">
+              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="rl-testimonials__arrow" id="testNext" aria-label="Next">
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="rl-testimonials__track" id="testTrack">
+          <div class="rl-testimonials__card">
+            <div class="rl-testimonials__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="rl-testimonials__quote">"Rented the 540L for a Ladakh trip. Saved &#8377;20K and the dealer in Delhi installed it in 10 minutes. Will definitely rent again for our Goa trip next month."</p>
+            <div class="rl-testimonials__author">
+              <div class="rl-testimonials__initials">RK</div>
+              <div>
+                <span class="rl-testimonials__name">Rahul K.</span>
+                <span class="rl-testimonials__meta">Rented Roofbox 540L &bull; 14 days</span>
+              </div>
+            </div>
+          </div>
+          <div class="rl-testimonials__card">
+            <div class="rl-testimonials__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="rl-testimonials__quote">"We only go camping twice a year, so buying a roofbox never made sense. Renting from AWAY is the perfect solution — premium quality without the commitment."</p>
+            <div class="rl-testimonials__author">
+              <div class="rl-testimonials__initials">PS</div>
+              <div>
+                <span class="rl-testimonials__name">Priya S.</span>
+                <span class="rl-testimonials__meta">Rented Roofbox 450L &bull; 7 days</span>
+              </div>
+            </div>
+          </div>
+          <div class="rl-testimonials__card">
+            <div class="rl-testimonials__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="rl-testimonials__quote">"Tried the roofbox rental to test before buying. Ended up using the rent-to-own program and got &#8377;1,200 credited toward my purchase. Smart system."</p>
+            <div class="rl-testimonials__author">
+              <div class="rl-testimonials__initials">AM</div>
+              <div>
+                <span class="rl-testimonials__name">Amit M.</span>
+                <span class="rl-testimonials__meta">Rented Roofbox 540L &bull; 30 days</span>
+              </div>
+            </div>
+          </div>
+          <div class="rl-testimonials__card">
+            <div class="rl-testimonials__stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="rl-testimonials__quote">"Family road trip to Himachal with 4 kids worth of luggage. The 540L fit everything and more. Pickup and return at the Gurugram dealer was seamless."</p>
+            <div class="rl-testimonials__author">
+              <div class="rl-testimonials__initials">ND</div>
+              <div>
+                <span class="rl-testimonials__name">Neha D.</span>
+                <span class="rl-testimonials__meta">Rented Roofbox 540L &bull; 10 days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 7. FAQ ═══ -->
+      <section class="rl-faq" id="faq">
+        <div class="rl-faq__header">
+          <h2 class="rl-faq__title">Rental <em>FAQs</em></h2>
+          <p class="rl-section-sub">Everything You Need To Know</p>
+        </div>
+        <div class="rl-faq__list">
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              What's included in a rental?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">Every rental includes the roofbox or roofbag, mounting hardware, free professional installation at the dealer, and a protective cargo mat. Crossbars are available as an add-on if your vehicle doesn't have them.</div>
+          </div>
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              How much does it cost?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">Rental rates start at &#8377;1,999 for 1-5 days for roofboxes. Weekly and monthly rates offer significant discounts with daily rates as low as &#8377;349/day. A refundable security deposit (&#8377;4,000–&#8377;5,000) is collected at pickup and returned upon safe return.</div>
+          </div>
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              What happens if the product is damaged during rental?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">Normal wear and tear is expected and covered. For significant damage, repair costs are deducted from your security deposit. We inspect every unit upon return and document any issues transparently.</div>
+          </div>
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              Can I extend my rental period?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">Yes, extensions are available subject to availability. Contact us or your dealer at least 24 hours before your scheduled return date. Extended days are billed at the standard daily rate for your product.</div>
+          </div>
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              Can I apply my rental cost toward purchasing?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">Absolutely. We offer a Rent-to-Own program where up to 50% of your rental fees can be credited toward a purchase within 30 days of your rental return. Ask your dealer for details.</div>
+          </div>
+          <div class="rl-faq__item">
+            <button class="rl-faq__question">
+              Which dealers offer rentals?
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="rl-faq__answer">All 24+ AWAY authorized dealers across India participate in our rental program. During the booking flow, you'll see available dealers in your city with their addresses, phone numbers, and availability.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ 8. FINAL CTA ═══ -->
+      <section class="rl-final-cta">
+        <h2 class="rl-final-cta__title">Ready To Go <em>Away?</em></h2>
+        <p class="rl-final-cta__sub">Your next adventure is one booking away. Rent premium rooftop cargo, pick up from a dealer, and hit the road.</p>
+        <div class="rl-final-cta__actions">
+          <a href="../rental/" class="rl-final-cta__btn rl-final-cta__btn--primary">Start Renting Now</a>
+          <a href="../shop/" class="rl-final-cta__btn rl-final-cta__btn--secondary">Or Browse To Buy</a>
+        </div>
+        <p class="rl-final-cta__trust">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          Fully refundable deposit &bull; Free dealer installation &bull; Rent-to-own available
+        </p>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../components/header.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <script>
+    (() => {
+      /* ── Scroll indicator ── */
+      const scrollBtn = document.getElementById('rlScrollDown');
+      if (scrollBtn) {
+        scrollBtn.addEventListener('click', () => {
+          document.getElementById('why-rent').scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      /* ── Benefits fade-in on scroll ── */
+      const benefitCards = document.querySelectorAll('.rl-benefits__card');
+      if (benefitCards.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('is-visible');
+              }, i * 100);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        benefitCards.forEach(card => observer.observe(card));
+      }
+
+      /* ── Testimonials carousel ── */
+      const track = document.getElementById('testTrack');
+      const prevBtn = document.getElementById('testPrev');
+      const nextBtn = document.getElementById('testNext');
+
+      if (track && prevBtn && nextBtn) {
+        const scrollAmt = () => {
+          const card = track.querySelector('.rl-testimonials__card');
+          return card ? card.offsetWidth + 24 : 340;
+        };
+        prevBtn.addEventListener('click', () => {
+          track.scrollBy({ left: -scrollAmt(), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+          track.scrollBy({ left: scrollAmt(), behavior: 'smooth' });
+        });
+
+        // Drag-to-scroll
+        let isDragging = false, startX, scrollLeft;
+        track.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          track.classList.add('is-dragging');
+          startX = e.pageX - track.offsetLeft;
+          scrollLeft = track.scrollLeft;
+        });
+        track.addEventListener('mouseleave', () => { isDragging = false; track.classList.remove('is-dragging'); });
+        track.addEventListener('mouseup', () => { isDragging = false; track.classList.remove('is-dragging'); });
+        track.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - track.offsetLeft;
+          track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        });
+      }
+
+      /* ── FAQ Accordion ── */
+      document.querySelectorAll('.rl-faq__question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          const wasOpen = item.classList.contains('is-open');
+          document.querySelectorAll('.rl-faq__item').forEach(i => i.classList.remove('is-open'));
+          if (!wasOpen) item.classList.add('is-open');
+        });
+      });
+
+      /* ── Interactive Quiz ── */
+      const quiz = document.getElementById('rlQuiz');
+      if (quiz) {
+        const answers = {};
+        const steps = quiz.querySelectorAll('.rl-quiz__step');
+        const dots = quiz.querySelectorAll('.rl-quiz__progress-dot');
+        const result = document.getElementById('rlQuizResult');
+
+        quiz.addEventListener('click', function(e) {
+          const option = e.target.closest('.rl-quiz__option');
+          if (!option) return;
+
+          const step = option.closest('.rl-quiz__step');
+          const stepNum = parseInt(step.dataset.step);
+
+          step.querySelectorAll('.rl-quiz__option').forEach(o => o.classList.remove('is-selected'));
+          option.classList.add('is-selected');
+          answers[stepNum] = option.dataset.value;
+
+          setTimeout(function() {
+            dots[stepNum - 1].classList.remove('is-active');
+            dots[stepNum - 1].classList.add('is-done');
+
+            if (stepNum < 3) {
+              step.classList.remove('is-active');
+              steps[stepNum].classList.add('is-active');
+              dots[stepNum].classList.add('is-active');
+            } else {
+              step.classList.remove('is-active');
+              showQuizResult();
+            }
+          }, 400);
+        });
+
+        function showQuizResult() {
+          const freq = answers[1];
+          const cargo = answers[2];
+          const priority = answers[3];
+
+          const shouldBuy = (freq === 'often' && priority === 'own') ||
+                            (freq === 'often' && cargo === 'everything');
+          const needsLarge = (cargo === 'camping') || (cargo === 'everything');
+          const productName = needsLarge ? 'Roofbox 540L' : 'Roofbox 450L';
+
+          let title, desc, ctaText, ctaLink, altText, altLink, badge;
+
+          if (shouldBuy) {
+            badge = 'Best For You: Buy';
+            title = 'Buy the ' + productName;
+            desc = 'With ' + (freq === 'often' ? '6+' : '3-5') + ' trips per year, owning your ' + productName + ' gives you the best long-term value. Always ready, always yours.';
+            ctaText = 'Shop ' + productName;
+            ctaLink = '../shop/';
+            altText = 'Or try renting first \u2192';
+            altLink = '../rental/';
+          } else {
+            badge = 'Best For You: Rent';
+            title = 'Rent the ' + productName;
+            desc = needsLarge
+              ? 'The ' + productName + ' has all the space you need. Renting keeps costs low and gives you freedom to try it on your vehicle first.'
+              : 'The ' + productName + ' is perfect for your needs. Rent for your next trip \u2014 no commitment, no storage, just adventure.';
+            ctaText = 'Rent ' + productName;
+            ctaLink = '../rental/';
+            altText = 'Or buy to own it forever \u2192';
+            altLink = '../shop/';
+          }
+
+          document.getElementById('rlQuizBadge').textContent = badge;
+          document.getElementById('rlQuizRecTitle').textContent = title;
+          document.getElementById('rlQuizRecDesc').textContent = desc;
+          const cta = document.getElementById('rlQuizRecCta');
+          cta.textContent = ctaText;
+          cta.href = ctaLink;
+          const alt = document.getElementById('rlQuizRecAlt');
+          alt.textContent = altText;
+          alt.href = altLink;
+
+          result.classList.add('is-active');
+        }
+
+        document.getElementById('rlQuizRestart').addEventListener('click', function() {
+          result.classList.remove('is-active');
+          steps.forEach(s => s.classList.remove('is-active'));
+          steps[0].classList.add('is-active');
+          dots.forEach(d => { d.classList.remove('is-done', 'is-active'); });
+          dots[0].classList.add('is-active');
+          quiz.querySelectorAll('.rl-quiz__option').forEach(o => o.classList.remove('is-selected'));
+          Object.keys(answers).forEach(k => delete answers[k]);
+        });
+      }
+
+      /* ── Savings Calculator ── */
+      const tripsRange = document.getElementById('rlCalcTripsRange');
+      const daysRange = document.getElementById('rlCalcDaysRange');
+      if (tripsRange && daysRange) {
+        function updateCalc() {
+          const trips = parseInt(tripsRange.value);
+          const days = parseInt(daysRange.value);
+
+          document.getElementById('rlCalcTrips').textContent = trips;
+          document.getElementById('rlCalcDays').textContent = days + (days === 1 ? ' day' : ' days');
+
+          const buyPrice = 24999;
+          let rentalPerTrip;
+          if (days <= 5) {
+            rentalPerTrip = 2499;
+          } else {
+            rentalPerTrip = 2499 + (days - 5) * 399;
+          }
+          const totalRent = rentalPerTrip * trips;
+
+          document.getElementById('rlCalcBuyAmt').textContent = '\u20B9' + buyPrice.toLocaleString('en-IN');
+          document.getElementById('rlCalcBuyNote').textContent = 'One-time investment, use on all ' + trips + ' trip' + (trips > 1 ? 's' : '');
+          document.getElementById('rlCalcRentAmt').textContent = '\u20B9' + totalRent.toLocaleString('en-IN');
+          document.getElementById('rlCalcRentNote').textContent = trips + ' trip' + (trips > 1 ? 's' : '') + ' \u00D7 ' + days + ' day' + (days > 1 ? 's' : '') + ' per year';
+
+          const verdictText = document.getElementById('rlCalcVerdictText');
+          const verdictCta = document.getElementById('rlCalcVerdictCta');
+
+          if (totalRent < buyPrice) {
+            const savings = buyPrice - totalRent;
+            verdictText.innerHTML = 'At this rate, <strong>renting saves you \u20B9' + savings.toLocaleString('en-IN') + ' this year</strong>. Rent now and buy later when you\'re ready.';
+            verdictCta.textContent = 'Start Renting';
+            verdictCta.href = '../rental/';
+          } else {
+            verdictText.innerHTML = 'At ' + trips + ' trips per year, <strong>buying is the better value</strong>. Own your AWAY and go whenever the road calls.';
+            verdictCta.textContent = 'Shop Now';
+            verdictCta.href = '../shop/';
+          }
+        }
+
+        tripsRange.addEventListener('input', updateCalc);
+        daysRange.addEventListener('input', updateCalc);
+        updateCalc();
+      }
+    })();
+    </script>
+  </body>
+</html>

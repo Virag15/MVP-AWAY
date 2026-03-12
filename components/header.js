@@ -84,7 +84,7 @@
             '</div>' +
           '</div>' +
         '</div>' +
-        '<a href="../rental/" class="home-nav__link home-nav__link--single">Rent</a>' +
+        '<a href="../rent/" class="home-nav__link home-nav__link--single">Rent</a>' +
         '<div class="home-nav__item" data-menu="support">' +
           '<a href="../support/" class="home-nav__link">Support</a>' +
           '<div class="home-nav__mega">' +
@@ -144,7 +144,7 @@
             '<a href="../shop/">Roofboxes</a><a href="../shop/">Roofbags</a><a href="../shop/">Roofracks</a>' +
           '</div>' +
         '</div>' +
-        '<a href="../rental/">Rent</a>' +
+        '<a href="../rent/">Rent</a>' +
         '<div class="home-mobile-menu__group">' +
           '<button class="home-mobile-menu__toggle" data-target="mobileSupport">Support <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>' +
           '<div class="home-mobile-menu__sub" id="mobileSupport">' +
