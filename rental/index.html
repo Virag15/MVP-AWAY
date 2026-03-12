@@ -1,0 +1,1965 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AWAY — Rent premium rooftop cargo systems. Flexible rental periods, dealer installation." />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="../assets/fav-white.svg" media="(prefers-color-scheme: light)" />
+    <link rel="stylesheet" href="../components/shared.css">
+    <title>Rent — AWAY</title>
+
+    <style>
+      :root {
+        --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --r-text: #1a1a1a;
+        --r-text-muted: #9a8f8f;
+        --r-border: #e3dede;
+        --r-border-dark: rgba(255,255,255,0.1);
+        --r-bg: #fff;
+        --r-bg-alt: #f5f2f2;
+        --r-bg-dark: #1a1a1a;
+        --r-accent: #333;
+        --r-success: #22c55e;
+        --r-error: #ef4444;
+        --r-blue: #0ea5e9;
+        --r-ease: 0.25s ease;
+        --r-space-xs: 0.4rem;
+        --r-space-sm: 0.75rem;
+        --r-space-md: 1.25rem;
+        --r-space-lg: 2rem;
+        --r-space-xl: 2.5rem;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-body); background: var(--r-bg); color: var(--r-text); -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      button { font-family: inherit; }
+
+      /* ══════════════════════════════════════
+         LAYOUT
+         ══════════════════════════════════════ */
+      .r-layout {
+        display: grid; grid-template-columns: 1fr 420px;
+        min-height: 100vh; padding-top: 80px;
+      }
+      .r-layout.is-fullscreen {
+        grid-template-columns: 1fr;
+      }
+      .r-main {
+        padding: var(--r-space-xl) var(--r-space-lg) var(--r-space-xl) 3rem;
+        max-width: 720px;
+      }
+      .r-layout.is-fullscreen .r-main {
+        max-width: 100%;
+        padding: var(--r-space-xl) 3rem;
+      }
+
+      /* ══════════════════════════════════════
+         PAGE HEADER
+         ══════════════════════════════════════ */
+      .r-page-title {
+        font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-weight: 800; color: #000; text-transform: uppercase;
+        letter-spacing: -0.02em; margin: 0 0 0.3rem;
+      }
+      .r-page-title em { font-style: italic; }
+      .r-page-sub {
+        font-family: var(--font-body); font-size: 0.625rem; font-weight: 400;
+        color: var(--r-text-muted); letter-spacing: 0.02em; text-transform: uppercase;
+        margin: 0 0 var(--r-space-lg);
+      }
+
+      /* ══════════════════════════════════════
+         PROGRESS BAR
+         ══════════════════════════════════════ */
+      .r-progress {
+        display: flex; align-items: center; gap: 0;
+        margin-bottom: var(--r-space-xl);
+        padding-bottom: var(--r-space-lg);
+        border-bottom: 1px solid var(--r-border);
+        overflow-x: auto; scrollbar-width: none;
+      }
+      .r-progress::-webkit-scrollbar { display: none; }
+      .r-progress__step {
+        display: flex; align-items: center; gap: 0.4rem; cursor: default; flex-shrink: 0;
+      }
+      .r-progress__num {
+        width: 28px; height: 28px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-display); font-size: 0.6rem; font-weight: 600;
+        border: 1.5px solid var(--r-border); color: var(--r-text-muted);
+        transition: all 0.3s ease; flex-shrink: 0;
+      }
+      .r-progress__label {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 500;
+        color: var(--r-text-muted); text-transform: uppercase; letter-spacing: 0.02em;
+        transition: color 0.3s ease; white-space: nowrap;
+      }
+      .r-progress__line {
+        flex: 1; min-width: 12px; height: 1px; background: var(--r-border);
+        margin: 0 var(--r-space-xs); transition: background 0.3s ease;
+      }
+      .r-progress__step.is-active .r-progress__num {
+        border-color: var(--r-text); color: #fff; background: var(--r-text);
+      }
+      .r-progress__step.is-active .r-progress__label { color: var(--r-text); font-weight: 600; }
+      .r-progress__step.is-done .r-progress__num {
+        border-color: var(--r-success); color: #fff; background: var(--r-success);
+      }
+      .r-progress__step.is-done .r-progress__label { color: var(--r-success); }
+      .r-progress__line.is-done { background: var(--r-success); }
+
+      /* ══════════════════════════════════════
+         STEPS — SHARED
+         ══════════════════════════════════════ */
+      .r-step { display: none; }
+      .r-step.is-active { display: block; }
+      .r-step__title {
+        font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+        color: var(--r-text); text-transform: uppercase; letter-spacing: -0.01em;
+        margin: 0 0 0.3rem;
+      }
+      .r-step__desc {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: var(--r-text-muted); letter-spacing: 0.01em; margin: 0 0 var(--r-space-lg);
+      }
+
+      /* ── Form Elements ── */
+      .r-row { display: grid; gap: var(--r-space-md); margin-bottom: 0; }
+      .r-row--2 { grid-template-columns: 1fr 1fr; }
+      .r-row--3 { grid-template-columns: 1fr 1fr 1fr; }
+      .r-group { margin-bottom: var(--r-space-md); }
+      .r-label {
+        display: block; font-family: var(--font-body); font-size: 0.55rem; font-weight: 500;
+        color: var(--r-text-muted); letter-spacing: 0.02em; text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      .r-input {
+        width: 100%; font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: var(--r-text); border: none; border-bottom: 1px solid var(--r-border);
+        padding: 0.6rem 0; background: transparent; transition: border-color var(--r-ease);
+        letter-spacing: 0.01em;
+      }
+      .r-input:focus { outline: none; border-bottom-color: var(--r-text); }
+      .r-input::placeholder { color: #ccc; }
+      .r-input:read-only { color: var(--r-text-muted); cursor: default; }
+      select.r-input {
+        appearance: none; -webkit-appearance: none; border-radius: 0; cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 0 center; background-size: 10px;
+      }
+      .r-input--error { border-bottom-color: var(--r-error); }
+      .r-error-msg {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: var(--r-error); letter-spacing: 0.01em; text-transform: uppercase;
+        margin-top: 0.3rem; display: none;
+      }
+      .r-error-msg.is-visible { display: block; }
+
+      /* ── Phone Row ── */
+      .r-phone-row {
+        display: flex; align-items: stretch; border-bottom: 1px solid var(--r-border);
+      }
+      .r-phone-prefix {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+        color: var(--r-text-muted); padding: 0.6rem 0.6rem 0.6rem 0;
+        display: flex; align-items: center; white-space: nowrap;
+      }
+      .r-phone-input {
+        flex: 1; font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: var(--r-text); border: none; padding: 0.6rem 0;
+        background: transparent; letter-spacing: 0.05em;
+      }
+      .r-phone-input:focus { outline: none; }
+      .r-phone-input::placeholder { color: #ccc; }
+      .r-phone-check {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text);
+        background: none; border: none; cursor: pointer; padding: 0 0 0 1rem;
+        transition: opacity var(--r-ease); white-space: nowrap;
+      }
+      .r-phone-check:hover { opacity: 0.5; }
+      .r-phone-check:disabled { opacity: 0.3; cursor: not-allowed; }
+
+      /* ── OTP ── */
+      .r-otp-section { margin-top: var(--r-space-lg); display: none; }
+      .r-otp-section.is-visible { display: block; }
+      .r-otp-boxes {
+        display: flex; gap: var(--r-space-sm); margin: var(--r-space-sm) 0 var(--r-space-md);
+      }
+      .r-otp-box {
+        width: 48px; height: 48px; text-align: center;
+        font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
+        color: var(--r-text); border: 1.5px solid var(--r-border); background: transparent;
+        transition: border-color 0.15s ease;
+      }
+      .r-otp-box:focus { outline: none; border-color: var(--r-text); }
+      .r-otp-timer {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: var(--r-text-muted); letter-spacing: 0.01em; text-transform: uppercase;
+      }
+      .r-otp-timer span { color: var(--r-text); font-weight: 600; }
+
+      /* ── User Info (read-only) ── */
+      .r-user-info {
+        background: var(--r-bg-alt); padding: var(--r-space-md);
+        margin-bottom: var(--r-space-lg); display: none;
+      }
+      .r-user-info.is-visible { display: block; }
+      .r-user-info__badge {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        color: var(--r-success); margin-bottom: var(--r-space-sm); display: flex;
+        align-items: center; gap: 0.4rem;
+      }
+      .r-user-info__badge svg { width: 14px; height: 14px; stroke: var(--r-success); fill: none; stroke-width: 2; }
+      .r-user-info__row {
+        display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--r-space-md);
+      }
+      .r-user-info__label {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        color: var(--r-text-muted); text-transform: uppercase; letter-spacing: 0.02em;
+        margin-bottom: 0.2rem;
+      }
+      .r-user-info__value {
+        font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+        color: var(--r-text); letter-spacing: 0.01em;
+      }
+
+      /* ── Divider ── */
+      .r-divider {
+        height: 1px; background: var(--r-border); margin: var(--r-space-lg) 0;
+      }
+
+      /* ── Section Label ── */
+      .r-section-label {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        color: var(--r-text); text-transform: uppercase; letter-spacing: 0.02em;
+        margin: 0 0 var(--r-space-md);
+      }
+
+      /* ── Address Cards ── */
+      .r-addresses { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: var(--r-space-md); }
+      .r-address-card {
+        display: flex; align-items: flex-start; gap: var(--r-space-sm);
+        padding: var(--r-space-md); border: 1.5px solid var(--r-border);
+        cursor: pointer; transition: border-color var(--r-ease);
+      }
+      .r-address-card:hover { border-color: var(--r-text-muted); }
+      .r-address-card.is-selected { border-color: var(--r-text); }
+      .r-address-card__radio {
+        width: 18px; height: 18px; border: 1.5px solid var(--r-border); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        margin-top: 2px; transition: border-color var(--r-ease);
+      }
+      .r-address-card.is-selected .r-address-card__radio { border-color: var(--r-text); }
+      .r-address-card__radio-dot {
+        width: 8px; height: 8px; border-radius: 50%; background: var(--r-text);
+        transform: scale(0); transition: transform 0.15s ease;
+      }
+      .r-address-card.is-selected .r-address-card__radio-dot { transform: scale(1); }
+      .r-address-card__body { flex: 1; }
+      .r-address-card__type {
+        font-family: var(--font-display); font-size: 0.65rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.02em; color: var(--r-text);
+        margin-bottom: 0.3rem;
+      }
+      .r-address-card__text {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #666; line-height: 1.5; letter-spacing: 0.01em;
+      }
+      .r-address-card__actions {
+        display: flex; gap: 0.75rem; margin-top: 0.5rem;
+      }
+      .r-address-card__action {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        color: var(--r-text-muted); text-transform: uppercase; letter-spacing: 0.02em;
+        background: none; border: none; cursor: pointer; padding: 0;
+        text-decoration: underline; transition: color var(--r-ease);
+      }
+      .r-address-card__action:hover { color: var(--r-text); }
+
+      /* ── Address Form ── */
+      .r-address-form {
+        border: 1.5px solid var(--r-border); padding: var(--r-space-md);
+        margin-bottom: var(--r-space-md); display: none;
+      }
+      .r-address-form.is-visible { display: block; }
+      .r-address-form__radios {
+        display: flex; gap: var(--r-space-md); margin-bottom: var(--r-space-md);
+      }
+      .r-radio-pill {
+        display: flex; align-items: center; gap: 0.4rem; cursor: pointer;
+      }
+      .r-radio-pill__dot {
+        width: 16px; height: 16px; border: 1.5px solid var(--r-border); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; transition: border-color var(--r-ease);
+      }
+      .r-radio-pill.is-selected .r-radio-pill__dot { border-color: var(--r-text); }
+      .r-radio-pill__dot span {
+        width: 7px; height: 7px; border-radius: 50%; background: var(--r-text);
+        transform: scale(0); transition: transform 0.15s ease;
+      }
+      .r-radio-pill.is-selected .r-radio-pill__dot span { transform: scale(1); }
+      .r-radio-pill__label {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em; color: var(--r-text-muted);
+      }
+      .r-radio-pill.is-selected .r-radio-pill__label { color: var(--r-text); font-weight: 600; }
+
+      /* ── Add Address Button ── */
+      .r-add-address {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text);
+        background: none; border: 1.5px dashed var(--r-border); padding: var(--r-space-md);
+        width: 100%; cursor: pointer; transition: border-color var(--r-ease);
+        display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      }
+      .r-add-address:hover { border-color: var(--r-text); }
+      .r-add-address svg { width: 14px; height: 14px; stroke: var(--r-text); fill: none; stroke-width: 2; }
+
+      /* ══════════════════════════════════════
+         STEP 2 — CAR & VARIANT
+         ══════════════════════════════════════ */
+      .r-variant-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: var(--r-space-sm);
+        margin-top: var(--r-space-md);
+      }
+      .r-variant-card {
+        border: 1.5px solid var(--r-border); padding: 0; cursor: pointer;
+        transition: border-color var(--r-ease); overflow: hidden;
+      }
+      .r-variant-card:hover { border-color: var(--r-text-muted); }
+      .r-variant-card.is-selected { border-color: var(--r-text); }
+      .r-variant-card__img {
+        width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--r-bg-alt);
+      }
+      .r-variant-card__body { padding: var(--r-space-sm); }
+      .r-variant-card__name {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        text-transform: uppercase; color: var(--r-text); letter-spacing: -0.01em;
+        margin-bottom: 0.3rem;
+      }
+      .r-variant-card__attrs {
+        display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.5rem;
+      }
+      .r-variant-card__attr {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        background: var(--r-bg-alt); color: var(--r-text-muted); padding: 0.2rem 0.5rem;
+      }
+      .r-variant-card__pricing { display: flex; flex-direction: column; gap: 0.2rem; }
+      .r-variant-card__price {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em;
+      }
+      .r-variant-card__price span {
+        font-weight: 600; color: var(--r-text);
+      }
+      .r-variant-card__deposit {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 500;
+        color: var(--r-text-muted); letter-spacing: 0.01em; text-transform: uppercase;
+        margin-top: 0.2rem;
+      }
+      .r-variant-card__check {
+        display: flex; align-items: center; justify-content: center;
+        margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--r-border);
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text-muted);
+        transition: color var(--r-ease);
+      }
+      .r-variant-card.is-selected .r-variant-card__check { color: var(--r-success); }
+
+      /* ══════════════════════════════════════
+         STEP 3 — CROSSBAR
+         ══════════════════════════════════════ */
+      .r-crossbar-options { display: flex; flex-direction: column; gap: 0.5rem; }
+      .r-crossbar-card {
+        display: flex; align-items: flex-start; gap: var(--r-space-sm);
+        padding: var(--r-space-md); border: 1.5px solid var(--r-border);
+        cursor: pointer; transition: border-color var(--r-ease);
+      }
+      .r-crossbar-card:hover { border-color: var(--r-text-muted); }
+      .r-crossbar-card.is-selected { border-color: var(--r-text); }
+      .r-crossbar-card__radio {
+        width: 18px; height: 18px; border: 1.5px solid var(--r-border); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        margin-top: 2px; transition: border-color var(--r-ease);
+      }
+      .r-crossbar-card.is-selected .r-crossbar-card__radio { border-color: var(--r-text); }
+      .r-crossbar-card__radio-dot {
+        width: 8px; height: 8px; border-radius: 50%; background: var(--r-text);
+        transform: scale(0); transition: transform 0.15s ease;
+      }
+      .r-crossbar-card.is-selected .r-crossbar-card__radio-dot { transform: scale(1); }
+      .r-crossbar-card__body { flex: 1; }
+      .r-crossbar-card__title {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0em; color: var(--r-text);
+        margin-bottom: 0.2rem;
+      }
+      .r-crossbar-card__desc {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #666; line-height: 1.5; letter-spacing: 0.01em;
+      }
+      .r-crossbar-card__tag {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.02em;
+        padding: 0.2rem 0.5rem; margin-top: 0.4rem; display: inline-block;
+      }
+      .r-crossbar-card__tag--free { background: rgba(34,197,94,0.1); color: var(--r-success); }
+      .r-crossbar-card__tag--fee { background: rgba(239,68,68,0.1); color: var(--r-error); }
+      .r-crossbar-card__tag--info { background: rgba(14,165,233,0.1); color: var(--r-blue); }
+      .r-crossbar-card__checkbox {
+        display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem;
+        padding-top: 0.6rem; border-top: 1px solid var(--r-border); display: none;
+      }
+      .r-crossbar-card.is-selected .r-crossbar-card__checkbox { display: flex; }
+      .r-crossbar-card__checkbox input[type="checkbox"] {
+        width: 14px; height: 14px; accent-color: var(--r-text); cursor: pointer;
+      }
+      .r-crossbar-card__checkbox label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em; cursor: pointer;
+      }
+
+      /* ══════════════════════════════════════
+         STEP 4 — TIMELINE
+         ══════════════════════════════════════ */
+      .r-date-row {
+        display: grid; grid-template-columns: 1fr 1fr; gap: var(--r-space-lg);
+      }
+      .r-date-group { position: relative; }
+      .r-date-input {
+        width: 100%; font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: var(--r-text); border: none; border-bottom: 1.5px solid var(--r-border);
+        padding: 0.6rem 0; background: transparent; cursor: pointer;
+        transition: border-color var(--r-ease);
+      }
+      .r-date-input:focus { outline: none; border-bottom-color: var(--r-text); }
+      .r-duration-badge {
+        display: none; margin-top: var(--r-space-lg);
+        padding: var(--r-space-md); background: var(--r-bg-alt); text-align: center;
+      }
+      .r-duration-badge.is-visible { display: block; }
+      .r-duration-badge__num {
+        font-family: var(--font-display); font-size: 2rem; font-weight: 800;
+        color: var(--r-text); letter-spacing: -0.02em;
+      }
+      .r-duration-badge__label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: var(--r-text-muted); text-transform: uppercase; letter-spacing: 0.04em;
+        margin-top: 0.2rem;
+      }
+      .r-date-note {
+        font-family: var(--font-body); font-size: 0.55rem; font-weight: 400;
+        color: var(--r-blue); letter-spacing: 0.01em; margin-top: 0.5rem;
+        display: none;
+      }
+      .r-date-note.is-visible { display: block; }
+
+      /* ══════════════════════════════════════
+         STEP 5 — DEALER
+         ══════════════════════════════════════ */
+      .r-dealer-grid {
+        display: flex; flex-direction: column; gap: 0.5rem;
+      }
+      .r-dealer-card {
+        display: flex; align-items: flex-start; gap: var(--r-space-sm);
+        padding: var(--r-space-md); border: 1.5px solid var(--r-border);
+        cursor: pointer; transition: border-color var(--r-ease);
+      }
+      .r-dealer-card:hover { border-color: var(--r-text-muted); }
+      .r-dealer-card.is-selected { border-color: var(--r-text); }
+      .r-dealer-card__radio {
+        width: 18px; height: 18px; border: 1.5px solid var(--r-border); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        margin-top: 2px; transition: border-color var(--r-ease);
+      }
+      .r-dealer-card.is-selected .r-dealer-card__radio { border-color: var(--r-text); }
+      .r-dealer-card__radio-dot {
+        width: 8px; height: 8px; border-radius: 50%; background: var(--r-text);
+        transform: scale(0); transition: transform 0.15s ease;
+      }
+      .r-dealer-card.is-selected .r-dealer-card__radio-dot { transform: scale(1); }
+      .r-dealer-card__body { flex: 1; }
+      .r-dealer-card__name {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0em; color: var(--r-text);
+        margin-bottom: 0.2rem;
+      }
+      .r-dealer-card__address {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #666; line-height: 1.5; letter-spacing: 0.01em;
+      }
+      .r-dealer-card__phone {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 500;
+        color: var(--r-text); letter-spacing: 0.02em; margin-top: 0.3rem;
+        display: flex; align-items: center; gap: 0.3rem;
+      }
+      .r-dealer-card__phone svg { width: 12px; height: 12px; stroke: var(--r-text-muted); fill: none; stroke-width: 2; }
+      .r-dealer-card__tag {
+        font-family: var(--font-body); font-size: 0.45rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em;
+        background: rgba(34,197,94,0.1); color: var(--r-success);
+        padding: 0.2rem 0.5rem; display: inline-block; margin-top: 0.4rem;
+      }
+      .r-show-all {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text);
+        background: none; border: none; cursor: pointer; padding: var(--r-space-sm) 0;
+        transition: opacity var(--r-ease); text-decoration: underline;
+      }
+      .r-show-all:hover { opacity: 0.5; }
+
+      /* ══════════════════════════════════════
+         STEP 6 — PAYMENT
+         ══════════════════════════════════════ */
+      .r-pay-summary { margin-bottom: var(--r-space-lg); }
+      .r-pay-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        padding: 0.5rem 0; border-bottom: 1px solid var(--r-border);
+      }
+      .r-pay-row:last-child { border-bottom: none; }
+      .r-pay-row__label {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        color: #666; letter-spacing: 0.01em;
+      }
+      .r-pay-row__value {
+        font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+        color: var(--r-text);
+      }
+      .r-pay-row--total { border-top: 1.5px solid var(--r-text); margin-top: 0.25rem; padding-top: 0.75rem; }
+      .r-pay-row--total .r-pay-row__label {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 800;
+        text-transform: uppercase; color: var(--r-text);
+      }
+      .r-pay-row--total .r-pay-row__value {
+        font-size: 1.1rem; font-weight: 800;
+      }
+      .r-pay-row__note {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 400;
+        color: var(--r-text-muted); letter-spacing: 0.01em;
+      }
+
+      /* Deposit method */
+      .r-deposit-options { display: flex; flex-direction: column; gap: 0; margin-bottom: var(--r-space-md); }
+      .r-deposit-opt {
+        display: flex; align-items: center; gap: var(--r-space-sm);
+        padding: var(--r-space-sm) 0; border-bottom: 1px solid var(--r-border);
+        cursor: pointer; transition: opacity 0.15s ease;
+      }
+      .r-deposit-opt:last-child { border-bottom: none; }
+      .r-deposit-opt:hover { opacity: 0.7; }
+      .r-deposit-opt__dot {
+        width: 20px; height: 20px; border: 1.5px solid var(--r-text-muted); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        transition: border-color var(--r-ease);
+      }
+      .r-deposit-opt.is-selected .r-deposit-opt__dot { border-color: var(--r-text); }
+      .r-deposit-opt__dot span {
+        width: 9px; height: 9px; border-radius: 50%; background: var(--r-text);
+        transform: scale(0); transition: transform 0.15s ease;
+      }
+      .r-deposit-opt.is-selected .r-deposit-opt__dot span { transform: scale(1); }
+      .r-deposit-opt__label {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: var(--r-text); letter-spacing: 0.01em;
+      }
+
+      /* Terms */
+      .r-terms {
+        display: flex; align-items: flex-start; gap: 0.5rem;
+        margin: var(--r-space-lg) 0 0;
+        padding: var(--r-space-md); background: var(--r-bg-alt);
+      }
+      .r-terms input[type="checkbox"] {
+        width: 16px; height: 16px; accent-color: var(--r-text); cursor: pointer;
+        flex-shrink: 0; margin-top: 1px;
+      }
+      .r-terms__text {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: #666; line-height: 1.5; letter-spacing: 0.01em;
+      }
+      .r-terms__link {
+        color: var(--r-text); font-weight: 600; text-decoration: underline; cursor: pointer;
+      }
+
+      /* ══════════════════════════════════════
+         STEP 7 — SUCCESS
+         ══════════════════════════════════════ */
+      .r-success {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; padding: 4rem 2rem; min-height: calc(100vh - 160px);
+      }
+      .r-success__icon {
+        width: 80px; height: 80px; border-radius: 50%;
+        background: var(--r-success); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto var(--r-space-lg);
+      }
+      .r-success__icon svg { width: 36px; height: 36px; stroke: #fff; fill: none; stroke-width: 2.5; }
+      .r-success__title {
+        font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+        text-transform: uppercase; color: var(--r-text); letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+      .r-success__sub {
+        font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+        color: var(--r-text-muted); letter-spacing: 0.01em; margin-bottom: var(--r-space-xl);
+        max-width: 500px;
+      }
+      .r-success__steps {
+        text-align: left; margin: 0 auto; max-width: 520px; width: 100%;
+        background: var(--r-bg-alt); padding: var(--r-space-lg);
+      }
+      .r-success__steps-title {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text);
+        margin-bottom: var(--r-space-md); padding-bottom: var(--r-space-sm);
+        border-bottom: 1px solid var(--r-border);
+      }
+      .r-success__step-item {
+        display: flex; align-items: flex-start; gap: var(--r-space-sm);
+        padding: var(--r-space-sm) 0; border-bottom: 1px solid var(--r-border);
+      }
+      .r-success__step-item:last-child { border-bottom: none; }
+      .r-success__step-num {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: var(--r-text); color: #fff; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-display); font-size: 0.6rem; font-weight: 700;
+      }
+      .r-success__step-text {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; line-height: 1.6; letter-spacing: 0.01em; padding-top: 4px;
+      }
+      .r-success__step-text strong {
+        font-weight: 600; color: var(--r-text);
+      }
+      .r-success__actions {
+        display: flex; gap: var(--r-space-sm); justify-content: center;
+        margin-top: var(--r-space-xl);
+      }
+
+      /* ══════════════════════════════════════
+         NAVIGATION BUTTONS
+         ══════════════════════════════════════ */
+      .r-nav { display: flex; gap: var(--r-space-sm); margin-top: var(--r-space-lg); }
+      .r-nav-back {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+        text-transform: uppercase; letter-spacing: 0.02em; color: var(--r-text-muted);
+        background: none; border: 1px solid var(--r-border); padding: 1rem var(--r-space-lg);
+        cursor: pointer; transition: all 0.15s ease;
+      }
+      .r-nav-back:hover { border-color: var(--r-text); color: var(--r-text); }
+      .r-nav-next {
+        flex: 1; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
+        background: var(--r-text); border: none; padding: 1rem; cursor: pointer;
+        transition: background var(--r-ease);
+      }
+      .r-nav-next:hover { background: var(--r-accent); }
+      .r-nav-next:disabled { background: var(--r-border); color: var(--r-text-muted); cursor: not-allowed; }
+      .r-btn-outline {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: var(--r-text);
+        background: none; border: 1.5px solid var(--r-text); padding: 0.9rem 1.5rem;
+        cursor: pointer; transition: all var(--r-ease); text-decoration: none;
+        display: inline-flex; align-items: center; gap: 0.4rem;
+      }
+      .r-btn-outline:hover { background: var(--r-text); color: #fff; }
+      .r-btn-solid {
+        font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
+        background: var(--r-text); border: 1.5px solid var(--r-text);
+        padding: 0.9rem 1.5rem; cursor: pointer; transition: all var(--r-ease);
+        text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+      }
+      .r-btn-solid:hover { background: var(--r-accent); border-color: var(--r-accent); }
+
+      /* ══════════════════════════════════════
+         RIGHT SIDEBAR — SUMMARY
+         ══════════════════════════════════════ */
+      .r-sidebar {
+        background: var(--r-bg-dark); color: #fff;
+        padding: var(--r-space-xl) var(--r-space-lg);
+        position: sticky; top: 80px; align-self: start;
+        min-height: calc(100vh - 80px);
+        display: flex; flex-direction: column;
+      }
+      .r-sidebar__title {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.04em; color: #fff;
+        margin-bottom: var(--r-space-lg); padding-bottom: var(--r-space-sm);
+        border-bottom: 1px solid var(--r-border-dark);
+      }
+      .r-sidebar__section {
+        margin-bottom: var(--r-space-md); padding-bottom: var(--r-space-md);
+        border-bottom: 1px solid var(--r-border-dark);
+      }
+      .r-sidebar__section:last-child { border-bottom: none; }
+      .r-sidebar__label {
+        font-family: var(--font-body); font-size: 0.5rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.4);
+        margin-bottom: 0.4rem;
+      }
+      .r-sidebar__value {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+        color: #fff; letter-spacing: 0.01em; line-height: 1.5;
+      }
+      .r-sidebar__value--highlight {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+        color: #fff;
+      }
+      .r-sidebar__empty {
+        font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+        color: rgba(255,255,255,0.3); letter-spacing: 0.01em; line-height: 1.6;
+        margin-top: auto;
+      }
+      .r-sidebar__total-section {
+        margin-top: auto; padding-top: var(--r-space-md);
+        border-top: 1px solid var(--r-border-dark);
+      }
+      .r-sidebar__total-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        margin-bottom: 0.3rem;
+      }
+      .r-sidebar__total-label {
+        font-family: var(--font-body); font-size: 0.6rem; font-weight: 400;
+        color: rgba(255,255,255,0.5); letter-spacing: 0.01em;
+      }
+      .r-sidebar__total-value {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+        color: #fff;
+      }
+      .r-sidebar__total-row--grand .r-sidebar__total-label {
+        font-family: var(--font-display); font-size: 0.75rem; font-weight: 800;
+        text-transform: uppercase; color: #fff;
+      }
+      .r-sidebar__total-row--grand .r-sidebar__total-value {
+        font-size: 1.1rem; font-weight: 800;
+      }
+
+      /* ══════════════════════════════════════
+         TERMS MODAL
+         ══════════════════════════════════════ */
+      .r-modal-overlay {
+        position: fixed; inset: 0; z-index: 500;
+        background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none;
+        transition: opacity 0.3s ease; display: flex;
+        align-items: center; justify-content: center;
+      }
+      .r-modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+      .r-modal {
+        background: #fff; width: 90%; max-width: 600px; max-height: 80vh;
+        overflow-y: auto; padding: var(--r-space-xl);
+        transform: translateY(20px); transition: transform 0.3s ease;
+      }
+      .r-modal-overlay.is-open .r-modal { transform: translateY(0); }
+      .r-modal__header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: var(--r-space-lg); padding-bottom: var(--r-space-sm);
+        border-bottom: 1px solid var(--r-border);
+      }
+      .r-modal__title {
+        font-family: var(--font-display); font-size: 1rem; font-weight: 800;
+        text-transform: uppercase; color: var(--r-text);
+      }
+      .r-modal__close {
+        background: none; border: none; cursor: pointer; padding: 0;
+      }
+      .r-modal__close svg { width: 20px; height: 20px; stroke: #999; fill: none; stroke-width: 2; }
+      .r-modal__close:hover svg { stroke: var(--r-text); }
+      .r-modal__body {
+        font-family: var(--font-body); font-size: 0.75rem; font-weight: 400;
+        color: #666; line-height: 1.7; letter-spacing: 0.01em;
+      }
+      .r-modal__body h3 {
+        font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+        text-transform: uppercase; color: var(--r-text); margin: 1.5rem 0 0.5rem;
+      }
+      .r-modal__body ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+      .r-modal__body li { margin-bottom: 0.3rem; }
+
+      /* ══════════════════════════════════════
+         ALL DEALERS MODAL
+         ══════════════════════════════════════ */
+      .r-dealers-modal__grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+      }
+
+      /* ══════════════════════════════════════
+         RESPONSIVE
+         ══════════════════════════════════════ */
+      @media (max-width: 900px) {
+        .r-layout { grid-template-columns: 1fr; }
+        .r-main { max-width: 100%; padding: var(--r-space-lg) 1.5rem; }
+        .r-success { min-height: auto; padding: 3rem 1rem; }
+        .r-sidebar {
+          position: relative; top: 0; min-height: auto;
+          padding: var(--r-space-lg) 1.5rem;
+        }
+        .r-sidebar__total-section { margin-top: var(--r-space-md); }
+        .r-variant-grid { grid-template-columns: 1fr; }
+        .r-date-row { grid-template-columns: 1fr; gap: var(--r-space-md); }
+        .r-user-info__row { grid-template-columns: 1fr; gap: var(--r-space-sm); }
+        .r-dealers-modal__grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 480px) {
+        .r-main { padding: var(--r-space-md) 1rem; }
+        .r-progress__label { display: none; }
+        .r-progress__line { min-width: 8px; }
+        .r-row--2 { grid-template-columns: 1fr; }
+        .r-row--3 { grid-template-columns: 1fr; }
+        .r-otp-box { width: 40px; height: 40px; font-size: 1rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="site-header"></div>
+
+    <div class="r-layout">
+      <!-- LEFT — FORM -->
+      <div class="r-main">
+        <h1 class="r-page-title">Rent A <em>Roofbox</em></h1>
+        <p class="r-page-sub">Flexible rentals, hassle-free installation</p>
+
+        <!-- Progress Bar -->
+        <div class="r-progress" id="rProgress">
+          <div class="r-progress__step is-active" data-step="1">
+            <span class="r-progress__num">1</span>
+            <span class="r-progress__label">Verify</span>
+          </div>
+          <div class="r-progress__line" data-line="1"></div>
+          <div class="r-progress__step" data-step="2">
+            <span class="r-progress__num">2</span>
+            <span class="r-progress__label">Vehicle</span>
+          </div>
+          <div class="r-progress__line" data-line="2"></div>
+          <div class="r-progress__step" data-step="3">
+            <span class="r-progress__num">3</span>
+            <span class="r-progress__label">Crossbar</span>
+          </div>
+          <div class="r-progress__line" data-line="3"></div>
+          <div class="r-progress__step" data-step="4">
+            <span class="r-progress__num">4</span>
+            <span class="r-progress__label">Timeline</span>
+          </div>
+          <div class="r-progress__line" data-line="4"></div>
+          <div class="r-progress__step" data-step="5">
+            <span class="r-progress__num">5</span>
+            <span class="r-progress__label">Dealer</span>
+          </div>
+          <div class="r-progress__line" data-line="5"></div>
+          <div class="r-progress__step" data-step="6">
+            <span class="r-progress__num">6</span>
+            <span class="r-progress__label">Payment</span>
+          </div>
+          <div class="r-progress__line" data-line="6"></div>
+          <div class="r-progress__step" data-step="7">
+            <span class="r-progress__num">7</span>
+            <span class="r-progress__label">Done</span>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 1 — USER VERIFICATION
+             ═══════════════════════════════════ -->
+        <div class="r-step is-active" data-step="1">
+          <h2 class="r-step__title">User Verification</h2>
+          <p class="r-step__desc">Verify your identity and select a delivery address</p>
+
+          <!-- Phone Lookup -->
+          <div class="r-group">
+            <label class="r-label">Phone Number</label>
+            <div class="r-phone-row">
+              <span class="r-phone-prefix">+91</span>
+              <input type="tel" class="r-phone-input" id="rPhone" placeholder="Enter 10-digit number" maxlength="10" inputmode="numeric" />
+              <button class="r-phone-check" id="rPhoneCheck">Check</button>
+            </div>
+          </div>
+
+          <!-- Existing User Info -->
+          <div class="r-user-info" id="rUserInfo">
+            <div class="r-user-info__badge">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Verified Customer
+            </div>
+            <div class="r-user-info__row">
+              <div>
+                <p class="r-user-info__label">Full Name</p>
+                <p class="r-user-info__value" id="rUserName">—</p>
+              </div>
+              <div>
+                <p class="r-user-info__label">Mobile</p>
+                <p class="r-user-info__value" id="rUserMobile">—</p>
+              </div>
+              <div>
+                <p class="r-user-info__label">Email</p>
+                <p class="r-user-info__value" id="rUserEmail">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- New User OTP & Registration -->
+          <div class="r-otp-section" id="rOtpSection">
+            <p class="r-section-label">Verify OTP</p>
+            <p class="r-step__desc" style="margin-bottom:0.5rem;">An OTP has been sent to your mobile number</p>
+            <div class="r-otp-boxes">
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+              <input type="text" class="r-otp-box" maxlength="1" inputmode="numeric" />
+            </div>
+            <p class="r-otp-timer">Resend OTP in <span id="rOtpCountdown">30s</span></p>
+
+            <div class="r-divider"></div>
+            <p class="r-section-label">Register</p>
+            <div class="r-row r-row--2">
+              <div class="r-group">
+                <label class="r-label">Full Name</label>
+                <input type="text" class="r-input" id="rRegName" placeholder="Your full name" />
+              </div>
+              <div class="r-group">
+                <label class="r-label">Email Address</label>
+                <input type="email" class="r-input" id="rRegEmail" placeholder="you@example.com" />
+              </div>
+            </div>
+            <button class="r-nav-next" id="rVerifyOtp" style="margin-top:0.5rem;">Verify OTP &amp; Register</button>
+          </div>
+
+          <!-- Address Section -->
+          <div id="rAddressSection" style="display:none;">
+            <div class="r-divider"></div>
+            <p class="r-section-label">Delivery Address</p>
+
+            <div class="r-addresses" id="rAddressList">
+              <!-- Address Card 1 (demo) -->
+              <div class="r-address-card" data-address="1">
+                <div class="r-address-card__radio"><div class="r-address-card__radio-dot"></div></div>
+                <div class="r-address-card__body">
+                  <p class="r-address-card__type">Home</p>
+                  <p class="r-address-card__text">Flat 301, Sunrise Apartments, Sector 45, Gurugram, Haryana — 122003</p>
+                  <div class="r-address-card__actions">
+                    <button class="r-address-card__action">Edit</button>
+                    <button class="r-address-card__action">Deliver Here</button>
+                  </div>
+                </div>
+              </div>
+              <div class="r-address-card" data-address="2">
+                <div class="r-address-card__radio"><div class="r-address-card__radio-dot"></div></div>
+                <div class="r-address-card__body">
+                  <p class="r-address-card__type">Work</p>
+                  <p class="r-address-card__text">Unit 12B, DLF Cyber City, Phase 2, Gurugram, Haryana — 122002</p>
+                  <div class="r-address-card__actions">
+                    <button class="r-address-card__action">Edit</button>
+                    <button class="r-address-card__action">Deliver Here</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="r-add-address" id="rAddAddressBtn">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+              Add New Address
+            </button>
+
+            <!-- Add/Edit Address Form -->
+            <div class="r-address-form" id="rAddressForm">
+              <p class="r-section-label" style="margin-bottom:var(--r-space-md);">New Address</p>
+              <div class="r-address-form__radios">
+                <div class="r-radio-pill is-selected" data-type="home">
+                  <div class="r-radio-pill__dot"><span></span></div>
+                  <span class="r-radio-pill__label">Home</span>
+                </div>
+                <div class="r-radio-pill" data-type="work">
+                  <div class="r-radio-pill__dot"><span></span></div>
+                  <span class="r-radio-pill__label">Work</span>
+                </div>
+              </div>
+              <div class="r-row r-row--3">
+                <div class="r-group">
+                  <label class="r-label">Pincode</label>
+                  <input type="text" class="r-input" placeholder="6-digit pincode" maxlength="6" inputmode="numeric" />
+                </div>
+                <div class="r-group">
+                  <label class="r-label">City</label>
+                  <input type="text" class="r-input" placeholder="City" />
+                </div>
+                <div class="r-group">
+                  <label class="r-label">State</label>
+                  <input type="text" class="r-input" placeholder="State" />
+                </div>
+              </div>
+              <div class="r-group">
+                <label class="r-label">Flat, House no., Building</label>
+                <input type="text" class="r-input" placeholder="Flat, House no., Building" />
+              </div>
+              <div class="r-group">
+                <label class="r-label">Area, Street, Sector, Village</label>
+                <input type="text" class="r-input" placeholder="Area, Street, Sector, Village" />
+              </div>
+              <div class="r-row r-row--2">
+                <div class="r-group">
+                  <label class="r-label">Customer Name</label>
+                  <input type="text" class="r-input" placeholder="Recipient name" />
+                </div>
+                <div class="r-group">
+                  <label class="r-label">Customer Phone</label>
+                  <input type="tel" class="r-input" placeholder="10-digit phone" maxlength="10" inputmode="numeric" />
+                </div>
+              </div>
+              <div class="r-group">
+                <label class="r-label">Customer Email (optional)</label>
+                <input type="email" class="r-input" placeholder="Email address" />
+              </div>
+              <div class="r-nav" style="margin-top:var(--r-space-md);">
+                <button class="r-nav-back" id="rCancelAddress">Cancel</button>
+                <button class="r-nav-next" id="rSaveAddress">Save Address</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-nav">
+            <button class="r-nav-next" id="rStep1Next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 2 — CAR DETAILS & VARIANT
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="2">
+          <h2 class="r-step__title">Car Details &amp; Variant</h2>
+          <p class="r-step__desc">Select your vehicle for compatibility matching</p>
+
+          <div class="r-row r-row--3">
+            <div class="r-group">
+              <label class="r-label">Car Make</label>
+              <select class="r-input" id="rCarMake">
+                <option value="">Select Make</option>
+                <option value="tata">Tata</option>
+                <option value="mahindra">Mahindra</option>
+                <option value="maruti">Maruti Suzuki</option>
+                <option value="hyundai">Hyundai</option>
+                <option value="kia">Kia</option>
+                <option value="toyota">Toyota</option>
+                <option value="mg">MG</option>
+                <option value="honda">Honda</option>
+              </select>
+            </div>
+            <div class="r-group">
+              <label class="r-label">Car Model</label>
+              <select class="r-input" id="rCarModel" disabled>
+                <option value="">Select Model</option>
+              </select>
+            </div>
+            <div class="r-group">
+              <label class="r-label">Model Variant</label>
+              <select class="r-input" id="rCarVariant" disabled>
+                <option value="">Select Variant</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="rVariantSection" style="display:none;">
+            <div class="r-divider"></div>
+            <p class="r-section-label">Compatible Rental Variants</p>
+            <div class="r-variant-grid" id="rVariantGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="r-nav">
+            <button class="r-nav-back" data-back>Back</button>
+            <button class="r-nav-next" id="rStep2Next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 3 — CROSSBAR CHECK
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="3">
+          <h2 class="r-step__title">Crossbar Compatibility</h2>
+          <p class="r-step__desc">Do you have crossbars installed on your vehicle?</p>
+
+          <div class="r-crossbar-options" id="rCrossbarOptions">
+            <div class="r-crossbar-card" data-crossbar="away">
+              <div class="r-crossbar-card__radio"><div class="r-crossbar-card__radio-dot"></div></div>
+              <div class="r-crossbar-card__body">
+                <p class="r-crossbar-card__title">Yes, I have AWAY Crossbars</p>
+                <p class="r-crossbar-card__desc">No additional fees. Your existing AWAY crossbars are fully compatible.</p>
+                <span class="r-crossbar-card__tag r-crossbar-card__tag--free">Free</span>
+                <div class="r-crossbar-card__checkbox">
+                  <input type="checkbox" id="rCrossbarProof" />
+                  <label for="rCrossbarProof">I can provide proof of AWAY crossbar ownership</label>
+                </div>
+              </div>
+            </div>
+            <div class="r-crossbar-card" data-crossbar="other">
+              <div class="r-crossbar-card__radio"><div class="r-crossbar-card__radio-dot"></div></div>
+              <div class="r-crossbar-card__body">
+                <p class="r-crossbar-card__title">Yes, I have other brand crossbars</p>
+                <p class="r-crossbar-card__desc">A compatibility check fee will be applied to ensure safe fitment.</p>
+                <span class="r-crossbar-card__tag r-crossbar-card__tag--fee">&#8377;1,999 Compatibility Fee</span>
+              </div>
+            </div>
+            <div class="r-crossbar-card" data-crossbar="none">
+              <div class="r-crossbar-card__radio"><div class="r-crossbar-card__radio-dot"></div></div>
+              <div class="r-crossbar-card__body">
+                <p class="r-crossbar-card__title">No, I don't have crossbars</p>
+                <p class="r-crossbar-card__desc">AWAY crossbars will be provided. Cost deducted from security deposit at rental end. Start date must be at least 5 days from today.</p>
+                <span class="r-crossbar-card__tag r-crossbar-card__tag--info">Crossbars Included</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-nav">
+            <button class="r-nav-back" data-back>Back</button>
+            <button class="r-nav-next" id="rStep3Next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 4 — BOOKING TIMELINE
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="4">
+          <h2 class="r-step__title">Booking Timeline</h2>
+          <p class="r-step__desc">Select your rental start and end dates</p>
+
+          <div class="r-date-row">
+            <div class="r-date-group">
+              <label class="r-label">Start Date</label>
+              <input type="date" class="r-date-input" id="rStartDate" />
+              <p class="r-date-note" id="rDateNote">Earliest start date: 5 days from today (crossbar shipping)</p>
+            </div>
+            <div class="r-date-group">
+              <label class="r-label">End Date</label>
+              <input type="date" class="r-date-input" id="rEndDate" />
+            </div>
+          </div>
+
+          <div class="r-duration-badge" id="rDuration">
+            <p class="r-duration-badge__num" id="rDurationNum">—</p>
+            <p class="r-duration-badge__label">Rental Duration (Days)</p>
+          </div>
+
+          <div class="r-nav">
+            <button class="r-nav-back" data-back>Back</button>
+            <button class="r-nav-next" id="rStep4Next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 5 — SELECT DEALER
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="5">
+          <h2 class="r-step__title">Select Dealer</h2>
+          <p class="r-step__desc">Choose an installation center for your roofbox</p>
+
+          <p class="r-section-label">Suggested Dealers</p>
+          <div class="r-dealer-grid" id="rDealerGrid">
+            <div class="r-dealer-card" data-dealer="1">
+              <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+              <div class="r-dealer-card__body">
+                <p class="r-dealer-card__name">AWAY Gurugram Hub</p>
+                <p class="r-dealer-card__address">Plot 42, Udyog Vihar Phase 4, Gurugram, Haryana — 122016</p>
+                <p class="r-dealer-card__phone">
+                  <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  +91 98765 43210
+                </p>
+                <span class="r-dealer-card__tag">In Your City</span>
+              </div>
+            </div>
+            <div class="r-dealer-card" data-dealer="2">
+              <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+              <div class="r-dealer-card__body">
+                <p class="r-dealer-card__name">AWAY Delhi South</p>
+                <p class="r-dealer-card__address">B-12, Okhla Industrial Area Phase 2, New Delhi — 110020</p>
+                <p class="r-dealer-card__phone">
+                  <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  +91 98765 12345
+                </p>
+                <span class="r-dealer-card__tag">In Your City</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="r-show-all" id="rShowAllDealers">Show All Dealers</button>
+
+          <div class="r-nav">
+            <button class="r-nav-back" data-back>Back</button>
+            <button class="r-nav-next" id="rStep5Next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 6 — PAYMENT DETAILS
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="6">
+          <h2 class="r-step__title">Payment Details</h2>
+          <p class="r-step__desc">Review costs and confirm your booking</p>
+
+          <div class="r-pay-summary" id="rPaySummary">
+            <div class="r-pay-row">
+              <span class="r-pay-row__label">Rental Charge (1–5 Days)</span>
+              <span class="r-pay-row__value" id="rPayRental5">&#8377;2,499</span>
+            </div>
+            <div class="r-pay-row" id="rPayRental6Row" style="display:none;">
+              <span class="r-pay-row__label">Rental Charge (6+ Days) <span class="r-pay-row__note" id="rPayRental6Note"></span></span>
+              <span class="r-pay-row__value" id="rPayRental6">&#8377;0</span>
+            </div>
+            <div class="r-pay-row" id="rPayCompatRow" style="display:none;">
+              <span class="r-pay-row__label">Compatibility Fee</span>
+              <span class="r-pay-row__value">&#8377;1,999</span>
+            </div>
+            <div class="r-pay-row">
+              <span class="r-pay-row__label">Security Deposit <span class="r-pay-row__note">(Refundable)</span></span>
+              <span class="r-pay-row__value" id="rPayDeposit">&#8377;5,000</span>
+            </div>
+            <div class="r-pay-row r-pay-row--total">
+              <span class="r-pay-row__label">Total Amount</span>
+              <span class="r-pay-row__value" id="rPayTotal">&#8377;7,499</span>
+            </div>
+          </div>
+
+          <div class="r-divider"></div>
+          <p class="r-section-label">Deposit Payment Method</p>
+          <div class="r-deposit-options" id="rDepositOptions">
+            <div class="r-deposit-opt is-selected" data-deposit="online">
+              <div class="r-deposit-opt__dot"><span></span></div>
+              <span class="r-deposit-opt__label">Pay Deposit Now (Online)</span>
+            </div>
+            <div class="r-deposit-opt" data-deposit="dealer">
+              <div class="r-deposit-opt__dot"><span></span></div>
+              <span class="r-deposit-opt__label">Pay Deposit at Dealer</span>
+            </div>
+          </div>
+
+          <div class="r-terms">
+            <input type="checkbox" id="rTermsCheck" />
+            <span class="r-terms__text">
+              I agree to the <span class="r-terms__link" id="rTermsLink">Terms and Conditions</span> including eligibility requirements, refund policies, installation rules, load capacity guidelines, and liability terms.
+            </span>
+          </div>
+
+          <div class="r-nav">
+            <button class="r-nav-back" data-back>Back</button>
+            <button class="r-nav-next" id="rStep6Next" disabled>Confirm Booking</button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             STEP 7 — CONFIRMATION
+             ═══════════════════════════════════ -->
+        <div class="r-step" data-step="7">
+          <div class="r-success">
+            <div class="r-success__icon">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h2 class="r-success__title">Booking Confirmed!</h2>
+            <p class="r-success__sub">Your roofbox rental has been successfully booked. Here's what happens next.</p>
+
+            <div class="r-success__steps">
+              <p class="r-success__steps-title">Next Steps</p>
+              <div class="r-success__step-item">
+                <span class="r-success__step-num">1</span>
+                <p class="r-success__step-text"><strong>Dealer Notification Sent</strong> — Your selected dealer has been notified of your booking.</p>
+              </div>
+              <div class="r-success__step-item">
+                <span class="r-success__step-num">2</span>
+                <p class="r-success__step-text"><strong>Community Access Granted</strong> — You now have access to the AWAY renters community.</p>
+              </div>
+              <div class="r-success__step-item">
+                <span class="r-success__step-num">3</span>
+                <p class="r-success__step-text"><strong>Visit Dealer on Start Date</strong> — Head to <strong id="rConfirmDealer">AWAY Gurugram Hub</strong> on <strong id="rConfirmDate">—</strong> for installation.</p>
+              </div>
+            </div>
+
+            <div class="r-success__actions">
+              <a href="#" class="r-btn-solid">View Booking Details</a>
+              <a href="#" class="r-btn-outline">Contact Dealer</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT — SUMMARY SIDEBAR -->
+      <div class="r-sidebar" id="rSidebar">
+        <p class="r-sidebar__title">Booking Summary</p>
+
+        <div class="r-sidebar__section" id="rSideCustomer" style="display:none;">
+          <p class="r-sidebar__label">Customer</p>
+          <p class="r-sidebar__value" id="rSideName">—</p>
+        </div>
+
+        <div class="r-sidebar__section" id="rSideVehicle" style="display:none;">
+          <p class="r-sidebar__label">Vehicle</p>
+          <p class="r-sidebar__value" id="rSideVehicleVal">—</p>
+        </div>
+
+        <div class="r-sidebar__section" id="rSideVariant" style="display:none;">
+          <p class="r-sidebar__label">Rental Variant</p>
+          <p class="r-sidebar__value r-sidebar__value--highlight" id="rSideVariantVal">—</p>
+        </div>
+
+        <div class="r-sidebar__section" id="rSideCrossbar" style="display:none;">
+          <p class="r-sidebar__label">Crossbars</p>
+          <p class="r-sidebar__value" id="rSideCrossbarVal">—</p>
+        </div>
+
+        <div class="r-sidebar__section" id="rSideDates" style="display:none;">
+          <p class="r-sidebar__label">Rental Period</p>
+          <p class="r-sidebar__value" id="rSideDatesVal">—</p>
+        </div>
+
+        <div class="r-sidebar__section" id="rSideDealer" style="display:none;">
+          <p class="r-sidebar__label">Dealer</p>
+          <p class="r-sidebar__value" id="rSideDealerVal">—</p>
+        </div>
+
+        <div class="r-sidebar__total-section" id="rSideTotals" style="display:none;">
+          <div class="r-sidebar__total-row">
+            <span class="r-sidebar__total-label">Rental</span>
+            <span class="r-sidebar__total-value" id="rSideTotalRental">&#8377;0</span>
+          </div>
+          <div class="r-sidebar__total-row" id="rSideTotalCompatRow" style="display:none;">
+            <span class="r-sidebar__total-label">Compat. Fee</span>
+            <span class="r-sidebar__total-value">&#8377;1,999</span>
+          </div>
+          <div class="r-sidebar__total-row">
+            <span class="r-sidebar__total-label">Deposit</span>
+            <span class="r-sidebar__total-value" id="rSideTotalDeposit">&#8377;0</span>
+          </div>
+          <div class="r-sidebar__total-row r-sidebar__total-row--grand" style="margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--r-border-dark);">
+            <span class="r-sidebar__total-label">Total</span>
+            <span class="r-sidebar__total-value" id="rSideTotalGrand">&#8377;0</span>
+          </div>
+        </div>
+
+        <p class="r-sidebar__empty" id="rSideEmpty">Complete each step to build your rental booking summary. Your selections will appear here as you progress.</p>
+      </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="r-modal-overlay" id="rTermsModal">
+      <div class="r-modal">
+        <div class="r-modal__header">
+          <h3 class="r-modal__title">Terms &amp; Conditions</h3>
+          <button class="r-modal__close" id="rTermsModalClose">
+            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="r-modal__body">
+          <h3>Eligibility</h3>
+          <ul>
+            <li>Renter must be 18 years or older with a valid ID.</li>
+            <li>Vehicle must have a compatible roof rail system or crossbars.</li>
+          </ul>
+          <h3>Rental Period</h3>
+          <ul>
+            <li>Minimum rental period is 1 day.</li>
+            <li>Extensions are subject to availability and must be requested 24 hours before the end date.</li>
+          </ul>
+          <h3>Security Deposit</h3>
+          <ul>
+            <li>A refundable security deposit is required at the time of booking.</li>
+            <li>Deposit will be refunded within 7 business days after the roofbox is returned in good condition.</li>
+            <li>Damages, missing parts, or late returns may result in partial or full forfeiture of the deposit.</li>
+          </ul>
+          <h3>Installation</h3>
+          <ul>
+            <li>Installation and removal must be performed at an authorized AWAY dealer.</li>
+            <li>Self-installation voids all liability coverage.</li>
+          </ul>
+          <h3>Load Capacity</h3>
+          <ul>
+            <li>Do not exceed the maximum load capacity specified for the roofbox model.</li>
+            <li>AWAY is not liable for damages caused by overloading.</li>
+          </ul>
+          <h3>Liability</h3>
+          <ul>
+            <li>Renter is responsible for the roofbox during the rental period.</li>
+            <li>Any damage, theft, or loss must be reported within 24 hours.</li>
+            <li>AWAY is not liable for damage to the vehicle or its contents during the rental.</li>
+          </ul>
+          <h3>Refund Policy</h3>
+          <ul>
+            <li>Cancellations made 48+ hours before start date: full refund of rental charges.</li>
+            <li>Cancellations within 48 hours: 50% refund of rental charges.</li>
+            <li>No refund for no-shows or cancellations after the start date.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Dealers Modal -->
+    <div class="r-modal-overlay" id="rDealersModal">
+      <div class="r-modal" style="max-width:700px;">
+        <div class="r-modal__header">
+          <h3 class="r-modal__title">All Dealers</h3>
+          <button class="r-modal__close" id="rDealersModalClose">
+            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="r-dealers-modal__grid">
+          <div class="r-dealer-card" data-dealer="1" data-modal-dealer>
+            <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+            <div class="r-dealer-card__body">
+              <p class="r-dealer-card__name">AWAY Gurugram Hub</p>
+              <p class="r-dealer-card__address">Plot 42, Udyog Vihar Phase 4, Gurugram — 122016</p>
+              <p class="r-dealer-card__phone">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                +91 98765 43210
+              </p>
+            </div>
+          </div>
+          <div class="r-dealer-card" data-dealer="2" data-modal-dealer>
+            <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+            <div class="r-dealer-card__body">
+              <p class="r-dealer-card__name">AWAY Delhi South</p>
+              <p class="r-dealer-card__address">B-12, Okhla Industrial Area Phase 2, New Delhi — 110020</p>
+              <p class="r-dealer-card__phone">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                +91 98765 12345
+              </p>
+            </div>
+          </div>
+          <div class="r-dealer-card" data-dealer="3" data-modal-dealer>
+            <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+            <div class="r-dealer-card__body">
+              <p class="r-dealer-card__name">AWAY Mumbai Central</p>
+              <p class="r-dealer-card__address">Shop 8, Worli Naka, Mumbai, Maharashtra — 400018</p>
+              <p class="r-dealer-card__phone">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                +91 98765 67890
+              </p>
+            </div>
+          </div>
+          <div class="r-dealer-card" data-dealer="4" data-modal-dealer>
+            <div class="r-dealer-card__radio"><div class="r-dealer-card__radio-dot"></div></div>
+            <div class="r-dealer-card__body">
+              <p class="r-dealer-card__name">AWAY Bangalore East</p>
+              <p class="r-dealer-card__address">14/2, Whitefield Main Rd, Bangalore, Karnataka — 560066</p>
+              <p class="r-dealer-card__phone">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                +91 98765 11111
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script src="../components/header.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <script>
+    (() => {
+      /* ══════════════════════════════════════
+         STATE
+         ══════════════════════════════════════ */
+      let currentStep = 1;
+      const state = {
+        userVerified: false,
+        addressSelected: false,
+        selectedAddress: null,
+        carMake: '', carModel: '', carVariant: '',
+        rentalVariant: null,
+        crossbar: null,
+        startDate: null, endDate: null, duration: 0,
+        dealer: null,
+        depositMethod: 'online',
+        termsAccepted: false,
+        // pricing
+        rental5: 2499,
+        rental6Rate: 399,
+        deposit: 5000,
+        compatFee: 0
+      };
+
+      /* ══════════════════════════════════════
+         CAR DATA (demo)
+         ══════════════════════════════════════ */
+      const carData = {
+        tata: { name: 'Tata', models: { nexon: { name: 'Nexon', variants: ['XE','XM','XZ','XZ+'] }, harrier: { name: 'Harrier', variants: ['XE','XM','XZ','XZA+'] }, safari: { name: 'Safari', variants: ['XE','XM','XZ','XZ+'] } } },
+        mahindra: { name: 'Mahindra', models: { xuv700: { name: 'XUV700', variants: ['MX','AX3','AX5','AX7'] }, scorpio: { name: 'Scorpio-N', variants: ['Z4','Z6','Z8','Z8L'] }, thar: { name: 'Thar', variants: ['AX Std','AX Opt','LX'] } } },
+        maruti: { name: 'Maruti Suzuki', models: { brezza: { name: 'Brezza', variants: ['LXi','VXi','ZXi','ZXi+'] }, grandvitara: { name: 'Grand Vitara', variants: ['Sigma','Delta','Zeta','Alpha'] }, fronx: { name: 'Fronx', variants: ['Sigma','Delta','Zeta','Alpha'] } } },
+        hyundai: { name: 'Hyundai', models: { creta: { name: 'Creta', variants: ['E','EX','S','SX','SX(O)'] }, venue: { name: 'Venue', variants: ['E','S','S+','SX','SX(O)'] }, tucson: { name: 'Tucson', variants: ['Platinum','Signature'] } } },
+        kia: { name: 'Kia', models: { seltos: { name: 'Seltos', variants: ['HTE','HTK','HTK+','HTX','HTX+','GTX+'] }, sonet: { name: 'Sonet', variants: ['HTE','HTK','HTK+','HTX','HTX+'] }, carnival: { name: 'Carnival', variants: ['Premium','Prestige','Limousine'] } } },
+        toyota: { name: 'Toyota', models: { fortuner: { name: 'Fortuner', variants: ['4x2 MT','4x2 AT','4x4 MT','4x4 AT'] }, innova: { name: 'Innova Crysta', variants: ['GX','VX','ZX'] } } },
+        mg: { name: 'MG', models: { hector: { name: 'Hector', variants: ['Style','Super','Smart','Sharp','Savvy'] }, astor: { name: 'Astor', variants: ['Style','Super','Smart','Sharp'] } } },
+        honda: { name: 'Honda', models: { city: { name: 'City', variants: ['V','VX','ZX'] }, elevate: { name: 'Elevate', variants: ['SV','V','VX','ZX'] } } }
+      };
+
+      /* ══════════════════════════════════════
+         RENTAL VARIANTS (demo)
+         ══════════════════════════════════════ */
+      const rentalVariants = [
+        { id: 'rb-540-glossy', name: 'Roofbox 540L', img: '../assets/RoofBox.webp', attrs: ['Glossy','Black','540L'], price5: 2499, rate6: 399, deposit: 5000 },
+        { id: 'rb-540-textured', name: 'Roofbox 540L', img: '../assets/RoofBox2.webp', attrs: ['Textured','Grey','540L'], price5: 2999, rate6: 449, deposit: 5000 },
+        { id: 'rb-450-glossy', name: 'Roofbox 450L', img: '../assets/Fronx%20Roofbox%20render%20/Roofbox-450.webp', attrs: ['Glossy','Black','450L'], price5: 1999, rate6: 349, deposit: 4000 },
+      ];
+
+      /* ══════════════════════════════════════
+         STEP NAVIGATION
+         ══════════════════════════════════════ */
+      function goToStep(step) {
+        currentStep = step;
+        document.querySelectorAll('.r-step').forEach(s => s.classList.remove('is-active'));
+        document.querySelector(`.r-step[data-step="${step}"]`).classList.add('is-active');
+
+        document.querySelectorAll('.r-progress__step').forEach(s => {
+          const n = +s.dataset.step;
+          s.classList.remove('is-active','is-done');
+          if (n === step) s.classList.add('is-active');
+          else if (n < step) s.classList.add('is-done');
+        });
+        document.querySelectorAll('.r-progress__line').forEach(l => {
+          const n = +l.dataset.line;
+          l.classList.toggle('is-done', n < step);
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Fullscreen layout on success step
+        const layout = document.querySelector('.r-layout');
+        const sidebar = document.getElementById('rSidebar');
+        const progress = document.getElementById('rProgress');
+        const pageTitle = document.querySelector('.r-page-title');
+        const pageSub = document.querySelector('.r-page-sub');
+        if (step === 7) {
+          sidebar.style.display = 'none';
+          layout.classList.add('is-fullscreen');
+          progress.style.display = 'none';
+          pageTitle.style.display = 'none';
+          pageSub.style.display = 'none';
+        } else {
+          sidebar.style.display = '';
+          layout.classList.remove('is-fullscreen');
+          progress.style.display = '';
+          pageTitle.style.display = '';
+          pageSub.style.display = '';
+        }
+      }
+
+      // Back buttons
+      document.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', () => goToStep(currentStep - 1));
+      });
+
+      /* ══════════════════════════════════════
+         STEP 1 — USER VERIFICATION
+         ══════════════════════════════════════ */
+      const phoneInput = document.getElementById('rPhone');
+      const phoneCheck = document.getElementById('rPhoneCheck');
+      const userInfo = document.getElementById('rUserInfo');
+      const otpSection = document.getElementById('rOtpSection');
+      const addressSection = document.getElementById('rAddressSection');
+      const step1Next = document.getElementById('rStep1Next');
+
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+        phoneCheck.disabled = phoneInput.value.length < 10;
+      });
+
+      phoneCheck.addEventListener('click', () => {
+        if (phoneInput.value.length !== 10) return;
+        // Simulate: 50/50 existing vs new user
+        const isExisting = Math.random() > 0.4;
+        if (isExisting) {
+          userInfo.classList.add('is-visible');
+          otpSection.classList.remove('is-visible');
+          document.getElementById('rUserName').textContent = 'Rahul Sharma';
+          document.getElementById('rUserMobile').textContent = '+91 ' + phoneInput.value;
+          document.getElementById('rUserEmail').textContent = 'rahul@example.com';
+          state.userVerified = true;
+          addressSection.style.display = '';
+          document.getElementById('rSideCustomer').style.display = '';
+          document.getElementById('rSideName').textContent = 'Rahul Sharma';
+          document.getElementById('rSideEmpty').style.display = 'none';
+          checkStep1();
+        } else {
+          otpSection.classList.add('is-visible');
+          userInfo.classList.remove('is-visible');
+          startOtpTimer();
+        }
+      });
+
+      // OTP boxes
+      const otpBoxes = document.querySelectorAll('.r-otp-box');
+      otpBoxes.forEach((box, i) => {
+        box.addEventListener('input', (e) => {
+          box.value = box.value.replace(/\D/g, '').slice(0, 1);
+          if (box.value && i < otpBoxes.length - 1) otpBoxes[i + 1].focus();
+        });
+        box.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !box.value && i > 0) otpBoxes[i - 1].focus();
+        });
+      });
+
+      function startOtpTimer() {
+        let t = 30;
+        const el = document.getElementById('rOtpCountdown');
+        const iv = setInterval(() => {
+          t--;
+          el.textContent = t + 's';
+          if (t <= 0) { clearInterval(iv); el.textContent = 'Resend'; }
+        }, 1000);
+      }
+
+      // Verify OTP & Register
+      document.getElementById('rVerifyOtp').addEventListener('click', () => {
+        const name = document.getElementById('rRegName').value.trim();
+        const email = document.getElementById('rRegEmail').value.trim();
+        if (!name) return;
+        state.userVerified = true;
+        otpSection.classList.remove('is-visible');
+        userInfo.classList.add('is-visible');
+        document.getElementById('rUserName').textContent = name;
+        document.getElementById('rUserMobile').textContent = '+91 ' + phoneInput.value;
+        document.getElementById('rUserEmail').textContent = email || '—';
+        addressSection.style.display = '';
+        document.getElementById('rSideCustomer').style.display = '';
+        document.getElementById('rSideName').textContent = name;
+        document.getElementById('rSideEmpty').style.display = 'none';
+        checkStep1();
+      });
+
+      // Address selection
+      document.getElementById('rAddressList').addEventListener('click', (e) => {
+        const card = e.target.closest('.r-address-card');
+        if (!card) return;
+        const action = e.target.closest('.r-address-card__action');
+        if (action && action.textContent.trim() === 'Edit') return;
+        document.querySelectorAll('.r-address-card').forEach(c => c.classList.remove('is-selected'));
+        card.classList.add('is-selected');
+        state.addressSelected = true;
+        state.selectedAddress = card.dataset.address;
+        checkStep1();
+      });
+
+      // Add address toggle
+      document.getElementById('rAddAddressBtn').addEventListener('click', () => {
+        document.getElementById('rAddressForm').classList.add('is-visible');
+      });
+      document.getElementById('rCancelAddress').addEventListener('click', () => {
+        document.getElementById('rAddressForm').classList.remove('is-visible');
+      });
+
+      // Save address
+      document.getElementById('rSaveAddress').addEventListener('click', () => {
+        document.getElementById('rAddressForm').classList.remove('is-visible');
+        // In production, append new address card
+      });
+
+      // Address form radio pills
+      document.querySelectorAll('.r-radio-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          pill.closest('.r-address-form__radios').querySelectorAll('.r-radio-pill').forEach(p => p.classList.remove('is-selected'));
+          pill.classList.add('is-selected');
+        });
+      });
+
+      function checkStep1() {
+        step1Next.disabled = !(state.userVerified && state.addressSelected);
+      }
+      step1Next.addEventListener('click', () => { if (!step1Next.disabled) goToStep(2); });
+
+      /* ══════════════════════════════════════
+         STEP 2 — CAR & VARIANT
+         ══════════════════════════════════════ */
+      const carMake = document.getElementById('rCarMake');
+      const carModel = document.getElementById('rCarModel');
+      const carVariantSel = document.getElementById('rCarVariant');
+      const variantSection = document.getElementById('rVariantSection');
+      const variantGrid = document.getElementById('rVariantGrid');
+      const step2Next = document.getElementById('rStep2Next');
+
+      carMake.addEventListener('change', () => {
+        const mk = carData[carMake.value];
+        carModel.innerHTML = '<option value="">Select Model</option>';
+        carVariantSel.innerHTML = '<option value="">Select Variant</option>';
+        carModel.disabled = true; carVariantSel.disabled = true;
+        variantSection.style.display = 'none';
+        state.rentalVariant = null; step2Next.disabled = true;
+        if (!mk) return;
+        Object.entries(mk.models).forEach(([k, m]) => {
+          carModel.innerHTML += `<option value="${k}">${m.name}</option>`;
+        });
+        carModel.disabled = false;
+      });
+
+      carModel.addEventListener('change', () => {
+        const mk = carData[carMake.value];
+        if (!mk) return;
+        const mdl = mk.models[carModel.value];
+        carVariantSel.innerHTML = '<option value="">Select Variant</option>';
+        carVariantSel.disabled = true;
+        variantSection.style.display = 'none';
+        state.rentalVariant = null; step2Next.disabled = true;
+        if (!mdl) return;
+        mdl.variants.forEach(v => {
+          carVariantSel.innerHTML += `<option value="${v}">${v}</option>`;
+        });
+        carVariantSel.disabled = false;
+      });
+
+      carVariantSel.addEventListener('change', () => {
+        if (!carVariantSel.value) { variantSection.style.display = 'none'; return; }
+        state.carMake = carData[carMake.value].name;
+        state.carModel = carData[carMake.value].models[carModel.value].name;
+        state.carVariant = carVariantSel.value;
+
+        // Update sidebar
+        document.getElementById('rSideVehicle').style.display = '';
+        document.getElementById('rSideVehicleVal').textContent = `${state.carMake} ${state.carModel} ${state.carVariant}`;
+
+        // Show variants
+        variantGrid.innerHTML = '';
+        rentalVariants.forEach(v => {
+          variantGrid.innerHTML += `
+            <div class="r-variant-card" data-variant="${v.id}">
+              <img class="r-variant-card__img" src="${v.img}" alt="${v.name}" loading="lazy" />
+              <div class="r-variant-card__body">
+                <p class="r-variant-card__name">${v.name}</p>
+                <div class="r-variant-card__attrs">
+                  ${v.attrs.map(a => `<span class="r-variant-card__attr">${a}</span>`).join('')}
+                </div>
+                <div class="r-variant-card__pricing">
+                  <p class="r-variant-card__price">1–5 Days: <span>&#8377;${v.price5.toLocaleString('en-IN')}</span></p>
+                  <p class="r-variant-card__price">6+ Days: <span>&#8377;${v.rate6}/day</span></p>
+                </div>
+                <p class="r-variant-card__deposit">Deposit: &#8377;${v.deposit.toLocaleString('en-IN')}</p>
+                <div class="r-variant-card__check">Select</div>
+              </div>
+            </div>`;
+        });
+        variantSection.style.display = '';
+
+        // Variant click
+        variantGrid.querySelectorAll('.r-variant-card').forEach(card => {
+          card.addEventListener('click', () => {
+            variantGrid.querySelectorAll('.r-variant-card').forEach(c => c.classList.remove('is-selected'));
+            card.classList.add('is-selected');
+            const v = rentalVariants.find(x => x.id === card.dataset.variant);
+            state.rentalVariant = v;
+            state.rental5 = v.price5;
+            state.rental6Rate = v.rate6;
+            state.deposit = v.deposit;
+            card.querySelector('.r-variant-card__check').textContent = 'Selected';
+            variantGrid.querySelectorAll('.r-variant-card:not(.is-selected) .r-variant-card__check').forEach(c => c.textContent = 'Select');
+            document.getElementById('rSideVariant').style.display = '';
+            document.getElementById('rSideVariantVal').textContent = `${v.name} (${v.attrs.join(', ')})`;
+            step2Next.disabled = false;
+          });
+        });
+      });
+
+      step2Next.addEventListener('click', () => { if (!step2Next.disabled) goToStep(3); });
+
+      /* ══════════════════════════════════════
+         STEP 3 — CROSSBAR
+         ══════════════════════════════════════ */
+      const crossbarOpts = document.getElementById('rCrossbarOptions');
+      const step3Next = document.getElementById('rStep3Next');
+
+      crossbarOpts.addEventListener('click', (e) => {
+        const card = e.target.closest('.r-crossbar-card');
+        if (!card) return;
+        crossbarOpts.querySelectorAll('.r-crossbar-card').forEach(c => c.classList.remove('is-selected'));
+        card.classList.add('is-selected');
+        state.crossbar = card.dataset.crossbar;
+        state.compatFee = state.crossbar === 'other' ? 1999 : 0;
+
+        document.getElementById('rSideCrossbar').style.display = '';
+        const labels = { away: 'AWAY Crossbars (Free)', other: 'Other Brand (+\u20B91,999)', none: 'None (Provided by AWAY)' };
+        document.getElementById('rSideCrossbarVal').textContent = labels[state.crossbar];
+
+        step3Next.disabled = false;
+      });
+
+      step3Next.addEventListener('click', () => {
+        if (step3Next.disabled) return;
+        // Set date constraints
+        const startInput = document.getElementById('rStartDate');
+        const today = new Date();
+        if (state.crossbar === 'none') {
+          const min = new Date(today);
+          min.setDate(min.getDate() + 5);
+          startInput.min = min.toISOString().split('T')[0];
+          document.getElementById('rDateNote').classList.add('is-visible');
+        } else {
+          const tmrw = new Date(today);
+          tmrw.setDate(tmrw.getDate() + 1);
+          startInput.min = tmrw.toISOString().split('T')[0];
+          document.getElementById('rDateNote').classList.remove('is-visible');
+        }
+        goToStep(4);
+      });
+
+      /* ══════════════════════════════════════
+         STEP 4 — TIMELINE
+         ══════════════════════════════════════ */
+      const startDate = document.getElementById('rStartDate');
+      const endDate = document.getElementById('rEndDate');
+      const step4Next = document.getElementById('rStep4Next');
+      const durationBadge = document.getElementById('rDuration');
+
+      function calcDuration() {
+        if (!startDate.value || !endDate.value) return;
+        const s = new Date(startDate.value);
+        const e = new Date(endDate.value);
+        const diff = Math.ceil((e - s) / (1000 * 60 * 60 * 24));
+        if (diff < 1) { durationBadge.classList.remove('is-visible'); step4Next.disabled = true; return; }
+        state.duration = diff;
+        state.startDate = startDate.value;
+        state.endDate = endDate.value;
+        document.getElementById('rDurationNum').textContent = diff;
+        durationBadge.classList.add('is-visible');
+
+        document.getElementById('rSideDates').style.display = '';
+        const fmt = d => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        document.getElementById('rSideDatesVal').textContent = `${fmt(state.startDate)} — ${fmt(state.endDate)} (${diff} days)`;
+
+        step4Next.disabled = false;
+      }
+
+      startDate.addEventListener('change', () => {
+        endDate.min = startDate.value;
+        calcDuration();
+      });
+      endDate.addEventListener('change', calcDuration);
+
+      step4Next.addEventListener('click', () => { if (!step4Next.disabled) goToStep(5); });
+
+      /* ══════════════════════════════════════
+         STEP 5 — DEALER
+         ══════════════════════════════════════ */
+      const dealerGrid = document.getElementById('rDealerGrid');
+      const step5Next = document.getElementById('rStep5Next');
+
+      function selectDealer(card) {
+        document.querySelectorAll('.r-dealer-card').forEach(c => c.classList.remove('is-selected'));
+        card.classList.add('is-selected');
+        // Sync selection across main + modal
+        const id = card.dataset.dealer;
+        document.querySelectorAll(`.r-dealer-card[data-dealer="${id}"]`).forEach(c => c.classList.add('is-selected'));
+        state.dealer = id;
+        const name = card.querySelector('.r-dealer-card__name').textContent;
+        document.getElementById('rSideDealer').style.display = '';
+        document.getElementById('rSideDealerVal').textContent = name;
+        document.getElementById('rConfirmDealer').textContent = name;
+        step5Next.disabled = false;
+      }
+
+      dealerGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('.r-dealer-card');
+        if (card) selectDealer(card);
+      });
+
+      // All dealers modal
+      document.getElementById('rShowAllDealers').addEventListener('click', () => {
+        document.getElementById('rDealersModal').classList.add('is-open');
+      });
+      document.getElementById('rDealersModalClose').addEventListener('click', () => {
+        document.getElementById('rDealersModal').classList.remove('is-open');
+      });
+      document.querySelectorAll('[data-modal-dealer]').forEach(card => {
+        card.addEventListener('click', () => {
+          selectDealer(card);
+          document.getElementById('rDealersModal').classList.remove('is-open');
+        });
+      });
+
+      step5Next.addEventListener('click', () => {
+        if (step5Next.disabled) return;
+        updatePayment();
+        goToStep(6);
+      });
+
+      /* ══════════════════════════════════════
+         STEP 6 — PAYMENT
+         ══════════════════════════════════════ */
+      const step6Next = document.getElementById('rStep6Next');
+      const termsCheck = document.getElementById('rTermsCheck');
+
+      function updatePayment() {
+        const r5 = state.rental5;
+        const extraDays = Math.max(0, state.duration - 5);
+        const r6 = extraDays * state.rental6Rate;
+        const compat = state.compatFee;
+        const dep = state.deposit;
+        const total = r5 + r6 + compat + dep;
+
+        document.getElementById('rPayRental5').textContent = '\u20B9' + r5.toLocaleString('en-IN');
+        if (extraDays > 0) {
+          document.getElementById('rPayRental6Row').style.display = '';
+          document.getElementById('rPayRental6').textContent = '\u20B9' + r6.toLocaleString('en-IN');
+          document.getElementById('rPayRental6Note').textContent = `(${extraDays} days × \u20B9${state.rental6Rate})`;
+        } else {
+          document.getElementById('rPayRental6Row').style.display = 'none';
+        }
+        document.getElementById('rPayCompatRow').style.display = compat > 0 ? '' : 'none';
+        document.getElementById('rPayDeposit').textContent = '\u20B9' + dep.toLocaleString('en-IN');
+        document.getElementById('rPayTotal').textContent = '\u20B9' + total.toLocaleString('en-IN');
+
+        // Sidebar totals
+        document.getElementById('rSideTotals').style.display = '';
+        document.getElementById('rSideTotalRental').textContent = '\u20B9' + (r5 + r6).toLocaleString('en-IN');
+        document.getElementById('rSideTotalDeposit').textContent = '\u20B9' + dep.toLocaleString('en-IN');
+        document.getElementById('rSideTotalCompatRow').style.display = compat > 0 ? '' : 'none';
+        document.getElementById('rSideTotalGrand').textContent = '\u20B9' + total.toLocaleString('en-IN');
+      }
+
+      // Deposit method
+      document.getElementById('rDepositOptions').addEventListener('click', (e) => {
+        const opt = e.target.closest('.r-deposit-opt');
+        if (!opt) return;
+        document.querySelectorAll('.r-deposit-opt').forEach(o => o.classList.remove('is-selected'));
+        opt.classList.add('is-selected');
+        state.depositMethod = opt.dataset.deposit;
+      });
+
+      // Terms
+      termsCheck.addEventListener('change', () => {
+        state.termsAccepted = termsCheck.checked;
+        step6Next.disabled = !state.termsAccepted;
+      });
+
+      // Terms modal
+      document.getElementById('rTermsLink').addEventListener('click', () => {
+        document.getElementById('rTermsModal').classList.add('is-open');
+      });
+      document.getElementById('rTermsModalClose').addEventListener('click', () => {
+        document.getElementById('rTermsModal').classList.remove('is-open');
+      });
+
+      // Close modals on overlay click
+      document.querySelectorAll('.r-modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) overlay.classList.remove('is-open');
+        });
+      });
+
+      step6Next.addEventListener('click', () => {
+        if (step6Next.disabled) return;
+        const fmt = d => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        document.getElementById('rConfirmDate').textContent = fmt(state.startDate);
+        goToStep(7);
+      });
+
+    })();
+    </script>
+  </body>
+</html>

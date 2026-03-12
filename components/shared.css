@@ -3,7 +3,7 @@
    Nav, Mobile Menu, Side Cart, Trust, Footer
    ══════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -58,7 +58,7 @@
 .home-nav__mega-images { margin-left: auto; flex-shrink: 0; }
 .home-nav__mega-col { display: flex; flex-direction: column; gap: 0.4rem; min-width: 200px; flex-shrink: 0; }
 .home-nav__mega-heading {
-  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 800;
   color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.04em;
   margin-bottom: 0.7rem;
 }
@@ -141,7 +141,7 @@
 .home-mobile-menu__links { display: flex; flex-direction: column; gap: 0; }
 .home-mobile-menu__links > a,
 .home-mobile-menu__toggle {
-  font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: #000;
+  font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #000;
   text-decoration: none; letter-spacing: 0em; text-transform: uppercase;
   padding: 0.7rem 0; border-bottom: 1px solid #e3dede; transition: opacity 0.2s ease;
   display: flex; align-items: center; justify-content: space-between;
@@ -363,7 +363,7 @@
   justify-content: space-between; padding: 3rem 0.85rem 0.85rem;
   background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%); z-index: 1;
 }
-.home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
+.home-product__name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0em; margin: 0; }
 .home-product__price { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: #fff; white-space: nowrap; flex-shrink: 0; display: flex; align-items: baseline; gap: 0.35rem; }
 .home-product__price--sale { color: #fff; font-weight: 600; }
 .home-product__price--original { font-size: 0.7rem; font-weight: 400; color: rgba(255,255,255,0.6); text-decoration: line-through; }
@@ -371,13 +371,13 @@
 /* ── PROMO MARQUEE ── */
 .home-promo { position: relative; z-index: 2; background: #1a1a1a; overflow: hidden; padding: 0.7rem 0; }
 .home-promo__track { display: flex; white-space: nowrap; animation: promoScroll 20s linear infinite; }
-.home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 500; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
+.home-promo__text { font-family: var(--font-display); font-size: clamp(0.75rem, 1.5vw, 1rem); font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0em; padding: 0 1.5rem; }
 .home-promo__text span { opacity: 0.4; padding: 0 1rem; }
 @keyframes promoScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ── NEWSLETTER ── */
 .home-newsletter { position: relative; z-index: 2; background: #f0f0f0; padding: 3rem 2rem; }
-.home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 600; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
+.home-newsletter__title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 800; color: #000; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 0.8rem; }
 .home-newsletter__subtitle { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 2.5rem; max-width: 700px; line-height: 1.5; }
 .home-newsletter__form { display: flex; align-items: center; border-bottom: 1.5px solid #000; padding-bottom: 0.5rem; margin-bottom: 1rem; max-width: 100%; }
 .home-newsletter__input { flex: 1; background: none; border: none; outline: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; color: #000; letter-spacing: 0.01em; text-transform: uppercase; }
@@ -413,7 +413,7 @@
 .home-footer__socials a:hover svg { opacity: 0.5; }
 .home-footer__columns { display: flex; gap: 4rem; }
 .home-footer__col-title {
-  font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+  font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
   color: #000; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 0.8rem;
 }
 .home-footer__col-links { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -429,7 +429,7 @@
 }
 .home-footer__stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
 .home-footer__stat-label {
-  font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+  font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
   color: #000; letter-spacing: 0.01em; text-transform: uppercase;
 }
 .home-footer__stat-value {
